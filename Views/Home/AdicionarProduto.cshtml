@@ -1,0 +1,16 @@
+@using StoreEP.Models
+@model Produto
+
+<h3>Criar Produto</h3>
+<form asp-action="AdicionarProduto" method="post">
+    <div class="form-group">
+        <label asp-for="NM_Produto">Nome</label>
+        <input asp-for="NM_Produto" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Preco">Preço</label>
+        <input asp-for="Preco" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+</form>
