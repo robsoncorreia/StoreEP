@@ -1,0 +1,12 @@
+@using StoreEP.Models
+@model Produto
+<div  class="well col-sm-4">
+    <img src="@Model.ImagemProduto" width="100" height="100"/>
+    <h3>
+        <strong>@Model?.NM_Produto</strong>
+        <span class="pull-right label label-primary"> 
+            @Model?.Preco.ToString("c")
+        </span>
+    </h3>
+    <span class="lead">@Model?.NM_Categoria</span>
+</div>
