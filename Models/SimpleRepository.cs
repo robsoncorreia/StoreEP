@@ -21,7 +21,7 @@ namespace StoreEP.Models
                     NM_Produto = "Camera",
                     CD_Produto = 1,
                     Preco = 10M,
-                    ImagemProduto = "http://imgsv.imaging.nikon.com/lineup/dslr/d5/img/Produto_01_01.png",
+                    ImagemProduto = "https://images-submarino.b2w.io/produtos/01/00/sku/9266/0/9266029_1GG.jpg",
                     PD_Fabricante = "Nikon",
                     NM_Categoria = "Fotografia"
 
@@ -40,7 +40,7 @@ namespace StoreEP.Models
                     NM_Produto = "Tv",
                     CD_Produto = 3,
                     Preco = 30M,
-                    ImagemProduto = "https://www.hirschs.co.za/media/catalog/Produto/cache/1/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/5/6/56409.jpg",
+                    ImagemProduto = "https://images-submarino.b2w.io/produtos/01/00/item/132380/7/132380720_1GG.jpg",
                     PD_Fabricante = "Samsung",
                     NM_Categoria = "Eletro Eletrônicos"
                 }
