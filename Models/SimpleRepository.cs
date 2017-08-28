@@ -31,7 +31,6 @@ namespace StoreEP.Models
                     CD_Produto = 2,
                     Preco = 20M,
                     PD_Fabricante = "KingStone",
-
                     ImagemProduto =  "http://images.tcdn.com.br/img/img_prod/49613/kingston_ssd_2_5_120gb_v300_sata_iii_sv300s37a_120g_2911_1_20150406164044.jpg",
                     NM_Categoria = "Informática"
 
