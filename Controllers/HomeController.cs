@@ -14,7 +14,7 @@ namespace StoreEP.Controllers
         public IActionResult Index()
         {
             //Exemplo usando o metodo Where do Linq
-            return View(SimpleReposity.SharedRepository.Produtos.Where(p => p.Preco >= 30));
+            return View(SimpleReposity.SharedRepository.Produtos);
         }
 
         public IActionResult About()

@@ -21,7 +21,7 @@ namespace StoreEP.Models
                     NM_Produto = "Camera",
                     CD_Produto = 1,
                     Preco = 10M,
-                    Imagem = "http://imgsv.imaging.nikon.com/lineup/dslr/d5/img/Produto_01_01.png",
+                    ImagemProduto = "http://imgsv.imaging.nikon.com/lineup/dslr/d5/img/Produto_01_01.png",
                     PD_Fabricante = "Nikon",
                     NM_Categoria = "Fotografia"
 
@@ -32,7 +32,7 @@ namespace StoreEP.Models
                     Preco = 20M,
                     PD_Fabricante = "KingStone",
 
-                    Imagem =  "http://images.tcdn.com.br/img/img_prod/49613/kingston_ssd_2_5_120gb_v300_sata_iii_sv300s37a_120g_2911_1_20150406164044.jpg",
+                    ImagemProduto =  "http://images.tcdn.com.br/img/img_prod/49613/kingston_ssd_2_5_120gb_v300_sata_iii_sv300s37a_120g_2911_1_20150406164044.jpg",
                     NM_Categoria = "Informática"
 
                 },
@@ -40,7 +40,7 @@ namespace StoreEP.Models
                     NM_Produto = "Tv",
                     CD_Produto = 3,
                     Preco = 30M,
-                    Imagem = "https://www.hirschs.co.za/media/catalog/Produto/cache/1/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/5/6/56409.jpg",
+                    ImagemProduto = "https://www.hirschs.co.za/media/catalog/Produto/cache/1/thumbnail/600x/17f82f742ffe127f42dca9de82fb58b1/5/6/56409.jpg",
                     PD_Fabricante = "Samsung",
                     NM_Categoria = "Eletro Eletrônicos"
                 }

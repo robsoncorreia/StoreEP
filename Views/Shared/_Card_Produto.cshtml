@@ -1,6 +1,6 @@
 @using StoreEP.Models
 @model Produto
-<div class="well">
+<div img src="@Model.ImagemProduto" class="well">
     <h3>
         <strong>@Model?.NM_Produto</strong>
         <span class="pull-right label label-primary"> 
@@ -9,3 +9,7 @@
     </h3>
     <span class="lead">@Model?.NM_Categoria</span>
 </div>
+
+
+
+
