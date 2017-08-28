@@ -24,7 +24,6 @@ namespace StoreEP.Models
                     ImagemProduto = "https://images-submarino.b2w.io/produtos/01/00/sku/9266/0/9266029_1GG.jpg",
                     PD_Fabricante = "Nikon",
                     NM_Categoria = "Fotografia"
-
                 },
                 new Produto {
                     NM_Produto = "SSD",
