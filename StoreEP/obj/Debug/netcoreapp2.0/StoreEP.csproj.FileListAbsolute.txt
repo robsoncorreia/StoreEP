@@ -18,3 +18,14 @@
 /home/robson/Desktop/StoreEP/StoreEP/obj/Debug/netcoreapp2.0/StoreEP.AssemblyInfo.cs
 /home/robson/Desktop/StoreEP/StoreEP/obj/Debug/netcoreapp2.0/StoreEP.dll
 /home/robson/Desktop/StoreEP/StoreEP/obj/Debug/netcoreapp2.0/StoreEP.pdb
+C:\Users\robso\Downloads\StoreEP\StoreEP\bin\Debug\netcoreapp2.0\StoreEP.deps.json
+C:\Users\robso\Downloads\StoreEP\StoreEP\bin\Debug\netcoreapp2.0\StoreEP.runtimeconfig.json
+C:\Users\robso\Downloads\StoreEP\StoreEP\bin\Debug\netcoreapp2.0\StoreEP.runtimeconfig.dev.json
+C:\Users\robso\Downloads\StoreEP\StoreEP\bin\Debug\netcoreapp2.0\StoreEP.dll
+C:\Users\robso\Downloads\StoreEP\StoreEP\bin\Debug\netcoreapp2.0\StoreEP.pdb
+C:\Users\robso\Downloads\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.csprojResolveAssemblyReference.cache
+C:\Users\robso\Downloads\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.csproj.CoreCompileInputs.cache
+C:\Users\robso\Downloads\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.AssemblyInfoInputs.cache
+C:\Users\robso\Downloads\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.AssemblyInfo.cs
+C:\Users\robso\Downloads\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.dll
+C:\Users\robso\Downloads\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.pdb

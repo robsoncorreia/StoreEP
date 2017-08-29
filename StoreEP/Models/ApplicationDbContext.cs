@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext : DbContext
     {
-        ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Produto> Produtos { get; set; }
     }
 }
