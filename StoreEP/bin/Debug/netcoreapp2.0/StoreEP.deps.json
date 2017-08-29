@@ -24,6 +24,7 @@
       "StoreEP/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.All": "2.0.0",
+          "Microsoft.Extensions.Configuration.Json": "2.0.0",
           "Microsoft.NETCore.App": "2.0.0"
         },
         "runtime": {

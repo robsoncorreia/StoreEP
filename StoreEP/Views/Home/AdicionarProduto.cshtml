@@ -2,7 +2,6 @@
 @model Produto
 
 <h3>Criar Produto</h3>
-
 <div class="row">
     <form asp-action="AdicionarProduto" method="post">
         <div class="form-group col-sm-4">
@@ -34,7 +33,6 @@
             <textarea asp-for="PD_Descricao" class="form-control" style="margin: 0 0 10px 0; resize: none;"></textarea>
             <button type="submit" class="btn btn-primary">Adicionar</button>
             <a asp-action="Index" class="btn btn-default">Cancelar</a>
-        </div>
-        
+        </div>        
     </form>
 </div>
