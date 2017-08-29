@@ -1,0 +1,13 @@
+﻿
+@model IEnumerable<StoreEP.Produto>
+@{
+    ViewData["Title"] = "Home Page";
+}
+@foreach (var p in Model)
+{
+    <div>
+        <h3>@p.NM_Produto</h3>
+        @p.PD_Descricao
+        <h4>@p.Preco.ToString("c")</h4>
+    </div>
+}

@@ -1,9 +1,11 @@
 using StoreEP.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace StoreEP
 {
     public class Produto
     {
+        [Key]
         public int CD_Produto { get; set; }
         public string NM_Produto { get; set; }
         public string NM_Categoria { get; set; }

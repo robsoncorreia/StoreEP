@@ -6,35 +6,45 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using StoreEP.Models;
+using Microsoft.Extensions.Logging;
 
-namespace StoreEP
+#region AddedUsings
+using StoreEP.Models;
+using Microsoft.EntityFrameworkCore;
+#endregion
+
+namespace StoreEP.Models
 {
     public class Startup
     {
-        public IConfigurationRoot Configuration;
-
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            Configuration = new ConfigurationBuilder().SetBasePath(env.ContentRootPath).AddJsonFile("appsettings.json").Build();
+            Configuration = configuration;
         }
-       
 
+        public IConfiguration Configuration { get; }
+
+        #region ConfigureServices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:StoreEP: ConnectionString"]));
             services.AddMvc();
-            services.AddTransient<IProdutoRepositorio, EFProductRepository>();
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
         }
+        #endregion
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
             else
             {
@@ -49,7 +59,9 @@ namespace StoreEP
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            SeedData.EnsurePopulated(app);
         }
     }
 }
+
+
+
