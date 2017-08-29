@@ -16,9 +16,7 @@ namespace StoreEP.Controllers
         private IProdutoRepositorio produtoRepositorio;
         public int PageSize = 4;
         // GET: /<controller>/
-        public ProdutoController(IProdutoRepositorio repo) {
-            produtoRepositorio = repo;
-        }
-        public ViewResult List(int page = 1) => View(produtoRepositorio.Produtos.OrderBy(p => p.CD_Produto).Skip((page - 1) * PageSize).Take(PageSize));
+
+        public ViewResult List(int page = 1) => View();
     }
 }

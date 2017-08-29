@@ -10,7 +10,7 @@ namespace StoreEP.Controllers
 {
     public class HomeController : Controller
     {
-        SimpleReposity reposity =  SimpleReposity.SharedRepository;
+        SimpleReposity reposity = SimpleReposity.SharedRepository;
         public IActionResult Index()
         {
             //Exemplo usando o metodo Where do Linq
@@ -39,7 +39,8 @@ namespace StoreEP.Controllers
         public IActionResult AdicionarProduto() => View(new Produto());
 
         [HttpPost]
-        public IActionResult AdicionarProduto(Produto produto){
+        public IActionResult AdicionarProduto(Produto produto)
+        {
             reposity.AddProduto(produto);
             return RedirectToAction("Index");
         }
