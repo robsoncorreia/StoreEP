@@ -50,7 +50,7 @@ namespace StoreEP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProdutoID,NomePD,CategoriaPD,PrecoPD,DescricaoPD,LinkImagemPD")] Produto produto)
+        public async Task<IActionResult> Create([Bind("ProdutoID,NomePD,CategoriaPD,PrecoPD,DescricaoPD,LinkImagemPD, Fabricante")] Produto produto)
         {
             if (ModelState.IsValid)
             {

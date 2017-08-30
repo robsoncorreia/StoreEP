@@ -19,17 +19,21 @@
                 Categoria
             </th>
             <th>
-                Preço
+                PreÃ§o
             </th>
             <th>
-                Descrição
+                DescriÃ§Ã£o
             </th>
             <th>
-                Link da imagem
+                Fabricante
             </th>
             <th>
                 Preview
             </th>
+            <th>
+                Editar
+            </th>
+
         </tr>
     </thead>
     <tbody>
@@ -47,6 +51,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DescricaoPD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fabricante)
                 </td>
                 <td>
                     <img src="@Html.DisplayFor(modelItem => item.LinkImagemPD)" height="100" width="100" />

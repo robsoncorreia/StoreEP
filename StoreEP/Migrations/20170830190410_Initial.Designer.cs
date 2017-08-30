@@ -8,7 +8,7 @@ using StoreEP.Models;
 namespace StoreEP.Migrations
 {
     [DbContext(typeof(StoreEPContext))]
-    [Migration("20170830131618_Initial")]
+    [Migration("20170830190410_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,8 @@ namespace StoreEP.Migrations
                     b.Property<string>("CategoriaPD");
 
                     b.Property<string>("DescricaoPD");
+
+                    b.Property<string>("Fabricante");
 
                     b.Property<string>("LinkImagemPD");
 

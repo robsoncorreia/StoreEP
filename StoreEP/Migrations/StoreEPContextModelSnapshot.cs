@@ -25,6 +25,8 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("DescricaoPD");
 
+                    b.Property<string>("Fabricante");
+
                     b.Property<string>("LinkImagemPD");
 
                     b.Property<string>("NomePD");

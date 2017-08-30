@@ -17,6 +17,7 @@ namespace StoreEP.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CategoriaPD = table.Column<string>(nullable: true),
                     DescricaoPD = table.Column<string>(nullable: true),
+                    Fabricante = table.Column<string>(nullable: true),
                     LinkImagemPD = table.Column<string>(nullable: true),
                     NomePD = table.Column<string>(nullable: true),
                     PrecoPD = table.Column<decimal>(nullable: false),
