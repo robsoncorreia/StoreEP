@@ -1,0 +1,11 @@
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\bin\Debug\netcoreapp1.1\StoreEP.deps.json
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\bin\Debug\netcoreapp1.1\StoreEP.runtimeconfig.json
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\bin\Debug\netcoreapp1.1\StoreEP.runtimeconfig.dev.json
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\bin\Debug\netcoreapp1.1\StoreEP.dll
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp1.1\StoreEP.csprojResolveAssemblyReference.cache
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp1.1\StoreEP.csproj.CoreCompileInputs.cache
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp1.1\StoreEP.AssemblyInfoInputs.cache
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp1.1\StoreEP.AssemblyInfo.cs
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\bin\Debug\netcoreapp1.1\StoreEP.pdb
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp1.1\StoreEP.dll
+C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp1.1\StoreEP.pdb

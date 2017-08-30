@@ -1,20 +1,20 @@
-using StoreEP.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace StoreEP
+namespace StoreEP.Models
 {
     public class Produto
     {
         [Key]
-        public int CD_Produto { get; set; }
-        public string NM_Produto { get; set; }
-        public string NM_Categoria { get; set; }
-        public decimal Preco { get; set; }
-        public Produto PD_Relacionado {get;set;}
-        public bool EmEstoque {get;} = true;
-        public string PD_Fabricante { get; set; }
-        public string PD_Descricao { get; set; }
-        public string ImagemProduto { get; set; }
-    
+        public int ProdutoID { get; set; }
+        public string NomePD { get; set; }
+        public string CategoriaPD { get; set; }
+        public decimal PrecoPD { get; set; }
+        public string DescricaoPD { get; set; }
+        public Produto RelacionadoPD { get; set; }
+        public string LinkImagemPD { get; set; }
     }
 }
