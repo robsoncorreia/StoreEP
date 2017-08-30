@@ -4,30 +4,32 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista de produtos</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar novo produto</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.NomePD)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CategoriaPD)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PrecoPD)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DescricaoPD)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LinkImagemPD)
-                </th>
-            <th></th>
+            <th>
+                Nome do produto
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Preço
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Link da imagem
+            </th>
+            <th>
+                Preview
+            </th>
         </tr>
     </thead>
     <tbody>
