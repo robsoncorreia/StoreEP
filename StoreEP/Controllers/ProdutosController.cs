@@ -19,10 +19,7 @@ namespace StoreEP.Controllers
         }
 
         // GET: Produtos
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Produto.ToListAsync());
-        }
+        public async Task<IActionResult> Index() => View(await _context.Produto.ToListAsync());
 
         // GET: Produtos/Details/5
         public async Task<IActionResult> Details(int? id)

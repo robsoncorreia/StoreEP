@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,5 +16,6 @@ namespace StoreEP.Models
         public string DescricaoPD { get; set; }
         public Produto RelacionadoPD { get; set; }
         public string LinkImagemPD { get; set; }
+        public string Fabricante { get; set; }
     }
 }

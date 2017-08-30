@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +13,6 @@ namespace StoreEP.Models
         {
         }
 
-        public DbSet<StoreEP.Models.Produto> Produto { get; set; }
+        public DbSet<Produto> Produto { get; set; }
     }
 }

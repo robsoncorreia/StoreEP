@@ -12,40 +12,43 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="NomePD" class="col-md-2 control-label"></label>
+            <label asp-for="NomePD" class="col-md-2 control-label">Nome do produto</label>
             <div class="col-md-10">
                 <input asp-for="NomePD" class="form-control" />
                 <span asp-validation-for="NomePD" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="CategoriaPD" class="col-md-2 control-label"></label>
+            <label asp-for="CategoriaPD" class="col-md-2 control-label">Categoria</label>
             <div class="col-md-10">
                 <input asp-for="CategoriaPD" class="form-control" />
                 <span asp-validation-for="CategoriaPD" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="PrecoPD" class="col-md-2 control-label"></label>
+            <label asp-for="PrecoPD" class="col-md-2 control-label">Preço</label>
             <div class="col-md-10">
                 <input asp-for="PrecoPD" class="form-control" />
                 <span asp-validation-for="PrecoPD" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="DescricaoPD" class="col-md-2 control-label"></label>
+            <label asp-for="DescricaoPD" class="col-md-2 control-label">Descrição</label>
             <div class="col-md-10">
                 <input asp-for="DescricaoPD" class="form-control" />
                 <span asp-validation-for="DescricaoPD" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="LinkImagemPD" class="col-md-2 control-label"></label>
+            <label asp-for="LinkImagemPD" class="col-md-2 control-label">Link da imagem</label>
             <div class="col-md-10">
                 <input asp-for="LinkImagemPD" class="form-control" />
                 <span asp-validation-for="LinkImagemPD" class="text-danger"></span>
             </div>
         </div>
+        <div class="col-md-10 right">
+            <img id="img_produto" class="img-thumbnail" src="http://www.fantucci.com.br/image/cache/data/sem-foto-vertical-500x500.jpg" width="100" height="100"/>
+        </div> 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
