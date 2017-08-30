@@ -48,7 +48,7 @@
                 @Html.DisplayFor(modelItem => item.DescricaoPD)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LinkImagemPD)
+               <img src="@Html.DisplayFor(modelItem => item.LinkImagemPD)" height="100" width="100" />
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ProdutoID">Edit</a> |
