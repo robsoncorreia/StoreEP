@@ -1,0 +1,20 @@
+@model IEnumerable<StoreEP.Models.Produto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<a asp-action="Create">Criar produto</a>
+@foreach (var p in Model)
+{
+    <div class="well">
+        <h3>
+            <strong>@p?.NomePD</strong>
+            <span class="pull-right label label-primary">
+                @p?.PrecoPD.ToString("c")
+            </span>
+        </h3>
+        <span class="lead">@p?.DescricaoPD</span>
+    </div>
+}
+
+

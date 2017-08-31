@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StoreEP.Models;
+using StoreEP.Models.ViewModels;
 
 namespace StoreEP.Controllers
 {
@@ -13,13 +14,37 @@ namespace StoreEP.Controllers
     {
         private readonly StoreEPContext _context;
 
+        public IProductRepository repository;
+
         public ProdutosController(StoreEPContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: Produtos
-        public async Task<IActionResult> Index() => View(await _context.Produto.ToListAsync());
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Produto.ToListAsync());
+        }
+
+        public int PageSize = 4;
+
+        // GET: Produtos
+        //public ViewResult List(int page = 1) => View(new ProductsListViewModel
+        //{
+        //    Produtos = repository.Produtos.OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize),
+        //    PagingInfo = new PagingInfo
+        //    {
+        //        CurrentPage = page,
+        //        ItensPerPage = PageSize,
+        //        TotalItems = repository.Produtos.Count()
+        //    }
+        //});
+
+        public async Task<IActionResult> List()
+        {
+            return View(await _context.Produto.ToListAsync());
+        }
 
         // GET: Produtos/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -50,13 +75,13 @@ namespace StoreEP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProdutoID,NomePD,CategoriaPD,PrecoPD,DescricaoPD,LinkImagemPD, Fabricante")] Produto produto)
+        public async Task<IActionResult> Create([Bind("ProdutoID,NomePD,CategoriaPD,PrecoPD,DescricaoPD,LinkImagemPD,Fabricante")] Produto produto)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(produto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(produto);
         }
@@ -82,7 +107,7 @@ namespace StoreEP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProdutoID,NomePD,CategoriaPD,PrecoPD,DescricaoPD,LinkImagemPD")] Produto produto)
+        public async Task<IActionResult> Edit(int id, [Bind("ProdutoID,NomePD,CategoriaPD,PrecoPD,DescricaoPD,LinkImagemPD,Fabricante")] Produto produto)
         {
             if (id != produto.ProdutoID)
             {
@@ -107,7 +132,7 @@ namespace StoreEP.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(produto);
         }
@@ -138,7 +163,7 @@ namespace StoreEP.Controllers
             var produto = await _context.Produto.SingleOrDefaultAsync(m => m.ProdutoID == id);
             _context.Produto.Remove(produto);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         private bool ProdutoExists(int id)

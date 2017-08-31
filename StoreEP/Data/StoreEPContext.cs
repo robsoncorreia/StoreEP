@@ -13,6 +13,6 @@ namespace StoreEP.Models
         {
         }
 
-        public DbSet<Produto> Produto { get; set; }
+        public DbSet<StoreEP.Models.Produto> Produto { get; set; }
     }
 }
