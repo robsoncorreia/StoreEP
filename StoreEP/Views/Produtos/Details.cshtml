@@ -4,38 +4,37 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalhes</h2>
 
 <div>
-    <h4>Produto</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NomePD)
+            Nome do produto:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.NomePD)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CategoriaPD)
+            Categoria:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.CategoriaPD)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.PrecoPD)
+            Preço:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.PrecoPD)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DescricaoPD)
+            Descricação:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DescricaoPD)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LinkImagemPD)
+            Link da imagem:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.LinkImagemPD)
@@ -43,6 +42,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ProdutoID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.ProdutoID">Editar</a> |
+    <a asp-action="Index">Voltar a lista</a>
 </div>
