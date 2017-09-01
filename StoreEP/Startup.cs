@@ -55,9 +55,9 @@ namespace StoreEP
                     name: "default",
                     template: "{controller=Produtos}/{action=List}/{id?}");
 
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                //routes.MapSpaFallbackRoute(
+                //    name: "spa-fallback",
+                //    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }

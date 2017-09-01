@@ -21,7 +21,7 @@ namespace StoreEP.Controllers
             _context = context;
         }
 
-        // GET: Produtos
+        //GET: Produtos
         public async Task<IActionResult> Index()
         {
             return View(await _context.Produto.ToListAsync());
@@ -29,10 +29,10 @@ namespace StoreEP.Controllers
 
         public int PageSize = 4;
 
-        // GET: Produtos
+        //GET: Produtos
         //public ViewResult List(int page = 1) => View(new ProductsListViewModel
         //{
-        //    Produtos = repository.Produtos.OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize),
+        //    Produtos = _context.Produto.OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize),
         //    PagingInfo = new PagingInfo
         //    {
         //        CurrentPage = page,

@@ -35,7 +35,7 @@
     "isomorphic-fetch": "2.2.1",
     "jquery": "3.2.1",
     "json-loader": "0.5.4",
-    "node-chartist": "^1.0.5",
+    "node-chartist": "https://registry.npmjs.org/node-chartist/-/node-chartist-1.0.5.tgz",
     "preboot": "4.5.2",
     "raw-loader": "0.5.1",
     "reflect-metadata": "0.1.10",
@@ -59,6 +59,7 @@
     "karma-chrome-launcher": "2.2.0",
     "karma-cli": "1.0.1",
     "karma-jasmine": "1.1.0",
-    "karma-webpack": "2.0.3"
+    "karma-webpack": "2.0.3",
+    "webpack": "https://registry.npmjs.org/webpack/-/webpack-2.5.1.tgz"
   }
 }
