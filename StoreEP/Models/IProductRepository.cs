@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public interface IProductRepository
+    public interface IProductRepository 
     {
         IEnumerable<Produto> Produtos { get; }
     }

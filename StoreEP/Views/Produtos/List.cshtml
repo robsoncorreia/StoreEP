@@ -1,22 +1,11 @@
-@model IEnumerable<StoreEP.Models.Produto>
+@using StoreEP.Models.ViewModels
+@model ProductsListViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
-@foreach (var p in Model)
+@foreach (var p in Model.Produtos)
 {
-    <figure class="snip1423">
-        <img src="@p?.LinkImagemPD" alt="@p?.NomePD" />
-        <figcaption>
-            <h3>@p?.NomePD</h3>
-            <p>@p?.DescricaoPD</p>
-            <div class="price">
-                @{
-                    var x = $"{(decimal)p?.PrecoPD * 1.1M:c2}";
-                }
-                <s>@x</s>@p?.PrecoPD.ToString("c")
-            </div>
-        </figcaption><i class="ion-android-cart"></i>
-        <a href="#"></a>
-    </figure>
- }
+    @Html.Partial("CardProduto", p);
+}
+<div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true" page-class="btn" page-class-normal="btn-default" page-class-selected="btn-primary" class="btn-group pull-right"></div>

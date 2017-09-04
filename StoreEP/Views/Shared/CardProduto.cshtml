@@ -1,18 +1,16 @@
 @model StoreEP.Models.Produto
-
-
-    <figure class="snip1423">
-        <img src="@Model?.LinkImagemPD" alt="@Model?.NomePD" />
-        <figcaption>
-            <h3>@Model?.NomePD</h3>
-            <p>@Model?.DescricaoPD</p>
-            <div class="price">
-                @{
-                    var x = $"{(decimal)Model?.PrecoPD * 1.1M:c2}";
-                }
-                <s>@x</s>@Model?.PrecoPD.ToString("c")
-            </div>
-        </figcaption><i class="ion-android-cart"></i>
-        <a href="#"></a>
-    </figure>
+<figure class="snip1423">
+    <img src="@Model?.LinkImagemPD" alt="@Model?.NomePD" />
+    <figcaption>
+        <h3>@Model?.NomePD</h3>
+        <p>@Model?.DescricaoPD</p>
+        <div class="price">
+            @{
+                var x = $"{(decimal)Model?.PrecoPD * 1.1M:c2}";
+            }
+            <s>@x</s>@Model?.PrecoPD.ToString("c")
+        </div>
+    </figcaption><i class="ion-android-cart"></i>
+    <a href="#"></a>
+</figure>
               

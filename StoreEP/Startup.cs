@@ -37,10 +37,10 @@ namespace StoreEP
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                {
-                    HotModuleReplacement = true
-                });
+                //app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                //{
+                //    HotModuleReplacement = true
+                //});
             }
             else
             {
@@ -52,12 +52,12 @@ namespace StoreEP
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "pagination",
+                    template: "Produtos/Page{page}",
+                    defaults: new { Controller = "Produtos", action = "Produtos/List" });
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Produtos}/{action=List}/{id?}");
-
-                //routes.MapSpaFallbackRoute(
-                //    name: "spa-fallback",
-                //    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }

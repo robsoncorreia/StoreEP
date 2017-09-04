@@ -14,36 +14,32 @@ namespace StoreEP.Controllers
     {
         private readonly StoreEPContext _context;
 
-        public IProductRepository repository;
+
 
         public ProdutosController(StoreEPContext context)
         {
             _context = context;
         }
 
+        public int PageSize = 3;
         //GET: Produtos
         public async Task<IActionResult> Index()
         {
             return View(await _context.Produto.ToListAsync());
         }
 
-        public int PageSize = 4;
-
-        //GET: Produtos
-        //public ViewResult List(int page = 1) => View(new ProductsListViewModel
-        //{
-        //    Produtos = _context.Produto.OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize),
-        //    PagingInfo = new PagingInfo
-        //    {
-        //        CurrentPage = page,
-        //        ItensPerPage = PageSize,
-        //        TotalItems = repository.Produtos.Count()
-        //    }
-        //});
-
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(int page = 1)
         {
-            return View(await _context.Produto.ToListAsync());
+            return View(new ProductsListViewModel
+            {
+                Produtos = await _context.Produto.OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItensPerPage = PageSize,
+                    TotalItems = _context.Produto.Count()
+                }
+            });
         }
 
         // GET: Produtos/Details/5
