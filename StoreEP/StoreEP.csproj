@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Compile Remove="Models\VIewModels.cs" />
+    <Compile Remove="Views\Shared\CardProduto.cshtml.cs" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

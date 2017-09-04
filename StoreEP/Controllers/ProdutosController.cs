@@ -163,7 +163,7 @@ namespace StoreEP.Controllers
             var produto = await _context.Produto.SingleOrDefaultAsync(m => m.ProdutoID == id);
             _context.Produto.Remove(produto);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool ProdutoExists(int id)

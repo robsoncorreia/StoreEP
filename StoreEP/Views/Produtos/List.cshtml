@@ -3,20 +3,20 @@
 @{
     ViewData["Title"] = "Index";
 }
-<a asp-action="Create">Criar produto</a>
 @foreach (var p in Model)
 {
     <figure class="snip1423">
-        <img src="@p.LinkImagemPD" alt="@p?.NomePD"  />
+        <img src="@p?.LinkImagemPD" alt="@p?.NomePD" />
         <figcaption>
             <h3>@p?.NomePD</h3>
             <p>@p?.DescricaoPD</p>
             <div class="price">
-                <s>@p?.PrecoPD.ToString("c")</s>@p?.PrecoPD.ToString("c")
+                @{
+                    var x = $"{(decimal)p?.PrecoPD * 1.1M:c2}";
+                }
+                <s>@x</s>@p?.PrecoPD.ToString("c")
             </div>
         </figcaption><i class="ion-android-cart"></i>
         <a href="#"></a>
     </figure>
-}
-
-
+ }
