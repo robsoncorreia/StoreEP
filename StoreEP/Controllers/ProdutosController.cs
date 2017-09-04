@@ -28,17 +28,18 @@ namespace StoreEP.Controllers
             return View(await _context.Produto.ToListAsync());
         }
 
-        public async Task<IActionResult> List(int page = 1)
+        public async Task<IActionResult> List(string category, int page = 1)
         {
             return View(new ProductsListViewModel
             {
-                Produtos = await _context.Produto.OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+                Produtos = await _context.Produto.Where(p => category == null || p.CategoriaPD == category).OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItensPerPage = PageSize,
                     TotalItems = _context.Produto.Count()
-                }
+                },
+                CurrentCategory = category
             });
         }
 
