@@ -52,9 +52,21 @@ namespace StoreEP
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "pagination",
-                    template: "Produtos/Page{page}",
-                    defaults: new { Controller = "Produtos", action = "Produtos/List" });
+                    name: null,
+                    template: "{category}/Page{page:int}",
+                    defaults: new { controller = "Produtos", action = "Produtos/List" });
+                routes.MapRoute(
+                    name: null,
+                    template: "Page{page:int}",
+                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1});
+                routes.MapRoute(
+                    name: null,
+                    template: "{category}",
+                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1 });
+                routes.MapRoute(
+                    name: null,
+                    template: "",
+                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1});
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Produtos}/{action=List}/{id?}");
