@@ -37,10 +37,10 @@ namespace StoreEP
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                //{
-                //    HotModuleReplacement = true
-                //});
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
+                    HotModuleReplacement = true
+                });
             }
             else
             {
@@ -58,7 +58,7 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "Page{page:int}",
-                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1});
+                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1 });
                 routes.MapRoute(
                     name: null,
                     template: "{category}",
@@ -66,7 +66,7 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "",
-                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1});
+                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1 });
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Produtos}/{action=List}/{id?}");

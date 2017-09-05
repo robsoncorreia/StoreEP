@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StoreEP</title>
     <base href="~/" />
-
-    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/cardprodutc.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/js/cardstore.js" asp-append-version="true" />
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
@@ -25,5 +20,10 @@
             @RenderSection("scripts", required: false)
         </div>
     </div>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
+    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/cardprodutc.css" asp-append-version="true" />
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/cardstore.js"> </script>
 </body>
 </html>
