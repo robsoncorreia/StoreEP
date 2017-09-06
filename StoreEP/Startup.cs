@@ -54,22 +54,22 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "{category}/Page{page:int}",
-                    defaults: new { controller = "Produtos", action = "Produtos/List" });
+                    defaults: new { controller = "Produtos", action = "List" });
                 routes.MapRoute(
                     name: null,
                     template: "Page{page:int}",
-                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1 });
+                    defaults: new { controller = "Produtos", action = "List", page = 1 });
                 routes.MapRoute(
                     name: null,
                     template: "{category}",
-                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1 });
+                    defaults: new { controller = "Produtos", action = "List", page = 1 });
                 routes.MapRoute(
                     name: null,
                     template: "",
-                    defaults: new { controller = "Produtos", action = "Produtos/List", page = 1 });
+                    defaults: new { controller = "Produtos", action = "List", page = 1 });
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Produtos}/{action=List}/{id?}");
+                    template: "{controller=Produtos}/{action=Produtos/List}/{id?}");
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
