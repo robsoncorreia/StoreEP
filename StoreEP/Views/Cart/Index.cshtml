@@ -1,0 +1,42 @@
+﻿@using StoreEP.Models.ViewModels
+@model CartIndexViewModel
+<h2>Seu carrinho</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Quantidade</th>
+            <th>Item</th>
+            <th class="text-right">Preço</th>
+            <th class="text-right">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+        <tr>
+            <td class="text-center">@line.Quantidade</td>
+            <td class="text-left">@line.Produto.NomePD</td>
+            <td class="text-right">@line.Produto.PrecoPD.ToString("c")</td>
+            <td class="text-right">@((line.Quantidade * line.Produto.PrecoPD).ToString("c"))</td>
+            <td>
+                <form asp-action="RemoveFromCart" method="post">
+                    <input type="hidden" name="ProdutoID" value="@line.Produto.ProdutoID" />
+                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                    <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.Cart.ComputeTotalValue().ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue shopping</a>
+</div>

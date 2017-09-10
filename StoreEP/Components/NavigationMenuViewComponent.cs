@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StoreEP.Models;
 
-namespace StoreEP.Component
+namespace StoreEP.Components
 {
     public class NavigationMenuViewComponent : ViewComponent
     {

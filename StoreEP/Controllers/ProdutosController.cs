@@ -14,8 +14,6 @@ namespace StoreEP.Controllers
     {
         private readonly StoreEPContext _context;
 
-
-
         public ProdutosController(StoreEPContext context)
         {
             _context = context;
@@ -23,25 +21,19 @@ namespace StoreEP.Controllers
 
         public int PageSize = 3;
         //GET: Produtos
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Produto.ToListAsync());
-        }
+        public async Task<IActionResult> Index() => View(await _context.Produto.ToListAsync());
 
-        public async Task<IActionResult> List(string category, int page = 1)
+        public async Task<IActionResult> List(string category, int page = 1) => View(new ProductsListViewModel
         {
-            return View(new ProductsListViewModel
+            Produtos = await _context.Produto.Where(p => category == null || p.CategoriaPD == category).OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+            PagingInfo = new PagingInfo
             {
-                Produtos = await _context.Produto.Where(p => category == null || p.CategoriaPD == category).OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItensPerPage = PageSize,
-                    TotalItems = _context.Produto.Count()
-                },
-                CurrentCategory = category
-            });
-        }
+                CurrentPage = page,
+                ItensPerPage = PageSize,
+                TotalItems = _context.Produto.Count()
+            },
+            CurrentCategory = category
+        });
 
         // GET: Produtos/Details/5
         public async Task<IActionResult> Details(int? id)

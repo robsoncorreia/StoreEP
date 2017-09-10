@@ -24,9 +24,11 @@ namespace StoreEP
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddMvc();
             services.AddNodeServices();
-
+            services.AddMemoryCache();
+            services.AddSession();
             services.AddDbContext<StoreEPContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StoreEPContext")));
         }
@@ -48,7 +50,7 @@ namespace StoreEP
             }
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -58,21 +60,22 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "Page{page:int}",
-                    defaults: new { controller = "Produtos", action = "List", page = 1 });
+                    defaults: new { controller = "Produtos", action = "List"});
                 routes.MapRoute(
                     name: null,
                     template: "{category}",
-                    defaults: new { controller = "Produtos", action = "List", page = 1 });
+                    defaults: new { controller = "Produtos", action = "List"});
                 routes.MapRoute(
                     name: null,
                     template: "",
-                    defaults: new { controller = "Produtos", action = "List", page = 1 });
+                    defaults: new { controller = "Produtos", action = "List" });
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Produtos}/{action=Produtos/List}/{id?}");
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                    name: null,
+                    template: "{controller=Produtos}/{action=List}/{id?}");
+                routes.MapRoute(
+                    name: null,
+                    template: "",
+                    defaults: new { controller = "Produtos", action = "List" });
             });
         }
     }
