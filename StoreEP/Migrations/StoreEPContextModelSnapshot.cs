@@ -20,6 +20,59 @@ namespace StoreEP.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("StoreEP.Models.CartLine", b =>
+                {
+                    b.Property<int>("CartLineID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("OrderID");
+
+                    b.Property<int?>("ProdutoID");
+
+                    b.Property<int>("Quantidade");
+
+                    b.HasKey("CartLineID");
+
+                    b.HasIndex("OrderID");
+
+                    b.HasIndex("ProdutoID");
+
+                    b.ToTable("CartLine");
+                });
+
+            modelBuilder.Entity("StoreEP.Models.Order", b =>
+                {
+                    b.Property<int>("OrderID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("City")
+                        .IsRequired();
+
+                    b.Property<string>("Country")
+                        .IsRequired();
+
+                    b.Property<bool>("GifWrap");
+
+                    b.Property<string>("Line1")
+                        .IsRequired();
+
+                    b.Property<string>("Line2");
+
+                    b.Property<string>("Line3");
+
+                    b.Property<string>("Nome")
+                        .IsRequired();
+
+                    b.Property<string>("State")
+                        .IsRequired();
+
+                    b.Property<string>("Zip");
+
+                    b.HasKey("OrderID");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("StoreEP.Models.Produto", b =>
                 {
                     b.Property<int>("ProdutoID")
@@ -44,6 +97,17 @@ namespace StoreEP.Migrations
                     b.HasIndex("RelacionadoPDProdutoID");
 
                     b.ToTable("Produto");
+                });
+
+            modelBuilder.Entity("StoreEP.Models.CartLine", b =>
+                {
+                    b.HasOne("StoreEP.Models.Order")
+                        .WithMany("Lines")
+                        .HasForeignKey("OrderID");
+
+                    b.HasOne("StoreEP.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoID");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Produto", b =>

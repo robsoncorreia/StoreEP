@@ -16,13 +16,16 @@
                 <span asp-validation-for="NomePD" class="text-danger"></span>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="CategoriaPD" class="col-md-2 control-label">Categoria</label>
-            <div class="col-md-10">
-                <input asp-for="CategoriaPD" class="form-control" />
-                <span asp-validation-for="CategoriaPD" class="text-danger"></span>
-            </div>
-        </div>
+        <label asp-for="CategoriaPD" class="text-right control-label ">Categoria</label>
+        <select asp-for="CategoriaPD" class="combobox input-large form-control">
+            <option></option>
+            <option value="Moda e acessórios">Moda e acessórios</option>
+            <option value="Eletrodomésticos">Eletrodomésticos</option>
+            <option value="Telefonia/Celulares">Telefonia/Celulares</option>
+            <option value="Casa e decoração">Casa e decoração</option>
+            <option value="Informática">Informática</option>
+        </select>
+
         <div class="form-group">
             <label asp-for="PrecoPD" class="col-md-2 control-label">Preço</label>
             <div class="col-md-10">
@@ -53,10 +56,10 @@
         </div>
         <div class="col-md-8 left">
             <img id="img_produto" class="img-thumbnail" src="http://pulauhp.com/pemesanan/produk/no-image.jpg" style="width:100px; height: 100px; margin: 10px 0 10px 0;" />
-        </div> 
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Criar" class="btn btn-primary" disabled/>
+                <input type="submit" value="Criar" class="btn btn-primary"/>
             </div>
         </div>
     </div>

@@ -20,4 +20,5 @@ $(document).ready(function () {
             $("#LinkImagemPD").css({ 'background-color': 'red', 'color': 'white' });
         }
     });
+    $('.combobox').combobox({ bsVersion: '3.3.7' });
 });

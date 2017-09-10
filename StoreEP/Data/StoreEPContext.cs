@@ -9,11 +9,12 @@ namespace StoreEP.Models
 {
     public class StoreEPContext : DbContext
     {
-        public StoreEPContext (DbContextOptions<StoreEPContext> options)
+        public StoreEPContext(DbContextOptions<StoreEPContext> options)
             : base(options)
         {
         }
 
         public DbSet<Produto> Produto { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using StoreEP.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace StoreEP
 {
@@ -25,12 +26,14 @@ namespace StoreEP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
             services.AddNodeServices();
             services.AddMemoryCache();
             services.AddSession();
             services.AddDbContext<StoreEPContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StoreEPContext")));
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
