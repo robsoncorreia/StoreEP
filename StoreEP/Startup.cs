@@ -34,6 +34,7 @@ namespace StoreEP
             services.AddDbContext<StoreEPContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StoreEPContext")));
             services.AddTransient<IOrderRepository, EFOrderRepository>();
+            services.AddTransient<IProductRepository, EFProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

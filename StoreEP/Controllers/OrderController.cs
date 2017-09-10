@@ -15,6 +15,20 @@ namespace StoreEP.Controllers
         private IOrderRepository repository;
         private Cart cart;
 
+        public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
+
+        [HttpPost]
+        public IActionResult MarkShipped(int orderID)
+        {
+            Order order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);
+            if (order != null)
+            {
+                order.Shipped = true;
+                repository.SaveOrder(order);
+            }
+            return RedirectToAction(nameof(List));
+        }
+
         public OrderController(IOrderRepository repoService, Cart cartService)
         {
             this.repository = repoService;

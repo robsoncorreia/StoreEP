@@ -63,6 +63,8 @@ namespace StoreEP.Migrations
                     b.Property<string>("Nome")
                         .IsRequired();
 
+                    b.Property<bool>("Shipped");
+
                     b.Property<string>("State")
                         .IsRequired();
 

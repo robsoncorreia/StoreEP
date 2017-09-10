@@ -13,6 +13,8 @@ namespace StoreEP.Models
         public int OrderID { get; set; }
         [BindNever]
         public ICollection<CartLine> Lines { get; set; }
+        [BindNever]
+        public bool Shipped { get; set; } = false;
         [Required(ErrorMessage = "Por favor entre com um nome.")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Entre com o primeiro endereço.")]
