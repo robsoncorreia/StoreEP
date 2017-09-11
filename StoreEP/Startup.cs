@@ -32,7 +32,9 @@ namespace StoreEP
             services.AddMemoryCache();
             services.AddSession();
             services.AddDbContext<StoreEPContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("StoreEPContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("StoreEPContext"))); 
+                services.AddDbContext<AppIdentityDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("Identity"))); 
             services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddTransient<IProductRepository, EFProductRepository>();
         }
@@ -62,13 +64,17 @@ namespace StoreEP
                     template: "{category}/Page{page:int}",
                     defaults: new { controller = "Produtos", action = "List" });
                 routes.MapRoute(
+                  name: null,
+                  template: "{controller}/Produto{batata:int}",
+                  defaults: new { controller = "Admin", action = "Edit" });
+                routes.MapRoute(
                     name: null,
                     template: "Page{page:int}",
-                    defaults: new { controller = "Produtos", action = "List"});
+                    defaults: new { controller = "Produtos", action = "List" });
                 routes.MapRoute(
                     name: null,
                     template: "{category}",
-                    defaults: new { controller = "Produtos", action = "List"});
+                    defaults: new { controller = "Produtos", action = "List" });
                 routes.MapRoute(
                     name: null,
                     template: "",

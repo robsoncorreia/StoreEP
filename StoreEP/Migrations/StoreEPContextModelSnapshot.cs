@@ -10,7 +10,7 @@ using System;
 
 namespace StoreEP.Migrations
 {
-    [DbContext(typeof(StoreEPContext))]
+    [DbContext(typeof(AppIdentityDbContext))]
     partial class StoreEPContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -20,103 +20,208 @@ namespace StoreEP.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("StoreEP.Models.CartLine", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<int>("CartLineID")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("OrderID");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
 
-                    b.Property<int?>("ProdutoID");
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
 
-                    b.Property<int>("Quantidade");
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
 
-                    b.HasKey("CartLineID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("OrderID");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.HasIndex("ProdutoID");
-
-                    b.ToTable("CartLine");
+                    b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("StoreEP.Models.Order", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<int>("OrderID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("City")
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("RoleId")
                         .IsRequired();
 
-                    b.Property<string>("Country")
-                        .IsRequired();
+                    b.HasKey("Id");
 
-                    b.Property<bool>("GifWrap");
+                    b.HasIndex("RoleId");
 
-                    b.Property<string>("Line1")
-                        .IsRequired();
-
-                    b.Property<string>("Line2");
-
-                    b.Property<string>("Line3");
-
-                    b.Property<string>("Nome")
-                        .IsRequired();
-
-                    b.Property<bool>("Shipped");
-
-                    b.Property<string>("State")
-                        .IsRequired();
-
-                    b.Property<string>("Zip");
-
-                    b.HasKey("OrderID");
-
-                    b.ToTable("Orders");
+                    b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("StoreEP.Models.Produto", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
-                    b.Property<int>("ProdutoID")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CategoriaPD");
+                    b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("DescricaoPD");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
 
-                    b.Property<string>("Fabricante");
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
 
-                    b.Property<string>("LinkImagemPD");
+                    b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("NomePD");
+                    b.Property<bool>("LockoutEnabled");
 
-                    b.Property<decimal>("PrecoPD");
+                    b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<int?>("RelacionadoPDProdutoID");
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
 
-                    b.HasKey("ProdutoID");
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
 
-                    b.HasIndex("RelacionadoPDProdutoID");
+                    b.Property<string>("PasswordHash");
 
-                    b.ToTable("Produto");
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("StoreEP.Models.CartLine", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("StoreEP.Models.Order")
-                        .WithMany("Lines")
-                        .HasForeignKey("OrderID");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.HasOne("StoreEP.Models.Produto", "Produto")
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("ProviderKey");
+
+                    b.Property<string>("ProviderDisplayName");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                         .WithMany()
-                        .HasForeignKey("ProdutoID");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("StoreEP.Models.Produto", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("StoreEP.Models.Produto", "RelacionadoPD")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
-                        .HasForeignKey("RelacionadoPDProdutoID");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

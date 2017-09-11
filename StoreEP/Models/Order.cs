@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +26,7 @@ namespace StoreEP.Models
         [Required(ErrorMessage = "Por favor digite o nome do estado.")]
         public string State { get; set; }
         public string Zip { get; set; }
-        [Required(ErrorMessage = "Digie o nome do pais.")]
+        [Required(ErrorMessage = "Digite o nome do pais.")]
         public string Country { get; set; }
         public bool GifWrap { get; set; }
     }

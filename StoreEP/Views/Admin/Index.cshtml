@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Produto>
+@model IEnumerable<Produto>
 @{
     ViewBag.Title = "Todos os produtos";
     Layout = "_AdminLayout";
@@ -8,7 +8,7 @@
         <th class="text-right">ID</th>
         <th>Nome</th>
         <th class="text-right">Preço</th>
-        <th class="text-center">Actions</th>
+        <th class="text-center">Ações</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -18,7 +18,7 @@
             <td class="text-right">@item?.PrecoPD.ToString("c")</td>
             <td class="text-center">
                 <form asp-action="Delete" method="post">
-                    <a asp-action="Edit" class="btn btn-sm btn btn-warning" asp-route-productId="@item.ProdutoID">Edit</a>
+                    <a asp-action="Edit" class="btn btn-sm btn btn-warning" asp-route-batata="@item.ProdutoID">Edit</a>
                     <input type="hidden" name="ProdutoID" value="@item.ProdutoID" />
                     <button type="submit" class="btn btn-danger btn-sm" >Delete</button>
                 </form>

@@ -1,0 +1,41 @@
+@model Produto
+@{ 
+    ViewBag.Title = "Editar Produto";
+    Layout = "_AdminLayout";
+}
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ProdutoID"/>
+    <div class="form-group">
+        <label>Nome</label>
+        <div><span asp-validation-for="NomePD" class="text-danger"></span></div>
+        <input asp-for="NomePD" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Descrição</label>
+        <div><span asp-validation-for="DescricaoPD" class="text-danger"></span></div>
+        <textarea asp-for="DescricaoPD" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoriaPD">Categoria</label>
+        <div><span asp-validation-for="CategoriaPD" class="text-danger"></span></div>
+        <div >
+            <select asp-for="CategoriaPD" class="combobox input-large form-control">
+                <option></option>
+                <option value="Moda e acessórios">Moda e acessórios</option>
+                <option value="Eletrodomésticos">Eletrodomésticos</option>
+                <option value="Telefonia Celulares">Telefonia/Celulares</option>
+                <option value="Casa e decoração">Casa e decoração</option>
+                <option value="Informática">Informática</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Preço</label>
+        <div><span asp-validation-for="PrecoPD" class="text-danger"></span></div>
+        <input asp-for="PrecoPD" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Salvar</button>
+        <a asp-action="Index" class="btn btn-default">Cancelar</a>
+    </div>
+</form>

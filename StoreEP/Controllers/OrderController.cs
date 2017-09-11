@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,8 +31,8 @@ namespace StoreEP.Controllers
 
         public OrderController(IOrderRepository repoService, Cart cartService)
         {
-            this.repository = repoService;
-            this.cart = cartService;
+            repository = repoService;
+            cart = cartService;
         }
 
         public ViewResult Checkout() => View(new Order());

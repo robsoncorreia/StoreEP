@@ -13,7 +13,6 @@ namespace StoreEP.Models
             : base(options)
         {
         }
-
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Order> Orders { get; set; }
     }
