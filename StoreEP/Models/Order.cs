@@ -25,6 +25,7 @@ namespace StoreEP.Models
         public string City { get; set; }
         [Required(ErrorMessage = "Por favor digite o nome do estado.")]
         public string State { get; set; }
+        [Required(ErrorMessage = "Por favor digite o Cep.")]
         public string Zip { get; set; }
         [Required(ErrorMessage = "Digite o nome do pais.")]
         public string Country { get; set; }

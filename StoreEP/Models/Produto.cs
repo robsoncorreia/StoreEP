@@ -18,7 +18,6 @@ namespace StoreEP.Models
         public decimal PrecoPD { get; set; }
         [Required(ErrorMessage = "Escreva um descrição sobre o produto.")]
         public string DescricaoPD { get; set; }
-        public Produto RelacionadoPD { get; set; }
         //[Required(ErrorMessage = "Digite o link da imagem.")]
         public string LinkImagemPD { get; set; }
         //[Required(ErrorMessage = "Quem é o fabricante.")]

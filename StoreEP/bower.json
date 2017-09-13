@@ -8,6 +8,7 @@
     "jquery-validation": "1.17.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "fontawesome": "4.7.0",
-    "bootstrap-combobox": "1.1.8"
+    "bootstrap-combobox": "1.1.8",
+    "jquery.maskedinput": "1.4.1"
   }
 }
