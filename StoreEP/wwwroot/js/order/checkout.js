@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
     $("#Zip").mask("99999-999");
     function limpa_formulário_cep() {
         // Limpa valores do formulário de cep.
@@ -6,7 +6,6 @@
         $("#bairro").val("");
         $("#City").val("");
         $("#uf").val("");
-        $("#ibge").val("");
     }
 
     //Quando o campo cep perde o foco.
@@ -29,7 +28,6 @@
                 $("#Line2").val("...");
                 $("#City").val("...");
                 $("#State").val("...");
-                $("#ibge").val("...");
 
                 //Consulta o webservice viacep.com.br/
                 $.getJSON("//viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {

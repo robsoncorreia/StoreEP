@@ -11,7 +11,6 @@ namespace StoreEP.Controllers
 {
     public class AdminController : Controller
     {
-
         private IProductRepository repository;
 
         public AdminController(IProductRepository repo)

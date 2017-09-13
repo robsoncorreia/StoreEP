@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StoreEP.Models;
 
@@ -15,9 +15,16 @@ namespace StoreEP.Controllers
         private IOrderRepository repository;
         private Cart cart;
 
+        public OrderController(IOrderRepository repoService, Cart cartService)
+        {
+            repository = repoService;
+            cart = cartService;
+        }
+        [Authorize]
         public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
 
         [HttpPost]
+        [Authorize]
         public IActionResult MarkShipped(int orderID)
         {
             Order order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);
@@ -29,17 +36,11 @@ namespace StoreEP.Controllers
             return RedirectToAction(nameof(List));
         }
 
-        public OrderController(IOrderRepository repoService, Cart cartService)
-        {
-            repository = repoService;
-            cart = cartService;
-        }
-
         public ViewResult Checkout() => View(new Order());
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
-            if (order.Lines?.Count() == 0)
+            if (cart.Lines?.Count() == 0)
             {
                 ModelState.AddModelError("", "Descupe sua lista está vazia.");
             }
