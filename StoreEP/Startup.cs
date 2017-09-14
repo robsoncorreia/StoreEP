@@ -96,7 +96,7 @@ namespace StoreEP
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseIdentity();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

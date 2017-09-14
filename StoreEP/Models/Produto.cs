@@ -10,7 +10,8 @@ namespace StoreEP.Models
     {
         [Key]
         public int ProdutoID { get; set; }
-        [Required(ErrorMessage = "Por favor digite o nome do produto.")]
+        [Required(ErrorMessage = "Escreva um nome válido.")]
+        [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Apenas caractéres.")]
         public string NomePD { get; set; }
         [Required(ErrorMessage = "Defina a categoria.")]
         public string CategoriaPD { get; set; }

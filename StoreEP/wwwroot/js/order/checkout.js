@@ -2,10 +2,11 @@ $(document).ready(function () {
     $("#Zip").mask("99999-999");
     function limpa_formulário_cep() {
         // Limpa valores do formulário de cep.
-        $("#rua").val("");
-        $("#bairro").val("");
+        $("#Line1").val("");
+        $("#Line2").val("");
+        $("#Line3").val("");
         $("#City").val("");
-        $("#uf").val("");
+        $("#State").val("");
     }
 
     //Quando o campo cep perde o foco.
@@ -26,6 +27,7 @@ $(document).ready(function () {
                 //Preenche os campos com "..." enquanto consulta webservice.
                 $("#Line1").val("...");
                 $("#Line2").val("...");
+                $("#Line3").val("...");
                 $("#City").val("...");
                 $("#State").val("...");
 
@@ -38,7 +40,6 @@ $(document).ready(function () {
                         $("#Line2").val(dados.bairro);
                         $("#City").val(dados.localidade);
                         $("#State").val(dados.uf);
-                        $("#ibge").val(dados.ibge);
                     } //end if.
                     else {
                         //CEP pesquisado não foi encontrado.

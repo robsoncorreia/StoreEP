@@ -20,6 +20,7 @@ namespace StoreEP.Controllers
 
         public ViewResult Index() => View(repository.Produtos);
 
+        [AutoValidateAntiforgeryToken]
         public ViewResult Edit(int batata) => View(repository.Produtos.FirstOrDefault(p => p.ProdutoID == batata));
 
         [HttpPost]

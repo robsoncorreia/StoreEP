@@ -1,5 +1,5 @@
 @model IEnumerable<Order>
-@{ 
+@{
     ViewBag.Title = "Pedidos";
     Layout = "_AdminLayout";
 }
@@ -7,16 +7,24 @@
 {
     <table class="table table-bordered table-striped">
         <tr>
-            <th>ID</th><th>Nome</th><th>Zip</th><th colspan="2">Detalhes</th><th></th>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Zip</th>
+            <th colspan="2">Detalhes</th>
+            <th></th>
         </tr>
         @foreach (Order o in Model)
         {
             <tr>
-                <td>@o?.OrderID</td><td>@o?.Nome</td><td>@o?.Zip</td><td>Produto</td><td>Quantidade</td>
+                <td>@o?.OrderID</td>
+                <td>@o?.Nome</td>
+                <td>@o?.Zip</td>
+                <td>Produto</td>
+                <td>Quantidade</td>
                 <td>
-                    <form asp-action="MarkShipped" method="post" >
+                    <form asp-action="MarkShipped" method="post">
                         <input type="hidden" name="orderID" value="@o.OrderID" />
-                        <button type="submit" class="btn btn-sm btn-danger">Enviar</button>
+                        <button  type="submit" class="btn btn-sm btn-danger">Enviar</button>
                     </form>
                 </td>
             </tr>
@@ -29,8 +37,10 @@
                     <td>@line?.Quantidade</td>
                 </tr>
             }
-        }    
+        }
     </table>
-}else{
+}
+else
+{
     <div class="text-center">No Unshipped Orders</div>
 }

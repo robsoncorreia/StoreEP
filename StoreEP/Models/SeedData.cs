@@ -19,10 +19,6 @@ namespace StoreEP.Models
             {
                 return;   // DB has been seeded
             }
-
-
-
-
             var produtos = new Produto[] {
                     new Produto
                     {
