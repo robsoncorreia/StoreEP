@@ -68,7 +68,8 @@ namespace StoreEP.Migrations
                     b.Property<string>("State")
                         .IsRequired();
 
-                    b.Property<string>("Zip");
+                    b.Property<string>("Zip")
+                        .IsRequired();
 
                     b.HasKey("OrderID");
 

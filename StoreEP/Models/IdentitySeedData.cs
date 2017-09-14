@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using StoreEP.Data;
 
 namespace StoreEP.Models
 {
@@ -14,13 +13,13 @@ namespace StoreEP.Models
         public static async void EnsurePopulated(IApplicationBuilder app)
         {
 
-            UserManager<ApplicationUser> userManager = app.ApplicationServices
-                .GetRequiredService<UserManager<ApplicationUser>>();
+            UserManager<AppUser> userManager = app.ApplicationServices
+                .GetRequiredService<UserManager<AppUser>>();
 
-            ApplicationUser user = await userManager.FindByIdAsync(adminUser);
+            AppUser user = await userManager.FindByIdAsync(adminUser);
             if (user == null)
             {
-                user = new ApplicationUser("Admin");
+                user = new AppUser("Admin");
                 await userManager.CreateAsync(user, adminPassword);
             }
         }

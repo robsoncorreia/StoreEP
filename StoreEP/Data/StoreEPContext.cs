@@ -15,5 +15,11 @@ namespace StoreEP.Models
         }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Order> Orders { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Produto>().ToTable("Produto");
+            modelBuilder.Entity<Order>().ToTable("Order");
+        }
     }
 }
