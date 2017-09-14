@@ -10,7 +10,7 @@ namespace StoreEP.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "Order",
                 columns: table => new
                 {
                     OrderID = table.Column<int>(type: "int", nullable: false)
@@ -28,7 +28,7 @@ namespace StoreEP.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OrderID);
+                    table.PrimaryKey("PK_Order", x => x.OrderID);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,9 +63,9 @@ namespace StoreEP.Migrations
                 {
                     table.PrimaryKey("PK_CartLine", x => x.CartLineID);
                     table.ForeignKey(
-                        name: "FK_CartLine_Orders_OrderID",
+                        name: "FK_CartLine_Order_OrderID",
                         column: x => x.OrderID,
-                        principalTable: "Orders",
+                        principalTable: "Order",
                         principalColumn: "OrderID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -93,7 +93,7 @@ namespace StoreEP.Migrations
                 name: "CartLine");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "Produto");

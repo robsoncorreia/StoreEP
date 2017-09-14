@@ -11,8 +11,8 @@ using System;
 namespace StoreEP.Migrations
 {
     [DbContext(typeof(StoreEPContext))]
-    [Migration("20170914115852_Inicial2")]
-    partial class Inicial2
+    [Migration("20170914142053_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,7 +74,7 @@ namespace StoreEP.Migrations
 
                     b.HasKey("OrderID");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Produto", b =>

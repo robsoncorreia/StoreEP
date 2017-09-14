@@ -20,11 +20,10 @@ namespace StoreEP.Controllers
             repository = repoService;
             cart = cartService;
         }
-        [Authorize]
+
         public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
 
         [HttpPost]
-        [Authorize]
         public IActionResult MarkShipped(int orderID)
         {
             Order order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);

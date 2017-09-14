@@ -9,11 +9,11 @@ namespace StoreEP.Models
 {
     public class Order
     {
-        [BindNever]
+        //[BindNever]
         public int OrderID { get; set; }
-        [BindNever]
+       // [BindNever]
         public ICollection<CartLine> Lines { get; set; }
-        [BindNever]
+       // [BindNever]
         public bool Shipped { get; set; } = false;
         [Required(ErrorMessage = "Por favor entre com um nome.")]
         public string Nome { get; set; }

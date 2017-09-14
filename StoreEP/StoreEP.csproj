@@ -18,29 +18,16 @@
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
-    <Compile Remove="Migrations\**" />
     <Compile Remove="Models\NovaPasta\**" />
     <Content Remove="ClientApp\**" />
-    <Content Remove="Migrations\**" />
     <Content Remove="Models\NovaPasta\**" />
-    <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Models\NovaPasta\**" />
-    <None Remove="Migrations\**" />
     <None Remove="Models\NovaPasta\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Models\VIewModels.cs" />
     <Compile Remove="Views\Shared\CardProduto.cshtml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Migrations\20170914120759_Inicial.cs" />
-    <Compile Include="Migrations\20170914120759_Inicial.Designer.cs" />
-    <Compile Include="Migrations\AppIdentityDb\20170914121104_Inicial.cs" />
-    <Compile Include="Migrations\AppIdentityDb\20170914121104_Inicial.Designer.cs" />
-    <Compile Include="Migrations\AppIdentityDb\AppIdentityDbContextModelSnapshot.cs" />
-    <Compile Include="Migrations\StoreEPContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>

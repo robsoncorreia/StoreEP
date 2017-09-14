@@ -73,7 +73,7 @@ namespace StoreEP.Migrations
 
                     b.HasKey("OrderID");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Produto", b =>
