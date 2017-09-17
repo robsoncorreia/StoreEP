@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace StoreEP.Migrations
+namespace StoreEP.Migrations.StoreEP
 {
-    public partial class Inicial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,8 +19,8 @@ namespace StoreEP.Migrations
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GifWrap = table.Column<bool>(type: "bit", nullable: false),
                     Line1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Line2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Line3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Line2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Line3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Shipped = table.Column<bool>(type: "bit", nullable: false),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: false),

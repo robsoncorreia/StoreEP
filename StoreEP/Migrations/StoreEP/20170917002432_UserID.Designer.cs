@@ -8,12 +8,13 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using StoreEP.Models;
 using System;
 
-namespace StoreEP.Migrations
+namespace StoreEP.Migrations.StoreEP
 {
     [DbContext(typeof(StoreEPContext))]
-    partial class StoreEPContextModelSnapshot : ModelSnapshot
+    [Migration("20170917002432_UserID")]
+    partial class UserID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,9 +57,11 @@ namespace StoreEP.Migrations
                     b.Property<string>("Line1")
                         .IsRequired();
 
-                    b.Property<string>("Line2");
+                    b.Property<string>("Line2")
+                        .IsRequired();
 
-                    b.Property<string>("Line3");
+                    b.Property<string>("Line3")
+                        .IsRequired();
 
                     b.Property<string>("Nome")
                         .IsRequired();
@@ -67,6 +70,8 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("State")
                         .IsRequired();
+
+                    b.Property<string>("UserID");
 
                     b.Property<string>("Zip")
                         .IsRequired();

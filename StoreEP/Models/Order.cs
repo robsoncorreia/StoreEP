@@ -9,6 +9,7 @@ namespace StoreEP.Models
 {
     public class Order
     {
+        public string UserID { get; set; }
         //[BindNever]
         public int OrderID { get; set; }
        // [BindNever]

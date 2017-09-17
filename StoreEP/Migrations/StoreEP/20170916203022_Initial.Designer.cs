@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using StoreEP.Models;
 using System;
 
-namespace StoreEP.Migrations
+namespace StoreEP.Migrations.StoreEP
 {
     [DbContext(typeof(StoreEPContext))]
-    [Migration("20170914142053_Inicial")]
-    partial class Inicial
+    [Migration("20170916203022_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,9 +57,11 @@ namespace StoreEP.Migrations
                     b.Property<string>("Line1")
                         .IsRequired();
 
-                    b.Property<string>("Line2");
+                    b.Property<string>("Line2")
+                        .IsRequired();
 
-                    b.Property<string>("Line3");
+                    b.Property<string>("Line3")
+                        .IsRequired();
 
                     b.Property<string>("Nome")
                         .IsRequired();

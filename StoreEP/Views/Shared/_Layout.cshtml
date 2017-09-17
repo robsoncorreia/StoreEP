@@ -19,6 +19,7 @@
 <body>
     <div class="navbar navbar-inverse" role="navigation">
         <a class="navbar-brand" href="#">Loja</a>
+        @await Html.PartialAsync("_LoginPartial")
         <div class="pull-right">
             @await Component.InvokeAsync("CartSummary")
         </div>
