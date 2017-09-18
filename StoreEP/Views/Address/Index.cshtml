@@ -25,7 +25,7 @@
                 <td>@address.Zip</td>
                 <td>@address.Country</td>
                 <td>
-                    <form asp-action="" asp-controller="Order">
+                    <form asp-action="Checkout" asp-controller="Order">
                         <button class="btn btn-danger" type="submit" asp-route-addressid="@address.AddressID">Usar Este</button>
                     </form>
                 </td>
