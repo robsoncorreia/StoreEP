@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ namespace StoreEP.Models
             context = ctx;
         }
         public IEnumerable<Address> Address => context.Address;
-        public void SaveAdress(Address address)
+        public void SaveAddress(Address address)
         {
             if (address.AddressID == 0)
             {

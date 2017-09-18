@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,20 +27,35 @@ namespace StoreEP.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             if (user != null && _addressRepositoty.Address.Where(a => a.UserID.Equals(user.Id)).Count() != 0)
             {
                 return View(new AddressViewModel
                 {
-                    Address = _addressRepositoty.Address.Where(a => a.UserID.Equals(user.Id)).OrderBy(a => a.Line1).ToList()
+                    GetAddress = _addressRepositoty.Address.Where(a => a.UserID.Equals(user.Id)).ToList()
                 });
             }
-            return RedirectToAction("Create", "Adrress");
+            return RedirectToAction(nameof(Create));
         }
-        public IActionResult Create() => View();
-
-        public IActionResult Create(Address address)
+        [HttpPost]
+        public async Task<IActionResult> Create(Address address)
         {
+            ClaimsPrincipal currentUser = this.User;
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                address.UserID = user.Id;
+            }
+            if (ModelState.IsValid)
+            {
+                _addressRepositoty.SaveAddress(address);
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
+        public IActionResult Create() => View();
     }
 }

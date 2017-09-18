@@ -28,6 +28,7 @@ namespace StoreEP.Controllers
             _signInManager = signInManager;
         }
 
+
         public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
 
         [HttpPost]

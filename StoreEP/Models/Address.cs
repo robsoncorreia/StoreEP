@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,11 +10,9 @@ namespace StoreEP.Models
     {
         public int AddressID { get; set; }
         public string UserID { get; set; }
-        [Required(ErrorMessage = "Por favor entre com um nome.")]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Apenas caractéres.")]
-        public string Nome { get; set; }
         [Required(ErrorMessage = "Entre com o endereço.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
+        [Display(Name = "Rua")]
         public string Line1 { get; set; }
         [Required(ErrorMessage = "Entre com o nome bairro.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]

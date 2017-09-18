@@ -42,9 +42,6 @@ namespace StoreEP.Migrations.StoreEP
                     b.Property<string>("Line3")
                         .IsRequired();
 
-                    b.Property<string>("Nome")
-                        .IsRequired();
-
                     b.Property<string>("State")
                         .IsRequired();
 

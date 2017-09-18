@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,6 +56,9 @@ namespace StoreEP
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
+
+            services.AddDbContext<StoreEPContext2>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("StoreEPContext2")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,9 +1,10 @@
-﻿@using System.Collections.Generic
+@using System.Collections.Generic
 @using System.Linq
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Authentication
 @model LoginViewModel
 @inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Log in";
@@ -39,11 +40,11 @@
                     <button type="submit" class="btn btn-default">Log in</button>
                 </div>
                 <div class="form-group">
-                    <p>
+                    @*<p>
                         <a asp-action="ForgotPassword">Forgot your password?</a>
-                    </p>
+                    </p>*@
                     <p>
-                        <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
+                        <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Registra um novo usuário?</a>
                     </p>
                 </div>
             </form>
@@ -81,7 +82,6 @@
         </section>
     </div>
 </div>
-
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
