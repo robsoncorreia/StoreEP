@@ -27,7 +27,7 @@ namespace StoreEP.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
-            if (user != null && _addressRepositoty.Address.Where(a => a.UserID.Equals(user.Id)).Count() == 0)
+            if (user != null && _addressRepositoty.Address.Where(a => a.UserID.Equals(user.Id)).Count() != 0)
             {
                 return View(new AddressViewModel
                 {
