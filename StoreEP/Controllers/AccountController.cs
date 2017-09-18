@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using StoreEP.Models;
 using StoreEP.Models.AccountViewModels;
 using StoreEP.Services;
+using StoreEP.Models.ViewModels;
 
 namespace StoreEP.Controllers
 {
@@ -220,7 +221,7 @@ namespace StoreEP.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Name, Email = model.Email, PhoneNumber = model.PhoneNumber };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

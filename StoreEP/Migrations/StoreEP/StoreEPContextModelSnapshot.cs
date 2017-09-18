@@ -20,6 +20,44 @@ namespace StoreEP.Migrations.StoreEP
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("StoreEP.Models.Address", b =>
+                {
+                    b.Property<int>("AddressID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("City")
+                        .IsRequired();
+
+                    b.Property<string>("Country")
+                        .IsRequired();
+
+                    b.Property<bool>("GifWrap");
+
+                    b.Property<string>("Line1")
+                        .IsRequired();
+
+                    b.Property<string>("Line2")
+                        .IsRequired();
+
+                    b.Property<string>("Line3")
+                        .IsRequired();
+
+                    b.Property<string>("Nome")
+                        .IsRequired();
+
+                    b.Property<string>("State")
+                        .IsRequired();
+
+                    b.Property<string>("UserID");
+
+                    b.Property<string>("Zip")
+                        .IsRequired();
+
+                    b.HasKey("AddressID");
+
+                    b.ToTable("Address");
+                });
+
             modelBuilder.Entity("StoreEP.Models.CartLine", b =>
                 {
                     b.Property<int>("CartLineID")
@@ -45,37 +83,15 @@ namespace StoreEP.Migrations.StoreEP
                     b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<string>("Country")
-                        .IsRequired();
-
-                    b.Property<bool>("GifWrap");
-
-                    b.Property<string>("Line1")
-                        .IsRequired();
-
-                    b.Property<string>("Line2")
-                        .IsRequired();
-
-                    b.Property<string>("Line3")
-                        .IsRequired();
-
-                    b.Property<string>("Nome")
-                        .IsRequired();
+                    b.Property<int?>("AddressID");
 
                     b.Property<bool>("Shipped");
 
-                    b.Property<string>("State")
-                        .IsRequired();
-
                     b.Property<string>("UserID");
 
-                    b.Property<string>("Zip")
-                        .IsRequired();
-
                     b.HasKey("OrderID");
+
+                    b.HasIndex("AddressID");
 
                     b.ToTable("Order");
                 });
@@ -114,6 +130,13 @@ namespace StoreEP.Migrations.StoreEP
                     b.HasOne("StoreEP.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoID");
+                });
+
+            modelBuilder.Entity("StoreEP.Models.Order", b =>
+                {
+                    b.HasOne("StoreEP.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressID");
                 });
 #pragma warning restore 612, 618
         }

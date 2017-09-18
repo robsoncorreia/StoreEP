@@ -46,6 +46,7 @@ namespace StoreEP
 
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddTransient<IOrderRepository, EFOrderRepository>();
+            services.AddTransient<IAddressRepositoty, EFAddresRepository>();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -103,10 +104,6 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "{controller=Produtos}/{action=List}/{id?}");
-                routes.MapRoute(
-                    name: null,
-                    template: "",
-                    defaults: new { controller = "Produtos", action = "List" });
             });
             //IdentitySeedData.EnsurePopulated(app);
         }
