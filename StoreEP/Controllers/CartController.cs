@@ -21,7 +21,6 @@ namespace StoreEP.Controllers
             _context = repo;
             cart = carService;
         }
-
         public ViewResult Index(string returnUrl)
         {
             return View(new CartIndexViewModel {
@@ -29,7 +28,6 @@ namespace StoreEP.Controllers
                 ReturnUrl = returnUrl
             });
         }
-
         public RedirectToActionResult AddToCart(int produtoID, string returnUrl)
         {
             Produto produto = _context.Produto.FirstOrDefault(p => p.ProdutoID == produtoID);
@@ -46,8 +44,7 @@ namespace StoreEP.Controllers
             {
                 cart.RemoveLine(produto);
             }
-            return RedirectToAction("Index", new { returnUrl});
+            return RedirectToAction("Index", new { returnUrl });
         }
-      
     }
 }
