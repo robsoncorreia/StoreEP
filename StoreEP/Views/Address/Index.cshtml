@@ -25,8 +25,8 @@
                 <td>@address.Zip</td>
                 <td>@address.Country</td>
                 <td>
-                    <form asp-action="Checkout" asp-controller="Order">
-                        <button class="btn btn-danger" type="submit" asp-route-addressid="@address.AddressID">Usar Este</button>
+                    <form asp-action="List" asp-controller="Order">
+                        <input type="submit" value="Save" class="btn btn-default" asp-route-addressid="@address.AddressID"/>
                     </form>
                 </td>
             </tr>

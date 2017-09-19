@@ -18,7 +18,7 @@ namespace StoreEP.Controllers
             repository = repo;
         }
 
-        public ViewResult Index() => View(repository.Produtos);
+        public ViewResult List() => View(repository.Produtos);
 
         [AutoValidateAntiforgeryToken]
         public ViewResult Edit(int batata) => View(repository.Produtos.FirstOrDefault(p => p.ProdutoID == batata));
@@ -30,7 +30,7 @@ namespace StoreEP.Controllers
             {
                 repository.SaveProduct(produto);
                 TempData["massage"] = $"{produto.NomePD} foi salvo com sucesso.";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(List));
             }
             else
             {
@@ -46,7 +46,7 @@ namespace StoreEP.Controllers
             {
                 TempData["message"] = $"{deletedProduto.NomePD} foi apagado." ;
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
     }
 }
