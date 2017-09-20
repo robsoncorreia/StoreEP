@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +21,8 @@ namespace StoreEP.Views.Manage
 
         public static string Compras => "Compras";
 
+        public static string Address => "Address";
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
@@ -30,6 +32,8 @@ namespace StoreEP.Views.Manage
         public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
 
         public static string ComprasNavClass(ViewContext viewContext) => PageNavClass(viewContext, Compras);
+
+        public static string AddressNavClass(ViewContext viewContext) => PageNavClass(viewContext, Address);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {

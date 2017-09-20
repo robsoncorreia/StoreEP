@@ -18,16 +18,17 @@ namespace StoreEP.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private IOrderRepository repository;
+        private IAddressRepositoty _addressRepositoty;
         private Cart cart;
 
-        public OrderController(IOrderRepository repoService, Cart cartService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public OrderController(IAddressRepositoty address,IOrderRepository repoService, Cart cartService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             repository = repoService;
             cart = cartService;
             _userManager = userManager;
             _signInManager = signInManager;
+            _addressRepositoty = address;
         }
-
 
         public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
 
@@ -42,26 +43,36 @@ namespace StoreEP.Controllers
             }
             return RedirectToAction(nameof(List));
         }
-        [HttpGet]
-        public async Task<IActionResult> Checkout()
-        {
+        //[HttpGet]
+        //public async Task<IActionResult> CheckoutVal()
+        //{
 
+        //    ClaimsPrincipal currentUser = this.User;
+        //    var user = await _userManager.GetUserAsync(User);
+        //    if (user == null)
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+        //    return Redirect(Url.Action("Checkout", "Order", new Order()));
+        //    //return RedirectToAction(actionName: "Checkout", controllerName: "Order", new Order());
+        //}
+
+        [HttpPost]
+        public async Task<IActionResult> Checkout(int addressID)
+        {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-            
-            return View(new Order());
-        }
-
-        [HttpPost]
-        public IActionResult Checkout(Order order)
-        {
+            Order order = new Order();
+            var address = _addressRepositoty.Address.SingleOrDefault(a => a.AddressID == addressID);
+            order.Address = address;
             if (cart.Lines?.Count() == 0)
             {
                 ModelState.AddModelError("", "Descupe sua lista está vazia.");
+                return RedirectToAction(actionName: "List", controllerName: "Produtos");
             }
             if (ModelState.IsValid)
             {

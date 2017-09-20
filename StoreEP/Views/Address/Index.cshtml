@@ -25,11 +25,12 @@
                 <td>@address.Zip</td>
                 <td>@address.Country</td>
                 <td>
-                    <form asp-action="List" asp-controller="Order">
-                        <input type="submit" value="Save" class="btn btn-default" asp-route-addressid="@address.AddressID"/>
+                    <form asp-action="Order" method="post">
+                        <button type="submit" class="btn btn-sm btn-danger" asp-route-addressid="@address.AddressID">Usar</button>
                     </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<div><a asp-action="Create">Adicionar novo endereço</a></div>

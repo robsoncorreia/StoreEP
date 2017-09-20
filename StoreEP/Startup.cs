@@ -60,7 +60,7 @@ namespace StoreEP
                 options.Password.RequiredUniqueChars = 6;
 
                 // Lockout settings
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(7);
                 options.Lockout.MaxFailedAccessAttempts = 10;
                 options.Lockout.AllowedForNewUsers = true;
 
@@ -139,7 +139,7 @@ namespace StoreEP
                     template: "{controller=Produtos}/{action=List}/{id?}");
                 routes.MapRoute(
                     name: null,
-                    template: "{controller=Address}/Index/{addressid:int}/");
+                    template: "{controller=Address}/Index/{addressid}");
             });
             //IdentitySeedData.EnsurePopulated(app);
         }

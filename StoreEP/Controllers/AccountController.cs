@@ -68,8 +68,7 @@ namespace StoreEP.Controllers
                     if (result.Succeeded)
                     {
                         _logger.LogInformation(message: $"Usuário {user.UserName} logado.");
-                        return RedirectToLocal(returnUrl);
-
+                        return RedirectToAction(actionName: "List", controllerName: "Produtos");
                     }
                     else
                     {
@@ -142,7 +141,6 @@ namespace StoreEP.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = null)
         {
-            // Ensure the user has gone through the username & password screen first
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
@@ -231,8 +229,6 @@ namespace StoreEP.Controllers
                 }
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -242,7 +238,7 @@ namespace StoreEP.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(actionName: "List", controllerName: "Produtos");
         }
 
         [HttpPost]
