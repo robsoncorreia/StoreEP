@@ -67,7 +67,7 @@ namespace StoreEP.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
                     {
-                        _logger.LogInformation($"Usuário {user.UserName} logado.");
+                        _logger.LogInformation(message: $"Usuário {user.UserName} logado.");
                         return RedirectToLocal(returnUrl);
 
                     }
