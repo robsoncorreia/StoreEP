@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Cart\" />
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
   <ItemGroup>
