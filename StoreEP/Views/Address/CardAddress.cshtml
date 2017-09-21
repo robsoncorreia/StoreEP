@@ -1,18 +1,11 @@
 @model Address
-<div class="demo-card-event mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title mdl-card--expand">
-        <h4>
-           @Model.Line1<br>
-           @Model.Line2<br>
-            @Model.Line3
-        </h4>
-    </div>
-    <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-            User este
-        </a>
-        <div class="mdl-layout-spacer"></div>
-        <i class="material-icons">event</i>
+<div class="card">
+    <div class="card-block">
+        <h4 class="card-title">@Model.Line1</h4>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.Line2</h6>
+        <p class="card-text">@Model.Line3</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
     </div>
 </div>
 @*<td>@address.Line1</td>
