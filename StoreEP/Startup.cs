@@ -52,10 +52,10 @@ namespace StoreEP
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequiredUniqueChars = 6;
 
@@ -72,10 +72,10 @@ namespace StoreEP
             {
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
-                options.Cookie.Expiration = TimeSpan.FromDays(150);
-                options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
-                options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
-                options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
+                options.Cookie.Expiration = TimeSpan.FromDays(7);
+                options.LoginPath = "/Account/Login"; 
+                options.LogoutPath = "/Account/Logout"; 
+                options.AccessDeniedPath = "/Account/AccessDenied"; 
                 options.SlidingExpiration = true;
             });
 
@@ -86,9 +86,6 @@ namespace StoreEP
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
-
-            services.AddDbContext<StoreEPContext2>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("StoreEPContext2")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
