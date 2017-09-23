@@ -13,12 +13,12 @@ using StoreEP.Models.ViewModels;
 namespace StoreEP.Controllers
 {
 
-    public class AddressController : Controller
+    public class EnderecoController : Controller
     {
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAddressRepositoty _addressRepositoty;
-        public AddressController(IAddressRepositoty addressRepositoty, UserManager<ApplicationUser> userManager)
+        public EnderecoController(IAddressRepositoty addressRepositoty, UserManager<ApplicationUser> userManager)
         {
             _addressRepositoty = addressRepositoty;
             _userManager = userManager;
@@ -33,7 +33,7 @@ namespace StoreEP.Controllers
             }
             if (user != null && _addressRepositoty.Address.Where(a => a.UserID.Equals(user.Id)).Count() != 0)
             {
-                return View(new AddressViewModel
+                return View(new EnderecoViewModel
                 {
                     GetAddress = _addressRepositoty.Address.Where(a => a.UserID.Equals(user.Id)).ToList()
                 });
@@ -41,7 +41,7 @@ namespace StoreEP.Controllers
             return RedirectToAction(nameof(Create));
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Address address)
+        public async Task<IActionResult> Create(Endereco address)
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);

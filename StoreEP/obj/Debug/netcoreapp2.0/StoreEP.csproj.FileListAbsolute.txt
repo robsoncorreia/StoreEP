@@ -22,3 +22,5 @@ C:\Users\robso\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.dll
 C:\Users\robso\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.pdb
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.Properties.Resources.resources
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.csproj.GenerateResource.Cache
+C:\Users\robso\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.Properties.Resources.resources
+C:\Users\robso\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.csproj.GenerateResource.Cache

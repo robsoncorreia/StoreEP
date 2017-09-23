@@ -13,14 +13,14 @@ namespace StoreEP.Models
         {
         }
         public DbSet<Produto> Produto { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Address> Address { get; set; }
+        public DbSet<Pedido> Orders { get; set; }
+        public DbSet<Endereco> Address { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Produto>().ToTable("Produto");
-            modelBuilder.Entity<Order>().ToTable("Order");
-            modelBuilder.Entity<Address>().ToTable("Address");
+            modelBuilder.Entity<Pedido>().ToTable("Order");
+            modelBuilder.Entity<Endereco>().ToTable("Address");
         }
     }
 }

@@ -6,7 +6,7 @@
             @Model?.PrecoPD.ToString("c")
         </span> 
     </h3>
-    <form id="@Model?.ProdutoID" asp-action="AddToCart" asp-controller="Cart" method="post">
+    <form id="@Model?.ProdutoID" asp-action="AddToCart" asp-controller="Carrinho" method="post">
         <input type="hidden" asp-for="ProdutoID"/>
         <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
         <span class="lead">

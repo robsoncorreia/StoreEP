@@ -9,10 +9,10 @@ namespace StoreEP.Components
 {
     public class CartSummaryViewComponent : ViewComponent
     {
-        private readonly Cart _cart;
-        public CartSummaryViewComponent(Cart cart)
+        private readonly Carrinho _cart;
+        public CartSummaryViewComponent(Carrinho Carrinho)
         {
-            _cart = cart;
+            _cart = Carrinho;
         }
         public IViewComponentResult Invoke()
         {

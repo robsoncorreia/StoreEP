@@ -7,7 +7,7 @@ namespace StoreEP.Models
 {
     public interface IAddressRepositoty
     {
-        IEnumerable<Address> Address { get; }
-        void SaveAddress(Address address);
+        IEnumerable<Endereco> Address { get; }
+        void SaveAddress(Endereco address);
     }
 }

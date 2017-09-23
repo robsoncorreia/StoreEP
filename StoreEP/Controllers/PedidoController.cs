@@ -13,18 +13,18 @@ using System.Security.Claims;
 namespace StoreEP.Controllers
 {
 
-    public class OrderController : Controller
+    public class PedidoController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private IOrderRepository repository;
         private IAddressRepositoty _addressRepositoty;
-        private Cart cart;
+        private Carrinho Carrinho;
 
-        public OrderController(IAddressRepositoty address,IOrderRepository repoService, Cart cartService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public PedidoController(IAddressRepositoty address,IOrderRepository repoService, Carrinho cartService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             repository = repoService;
-            cart = cartService;
+            Carrinho = cartService;
             _userManager = userManager;
             _signInManager = signInManager;
             _addressRepositoty = address;
@@ -33,9 +33,9 @@ namespace StoreEP.Controllers
         public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
 
         [HttpPost]
-        public IActionResult MarkShipped(int orderID)
+        public IActionResult MarkShipped(int ID)
         {
-            Order order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);
+            Pedido order = repository.Orders.FirstOrDefault(o => o.ID == ID);
             if (order != null)
             {
                 order.Shipped = true;
@@ -58,7 +58,7 @@ namespace StoreEP.Controllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> Checkout(int addressID)
+        public async Task<IActionResult> Checkout(int ID)
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
@@ -66,17 +66,17 @@ namespace StoreEP.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            Order order = new Order();
-            var address = _addressRepositoty.Address.SingleOrDefault(a => a.AddressID == addressID);
+            Pedido order = new Pedido();
+            var address = _addressRepositoty.Address.SingleOrDefault(a => a.ID == ID);
             order.Address = address;
-            if (cart.Lines?.Count() == 0)
+            if (Carrinho.Lines?.Count() == 0)
             {
                 ModelState.AddModelError("", "Descupe sua lista está vazia.");
                 return RedirectToAction(actionName: "List", controllerName: "Produtos");
             }
             if (ModelState.IsValid)
             {
-                order.Lines = cart.Lines.ToArray();
+                order.Lines = Carrinho.Lines.ToArray();
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
             }
@@ -87,7 +87,7 @@ namespace StoreEP.Controllers
         }
         public ViewResult Completed()
         {
-            cart.Clear();
+            Carrinho.Clear();
             return View();
         }
     }

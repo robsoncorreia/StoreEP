@@ -81,7 +81,7 @@ namespace StoreEP
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddScoped<Carrinho>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
             services.AddMemoryCache();
@@ -136,7 +136,7 @@ namespace StoreEP
                     template: "{controller=Produtos}/{action=List}/{id?}");
                 routes.MapRoute(
                     name: null,
-                    template: "{controller=Address}/Index/{addressid}");
+                    template: "{controller=Address}/Index/{ID}");
             });
             //IdentitySeedData.EnsurePopulated(app);
         }

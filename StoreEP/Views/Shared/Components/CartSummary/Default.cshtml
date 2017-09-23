@@ -1,5 +1,5 @@
 ﻿@using StoreEP.Models
-@model Cart
+@model Carrinho
 <div class="">
     @if (Model.Lines.Count() > 0)
     {
@@ -9,7 +9,7 @@
             @Model.ComputeTotalValue().ToString("c")
         </small>
     }
-    <a class="btn btn-sm btn-default navbar-btn" asp-controller="Cart" asp-action="Index" asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
-        <i class="fa fa-shopping-cart"></i>
+    <a class="btn btn-sm btn-default navbar-btn" asp-controller="Carrinho" asp-action="Index" asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <i class="fa fa-shopping-Carrinho"></i>
     </a>
 </div>

@@ -12,16 +12,16 @@ namespace StoreEP.Models
         {
             context = ctx;
         }
-        public IEnumerable<Address> Address => context.Address;
-        public void SaveAddress(Address address)
+        public IEnumerable<Endereco> Address => context.Address;
+        public void SaveAddress(Endereco address)
         {
-            if (address.AddressID == 0)
+            if (address.ID == 0)
             {
                 context.Address.Add(address);
             }
             else
             {
-                Address dbEntry = context.Address.FirstOrDefault(p => p.AddressID == address.AddressID);
+                Endereco dbEntry = context.Address.FirstOrDefault(p => p.ID == address.ID);
                 if (dbEntry != null)
                 {
                     dbEntry.UserID = address.UserID;
@@ -37,9 +37,9 @@ namespace StoreEP.Models
             }
             context.SaveChanges();
         }
-        public Address DeleteAddress(int addressId)
+        public Endereco DeleteAddress(int ID)
         {
-            Address dbEntry = context.Address.FirstOrDefault(a => a.AddressID == addressId);
+            Endereco dbEntry = context.Address.FirstOrDefault(a => a.ID == ID);
             if (dbEntry != null)
             {
                 context.Address.Remove(dbEntry);

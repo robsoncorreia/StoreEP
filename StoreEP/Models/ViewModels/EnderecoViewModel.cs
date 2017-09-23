@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models.ViewModels
 {
-    public class AddressViewModel
+    public class EnderecoViewModel
     {
-        public IEnumerable<Address> GetAddress { get; set; }
+        public IEnumerable<Endereco> GetAddress { get; set; }
     }
 }

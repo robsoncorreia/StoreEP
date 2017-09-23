@@ -535,7 +535,7 @@
 .fa-retweet:before {
   content: "\f079";
 }
-.fa-shopping-cart:before {
+.fa-shopping-Carrinho:before {
   content: "\f07a";
 }
 .fa-folder:before {
@@ -1720,10 +1720,10 @@
 .fa-skyatlas:before {
   content: "\f216";
 }
-.fa-cart-plus:before {
+.fa-Carrinho-plus:before {
   content: "\f217";
 }
-.fa-cart-arrow-down:before {
+.fa-Carrinho-arrow-down:before {
   content: "\f218";
 }
 .fa-diamond:before {

@@ -8,15 +8,14 @@ using StoreEP.Data;
 using StoreEP.Models;
 using System.Collections.Generic;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace StoreEP.Controllers
 {
-    public class RoleAdminController : Controller
+    public class AdminIdentidadeController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
         private UserManager<ApplicationUser> userManager;
-        public RoleAdminController(RoleManager<IdentityRole> role, UserManager<ApplicationUser> userMrg)
+        public AdminIdentidadeController(RoleManager<IdentityRole> role, UserManager<ApplicationUser> userMrg)
         {
             userManager = userMrg;
             roleManager = role;

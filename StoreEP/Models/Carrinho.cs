@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public class Cart
+    public class Carrinho
     {
         private List<CartLine> lineCollection = new List<CartLine>();
         public virtual void AddItem(Produto produto, int quantidade) {

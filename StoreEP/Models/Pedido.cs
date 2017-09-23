@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace StoreEP.Models
 {
-    public class Order
+    public class Pedido
     {
+
         public string UserID { get; set; }
         public bool Shipped { get; set; } = false;
-        public int OrderID { get; set; }
+        public int ID { get; set; }
         public ICollection<CartLine> Lines { get; set; }
-        public Address Address { get; set; }
+        public Endereco Address { get; set; }
     }
 }

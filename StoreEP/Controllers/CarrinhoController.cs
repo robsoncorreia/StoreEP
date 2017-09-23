@@ -12,19 +12,19 @@ using StoreEP.Models.ViewModels;
 
 namespace StoreEP.Controllers
 {
-    public class CartController : Controller
+    public class CarrinhoController : Controller
     {
         private readonly StoreEPContext _context;
-        private Cart cart;
-        public CartController(StoreEPContext repo, Cart carService)
+        private Carrinho Carrinho;
+        public CarrinhoController(StoreEPContext repo, Carrinho carService)
         {
             _context = repo;
-            cart = carService;
+            Carrinho = carService;
         }
         public ViewResult Index(string returnUrl)
         {
             return View(new CartIndexViewModel {
-                Cart = cart,
+                Carrinho = Carrinho,
                 ReturnUrl = returnUrl
             });
         }
@@ -33,7 +33,7 @@ namespace StoreEP.Controllers
             Produto produto = _context.Produto.FirstOrDefault(p => p.ProdutoID == produtoID);
             if(produto != null)
             {
-                cart.AddItem(produto, 1);
+                Carrinho.AddItem(produto, 1);
             }
             return RedirectToAction("Index", new { returnUrl });
         }
@@ -42,7 +42,7 @@ namespace StoreEP.Controllers
             Produto produto = _context.Produto.FirstOrDefault(p => p.ProdutoID == produtoID);
             if (produto != null)
             {
-                cart.RemoveLine(produto);
+                Carrinho.RemoveLine(produto);
             }
             return RedirectToAction("Index", new { returnUrl });
         }

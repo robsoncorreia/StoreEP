@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public class Address
+    public class Endereco
     {
-        public int AddressID { get; set; }
+        public int ID { get; set; }
         public string UserID { get; set; }
         [Required(ErrorMessage = "Entre com o endereço.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]

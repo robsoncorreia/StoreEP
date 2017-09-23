@@ -15,12 +15,12 @@ namespace StoreEP.Models
             context = ctx;
         }
 
-        public IEnumerable<Order> Orders => context.Orders.Include(o => o.Lines).ThenInclude(l => l.Produto);
+        public IEnumerable<Pedido> Orders => context.Orders.Include(o => o.Lines).ThenInclude(l => l.Produto);
 
-        public void SaveOrder(Order order)
+        public void SaveOrder(Pedido order)
         {
             context.AttachRange(order.Lines.Select(i => i.Produto));
-            if (order.OrderID == 0)
+            if (order.ID == 0)
             {
                 context.Orders.Add(order);
             }

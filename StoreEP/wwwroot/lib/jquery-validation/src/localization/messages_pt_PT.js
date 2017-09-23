@@ -12,7 +12,7 @@ $.extend( $.validator.messages, {
 	dateISO: "Por favor, introduza uma data v&aacute;lida (ISO).",
 	number: "Por favor, introduza um n&uacute;mero v&aacute;lido.",
 	digits: "Por favor, introduza apenas d&iacute;gitos.",
-	creditcard: "Por favor, introduza um n&uacute;mero de cart&atilde;o de cr&eacute;dito v&aacute;lido.",
+	creditcard: "Por favor, introduza um n&uacute;mero de Carrinho&atilde;o de cr&eacute;dito v&aacute;lido.",
 	equalTo: "Por favor, introduza de novo o mesmo valor.",
 	extension: "Por favor, introduza um ficheiro com uma extens&atilde;o v&aacute;lida.",
 	maxlength: $.validator.format( "Por favor, n&atilde;o introduza mais do que {0} caracteres." ),
