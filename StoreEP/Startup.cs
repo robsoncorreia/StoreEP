@@ -44,9 +44,9 @@ namespace StoreEP
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<IProductRepository, EFProductRepository>();
-            services.AddTransient<IOrderRepository, EFOrderRepository>();
-            services.AddTransient<IAddressRepositoty, EFAddresRepository>();
+            services.AddTransient<IProdutoRepositorio, EFProdutoRepositorio>();
+            services.AddTransient<IPedidoRepositorio, EFPedidoRepositorio>();
+            services.AddTransient<IEnderecoRepositorio, EFEnderecoRepositorio>();
 
 
             services.Configure<IdentityOptions>(options =>
@@ -136,7 +136,8 @@ namespace StoreEP
                     template: "{controller=Produtos}/{action=List}/{id?}");
                 routes.MapRoute(
                     name: null,
-                    template: "{controller=Address}/Index/{ID}");
+                    template: "{controller=Endereco}/Index/{ID}");
+               
             });
             //IdentitySeedData.EnsurePopulated(app);
         }

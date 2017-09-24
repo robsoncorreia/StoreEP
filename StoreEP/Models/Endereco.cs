@@ -13,24 +13,24 @@ namespace StoreEP.Models
         [Required(ErrorMessage = "Entre com o endereço.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
         [Display(Name = "Rua")]
-        public string Line1 { get; set; }
+        public string Rua { get; set; }
         [Required(ErrorMessage = "Entre com o nome bairro.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
-        public string Line2 { get; set; }
+        public string Bairro { get; set; }
         [Required(ErrorMessage = "Entre com o número.")]
         [RegularExpression(@"^[0-9]{1,100}$", ErrorMessage = "Apenas números.")]
-        public string Line3 { get; set; }
+        public string Numero { get; set; }
         [Required(ErrorMessage = "Por favor digite o nome da cidade.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
-        public string City { get; set; }
+        public string Cidade { get; set; }
         [Required(ErrorMessage = "Por favor digite o nome do estado.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
-        public string State { get; set; }
+        public string Estado { get; set; }
         [Required(ErrorMessage = "Por favor digite o Cep.")]
-        public string Zip { get; set; }
+        public string CEP { get; set; }
         [Required(ErrorMessage = "Digite o nome do pais.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
-        public string Country { get; set; }
+        public string Pais { get; set; }
         public bool GifWrap { get; set; }
     }
 }

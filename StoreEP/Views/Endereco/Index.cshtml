@@ -1,0 +1,10 @@
+@model IEnumerable<Endereco>
+@foreach (var endereco in Model)
+{
+    @Html.Partial("CardAddress", endereco)
+}
+<form method="post" asp-action="Criar">
+    <div class="text-center">
+        <button type="submit" class="btn btn-default">Criar novo</button>
+    </div>
+</form>

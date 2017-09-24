@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public interface IProductRepository 
+    public interface IProdutoRepositorio 
     {
         IEnumerable<Produto> Produtos { get; }
-        void SaveProduct(Produto produto);
-        Produto DeleteProduto(int produtoId);
+        void RegistrarProduto(Produto produto);
+        Produto ApagarProduto(int produtoId);
     }
 }

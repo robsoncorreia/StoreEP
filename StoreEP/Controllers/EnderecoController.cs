@@ -17,8 +17,8 @@ namespace StoreEP.Controllers
     {
 
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IAddressRepositoty _addressRepositoty;
-        public EnderecoController(IAddressRepositoty addressRepositoty, UserManager<ApplicationUser> userManager)
+        private readonly IEnderecoRepositorio _addressRepositoty;
+        public EnderecoController(IEnderecoRepositorio addressRepositoty, UserManager<ApplicationUser> userManager)
         {
             _addressRepositoty = addressRepositoty;
             _userManager = userManager;
@@ -31,17 +31,16 @@ namespace StoreEP.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            if (user != null && _addressRepositoty.Address.Where(a => a.UserID.Equals(user.Id)).Count() != 0)
+            if (user != null && _addressRepositoty.Enderecos.Where(a => a.UserID.Equals(user.Id)).Count() != 0)
             {
-                return View(new EnderecoViewModel
-                {
-                    GetAddress = _addressRepositoty.Address.Where(a => a.UserID.Equals(user.Id)).ToList()
-                });
+                IEnumerable<Endereco> enderecos;
+                enderecos = _addressRepositoty.Enderecos.Where(a => a.UserID.Equals(user.Id)).ToList();
+                return View(enderecos);
             }
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(Criar));
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Endereco address)
+        public async Task<IActionResult> Criar(Endereco address)
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
@@ -51,11 +50,11 @@ namespace StoreEP.Controllers
             }
             if (ModelState.IsValid)
             {
-                _addressRepositoty.SaveAddress(address);
+                _addressRepositoty.SalvarEndereco(address);
                 return RedirectToAction(nameof(Index));
             }
             return View();
         }
-        public IActionResult Create() => View();
+        public IActionResult Criar() => View();
     }
 }

@@ -24,7 +24,7 @@ $.mask = {
 		'a': "[A-Za-z]",
 		'*': "[A-Za-z0-9]"
 	},
-	autoclear: true,
+	autoClear: true,
 	dataName: "rawMaskFn",
 	placeholder: '_'
 };
@@ -83,7 +83,7 @@ $.fn.extend({
 		}
 
 		settings = $.extend({
-			autoclear: $.mask.autoclear,
+			autoClear: $.mask.autoClear,
 			placeholder: $.mask.placeholder, // Load default placeholder
 			completed: null
 		}, settings);
@@ -248,7 +248,7 @@ $.fn.extend({
 						begin=k!==46?seekPrev(begin):(end=seekNext(begin-1));
 						end=k===46?seekNext(end):end;
 					}
-					clearBuffer(begin, end);
+					ClearBuffer(begin, end);
 					shiftL(begin, end - 1);
 
 					e.preventDefault();
@@ -276,7 +276,7 @@ $.fn.extend({
 					return;
 				} else if ( k && k !== 13 ) {
 					if (pos.end - pos.begin !== 0){
-						clearBuffer(pos.begin, pos.end);
+						ClearBuffer(pos.begin, pos.end);
 						shiftL(pos.begin, pos.end-1);
 					}
 
@@ -309,7 +309,7 @@ $.fn.extend({
 				}
 			}
 
-			function clearBuffer(start, end) {
+			function ClearBuffer(start, end) {
 				var i;
 				for (i = start; i < end && i < len; i++) {
 					if (tests[i]) {
@@ -340,7 +340,7 @@ $.fn.extend({
 							}
 						}
 						if (pos > test.length) {
-							clearBuffer(i + 1, len);
+							ClearBuffer(i + 1, len);
 							break;
 						}
 					} else {
@@ -355,11 +355,11 @@ $.fn.extend({
 				if (allow) {
 					writeBuffer();
 				} else if (lastMatch + 1 < partialPosition) {
-					if (settings.autoclear || buffer.join('') === defaultBuffer) {
+					if (settings.autoClear || buffer.join('') === defaultBuffer) {
 						// Invalid value. Remove it and replace it with the
 						// mask, which is the default behavior.
 						if(input.val()) input.val("");
-						clearBuffer(0, len);
+						ClearBuffer(0, len);
 					} else {
 						// Invalid value, but we opt to show the value to the
 						// user and allow them to correct their mistake.
@@ -390,7 +390,7 @@ $.fn.extend({
                         return;
                     }
 
-					clearTimeout(caretTimeoutId);
+					ClearTimeout(caretTimeoutId);
 					var pos;
 
 					focusText = input.val();

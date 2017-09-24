@@ -14,7 +14,7 @@
             a: "[A-Za-z]",
             "*": "[A-Za-z0-9]"
         },
-        autoclear: !0,
+        autoClear: !0,
         dataName: "rawMaskFn",
         placeholder: "_"
     }, $.fn.extend({
@@ -43,7 +43,7 @@
                 return fn ? fn() : void 0;
             }
             return settings = $.extend({
-                autoclear: $.mask.autoclear,
+                autoClear: $.mask.autoClear,
                 placeholder: $.mask.placeholder,
                 completed: null
             }, settings), defs = $.mask.definitions, tests = [], partialPosition = len = mask.length, 
@@ -105,7 +105,7 @@
                         var pos, begin, end, k = e.which || e.keyCode;
                         oldVal = input.val(), 8 === k || 46 === k || iPhone && 127 === k ? (pos = input.caret(), 
                         begin = pos.begin, end = pos.end, end - begin === 0 && (begin = 46 !== k ? seekPrev(begin) : end = seekNext(begin - 1), 
-                        end = 46 === k ? seekNext(end) : end), clearBuffer(begin, end), shiftL(begin, end - 1), 
+                        end = 46 === k ? seekNext(end) : end), ClearBuffer(begin, end), shiftL(begin, end - 1), 
                         e.preventDefault()) : 13 === k ? blurEvent.call(this, e) : 27 === k && (input.val(focusText), 
                         input.caret(0, checkVal()), e.preventDefault());
                     }
@@ -114,7 +114,7 @@
                     if (!input.prop("readonly")) {
                         var p, c, next, k = e.which || e.keyCode, pos = input.caret();
                         if (!(e.ctrlKey || e.altKey || e.metaKey || 32 > k) && k && 13 !== k) {
-                            if (pos.end - pos.begin !== 0 && (clearBuffer(pos.begin, pos.end), shiftL(pos.begin, pos.end - 1)), 
+                            if (pos.end - pos.begin !== 0 && (ClearBuffer(pos.begin, pos.end), shiftL(pos.begin, pos.end - 1)), 
                             p = seekNext(pos.begin - 1), len > p && (c = String.fromCharCode(k), tests[p].test(c))) {
                                 if (shiftR(p), buffer[p] = c, writeBuffer(), next = seekNext(p), android) {
                                     var proxy = function() {
@@ -128,7 +128,7 @@
                         }
                     }
                 }
-                function clearBuffer(start, end) {
+                function ClearBuffer(start, end) {
                     var i;
                     for (i = start; end > i && len > i; i++) tests[i] && (buffer[i] = getPlaceholder(i));
                 }
@@ -144,12 +144,12 @@
                             break;
                         }
                         if (pos > test.length) {
-                            clearBuffer(i + 1, len);
+                            ClearBuffer(i + 1, len);
                             break;
                         }
                     } else buffer[i] === test.charAt(pos) && pos++, partialPosition > i && (lastMatch = i);
-                    return allow ? writeBuffer() : partialPosition > lastMatch + 1 ? settings.autoclear || buffer.join("") === defaultBuffer ? (input.val() && input.val(""), 
-                    clearBuffer(0, len)) : writeBuffer() : (writeBuffer(), input.val(input.val().substring(0, lastMatch + 1))), 
+                    return allow ? writeBuffer() : partialPosition > lastMatch + 1 ? settings.autoClear || buffer.join("") === defaultBuffer ? (input.val() && input.val(""), 
+                    ClearBuffer(0, len)) : writeBuffer() : (writeBuffer(), input.val(input.val().substring(0, lastMatch + 1))), 
                     partialPosition ? i : firstNonMaskPos;
                 }
                 var input = $(this), buffer = $.map(mask.split(""), function(c, i) {
@@ -163,7 +163,7 @@
                     input.off(".mask").removeData($.mask.dataName);
                 }).on("focus.mask", function() {
                     if (!input.prop("readonly")) {
-                        clearTimeout(caretTimeoutId);
+                        ClearTimeout(caretTimeoutId);
                         var pos;
                         focusText = input.val(), pos = checkVal(), caretTimeoutId = setTimeout(function() {
                             input.get(0) === document.activeElement && (writeBuffer(), pos == mask.replace("?", "").length ? input.caret(0, pos) : input.caret(pos));

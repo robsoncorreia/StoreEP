@@ -125,7 +125,7 @@
       return
     }
 
-    clearTimeout(self.timeout)
+    ClearTimeout(self.timeout)
 
     self.hoverState = 'in'
 
@@ -159,7 +159,7 @@
 
     if (self.isInStateTrue()) return
 
-    clearTimeout(self.timeout)
+    ClearTimeout(self.timeout)
 
     self.hoverState = 'out'
 
@@ -474,7 +474,7 @@
 
   Tooltip.prototype.destroy = function () {
     var that = this
-    clearTimeout(this.timeout)
+    ClearTimeout(this.timeout)
     this.hide(function () {
       that.$element.off('.' + that.type).removeData('bs.' + that.type)
       if (that.$tip) {

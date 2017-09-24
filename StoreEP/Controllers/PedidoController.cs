@@ -7,6 +7,7 @@ using StoreEP.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using StoreEP.Models.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,11 +18,11 @@ namespace StoreEP.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private IOrderRepository repository;
-        private IAddressRepositoty _addressRepositoty;
+        private IPedidoRepositorio repository;
+        private IEnderecoRepositorio _addressRepositoty;
         private Carrinho Carrinho;
 
-        public PedidoController(IAddressRepositoty address,IOrderRepository repoService, Carrinho cartService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public PedidoController(IEnderecoRepositorio address,IPedidoRepositorio repoService, Carrinho cartService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             repository = repoService;
             Carrinho = cartService;
@@ -30,45 +31,47 @@ namespace StoreEP.Controllers
             _addressRepositoty = address;
         }
 
-        public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
+        public async Task<ViewResult> Lista()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                
+            }
+            ListaPedidoViewModels listaPedido = new ListaPedidoViewModels
+            {
+                Pedidos = repository.Pedidos.Where(o => o.UserID == user.Id),
+                Enderecos = _addressRepositoty.Enderecos.ToList()
+            };
+            return View(listaPedido);
+        }
 
         [HttpPost]
         public IActionResult MarkShipped(int ID)
         {
-            Pedido order = repository.Orders.FirstOrDefault(o => o.ID == ID);
+            Pedido order = repository.Pedidos.FirstOrDefault(o => o.ID == ID);
             if (order != null)
             {
                 order.Shipped = true;
                 repository.SaveOrder(order);
             }
-            return RedirectToAction(nameof(List));
+            return RedirectToAction(nameof(Lista));
         }
-        //[HttpGet]
-        //public async Task<IActionResult> CheckoutVal()
-        //{
 
-        //    ClaimsPrincipal currentUser = this.User;
-        //    var user = await _userManager.GetUserAsync(User);
-        //    if (user == null)
-        //    {
-        //        return RedirectToAction("Login", "Account");
-        //    }
-        //    return Redirect(Url.Action("Checkout", "Order", new Order()));
-        //    //return RedirectToAction(actionName: "Checkout", controllerName: "Order", new Order());
-        //}
-
-        [HttpPost]
-        public async Task<IActionResult> Checkout(int ID)
+        [HttpGet]
+        public async Task<IActionResult> Checkout(string enderecoid)
         {
+
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-            Pedido order = new Pedido();
-            var address = _addressRepositoty.Address.SingleOrDefault(a => a.ID == ID);
-            order.Address = address;
+            Pedido pedido = new Pedido();
+            var address = _addressRepositoty.Enderecos.SingleOrDefault(a => a.ID == int.Parse(enderecoid));
+            pedido.Address = address;
             if (Carrinho.Lines?.Count() == 0)
             {
                 ModelState.AddModelError("", "Descupe sua lista está vazia.");
@@ -76,18 +79,19 @@ namespace StoreEP.Controllers
             }
             if (ModelState.IsValid)
             {
-                order.Lines = Carrinho.Lines.ToArray();
-                repository.SaveOrder(order);
+                pedido.UserID = user.Id;
+                pedido.Lines = Carrinho.Lines.ToArray();
+                repository.SaveOrder(pedido);
                 return RedirectToAction(nameof(Completed));
             }
             else
             {
-                return View(order);
+                return View(pedido);
             }
         }
         public ViewResult Completed()
         {
-            Carrinho.Clear();
+            Carrinho.Limpar();
             return View();
         }
     }

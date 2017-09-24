@@ -3512,7 +3512,7 @@ jQuery.extend( {
 		var tuples = [
 
 				// action, add listener, callbacks,
-				// ... .then handlers, argument index, [final state]
+				// ... .then handlers, argument index, [final Estado]
 				[ "notify", "progress", jQuery.Callbacks( "memory" ),
 					jQuery.Callbacks( "memory" ), 2 ],
 				[ "resolve", "done", jQuery.Callbacks( "once memory" ),
@@ -3520,10 +3520,10 @@ jQuery.extend( {
 				[ "reject", "fail", jQuery.Callbacks( "once memory" ),
 					jQuery.Callbacks( "once memory" ), 1, "rejected" ]
 			],
-			state = "pending",
+			Estado = "pending",
 			promise = {
-				state: function() {
-					return state;
+				Estado: function() {
+					return Estado;
 				},
 				always: function() {
 					deferred.done( arguments ).fail( arguments );
@@ -3747,14 +3747,14 @@ jQuery.extend( {
 			// promise.fail = list.add
 			promise[ tuple[ 1 ] ] = list.add;
 
-			// Handle state
+			// Handle Estado
 			if ( stateString ) {
 				list.add(
 					function() {
 
-						// state = "resolved" (i.e., fulfilled)
-						// state = "rejected"
-						state = stateString;
+						// Estado = "resolved" (i.e., fulfilled)
+						// Estado = "rejected"
+						Estado = stateString;
 					},
 
 					// rejected_callbacks.disable
@@ -3831,7 +3831,7 @@ jQuery.extend( {
 				!remaining );
 
 			// Use .then() to unwrap secondary thenables (cf. gh-3000)
-			if ( master.state() === "pending" ||
+			if ( master.Estado() === "pending" ||
 				jQuery.isFunction( resolveValues[ i ] && resolveValues[ i ].then ) ) {
 
 				return master.then();
@@ -4190,7 +4190,7 @@ var dataUser = new Data();
 //	3. Use the same single mechanism to support "private" and "user" data.
 //	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
 //	5. Avoid exposing implementation details on user objects (eg. expando properties)
-//	6. Provide a clear path for implementation upgrade to WeakMap in 2014
+//	6. Provide a Clear path for implementation upgrade to WeakMap in 2014
 
 var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
 	rmultiDash = /[A-Z]/g;
@@ -4449,7 +4449,7 @@ jQuery.fn.extend( {
 			jQuery.dequeue( this, type );
 		} );
 	},
-	clearQueue: function( type ) {
+	ClearQueue: function( type ) {
 		return this.queue( type || "fx", [] );
 	},
 
@@ -4676,9 +4676,9 @@ jQuery.fn.extend( {
 	hide: function() {
 		return showHide( this );
 	},
-	toggle: function( state ) {
-		if ( typeof state === "boolean" ) {
-			return state ? this.show() : this.hide();
+	toggle: function( Estado ) {
+		if ( typeof Estado === "boolean" ) {
+			return Estado ? this.show() : this.hide();
 		}
 
 		return this.each( function() {
@@ -4859,7 +4859,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 		input = document.createElement( "input" );
 
 	// Support: Android 4.0 - 4.3 only
-	// Check state lost if the name is set (#11217)
+	// Check Estado lost if the name is set (#11217)
 	// Support: Windows Web Apps (WWA)
 	// `name` and `type` must use .setAttribute for WWA (#14901)
 	input.setAttribute( "type", "radio" );
@@ -4869,7 +4869,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 	div.appendChild( input );
 
 	// Support: Android <=4.1 only
-	// Older WebKit doesn't clone checked state correctly in fragments
+	// Older WebKit doesn't clone checked Estado correctly in fragments
 	support.checkClone = div.cloneNode( true ).cloneNode( true ).lastChild.checked;
 
 	// Support: IE <=11 only
@@ -5343,7 +5343,7 @@ jQuery.event = {
 		},
 		click: {
 
-			// For checkbox, fire native event so checked state will be right
+			// For checkbox, fire native event so checked Estado will be right
 			trigger: function() {
 				if ( this.type === "checkbox" && this.click && nodeName( this, "input" ) ) {
 					this.click();
@@ -5696,11 +5696,11 @@ function cloneCopyEvent( src, dest ) {
 function fixInput( src, dest ) {
 	var nodeName = dest.nodeName.toLowerCase();
 
-	// Fails to persist the checked state of a cloned checkbox or radio button.
+	// Fails to persist the checked Estado of a cloned checkbox or radio button.
 	if ( nodeName === "input" && rcheckableType.test( src.type ) ) {
 		dest.checked = src.checked;
 
-	// Fails to return the selected option to the default selected state when cloning options
+	// Fails to return the selected option to the default selected Estado when cloning options
 	} else if ( nodeName === "input" || nodeName === "textarea" ) {
 		dest.defaultValue = src.defaultValue;
 	}
@@ -6136,7 +6136,7 @@ var getStyles = function( elem ) {
 	// Style of cloned element affects source element cloned (#8908)
 	div.style.backgroundClip = "content-box";
 	div.cloneNode( true ).style.backgroundClip = "";
-	support.clearCloneStyle = div.style.backgroundClip === "content-box";
+	support.ClearCloneStyle = div.style.backgroundClip === "content-box";
 
 	container.style.cssText = "border:0;width:8px;height:0;top:0;left:-9999px;" +
 		"padding:0;margin-top:1px;position:absolute";
@@ -6466,7 +6466,7 @@ jQuery.extend( {
 			}
 
 			// background-* props affect original clone's values
-			if ( !support.clearCloneStyle && value === "" && name.indexOf( "background" ) === 0 ) {
+			if ( !support.ClearCloneStyle && value === "" && name.indexOf( "background" ) === 0 ) {
 				style[ name ] = "inherit";
 			}
 
@@ -7208,7 +7208,7 @@ jQuery.speed = function( speed, easing, fn ) {
 		easing: fn && easing || easing && !jQuery.isFunction( easing ) && easing
 	};
 
-	// Go to the end state if fx are off
+	// Go to the end Estado if fx are off
 	if ( jQuery.fx.off ) {
 		opt.duration = 0;
 
@@ -7272,7 +7272,7 @@ jQuery.fn.extend( {
 			this.each( doAnimation ) :
 			this.queue( optall.queue, doAnimation );
 	},
-	stop: function( type, clearQueue, gotoEnd ) {
+	stop: function( type, ClearQueue, gotoEnd ) {
 		var stopQueue = function( hooks ) {
 			var stop = hooks.stop;
 			delete hooks.stop;
@@ -7280,11 +7280,11 @@ jQuery.fn.extend( {
 		};
 
 		if ( typeof type !== "string" ) {
-			gotoEnd = clearQueue;
-			clearQueue = type;
+			gotoEnd = ClearQueue;
+			ClearQueue = type;
 			type = undefined;
 		}
-		if ( clearQueue && type !== false ) {
+		if ( ClearQueue && type !== false ) {
 			this.queue( type || "fx", [] );
 		}
 
@@ -7450,7 +7450,7 @@ jQuery.fn.delay = function( time, type ) {
 	return this.queue( type, function( next, hooks ) {
 		var timeout = window.setTimeout( next, time );
 		hooks.stop = function() {
-			window.clearTimeout( timeout );
+			window.ClearTimeout( timeout );
 		};
 	} );
 };
@@ -8754,7 +8754,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 							response = conv( response );
 						} catch ( e ) {
 							return {
-								state: "parsererror",
+								Estado: "parsererror",
 								error: conv ? e : "No conversion from " + prev + " to " + current
 							};
 						}
@@ -8764,7 +8764,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		}
 	}
 
-	return { state: "success", data: response };
+	return { Estado: "success", data: response };
 }
 
 jQuery.extend( {
@@ -8887,7 +8887,7 @@ jQuery.extend( {
 			// Url cleanup var
 			urlAnchor,
 
-			// Request state (becomes false upon send and true upon completion)
+			// Request Estado (becomes false upon send and true upon completion)
 			completed,
 
 			// To know if global events are to be dispatched
@@ -9197,7 +9197,7 @@ jQuery.extend( {
 
 			// Clear timeout if it exists
 			if ( timeoutTimer ) {
-				window.clearTimeout( timeoutTimer );
+				window.ClearTimeout( timeoutTimer );
 			}
 
 			// Dereference transport for early garbage collection
@@ -9246,7 +9246,7 @@ jQuery.extend( {
 
 				// If we have data, let's convert it
 				} else {
-					statusText = response.state;
+					statusText = response.Estado;
 					success = response.data;
 					error = response.error;
 					isSuccess = !error;

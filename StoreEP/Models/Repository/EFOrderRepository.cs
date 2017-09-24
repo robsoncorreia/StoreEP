@@ -6,23 +6,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace StoreEP.Models
 {
-    public class EFOrderRepository : IOrderRepository
+    public class EFPedidoRepositorio : IPedidoRepositorio
     {
         private StoreEPContext context;
 
-        public EFOrderRepository(StoreEPContext ctx)
+        public EFPedidoRepositorio(StoreEPContext ctx)
         {
             context = ctx;
         }
 
-        public IEnumerable<Pedido> Orders => context.Orders.Include(o => o.Lines).ThenInclude(l => l.Produto);
+        public IEnumerable<Pedido> Pedidos => context.Pedidos.Include(o => o.Lines).ThenInclude(l => l.Produto);
 
-        public void SaveOrder(Pedido order)
+        public void SaveOrder(Pedido pedido)
         {
-            context.AttachRange(order.Lines.Select(i => i.Produto));
-            if (order.ID == 0)
+            context.AttachRange(pedido.Lines.Select(i => i.Produto));
+            if (pedido.ID == 0)
             {
-                context.Orders.Add(order);
+                context.Pedidos.Add(pedido);
             }
             context.SaveChanges();
         }

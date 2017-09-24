@@ -30,9 +30,9 @@ namespace StoreEP.Models
             base.RemoveLine(produto);
             Session.SetJson("Carrinho", this);
         }
-        public override void Clear()
+        public override void Limpar()
         {
-            base.Clear();
+            base.Limpar();
             Session.Remove("Carrinho");
         }
     }

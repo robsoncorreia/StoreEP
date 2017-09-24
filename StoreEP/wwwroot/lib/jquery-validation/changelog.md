@@ -252,9 +252,9 @@
 * Update messages_ko.js - closes gh-715 ([5da3085](https://github.com/jzaefferer/jquery-validation/commit/5da3085ff02e0e6ecc955a8bfc3bb9a8d220581b))
 * Update messages_pt_BR.js. Closes gh-782 ([4bf813b](https://github.com/jzaefferer/jquery-validation/commit/4bf813b751ce34fac3c04eaa2e80f75da3461124))
 * Update phonesUK and mobileUK to accept new prefixes. Closes gh-750 ([d447b41](https://github.com/jzaefferer/jquery-validation/commit/d447b41b830dee984be21d8281ec7b87a852001d))
-* Verify nine-digit zip codes. Closes gh-726 ([165005d](https://github.com/jzaefferer/jquery-validation/commit/165005d4b5780e22d13d13189d107940c622a76f))
+* Verify nine-digit CEP codes. Closes gh-726 ([165005d](https://github.com/jzaefferer/jquery-validation/commit/165005d4b5780e22d13d13189d107940c622a76f))
 * phoneUS: Add N11 exclusions. Closes gh-861 ([519bbc6](https://github.com/jzaefferer/jquery-validation/commit/519bbc656bcb26e8aae5166d7b2e000014e0d12a))
-* resetForm should clear any aria-invalid values ([4f8a631](https://github.com/jzaefferer/jquery-validation/commit/4f8a631cbe84f496ec66260ada52db2aa0bb3733))
+* resetForm should Clear any aria-invalid values ([4f8a631](https://github.com/jzaefferer/jquery-validation/commit/4f8a631cbe84f496ec66260ada52db2aa0bb3733))
 * valid(): Check all elements. Fixes #791 - valid() validates only the first (invalid) element ([#791](https://github.com/jzaefferer/jquery-validation/issues/791), [6f26803](https://github.com/jzaefferer/jquery-validation/commit/6f268031afaf4e155424ee74dd11f6c47fbb8553))
 
 1.11.1 / 2013-03-22
@@ -280,7 +280,7 @@
 1.11.0 / 2013-02-04
 ==================
 
-  * Remove clearing as numbers of `min`, `max` and `range` rules. Fixes #455. Closes gh-528.
+  * Remove Clearing as numbers of `min`, `max` and `range` rules. Fixes #455. Closes gh-528.
   * Update pre-existing labels - fixes #430 closes gh-436
   * Fix $.validator.format to avoid group interpolation, where at least IE8/9 replaces -bash with the match. Fixes #614
   * Fix mimetype regex
@@ -313,12 +313,12 @@
   * Updated UK Mobile phone number regex for new numbers. Fixes #154
   * Add element to success call with test. Fixes #60
   * Fixed regex for time additional method. Fixes #131
-  * resetForm now clears old previousValue on form elements. Fixes #312
+  * resetForm now Clears old previousValue on form elements. Fixes #312
   * Added checkbox test to require_from_group and changed require_from_group to use elementValue. Fixes #359
   * Fixed dataFilter response issues in jQuery 1.5.2+. Fixes #405
   * Added jQuery Mobile demo. Fixes #249
   * Deoptimize findByName for correctness. Fixes #82 - $.validator.prototype.findByName breaks in IE7
-  * Added US zip code support and test. Fixes #90
+  * Added US CEP code support and test. Fixes #90
   * Changed lastElement to lastActive in keyup, skip validation on tab or empty element. Fixes #244
   * Removed number stripping from stripHtml. Fixes #2
   * Fixed invalid count on invalid to valid remote validation. Fixes #286
@@ -576,7 +576,7 @@
 
 * Fixed invalid XHTML, preventing error label creation in IE since jQuery 1.1.4
 * Fixed and improved String.format: Global search & replace, better handling of array arguments
-* Fixed cancel-button handling to use validator-object for storing state instead of form element
+* Fixed cancel-button handling to use validator-object for storing Estado instead of form element
 * Fixed name selectors to handle "complex" names, eg. containing brackets ("list[]")
 * Added button and disabled elements to exclude from validation
 * Moved element event handlers to refresh to be able to add handlers to new elements

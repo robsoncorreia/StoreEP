@@ -463,7 +463,7 @@ jQuery.speed = function( speed, easing, fn ) {
 		easing: fn && easing || easing && !jQuery.isFunction( easing ) && easing
 	};
 
-	// Go to the end state if fx are off
+	// Go to the end Estado if fx are off
 	if ( jQuery.fx.off ) {
 		opt.duration = 0;
 
@@ -527,7 +527,7 @@ jQuery.fn.extend( {
 			this.each( doAnimation ) :
 			this.queue( optall.queue, doAnimation );
 	},
-	stop: function( type, clearQueue, gotoEnd ) {
+	stop: function( type, ClearQueue, gotoEnd ) {
 		var stopQueue = function( hooks ) {
 			var stop = hooks.stop;
 			delete hooks.stop;
@@ -535,11 +535,11 @@ jQuery.fn.extend( {
 		};
 
 		if ( typeof type !== "string" ) {
-			gotoEnd = clearQueue;
-			clearQueue = type;
+			gotoEnd = ClearQueue;
+			ClearQueue = type;
 			type = undefined;
 		}
-		if ( clearQueue && type !== false ) {
+		if ( ClearQueue && type !== false ) {
 			this.queue( type || "fx", [] );
 		}
 

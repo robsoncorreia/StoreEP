@@ -1,0 +1,40 @@
+@model ListaPedidoViewModels
+@{
+    ViewBag.Title = "Pedidos";
+    Layout = "_AdminLayout";
+}
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Pedido</th>
+        <th>Rua</th>
+        <th>CEP</th>
+        <th>Status</th>
+        <th colspan="4">Detalhes</th>
+    </tr>
+    @foreach (Pedido pedido in Model.Pedidos)
+    {
+        <tr>
+            <td>@pedido.ID</td>
+            <td>@pedido.Address.Rua</td>
+            <td>@pedido.Address.CEP</td>
+            @if (pedido.Shipped)
+                {
+                <td>Enviado</td>
+            }
+            else
+            {
+                <td>Não Enviado</td>
+            }
+
+        </tr>
+        @foreach (var produto in pedido.Lines)
+                {
+            <tr>
+                <td>@produto.Produto.NomePD</td>
+                <td>@produto.Produto.PrecoPD.ToString("c")</td>
+                <td>@produto.Produto.CategoriaPD</td>
+            </tr>
+        }
+    }
+</table>

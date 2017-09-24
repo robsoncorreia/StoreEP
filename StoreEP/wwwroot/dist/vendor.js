@@ -3847,7 +3847,7 @@ jQuery.extend( {
 		var tuples = [
 
 				// action, add listener, callbacks,
-				// ... .then handlers, argument index, [final state]
+				// ... .then handlers, argument index, [final Estado]
 				[ "notify", "progress", jQuery.Callbacks( "memory" ),
 					jQuery.Callbacks( "memory" ), 2 ],
 				[ "resolve", "done", jQuery.Callbacks( "once memory" ),
@@ -3855,10 +3855,10 @@ jQuery.extend( {
 				[ "reject", "fail", jQuery.Callbacks( "once memory" ),
 					jQuery.Callbacks( "once memory" ), 1, "rejected" ]
 			],
-			state = "pending",
+			Estado = "pending",
 			promise = {
-				state: function() {
-					return state;
+				Estado: function() {
+					return Estado;
 				},
 				always: function() {
 					deferred.done( arguments ).fail( arguments );
@@ -4082,14 +4082,14 @@ jQuery.extend( {
 			// promise.fail = list.add
 			promise[ tuple[ 1 ] ] = list.add;
 
-			// Handle state
+			// Handle Estado
 			if ( stateString ) {
 				list.add(
 					function() {
 
-						// state = "resolved" (i.e., fulfilled)
-						// state = "rejected"
-						state = stateString;
+						// Estado = "resolved" (i.e., fulfilled)
+						// Estado = "rejected"
+						Estado = stateString;
 					},
 
 					// rejected_callbacks.disable
@@ -4166,7 +4166,7 @@ jQuery.extend( {
 				!remaining );
 
 			// Use .then() to unwrap secondary thenables (cf. gh-3000)
-			if ( master.state() === "pending" ||
+			if ( master.Estado() === "pending" ||
 				jQuery.isFunction( resolveValues[ i ] && resolveValues[ i ].then ) ) {
 
 				return master.then();
@@ -4525,7 +4525,7 @@ var dataUser = new Data();
 //	3. Use the same single mechanism to support "private" and "user" data.
 //	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
 //	5. Avoid exposing implementation details on user objects (eg. expando properties)
-//	6. Provide a clear path for implementation upgrade to WeakMap in 2014
+//	6. Provide a Clear path for implementation upgrade to WeakMap in 2014
 
 var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
 	rmultiDash = /[A-Z]/g;
@@ -4784,7 +4784,7 @@ jQuery.fn.extend( {
 			jQuery.dequeue( this, type );
 		} );
 	},
-	clearQueue: function( type ) {
+	ClearQueue: function( type ) {
 		return this.queue( type || "fx", [] );
 	},
 
@@ -5011,9 +5011,9 @@ jQuery.fn.extend( {
 	hide: function() {
 		return showHide( this );
 	},
-	toggle: function( state ) {
-		if ( typeof state === "boolean" ) {
-			return state ? this.show() : this.hide();
+	toggle: function( Estado ) {
+		if ( typeof Estado === "boolean" ) {
+			return Estado ? this.show() : this.hide();
 		}
 
 		return this.each( function() {
@@ -5194,7 +5194,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 		input = document.createElement( "input" );
 
 	// Support: Android 4.0 - 4.3 only
-	// Check state lost if the name is set (#11217)
+	// Check Estado lost if the name is set (#11217)
 	// Support: Windows Web Apps (WWA)
 	// `name` and `type` must use .setAttribute for WWA (#14901)
 	input.setAttribute( "type", "radio" );
@@ -5204,7 +5204,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 	div.appendChild( input );
 
 	// Support: Android <=4.1 only
-	// Older WebKit doesn't clone checked state correctly in fragments
+	// Older WebKit doesn't clone checked Estado correctly in fragments
 	support.checkClone = div.cloneNode( true ).cloneNode( true ).lastChild.checked;
 
 	// Support: IE <=11 only
@@ -5678,7 +5678,7 @@ jQuery.event = {
 		},
 		click: {
 
-			// For checkbox, fire native event so checked state will be right
+			// For checkbox, fire native event so checked Estado will be right
 			trigger: function() {
 				if ( this.type === "checkbox" && this.click && nodeName( this, "input" ) ) {
 					this.click();
@@ -6031,11 +6031,11 @@ function cloneCopyEvent( src, dest ) {
 function fixInput( src, dest ) {
 	var nodeName = dest.nodeName.toLowerCase();
 
-	// Fails to persist the checked state of a cloned checkbox or radio button.
+	// Fails to persist the checked Estado of a cloned checkbox or radio button.
 	if ( nodeName === "input" && rcheckableType.test( src.type ) ) {
 		dest.checked = src.checked;
 
-	// Fails to return the selected option to the default selected state when cloning options
+	// Fails to return the selected option to the default selected Estado when cloning options
 	} else if ( nodeName === "input" || nodeName === "textarea" ) {
 		dest.defaultValue = src.defaultValue;
 	}
@@ -6471,7 +6471,7 @@ var getStyles = function( elem ) {
 	// Style of cloned element affects source element cloned (#8908)
 	div.style.backgroundClip = "content-box";
 	div.cloneNode( true ).style.backgroundClip = "";
-	support.clearCloneStyle = div.style.backgroundClip === "content-box";
+	support.ClearCloneStyle = div.style.backgroundClip === "content-box";
 
 	container.style.cssText = "border:0;width:8px;height:0;top:0;left:-9999px;" +
 		"padding:0;margin-top:1px;position:absolute";
@@ -6801,7 +6801,7 @@ jQuery.extend( {
 			}
 
 			// background-* props affect original clone's values
-			if ( !support.clearCloneStyle && value === "" && name.indexOf( "background" ) === 0 ) {
+			if ( !support.ClearCloneStyle && value === "" && name.indexOf( "background" ) === 0 ) {
 				style[ name ] = "inherit";
 			}
 
@@ -7543,7 +7543,7 @@ jQuery.speed = function( speed, easing, fn ) {
 		easing: fn && easing || easing && !jQuery.isFunction( easing ) && easing
 	};
 
-	// Go to the end state if fx are off
+	// Go to the end Estado if fx are off
 	if ( jQuery.fx.off ) {
 		opt.duration = 0;
 
@@ -7607,7 +7607,7 @@ jQuery.fn.extend( {
 			this.each( doAnimation ) :
 			this.queue( optall.queue, doAnimation );
 	},
-	stop: function( type, clearQueue, gotoEnd ) {
+	stop: function( type, ClearQueue, gotoEnd ) {
 		var stopQueue = function( hooks ) {
 			var stop = hooks.stop;
 			delete hooks.stop;
@@ -7615,11 +7615,11 @@ jQuery.fn.extend( {
 		};
 
 		if ( typeof type !== "string" ) {
-			gotoEnd = clearQueue;
-			clearQueue = type;
+			gotoEnd = ClearQueue;
+			ClearQueue = type;
 			type = undefined;
 		}
-		if ( clearQueue && type !== false ) {
+		if ( ClearQueue && type !== false ) {
 			this.queue( type || "fx", [] );
 		}
 
@@ -7785,7 +7785,7 @@ jQuery.fn.delay = function( time, type ) {
 	return this.queue( type, function( next, hooks ) {
 		var timeout = window.setTimeout( next, time );
 		hooks.stop = function() {
-			window.clearTimeout( timeout );
+			window.ClearTimeout( timeout );
 		};
 	} );
 };
@@ -9089,7 +9089,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 							response = conv( response );
 						} catch ( e ) {
 							return {
-								state: "parsererror",
+								Estado: "parsererror",
 								error: conv ? e : "No conversion from " + prev + " to " + current
 							};
 						}
@@ -9099,7 +9099,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		}
 	}
 
-	return { state: "success", data: response };
+	return { Estado: "success", data: response };
 }
 
 jQuery.extend( {
@@ -9222,7 +9222,7 @@ jQuery.extend( {
 			// Url cleanup var
 			urlAnchor,
 
-			// Request state (becomes false upon send and true upon completion)
+			// Request Estado (becomes false upon send and true upon completion)
 			completed,
 
 			// To know if global events are to be dispatched
@@ -9532,7 +9532,7 @@ jQuery.extend( {
 
 			// Clear timeout if it exists
 			if ( timeoutTimer ) {
-				window.clearTimeout( timeoutTimer );
+				window.ClearTimeout( timeoutTimer );
 			}
 
 			// Dereference transport for early garbage collection
@@ -9581,7 +9581,7 @@ jQuery.extend( {
 
 				// If we have data, let's convert it
 				} else {
-					statusText = response.state;
+					statusText = response.Estado;
 					success = response.data;
 					error = response.error;
 					isSuccess = !error;
@@ -10992,7 +10992,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵmakeDecorator", function() { return makeDecorator; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵisObservable", function() { return isObservable; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵisPromise", function() { return isPromise; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵclearProviderOverrides", function() { return clearProviderOverrides; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵClearProviderOverrides", function() { return ClearProviderOverrides; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵoverrideProvider", function() { return overrideProvider; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR", function() { return NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵregisterModuleFactory", function() { return registerModuleFactory; });
@@ -11027,14 +11027,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "group", function() { return group$$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sequence", function() { return sequence$$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style$$1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "state", function() { return state$$1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Estado", function() { return Estado$$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "keyframes", function() { return keyframes$$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transition", function() { return transition$$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵx", function() { return animate$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵy", function() { return group$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbc", function() { return keyframes$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵz", function() { return sequence$1; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbb", function() { return state$1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbb", function() { return Estado$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵba", function() { return style$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵbd", function() { return transition$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵw", function() { return trigger$1; });
@@ -13840,7 +13840,7 @@ function isObservable(obj) {
  */
 var APP_INITIALIZER = new InjectionToken('Application Initializer');
 /**
- * A class that reflects the state of running {\@link APP_INITIALIZER}s.
+ * A class that reflects the Estado of running {\@link APP_INITIALIZER}s.
  *
  * \@experimental
  */
@@ -14101,13 +14101,13 @@ var Compiler = (function () {
      * Clears all caches.
      * @return {?}
      */
-    Compiler.prototype.clearCache = function () { };
+    Compiler.prototype.ClearCache = function () { };
     /**
      * Clears the cache for the given component/ngModule.
      * @param {?} type
      * @return {?}
      */
-    Compiler.prototype.clearCacheFor = function (type) { };
+    Compiler.prototype.ClearCacheFor = function (type) { };
     return Compiler;
 }());
 Compiler.decorators = [
@@ -15823,7 +15823,7 @@ var ApplicationRef_ = (function (_super) {
             var stableSub = _this._zone.onStable.subscribe(function () {
                 NgZone.assertNotInAngularZone();
                 // Check whether there are no pending macro/micro tasks in the next tick
-                // to allow for NgZone to update the state.
+                // to allow for NgZone to update the Estado.
                 scheduleMicroTask(function () {
                     if (!_this._stable && !_this._zone.hasPendingMacrotasks &&
                         !_this._zone.hasPendingMicrotasks) {
@@ -16550,7 +16550,7 @@ function getModuleFactory(id) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * An unmodifiable list of items that Angular keeps up to date when the state
+ * An unmodifiable list of items that Angular keeps up to date when the Estado
  * of the application changes.
  *
  * The type of object that {\@link ViewChildren}, {\@link ContentChildren}, and {\@link QueryList}
@@ -16903,7 +16903,7 @@ var ViewContainerRef = (function () {
      * @abstract
      * @return {?}
      */
-    ViewContainerRef.prototype.clear = function () { };
+    ViewContainerRef.prototype.Clear = function () { };
     /**
      * Returns the {\@link ViewRef} for the View located in this container at the specified index.
      * @abstract
@@ -18037,8 +18037,8 @@ var DefaultIterableDiffer = (function () {
         configurable: true
     });
     /**
-     * Reset the state of the change objects to show no changes. This means set previousKey to
-     * currentKey, and clear all of the queues (additions, moves, removals).
+     * Reset the Estado of the change objects to show no changes. This means set previousKey to
+     * currentKey, and Clear all of the queues (additions, moves, removals).
      * Set the previousIndexes of moved and added items to their currentIndexes
      * Reset the list of additions, moves and removals
      *
@@ -18180,7 +18180,7 @@ var DefaultIterableDiffer = (function () {
             record = nextRecord;
         }
         if (this._unlinkedRecords !== null) {
-            this._unlinkedRecords.clear();
+            this._unlinkedRecords.Clear();
         }
         if (this._additionsTail !== null) {
             this._additionsTail._nextAdded = null;
@@ -18633,7 +18633,7 @@ var _DuplicateMap = (function () {
     /**
      * @return {?}
      */
-    _DuplicateMap.prototype.clear = function () { this.map.clear(); };
+    _DuplicateMap.prototype.Clear = function () { this.map.Clear(); };
     /**
      * @return {?}
      */
@@ -18774,7 +18774,7 @@ var DefaultKeyValueDiffer = (function () {
      */
     DefaultKeyValueDiffer.prototype.onDestroy = function () { };
     /**
-     * Check the current state of the map vs the previous.
+     * Check the current Estado of the map vs the previous.
      * The algorithm is optimised for when the keys do no change.
      * @param {?} map
      * @return {?}
@@ -18890,7 +18890,7 @@ var DefaultKeyValueDiffer = (function () {
     DefaultKeyValueDiffer.prototype._reset = function () {
         if (this.isDirty) {
             var /** @type {?} */ record = void 0;
-            // let `_previousMapHead` contain the state of the map before the changes
+            // let `_previousMapHead` contain the Estado of the map before the changes
             this._previousMapHead = this._mapHead;
             for (record = this._previousMapHead; record !== null; record = record._next) {
                 record._nextPrevious = record._next;
@@ -19491,7 +19491,7 @@ var Services = {
     createComponentView: undefined,
     createNgModuleRef: undefined,
     overrideProvider: undefined,
-    clearProviderOverrides: undefined,
+    ClearProviderOverrides: undefined,
     checkAndUpdateView: undefined,
     checkNoChangesView: undefined,
     destroyView: undefined,
@@ -19657,7 +19657,7 @@ function resolveRendererType2(type) {
  */
 function checkBinding(view, def, bindingIdx, value) {
     var /** @type {?} */ oldValues = view.oldValues;
-    if ((view.state & 2 /* FirstCheck */) ||
+    if ((view.Estado & 2 /* FirstCheck */) ||
         !looseIdentical(oldValues[def.bindingIndex + bindingIdx], value)) {
         return true;
     }
@@ -19686,8 +19686,8 @@ function checkAndUpdateBinding(view, def, bindingIdx, value) {
  */
 function checkBindingNoChanges(view, def, bindingIdx, value) {
     var /** @type {?} */ oldValue = view.oldValues[def.bindingIndex + bindingIdx];
-    if ((view.state & 1 /* BeforeFirstCheck */) || !devModeEqual(oldValue, value)) {
-        throw expressionChangedAfterItHasBeenCheckedError(Services.createDebugContext(view, def.index), oldValue, value, (view.state & 1 /* BeforeFirstCheck */) !== 0);
+    if ((view.Estado & 1 /* BeforeFirstCheck */) || !devModeEqual(oldValue, value)) {
+        throw expressionChangedAfterItHasBeenCheckedError(Services.createDebugContext(view, def.index), oldValue, value, (view.Estado & 1 /* BeforeFirstCheck */) !== 0);
     }
 }
 /**
@@ -19698,7 +19698,7 @@ function markParentViewsForCheck(view) {
     var /** @type {?} */ currView = view;
     while (currView) {
         if (currView.def.flags & 2 /* OnPush */) {
-            currView.state |= 8 /* ChecksEnabled */;
+            currView.Estado |= 8 /* ChecksEnabled */;
         }
         currView = currView.viewContainerParent || currView.parent;
     }
@@ -19711,7 +19711,7 @@ function markParentViewsForCheck(view) {
 function markParentViewsForCheckProjectedViews(view, endView) {
     var /** @type {?} */ currView = view;
     while (currView && currView !== endView) {
-        currView.state |= 64 /* CheckProjectedViews */;
+        currView.Estado |= 64 /* CheckProjectedViews */;
         currView = currView.viewContainerParent || currView.parent;
     }
 }
@@ -20740,7 +20740,7 @@ function attachEmbeddedView(parentView, elementData, viewIndex, view) {
 function attachProjectedView(vcElementData, view) {
     var /** @type {?} */ dvcElementData = declaredViewContainer(view);
     if (!dvcElementData || dvcElementData === vcElementData ||
-        view.state & 16 /* IsProjectedView */) {
+        view.Estado & 16 /* IsProjectedView */) {
         return;
     }
     // Note: For performance reasons, we
@@ -20750,7 +20750,7 @@ function attachProjectedView(vcElementData, view) {
     //    nested projected views as well, even accross component boundaries).
     // - don't track the insertion order of views in the projected views array
     //   (hard, as when the views of the same template are inserted different view containers)
-    view.state |= 16 /* IsProjectedView */;
+    view.Estado |= 16 /* IsProjectedView */;
     var /** @type {?} */ projectedViews = dvcElementData.template._projectedViews;
     if (!projectedViews) {
         projectedViews = dvcElementData.template._projectedViews = [];
@@ -20803,7 +20803,7 @@ function detachEmbeddedView(elementData, viewIndex) {
  * @return {?}
  */
 function detachProjectedView(view) {
-    if (!(view.state & 16 /* IsProjectedView */)) {
+    if (!(view.Estado & 16 /* IsProjectedView */)) {
         return;
     }
     var /** @type {?} */ dvcElementData = declaredViewContainer(view);
@@ -21130,7 +21130,7 @@ var ViewContainerRef_ = (function () {
     /**
      * @return {?}
      */
-    ViewContainerRef_.prototype.clear = function () {
+    ViewContainerRef_.prototype.Clear = function () {
         var /** @type {?} */ len = this._embeddedViews.length;
         for (var /** @type {?} */ i = len - 1; i >= 0; i--) {
             var /** @type {?} */ view = ((detachEmbeddedView(this._data, i)));
@@ -21274,7 +21274,7 @@ var ViewRef_ = (function () {
         /**
          * @return {?}
          */
-        get: function () { return (this._view.state & 128 /* Destroyed */) !== 0; },
+        get: function () { return (this._view.Estado & 128 /* Destroyed */) !== 0; },
         enumerable: true,
         configurable: true
     });
@@ -21285,7 +21285,7 @@ var ViewRef_ = (function () {
     /**
      * @return {?}
      */
-    ViewRef_.prototype.detach = function () { this._view.state &= ~4 /* Attached */; };
+    ViewRef_.prototype.detach = function () { this._view.Estado &= ~4 /* Attached */; };
     /**
      * @return {?}
      */
@@ -21306,7 +21306,7 @@ var ViewRef_ = (function () {
     /**
      * @return {?}
      */
-    ViewRef_.prototype.reattach = function () { this._view.state |= 4 /* Attached */; };
+    ViewRef_.prototype.reattach = function () { this._view.Estado |= 4 /* Attached */; };
     /**
      * @param {?} callback
      * @return {?}
@@ -21444,7 +21444,7 @@ function nodeValue(view, index) {
     else if (def.flags & (20224 /* CatProvider */ | 16 /* TypePipe */)) {
         return asProviderData(view, def.index).instance;
     }
-    throw new Error("Illegal state: read nodeValue for node index " + index);
+    throw new Error("Illegal Estado: read nodeValue for node index " + index);
 }
 /**
  * @param {?} view
@@ -21960,7 +21960,7 @@ function checkAndUpdateDirectiveInline(view, def, v0, v1, v2, v3, v4, v5, v6, v7
     if (changes) {
         directive.ngOnChanges(changes);
     }
-    if ((view.state & 2 /* FirstCheck */) && (def.flags & 65536 /* OnInit */)) {
+    if ((view.Estado & 2 /* FirstCheck */) && (def.flags & 65536 /* OnInit */)) {
         directive.ngOnInit();
     }
     if (def.flags & 262144 /* DoCheck */) {
@@ -21988,7 +21988,7 @@ function checkAndUpdateDirectiveDynamic(view, def, values) {
     if (changes) {
         directive.ngOnChanges(changes);
     }
-    if ((view.state & 2 /* FirstCheck */) && (def.flags & 65536 /* OnInit */)) {
+    if ((view.Estado & 2 /* FirstCheck */) && (def.flags & 65536 /* OnInit */)) {
         directive.ngOnInit();
     }
     if (def.flags & 262144 /* DoCheck */) {
@@ -22219,7 +22219,7 @@ function updateProp(view, providerData, def, bindingIdx, value, changes) {
     if (def.flags & 32768 /* Component */) {
         var /** @type {?} */ compView = asElementData(view, /** @type {?} */ ((def.parent)).index).componentView;
         if (compView.def.flags & 2 /* OnPush */) {
-            compView.state |= 8 /* ChecksEnabled */;
+            compView.Estado |= 8 /* ChecksEnabled */;
         }
     }
     var /** @type {?} */ binding = def.bindings[bindingIdx];
@@ -22236,7 +22236,7 @@ function updateProp(view, providerData, def, bindingIdx, value, changes) {
         }
         var /** @type {?} */ binding_1 = def.bindings[bindingIdx];
         changes[((binding_1.nonMinifiedName))] =
-            new SimpleChange(oldValue, value, (view.state & 2 /* FirstCheck */) !== 0);
+            new SimpleChange(oldValue, value, (view.Estado & 2 /* FirstCheck */) !== 0);
     }
     view.oldValues[def.bindingIndex + bindingIdx] = value;
     return changes;
@@ -23139,32 +23139,32 @@ function validateNode(parent, node, nodeCount) {
     var /** @type {?} */ template = node.element && node.element.template;
     if (template) {
         if (!template.lastRenderRootNode) {
-            throw new Error("Illegal State: Embedded templates without nodes are not allowed!");
+            throw new Error("Illegal Estado: Embedded templates without nodes are not allowed!");
         }
         if (template.lastRenderRootNode &&
             template.lastRenderRootNode.flags & 16777216 /* EmbeddedViews */) {
-            throw new Error("Illegal State: Last root node of a template can't have embedded views, at index " + node.index + "!");
+            throw new Error("Illegal Estado: Last root node of a template can't have embedded views, at index " + node.index + "!");
         }
     }
     if (node.flags & 20224 /* CatProvider */) {
         var /** @type {?} */ parentFlags = parent ? parent.flags : 0;
         if ((parentFlags & 1 /* TypeElement */) === 0) {
-            throw new Error("Illegal State: Provider/Directive nodes need to be children of elements or anchors, at index " + node.index + "!");
+            throw new Error("Illegal Estado: Provider/Directive nodes need to be children of elements or anchors, at index " + node.index + "!");
         }
     }
     if (node.query) {
         if (node.flags & 67108864 /* TypeContentQuery */ &&
             (!parent || (parent.flags & 16384 /* TypeDirective */) === 0)) {
-            throw new Error("Illegal State: Content Query nodes need to be children of directives, at index " + node.index + "!");
+            throw new Error("Illegal Estado: Content Query nodes need to be children of directives, at index " + node.index + "!");
         }
         if (node.flags & 134217728 /* TypeViewQuery */ && parent) {
-            throw new Error("Illegal State: View Query nodes have to be top level nodes, at index " + node.index + "!");
+            throw new Error("Illegal Estado: View Query nodes have to be top level nodes, at index " + node.index + "!");
         }
     }
     if (node.childCount) {
         var /** @type {?} */ parentEnd = parent ? parent.index + parent.childCount : nodeCount - 1;
         if (node.index <= parentEnd && node.index + node.childCount > parentEnd) {
-            throw new Error("Illegal State: childCount of node leads outside of parent, at index " + node.index + "!");
+            throw new Error("Illegal Estado: childCount of node leads outside of parent, at index " + node.index + "!");
         }
     }
 }
@@ -23230,7 +23230,7 @@ function createView(root, renderer, parent, parentNodeDef, def) {
         viewContainerParent: null, parentNodeDef: parentNodeDef,
         context: null,
         component: null, nodes: nodes,
-        state: 13 /* CatInit */, root: root, renderer: renderer,
+        Estado: 13 /* CatInit */, root: root, renderer: renderer,
         oldValues: new Array(def.bindingCount), disposables: disposables
     };
     return view;
@@ -23340,35 +23340,35 @@ function checkNoChangesView(view) {
     execComponentViewsAction(view, ViewAction.CheckNoChanges);
     // Note: We don't check queries for changes as we didn't do this in v2.x.
     // TODO(tbosch): investigate if we can enable the check again in v5.x with a nicer error message.
-    view.state &= ~(64 /* CheckProjectedViews */ | 32 /* CheckProjectedView */);
+    view.Estado &= ~(64 /* CheckProjectedViews */ | 32 /* CheckProjectedView */);
 }
 /**
  * @param {?} view
  * @return {?}
  */
 function checkAndUpdateView(view) {
-    if (view.state & 1 /* BeforeFirstCheck */) {
-        view.state &= ~1 /* BeforeFirstCheck */;
-        view.state |= 2 /* FirstCheck */;
+    if (view.Estado & 1 /* BeforeFirstCheck */) {
+        view.Estado &= ~1 /* BeforeFirstCheck */;
+        view.Estado |= 2 /* FirstCheck */;
     }
     else {
-        view.state &= ~2 /* FirstCheck */;
+        view.Estado &= ~2 /* FirstCheck */;
     }
     markProjectedViewsForCheck(view);
     Services.updateDirectives(view, 0 /* CheckAndUpdate */);
     execEmbeddedViewsAction(view, ViewAction.CheckAndUpdate);
     execQueriesAction(view, 67108864 /* TypeContentQuery */, 536870912 /* DynamicQuery */, 0 /* CheckAndUpdate */);
     callLifecycleHooksChildrenFirst(view, 2097152 /* AfterContentChecked */ |
-        (view.state & 2 /* FirstCheck */ ? 1048576 /* AfterContentInit */ : 0));
+        (view.Estado & 2 /* FirstCheck */ ? 1048576 /* AfterContentInit */ : 0));
     Services.updateRenderer(view, 0 /* CheckAndUpdate */);
     execComponentViewsAction(view, ViewAction.CheckAndUpdate);
     execQueriesAction(view, 134217728 /* TypeViewQuery */, 536870912 /* DynamicQuery */, 0 /* CheckAndUpdate */);
     callLifecycleHooksChildrenFirst(view, 8388608 /* AfterViewChecked */ |
-        (view.state & 2 /* FirstCheck */ ? 4194304 /* AfterViewInit */ : 0));
+        (view.Estado & 2 /* FirstCheck */ ? 4194304 /* AfterViewInit */ : 0));
     if (view.def.flags & 2 /* OnPush */) {
-        view.state &= ~8 /* ChecksEnabled */;
+        view.Estado &= ~8 /* ChecksEnabled */;
     }
-    view.state &= ~(64 /* CheckProjectedViews */ | 32 /* CheckProjectedView */);
+    view.Estado &= ~(64 /* CheckProjectedViews */ | 32 /* CheckProjectedView */);
 }
 /**
  * @param {?} view
@@ -23410,7 +23410,7 @@ function markProjectedViewsForCheck(view) {
             if (projectedViews) {
                 for (var /** @type {?} */ i_1 = 0; i_1 < projectedViews.length; i_1++) {
                     var /** @type {?} */ projectedView = projectedViews[i_1];
-                    projectedView.state |= 32 /* CheckProjectedView */;
+                    projectedView.Estado |= 32 /* CheckProjectedView */;
                     markParentViewsForCheckProjectedViews(projectedView, view);
                 }
             }
@@ -23581,7 +23581,7 @@ function checkNoChangesNodeDynamic(view, nodeDef, values) {
 function checkNoChangesQuery(view, nodeDef) {
     var /** @type {?} */ queryList = asQueryList(view, nodeDef.index);
     if (queryList.dirty) {
-        throw expressionChangedAfterItHasBeenCheckedError(Services.createDebugContext(view, nodeDef.index), "Query " + ((nodeDef.query)).id + " not dirty", "Query " + ((nodeDef.query)).id + " dirty", (view.state & 1 /* BeforeFirstCheck */) !== 0);
+        throw expressionChangedAfterItHasBeenCheckedError(Services.createDebugContext(view, nodeDef.index), "Query " + ((nodeDef.query)).id + " not dirty", "Query " + ((nodeDef.query)).id + " dirty", (view.Estado & 1 /* BeforeFirstCheck */) !== 0);
     }
 }
 /**
@@ -23589,7 +23589,7 @@ function checkNoChangesQuery(view, nodeDef) {
  * @return {?}
  */
 function destroyView(view) {
-    if (view.state & 128 /* Destroyed */) {
+    if (view.Estado & 128 /* Destroyed */) {
         return;
     }
     execEmbeddedViewsAction(view, ViewAction.Destroy);
@@ -23607,7 +23607,7 @@ function destroyView(view) {
     if (isComponentView(view)) {
         view.renderer.destroy();
     }
-    view.state |= 128 /* Destroyed */;
+    view.Estado |= 128 /* Destroyed */;
 }
 /**
  * @param {?} view
@@ -23695,7 +23695,7 @@ function execEmbeddedViewsAction(view, action) {
  * @return {?}
  */
 function callViewAction(view, action) {
-    var /** @type {?} */ viewState = view.state;
+    var /** @type {?} */ viewState = view.Estado;
     switch (action) {
         case ViewAction.CheckNoChanges:
             if ((viewState & 128 /* Destroyed */) === 0) {
@@ -23811,7 +23811,7 @@ function initServicesIfNeeded() {
     Services.createComponentView = services.createComponentView;
     Services.createNgModuleRef = services.createNgModuleRef;
     Services.overrideProvider = services.overrideProvider;
-    Services.clearProviderOverrides = services.clearProviderOverrides;
+    Services.ClearProviderOverrides = services.ClearProviderOverrides;
     Services.checkAndUpdateView = services.checkAndUpdateView;
     Services.checkNoChangesView = services.checkNoChangesView;
     Services.destroyView = services.destroyView;
@@ -23833,7 +23833,7 @@ function createProdServices() {
         createComponentView: createComponentView,
         createNgModuleRef: createNgModuleRef,
         overrideProvider: NOOP,
-        clearProviderOverrides: NOOP,
+        ClearProviderOverrides: NOOP,
         checkAndUpdateView: checkAndUpdateView,
         checkNoChangesView: checkNoChangesView,
         destroyView: destroyView,
@@ -23856,7 +23856,7 @@ function createDebugServices() {
         createComponentView: debugCreateComponentView,
         createNgModuleRef: debugCreateNgModuleRef,
         overrideProvider: debugOverrideProvider,
-        clearProviderOverrides: debugClearProviderOverrides,
+        ClearProviderOverrides: debugClearProviderOverrides,
         checkAndUpdateView: debugCheckAndUpdateView,
         checkNoChangesView: debugCheckNoChangesView,
         destroyView: debugDestroyView,
@@ -23957,7 +23957,7 @@ function debugOverrideProvider(override) {
  * @return {?}
  */
 function debugClearProviderOverrides() {
-    providerOverrides.clear();
+    providerOverrides.Clear();
 }
 /**
  * @param {?} def
@@ -24171,7 +24171,7 @@ function debugHandleEvent(view, nodeIndex, eventName, event) {
  * @return {?}
  */
 function debugUpdateDirectives(view, checkType) {
-    if (view.state & 128 /* Destroyed */) {
+    if (view.Estado & 128 /* Destroyed */) {
         throw viewDestroyedError(DebugAction[_currentAction]);
     }
     debugSetCurrentNode(view, nextDirectiveWithBinding(view, 0));
@@ -24209,7 +24209,7 @@ function debugUpdateDirectives(view, checkType) {
  * @return {?}
  */
 function debugUpdateRenderer(view, checkType) {
-    if (view.state & 128 /* Destroyed */) {
+    if (view.Estado & 128 /* Destroyed */) {
         throw viewDestroyedError(DebugAction[_currentAction]);
     }
     debugSetCurrentNode(view, nextRenderNodeWithBinding(view, 0));
@@ -24517,7 +24517,7 @@ var DebugContext_ = (function () {
         }; /** @type {?} */
         ((logViewDef.factory))(nodeLogger);
         if (currRenderNodeIndex < renderNodeIndex) {
-            console.error('Illegal state: the ViewDefinitionFactory did not call the logger!');
+            console.error('Illegal Estado: the ViewDefinitionFactory did not call the logger!');
             console.error.apply(console, values);
         }
     };
@@ -24901,9 +24901,9 @@ function overrideProvider(override) {
 /**
  * @return {?}
  */
-function clearProviderOverrides() {
+function ClearProviderOverrides() {
     initServicesIfNeeded();
-    return Services.clearProviderOverrides();
+    return Services.ClearProviderOverrides();
 }
 /**
  * @param {?} ngModuleType
@@ -24972,7 +24972,7 @@ var NgModuleFactory_ = (function (_super) {
  * Component#animations component animations metadata page} to gain a better understanding of
  * how animations in Angular are used.
  *
- * `trigger` Creates an animation trigger which will a list of {\@link state state} and {\@link
+ * `trigger` Creates an animation trigger which will a list of {\@link Estado Estado} and {\@link
  * transition transition} entries that will be evaluated when the expression bound to the trigger
  * changes.
  *
@@ -24984,7 +24984,7 @@ var NgModuleFactory_ = (function (_super) {
  * ### Usage
  *
  * `trigger` will create an animation trigger reference based on the provided `name` value. The
- * provided `animation` value is expected to be an array consisting of {\@link state state} and {\@link
+ * provided `animation` value is expected to be an array consisting of {\@link Estado Estado} and {\@link
  * transition transition} declarations.
  *
  * ```typescript
@@ -24993,8 +24993,8 @@ var NgModuleFactory_ = (function (_super) {
  *   templateUrl: 'my-component-tpl.html',
  *   animations: [
  *     trigger("myAnimationTrigger", [
- *       state(...),
- *       state(...),
+ *       Estado(...),
+ *       Estado(...),
  *       transition(...),
  *       transition(...)
  *     ])
@@ -25044,9 +25044,9 @@ function trigger$1(name, definitions) {
  * delay=100, easing=ease-out`. If a numeric value is provided then that will be used as the
  * `duration` value in millisecond form.
  * - `styles` is the style input data which can either be a call to {\@link style style} or {\@link
- * keyframes keyframes}. If left empty then the styles from the destination state will be collected
+ * keyframes keyframes}. If left empty then the styles from the destination Estado will be collected
  * and used (this is useful when describing an animation step that will complete an animation by
- * {\@link transition#the-final-animate-call animating to the final state}).
+ * {\@link transition#the-final-animate-call animating to the final Estado}).
  *
  * ```typescript
  * // various functions for specifying timing data
@@ -25161,7 +25161,7 @@ function sequence$1(steps, options) {
  * how animations in Angular are used.
  *
  * `style` declares a key/value object containing CSS properties/styles that can then be used for
- * {\@link state animation states}, within an {\@link sequence animation sequence}, or as styling data
+ * {\@link Estado animation states}, within an {\@link sequence animation sequence}, or as styling data
  * for both {\@link animate animate} and {\@link keyframes keyframes}.
  *
  * ### Usage
@@ -25182,7 +25182,7 @@ function sequence$1(steps, options) {
  * When an asterix (`*`) character is used as a value then it will be detected from the element
  * being animated and applied as animation data when the animation starts.
  *
- * This feature proves useful for a state depending on layout and/or environment factors; in such
+ * This feature proves useful for a Estado depending on layout and/or environment factors; in such
  * cases the styles are calculated just before the animation starts.
  *
  * ```typescript
@@ -25202,12 +25202,12 @@ function style$1(tokens) {
     return { type: 6 /* Style */, styles: tokens, offset: null };
 }
 /**
- * `state` is an animation-specific function that is designed to be used inside of Angular's
+ * `Estado` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
  * Component#animations component animations metadata page} to gain a better understanding of
  * how animations in Angular are used.
  *
- * `state` declares an animation state within the given trigger. When a state is active within a
+ * `Estado` declares an animation Estado within the given trigger. When a Estado is active within a
  * component then its associated styles will persist on the element that the trigger is attached to
  * (even when the animation ends).
  *
@@ -25215,34 +25215,34 @@ function style$1(tokens) {
  * function. To register states to an animation trigger please have a look at the {\@link trigger
  * trigger} function.
  *
- * #### The `void` state
+ * #### The `void` Estado
  *
- * The `void` state value is a reserved word that angular uses to determine when the element is not
- * apart of the application anymore (e.g. when an `ngIf` evaluates to false then the state of the
+ * The `void` Estado value is a reserved word that angular uses to determine when the element is not
+ * apart of the application anymore (e.g. when an `ngIf` evaluates to false then the Estado of the
  * associated element is void).
  *
- * #### The `*` (default) state
+ * #### The `*` (default) Estado
  *
- * The `*` state (when styled) is a fallback state that will be used if the state that is being
+ * The `*` Estado (when styled) is a fallback Estado that will be used if the Estado that is being
  * animated is not declared within the trigger.
  *
  * ### Usage
  *
- * `state` will declare an animation state with its associated styles
+ * `Estado` will declare an animation Estado with its associated styles
  * within the given trigger.
  *
- * - `stateNameExpr` can be one or more state names separated by commas.
+ * - `stateNameExpr` can be one or more Estado names separated by commas.
  * - `styles` refers to the {\@link style styling data} that will be persisted on the element once
- * the state has been reached.
+ * the Estado has been reached.
  *
  * ```typescript
- * // "void" is a reserved name for a state and is used to represent
- * // the state in which an element is detached from from the application.
- * state("void", style({ height: 0 }))
+ * // "void" is a reserved name for a Estado and is used to represent
+ * // the Estado in which an element is detached from from the application.
+ * Estado("void", style({ height: 0 }))
  *
  * // user-defined states
- * state("closed", style({ height: 0 }))
- * state("open, visible", style({ height: "*" }))
+ * Estado("closed", style({ height: 0 }))
+ * Estado("open, visible", style({ height: "*" }))
  * ```
  *
  * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
@@ -25252,8 +25252,8 @@ function style$1(tokens) {
  * @param {?} styles
  * @return {?}
  */
-function state$1(name, styles) {
-    return { type: 0 /* State */, name: name, styles: styles };
+function Estado$1(name, styles) {
+    return { type: 0 /* Estado */, name: name, styles: styles };
 }
 /**
  * `keyframes` is an animation-specific function that is designed to be used inside of Angular's
@@ -25314,32 +25314,32 @@ function keyframes$1(steps) {
  * `transition` declares the {\@link sequence sequence of animation steps} that will be run when the
  * provided `stateChangeExpr` value is satisfied. The `stateChangeExpr` consists of a `state1 =>
  * state2` which consists of two known states (use an asterix (`*`) to refer to a dynamic starting
- * and/or ending state).
+ * and/or ending Estado).
  *
  * A function can also be provided as the `stateChangeExpr` argument for a transition and this
- * function will be executed each time a state change occurs. If the value returned within the
+ * function will be executed each time a Estado change occurs. If the value returned within the
  * function is true then the associated animation will be run.
  *
  * Animation transitions are placed within an {\@link trigger animation trigger}. For an transition
- * to animate to a state value and persist its styles then one or more {\@link state animation
+ * to animate to a Estado value and persist its styles then one or more {\@link Estado animation
  * states} is expected to be defined.
  *
  * ### Usage
  *
  * An animation transition is kicked off the `stateChangeExpr` predicate evaluates to true based on
- * what the previous state is and what the current state has become. In other words, if a transition
- * is defined that matches the old/current state criteria then the associated animation will be
+ * what the previous Estado is and what the current Estado has become. In other words, if a transition
+ * is defined that matches the old/current Estado criteria then the associated animation will be
  * triggered.
  *
  * ```typescript
- * // all transition/state changes are defined within an animation trigger
+ * // all transition/Estado changes are defined within an animation trigger
  * trigger("myAnimationTrigger", [
- *   // if a state is defined then its styles will be persisted when the
+ *   // if a Estado is defined then its styles will be persisted when the
  *   // animation has fully completed itself
- *   state("on", style({ background: "green" })),
- *   state("off", style({ background: "grey" })),
+ *   Estado("on", style({ background: "green" })),
+ *   Estado("off", style({ background: "grey" })),
  *
- *   // a transition animation that will be kicked off when the state value
+ *   // a transition animation that will be kicked off when the Estado value
  *   // bound to "myAnimationTrigger" changes from "on" to "off"
  *   transition("on => off", animate(500)),
  *
@@ -25349,14 +25349,14 @@ function keyframes$1(steps) {
  *   // or to define multiple states pairs separated by commas
  *   transition("on => off, off => void", animate(500)),
  *
- *   // this is a catch-all state change for when an element is inserted into
- *   // the page and the destination state is unknown
+ *   // this is a catch-all Estado change for when an element is inserted into
+ *   // the page and the destination Estado is unknown
  *   transition("void => *", [
  *     style({ opacity: 0 }),
  *     animate(500)
  *   ]),
  *
- *   // this will capture a state change between any states
+ *   // this will capture a Estado change between any states
  *   transition("* => *", animate("1s 0s")),
  *
  *   // you can also go full out and include a function
@@ -25379,12 +25379,12 @@ function keyframes$1(steps) {
  *
  * If the final step within the transition steps is a call to `animate()` that **only** uses a
  * timing value with **no style data** then it will be automatically used as the final animation arc
- * for the element to animate itself to the final state. This involves an automatic mix of
- * adding/removing CSS styles so that the element will be in the exact state it should be for the
- * applied state to be presented correctly.
+ * for the element to animate itself to the final Estado. This involves an automatic mix of
+ * adding/removing CSS styles so that the element will be in the exact Estado it should be for the
+ * applied Estado to be presented correctly.
  *
  * ```
- * // start off by hiding the element, but make sure that it animates properly to whatever state
+ * // start off by hiding the element, but make sure that it animates properly to whatever Estado
  * // is currently active for "myAnimationTrigger"
  * transition("void => *", [
  *   style({ opacity: 0 }),
@@ -25396,7 +25396,7 @@ function keyframes$1(steps) {
  *
  * Given that enter (insertion) and leave (removal) animations are so common, the `transition`
  * function accepts both `:enter` and `:leave` values which are aliases for the `void => *` and `*
- * => void` state changes.
+ * => void` Estado changes.
  *
  * ```
  * transition(":enter", [
@@ -25803,8 +25803,8 @@ function style$$1(tokens) {
  * @param {?} styles
  * @return {?}
  */
-function state$$1(name, styles) {
-    return state$1(name, styles);
+function Estado$$1(name, styles) {
+    return Estado$1(name, styles);
 }
 /**
  * @deprecated This symbol has moved. Please Import from \@angular/animations instead!
@@ -26387,7 +26387,7 @@ var DomAdapter = (function () {
      * @param {?} el
      * @return {?}
      */
-    DomAdapter.prototype.clearNodes = function (el) { };
+    DomAdapter.prototype.ClearNodes = function (el) { };
     /**
      * @abstract
      * @param {?} el
@@ -27319,7 +27319,7 @@ var BrowserDomAdapter = (function (_super) {
      * @param {?} el
      * @return {?}
      */
-    BrowserDomAdapter.prototype.clearNodes = function (el) {
+    BrowserDomAdapter.prototype.ClearNodes = function (el) {
         while (el.firstChild) {
             el.removeChild(el.firstChild);
         }
@@ -27876,7 +27876,7 @@ var BrowserDomAdapter = (function (_super) {
      */
     BrowserDomAdapter.prototype.setCookie = function (name, value) {
         // document.cookie is magical, assigning into it assigns/overrides one cookie value, but does
-        // not clear other cookies.
+        // not Clear other cookies.
         document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
     };
     return BrowserDomAdapter;
@@ -28039,28 +28039,28 @@ var BrowserPlatformLocation = (function (_super) {
         configurable: true
     });
     /**
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} url
      * @return {?}
      */
-    BrowserPlatformLocation.prototype.pushState = function (state, title, url) {
+    BrowserPlatformLocation.prototype.pushState = function (Estado, title, url) {
         if (supportsState()) {
-            this._history.pushState(state, title, url);
+            this._history.pushState(Estado, title, url);
         }
         else {
             this._location.hash = url;
         }
     };
     /**
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} url
      * @return {?}
      */
-    BrowserPlatformLocation.prototype.replaceState = function (state, title, url) {
+    BrowserPlatformLocation.prototype.replaceState = function (Estado, title, url) {
         if (supportsState()) {
-            this._history.replaceState(state, title, url);
+            this._history.replaceState(Estado, title, url);
         }
         else {
             this._location.hash = url;
@@ -29638,7 +29638,7 @@ var VALID_ELEMENTS = merge(VOID_ELEMENTS, BLOCK_ELEMENTS, INLINE_ELEMENTS, OPTIO
 var URI_ATTRS = tagSet('background,cite,href,itemtype,longdesc,poster,src,xlink:href');
 // Attributes that have special href set hence need to be sanitized
 var SRCSET_ATTRS = tagSet('srcset');
-var HTML_ATTRS = tagSet('abbr,accesskey,align,alt,autoplay,axis,bgcolor,border,cellpadding,cellspacing,class,clear,color,cols,colspan,' +
+var HTML_ATTRS = tagSet('abbr,accesskey,align,alt,autoplay,axis,bgcolor,border,cellpadding,cellspacing,class,Clear,color,cols,colspan,' +
     'compact,controls,coords,datetime,default,dir,download,face,headers,height,hidden,hreflang,hspace,' +
     'ismap,itemscope,itemprop,kind,label,lang,language,loop,media,muted,nohref,nowrap,open,preload,rel,rev,role,rows,rowspan,rules,' +
     'scope,scrolling,shape,size,sizes,span,srclang,start,summary,tabindex,target,title,translate,type,usemap,' +
@@ -29846,7 +29846,7 @@ function sanitizeHtml(defaultDoc, unsafeHtmlInput) {
         return safeHtml;
     }
     catch (e) {
-        // In case anything goes wrong, clear out inertElement to reset the entire DOM structure.
+        // In case anything goes wrong, Clear out inertElement to reset the entire DOM structure.
         inertElement = null;
         throw e;
     }
@@ -30388,7 +30388,7 @@ var AngularProfiler = (function () {
     /**
      * Exercises change detection in a loop and then prints the average amount of
      * time in milliseconds how long a single round of change detection takes for
-     * the current state of the UI. It runs a minimum of 5 rounds for a minimum
+     * the current Estado of the UI. It runs a minimum of 5 rounds for a minimum
      * of 500 milliseconds.
      *
      * Optionally, a user may pass a `config` parameter containing a map of
@@ -30903,20 +30903,20 @@ var PlatformLocation = (function () {
     PlatformLocation.prototype.hash = function () { };
     /**
      * @abstract
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} url
      * @return {?}
      */
-    PlatformLocation.prototype.replaceState = function (state, title, url) { };
+    PlatformLocation.prototype.replaceState = function (Estado, title, url) { };
     /**
      * @abstract
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} url
      * @return {?}
      */
-    PlatformLocation.prototype.pushState = function (state, title, url) { };
+    PlatformLocation.prototype.pushState = function (Estado, title, url) { };
     /**
      * @abstract
      * @return {?}
@@ -30942,14 +30942,14 @@ var LOCATION_INITIALIZED = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["Inje
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * `LocationStrategy` is responsible for representing and reading route state
+ * `LocationStrategy` is responsible for representing and reading route Estado
  * from the browser's URL. Angular provides two strategies:
  * {\@link HashLocationStrategy} and {\@link PathLocationStrategy}.
  *
  * This is used under the hood of the {\@link Location} service.
  *
  * Applications should use the {\@link Router} or {\@link Location} services to
- * interact with application route state.
+ * interact with application route Estado.
  *
  * For instance, {\@link HashLocationStrategy} produces URLs like
  * `http://example.com#/foo`, and {\@link PathLocationStrategy} produces
@@ -30977,22 +30977,22 @@ var LocationStrategy = (function () {
     LocationStrategy.prototype.prepareExternalUrl = function (internal) { };
     /**
      * @abstract
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} url
      * @param {?} queryParams
      * @return {?}
      */
-    LocationStrategy.prototype.pushState = function (state, title, url, queryParams) { };
+    LocationStrategy.prototype.pushState = function (Estado, title, url, queryParams) { };
     /**
      * @abstract
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} url
      * @param {?} queryParams
      * @return {?}
      */
-    LocationStrategy.prototype.replaceState = function (state, title, url, queryParams) { };
+    LocationStrategy.prototype.replaceState = function (Estado, title, url, queryParams) { };
     /**
      * @abstract
      * @return {?}
@@ -31258,7 +31258,7 @@ function _stripIndexHtml(url) {
  * \@whatItDoes Use URL hash for storing application location data.
  * \@description
  * `HashLocationStrategy` is a {\@link LocationStrategy} used to configure the
- * {\@link Location} service to represent its state in the
+ * {\@link Location} service to represent its Estado in the
  * [hash fragment](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)
  * of the browser's URL.
  *
@@ -31320,32 +31320,32 @@ var HashLocationStrategy = (function (_super) {
         return url.length > 0 ? ('#' + url) : url;
     };
     /**
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} path
      * @param {?} queryParams
      * @return {?}
      */
-    HashLocationStrategy.prototype.pushState = function (state, title, path, queryParams) {
+    HashLocationStrategy.prototype.pushState = function (Estado, title, path, queryParams) {
         var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
-        this._platformLocation.pushState(state, title, url);
+        this._platformLocation.pushState(Estado, title, url);
     };
     /**
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} path
      * @param {?} queryParams
      * @return {?}
      */
-    HashLocationStrategy.prototype.replaceState = function (state, title, path, queryParams) {
+    HashLocationStrategy.prototype.replaceState = function (Estado, title, path, queryParams) {
         var /** @type {?} */ url = this.prepareExternalUrl(path + Location.normalizeQueryParams(queryParams));
         if (url.length == 0) {
             url = this._platformLocation.pathname;
         }
-        this._platformLocation.replaceState(state, title, url);
+        this._platformLocation.replaceState(Estado, title, url);
     };
     /**
      * @return {?}
@@ -31378,7 +31378,7 @@ HashLocationStrategy.ctorParameters = function () { return [
  * \@whatItDoes Use URL for storing application location data.
  * \@description
  * `PathLocationStrategy` is a {\@link LocationStrategy} used to configure the
- * {\@link Location} service to represent its state in the
+ * {\@link Location} service to represent its Estado in the
  * [path](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax) of the
  * browser's URL.
  *
@@ -31449,26 +31449,26 @@ var PathLocationStrategy = (function (_super) {
         return hash && includeHash ? "" + pathname + hash : pathname;
     };
     /**
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} url
      * @param {?} queryParams
      * @return {?}
      */
-    PathLocationStrategy.prototype.pushState = function (state, title, url, queryParams) {
+    PathLocationStrategy.prototype.pushState = function (Estado, title, url, queryParams) {
         var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
-        this._platformLocation.pushState(state, title, externalUrl);
+        this._platformLocation.pushState(Estado, title, externalUrl);
     };
     /**
-     * @param {?} state
+     * @param {?} Estado
      * @param {?} title
      * @param {?} url
      * @param {?} queryParams
      * @return {?}
      */
-    PathLocationStrategy.prototype.replaceState = function (state, title, url, queryParams) {
+    PathLocationStrategy.prototype.replaceState = function (Estado, title, url, queryParams) {
         var /** @type {?} */ externalUrl = this.prepareExternalUrl(url + Location.normalizeQueryParams(queryParams));
-        this._platformLocation.replaceState(state, title, externalUrl);
+        this._platformLocation.replaceState(Estado, title, externalUrl);
     };
     /**
      * @return {?}
@@ -32187,7 +32187,7 @@ NgClass.propDecorators = {
  * Instantiates a single {\@link Component} type and inserts its Host View into current View.
  * `NgComponentOutlet` provides a declarative approach for dynamic component creation.
  *
- * `NgComponentOutlet` requires a component type, if a falsy value is set the view will clear and
+ * `NgComponentOutlet` requires a component type, if a falsy value is set the view will Clear and
  * any existing component will get destroyed.
  *
  * ### Fine tune control
@@ -32251,7 +32251,7 @@ var NgComponentOutlet = (function () {
      * @return {?}
      */
     NgComponentOutlet.prototype.ngOnChanges = function (changes) {
-        this._viewContainerRef.clear();
+        this._viewContainerRef.Clear();
         this._componentRef = null;
         if (this.ngComponentOutlet) {
             var /** @type {?} */ elInjector = this.ngComponentOutletInjector || this._viewContainerRef.parentInjector;
@@ -32390,7 +32390,7 @@ var NgForOfContext = (function () {
  * Angular uses object identity to track insertions and deletions within the iterator and reproduce
  * those changes in the DOM. This has important implications for animations and any stateful
  * controls (such as `<input>` elements which accept user input) that are present. Inserted rows can
- * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state
+ * be animated in, deleted rows can be animated out, and unchanged rows retain any unsaved Estado
  * such as user input.
  *
  * It is possible for the identities of elements in the iterator to change while the data does not.
@@ -32716,7 +32716,7 @@ var NgIf = (function () {
          */
         set: function (templateRef) {
             this._thenTemplateRef = templateRef;
-            this._thenViewRef = null; // clear previous view if any.
+            this._thenViewRef = null; // Clear previous view if any.
             this._updateView();
         },
         enumerable: true,
@@ -32729,7 +32729,7 @@ var NgIf = (function () {
          */
         set: function (templateRef) {
             this._elseTemplateRef = templateRef;
-            this._elseViewRef = null; // clear previous view if any.
+            this._elseViewRef = null; // Clear previous view if any.
             this._updateView();
         },
         enumerable: true,
@@ -32741,7 +32741,7 @@ var NgIf = (function () {
     NgIf.prototype._updateView = function () {
         if (this._context.$implicit) {
             if (!this._thenViewRef) {
-                this._viewContainer.clear();
+                this._viewContainer.Clear();
                 this._elseViewRef = null;
                 if (this._thenTemplateRef) {
                     this._thenViewRef =
@@ -32751,7 +32751,7 @@ var NgIf = (function () {
         }
         else {
             if (!this._elseViewRef) {
-                this._viewContainer.clear();
+                this._viewContainer.Clear();
                 this._thenViewRef = null;
                 if (this._elseTemplateRef) {
                     this._elseViewRef =
@@ -32816,7 +32816,7 @@ var SwitchView = (function () {
      */
     SwitchView.prototype.destroy = function () {
         this._created = false;
-        this._viewContainerRef.clear();
+        this._viewContainerRef.Clear();
     };
     /**
      * @param {?} created
@@ -33119,7 +33119,7 @@ var NgPlural = (function () {
      * @return {?}
      */
     NgPlural.prototype._updateView = function () {
-        this._clearViews();
+        this._ClearViews();
         var /** @type {?} */ cases = Object.keys(this._caseViews);
         var /** @type {?} */ key = getPluralCategory(this._switchValue, cases, this._localization);
         this._activateView(this._caseViews[key]);
@@ -33127,7 +33127,7 @@ var NgPlural = (function () {
     /**
      * @return {?}
      */
-    NgPlural.prototype._clearViews = function () {
+    NgPlural.prototype._ClearViews = function () {
         if (this._activeView)
             this._activeView.destroy();
     };
@@ -34917,7 +34917,7 @@ var Subscription = (function () {
      * unsubscribed, is the same reference `add` is being called on, or is
      * `Subscription.EMPTY`, it will not be added.
      *
-     * If this subscription is already in an `closed` state, the passed
+     * If this subscription is already in an `closed` Estado, the passed
      * tear down logic will be executed immediately.
      *
      * @param {TeardownLogic} teardown The additional logic to execute on
@@ -35181,8 +35181,8 @@ var ArrayObservable = (function (_super) {
             return new EmptyObservable_1.EmptyObservable(scheduler);
         }
     };
-    ArrayObservable.dispatch = function (state) {
-        var array = state.array, index = state.index, count = state.count, subscriber = state.subscriber;
+    ArrayObservable.dispatch = function (Estado) {
+        var array = Estado.array, index = Estado.index, count = Estado.count, subscriber = Estado.subscriber;
         if (index >= count) {
             subscriber.complete();
             return;
@@ -35191,8 +35191,8 @@ var ArrayObservable = (function (_super) {
         if (subscriber.closed) {
             return;
         }
-        state.index = index + 1;
-        this.schedule(state);
+        Estado.index = index + 1;
+        this.schedule(Estado);
     };
     ArrayObservable.prototype._subscribe = function (subscriber) {
         var index = 0;
@@ -36453,7 +36453,7 @@ var StaticSymbol = (function () {
      */
     StaticSymbol.prototype.assertNoMembers = function () {
         if (this.members.length) {
-            throw new Error("Illegal state: symbol without members expected, but got " + JSON.stringify(this) + ".");
+            throw new Error("Illegal Estado: symbol without members expected, but got " + JSON.stringify(this) + ".");
         }
     };
     return StaticSymbol;
@@ -37463,7 +37463,7 @@ var ValueTransformer = (function () {
 var SyncAsync = {
     assertSync: function (value) {
         if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵisPromise"])(value)) {
-            throw new Error("Illegal state: value cannot be a promise");
+            throw new Error("Illegal Estado: value cannot be a promise");
         }
         return value;
     },
@@ -49827,12 +49827,12 @@ var DirectiveNormalizer = (function () {
     /**
      * @return {?}
      */
-    DirectiveNormalizer.prototype.clearCache = function () { this._resourceLoaderCache.clear(); };
+    DirectiveNormalizer.prototype.ClearCache = function () { this._resourceLoaderCache.Clear(); };
     /**
      * @param {?} normalizedDirective
      * @return {?}
      */
-    DirectiveNormalizer.prototype.clearCacheFor = function (normalizedDirective) {
+    DirectiveNormalizer.prototype.ClearCacheFor = function (normalizedDirective) {
         var _this = this;
         if (!normalizedDirective.isComponent) {
             return;
@@ -50714,7 +50714,7 @@ var CompileMetadataResolver = (function () {
      * @param {?} type
      * @return {?}
      */
-    CompileMetadataResolver.prototype.clearCacheFor = function (type) {
+    CompileMetadataResolver.prototype.ClearCacheFor = function (type) {
         var /** @type {?} */ dirMeta = this._directiveCache.get(type);
         this._directiveCache.delete(type);
         this._nonNormalizedDirectiveCache.delete(type);
@@ -50722,22 +50722,22 @@ var CompileMetadataResolver = (function () {
         this._pipeCache.delete(type);
         this._ngModuleOfTypes.delete(type);
         // Clear all of the NgModule as they contain transitive information!
-        this._ngModuleCache.clear();
+        this._ngModuleCache.Clear();
         if (dirMeta) {
-            this._directiveNormalizer.clearCacheFor(dirMeta);
+            this._directiveNormalizer.ClearCacheFor(dirMeta);
         }
     };
     /**
      * @return {?}
      */
-    CompileMetadataResolver.prototype.clearCache = function () {
-        this._directiveCache.clear();
-        this._nonNormalizedDirectiveCache.clear();
-        this._summaryCache.clear();
-        this._pipeCache.clear();
-        this._ngModuleCache.clear();
-        this._ngModuleOfTypes.clear();
-        this._directiveNormalizer.clearCache();
+    CompileMetadataResolver.prototype.ClearCache = function () {
+        this._directiveCache.Clear();
+        this._nonNormalizedDirectiveCache.Clear();
+        this._summaryCache.Clear();
+        this._pipeCache.Clear();
+        this._ngModuleCache.Clear();
+        this._ngModuleOfTypes.Clear();
+        this._directiveNormalizer.ClearCache();
     };
     /**
      * @param {?} baseType
@@ -50748,7 +50748,7 @@ var CompileMetadataResolver = (function () {
         var /** @type {?} */ delegate = null;
         var /** @type {?} */ proxyClass = (function () {
             if (!delegate) {
-                throw new Error("Illegal state: Class " + name + " for type " + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵstringify"])(baseType) + " is not compiled yet!");
+                throw new Error("Illegal Estado: Class " + name + " for type " + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["ɵstringify"])(baseType) + " is not compiled yet!");
             }
             return delegate.apply(this, arguments);
         });
@@ -51040,7 +51040,7 @@ var CompileMetadataResolver = (function () {
     CompileMetadataResolver.prototype.getDirectiveMetadata = function (directiveType) {
         var /** @type {?} */ dirMeta = ((this._directiveCache.get(directiveType)));
         if (!dirMeta) {
-            this._reportError(syntaxError("Illegal state: getDirectiveMetadata can only be called after loadNgModuleDirectiveAndPipeMetadata for a module that declares it. Directive " + stringifyType(directiveType) + "."), directiveType);
+            this._reportError(syntaxError("Illegal Estado: getDirectiveMetadata can only be called after loadNgModuleDirectiveAndPipeMetadata for a module that declares it. Directive " + stringifyType(directiveType) + "."), directiveType);
         }
         return dirMeta;
     };
@@ -51051,7 +51051,7 @@ var CompileMetadataResolver = (function () {
     CompileMetadataResolver.prototype.getDirectiveSummary = function (dirType) {
         var /** @type {?} */ dirSummary = (this._loadSummary(dirType, CompileSummaryKind.Directive));
         if (!dirSummary) {
-            this._reportError(syntaxError("Illegal state: Could not load the summary for directive " + stringifyType(dirType) + "."), dirType);
+            this._reportError(syntaxError("Illegal Estado: Could not load the summary for directive " + stringifyType(dirType) + "."), dirType);
         }
         return dirSummary;
     };
@@ -51435,7 +51435,7 @@ var CompileMetadataResolver = (function () {
     CompileMetadataResolver.prototype.getPipeMetadata = function (pipeType) {
         var /** @type {?} */ pipeMeta = this._pipeCache.get(pipeType);
         if (!pipeMeta) {
-            this._reportError(syntaxError("Illegal state: getPipeMetadata can only be called after loadNgModuleDirectiveAndPipeMetadata for a module that declares it. Pipe " + stringifyType(pipeType) + "."), pipeType);
+            this._reportError(syntaxError("Illegal Estado: getPipeMetadata can only be called after loadNgModuleDirectiveAndPipeMetadata for a module that declares it. Pipe " + stringifyType(pipeType) + "."), pipeType);
         }
         return pipeMeta || null;
     };
@@ -51446,7 +51446,7 @@ var CompileMetadataResolver = (function () {
     CompileMetadataResolver.prototype.getPipeSummary = function (pipeType) {
         var /** @type {?} */ pipeSummary = (this._loadSummary(pipeType, CompileSummaryKind.Pipe));
         if (!pipeSummary) {
-            this._reportError(syntaxError("Illegal state: Could not load the summary for pipe " + stringifyType(pipeType) + "."), pipeType);
+            this._reportError(syntaxError("Illegal Estado: Could not load the summary for pipe " + stringifyType(pipeType) + "."), pipeType);
         }
         return pipeSummary;
     };
@@ -55936,7 +55936,7 @@ var SCHEMA = [
     'a^[HTMLElement]|charset,coords,download,hash,host,hostname,href,hreflang,name,password,pathname,ping,port,protocol,referrerPolicy,rel,rev,search,shape,target,text,type,username',
     'area^[HTMLElement]|alt,coords,hash,host,hostname,href,!noHref,password,pathname,ping,port,protocol,referrerPolicy,search,shape,target,username',
     'audio^media|',
-    'br^[HTMLElement]|clear',
+    'br^[HTMLElement]|Clear',
     'base^[HTMLElement]|href,target',
     'body^[HTMLElement]|aLink,background,bgColor,link,*beforeunload,*blur,*error,*focus,*hashchange,*languagechange,*load,*message,*offline,*online,*pagehide,*pageshow,*popstate,*rejectionhandled,*resize,*scroll,*storage,*unhandledrejection,*unload,text,vLink',
     'button^[HTMLElement]|!autofocus,!disabled,formAction,formEnctype,formMethod,!formNoValidate,formTarget,name,type,value',
@@ -56998,7 +56998,7 @@ function convertActionBinding(localResolver, implicitReceiver, action, bindingId
             return function (args) { return literalMap(/** @type {?} */ (keys.map(function (key, i) { return [key, args[i]]; }))); };
         },
         createPipeConverter: function (name) {
-            throw new Error("Illegal State: Actions are not allowed to contain pipes. Pipe: " + name);
+            throw new Error("Illegal Estado: Actions are not allowed to contain pipes. Pipe: " + name);
         }
     }, action);
     var /** @type {?} */ visitor = new _AstToIrVisitor(localResolver, implicitReceiver, bindingId);
@@ -57279,7 +57279,7 @@ var _AstToIrVisitor = (function () {
      * @return {?}
      */
     _AstToIrVisitor.prototype.visitPipe = function (ast, mode) {
-        throw new Error("Illegal state: Pipes should have been converted into functions. Pipe: " + ast.name);
+        throw new Error("Illegal Estado: Pipes should have been converted into functions. Pipe: " + ast.name);
     };
     /**
      * @param {?} ast
@@ -57354,7 +57354,7 @@ var _AstToIrVisitor = (function () {
      * @return {?}
      */
     _AstToIrVisitor.prototype.visitLiteralArray = function (ast, mode) {
-        throw new Error("Illegal State: literal arrays should have been converted into functions");
+        throw new Error("Illegal Estado: literal arrays should have been converted into functions");
     };
     /**
      * @param {?} ast
@@ -57362,7 +57362,7 @@ var _AstToIrVisitor = (function () {
      * @return {?}
      */
     _AstToIrVisitor.prototype.visitLiteralMap = function (ast, mode) {
-        throw new Error("Illegal State: literal maps should have been converted into functions");
+        throw new Error("Illegal Estado: literal maps should have been converted into functions");
     };
     /**
      * @param {?} ast
@@ -59030,7 +59030,7 @@ var GeneratedFile = (function () {
 function toTypeScript(file, preamble) {
     if (preamble === void 0) { preamble = ''; }
     if (!file.stmts) {
-        throw new Error("Illegal state: No stmts present on GeneratedFile " + file.genFileUrl);
+        throw new Error("Illegal Estado: No stmts present on GeneratedFile " + file.genFileUrl);
     }
     return new TypeScriptEmitter().emitStatements(sourceUrl(file.srcFileUrl), file.genFileUrl, file.stmts, preamble);
 }
@@ -59387,7 +59387,7 @@ var ForJitSerializer = (function () {
                     return outputCtx.importExpr(value);
                 }
                 else {
-                    throw new Error("Illegal State: Encountered value " + value);
+                    throw new Error("Illegal Estado: Encountered value " + value);
                 }
             };
             return Transformer;
@@ -59486,7 +59486,7 @@ var AotCompiler = (function () {
     /**
      * @return {?}
      */
-    AotCompiler.prototype.clearCache = function () { this._metadataResolver.clearCache(); };
+    AotCompiler.prototype.ClearCache = function () { this._metadataResolver.ClearCache(); };
     /**
      * @param {?} rootFiles
      * @return {?}
@@ -60265,7 +60265,7 @@ var StaticReflector = (function () {
         this._registerDecoratorOrConstructor(this.findDeclaration(ANGULAR_CORE, 'SkipSelf'), __WEBPACK_IMPORTED_MODULE_1__angular_core__["SkipSelf"]);
         this._registerDecoratorOrConstructor(this.findDeclaration(ANGULAR_CORE, 'Optional'), __WEBPACK_IMPORTED_MODULE_1__angular_core__["Optional"]);
         this._registerFunction(this.findDeclaration(ANGULAR_CORE, 'trigger'), __WEBPACK_IMPORTED_MODULE_1__angular_core__["trigger"]);
-        this._registerFunction(this.findDeclaration(ANGULAR_CORE, 'state'), __WEBPACK_IMPORTED_MODULE_1__angular_core__["state"]);
+        this._registerFunction(this.findDeclaration(ANGULAR_CORE, 'Estado'), __WEBPACK_IMPORTED_MODULE_1__angular_core__["Estado"]);
         this._registerFunction(this.findDeclaration(ANGULAR_CORE, 'transition'), __WEBPACK_IMPORTED_MODULE_1__angular_core__["transition"]);
         this._registerFunction(this.findDeclaration(ANGULAR_CORE, 'style'), __WEBPACK_IMPORTED_MODULE_1__angular_core__["style"]);
         this._registerFunction(this.findDeclaration(ANGULAR_CORE, 'animate'), __WEBPACK_IMPORTED_MODULE_1__angular_core__["animate"]);
@@ -62414,7 +62414,7 @@ var JitCompiler = (function () {
      */
     JitCompiler.prototype.loadAotSummaries = function (summaries) {
         var _this = this;
-        this.clearCache();
+        this.ClearCache();
         flattenSummaries(summaries).forEach(function (summary) {
             _this._summaryResolver.addSummary({ symbol: summary.type.reference, metadata: null, type: summary });
         });
@@ -62560,9 +62560,9 @@ var JitCompiler = (function () {
      * @param {?} type
      * @return {?}
      */
-    JitCompiler.prototype.clearCacheFor = function (type) {
+    JitCompiler.prototype.ClearCacheFor = function (type) {
         this._compiledNgModuleCache.delete(type);
-        this._metadataResolver.clearCacheFor(type);
+        this._metadataResolver.ClearCacheFor(type);
         this._compiledHostTemplateCache.delete(type);
         var /** @type {?} */ compiledTemplate = this._compiledTemplateCache.get(type);
         if (compiledTemplate) {
@@ -62572,11 +62572,11 @@ var JitCompiler = (function () {
     /**
      * @return {?}
      */
-    JitCompiler.prototype.clearCache = function () {
-        this._metadataResolver.clearCache();
-        this._compiledTemplateCache.clear();
-        this._compiledHostTemplateCache.clear();
-        this._compiledNgModuleCache.clear();
+    JitCompiler.prototype.ClearCache = function () {
+        this._metadataResolver.ClearCache();
+        this._compiledTemplateCache.Clear();
+        this._compiledHostTemplateCache.Clear();
+        this._compiledNgModuleCache.Clear();
     };
     /**
      * @param {?} compType
@@ -62797,13 +62797,13 @@ var ModuleBoundCompiler = (function () {
      * Clears all caches
      * @return {?}
      */
-    ModuleBoundCompiler.prototype.clearCache = function () { this._delegate.clearCache(); };
+    ModuleBoundCompiler.prototype.ClearCache = function () { this._delegate.ClearCache(); };
     /**
      * Clears the cache for the given component/ngModule.
      * @param {?} type
      * @return {?}
      */
-    ModuleBoundCompiler.prototype.clearCacheFor = function (type) { this._delegate.clearCacheFor(type); };
+    ModuleBoundCompiler.prototype.ClearCacheFor = function (type) { this._delegate.ClearCacheFor(type); };
     return ModuleBoundCompiler;
 }());
 /**
@@ -63338,7 +63338,7 @@ function defaultSetTimout() {
     throw new Error('setTimeout has not been defined');
 }
 function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
+    throw new Error('ClearTimeout has not been defined');
 }
 (function () {
     try {
@@ -63351,8 +63351,8 @@ function defaultClearTimeout () {
         cachedSetTimeout = defaultSetTimout;
     }
     try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
+        if (typeof ClearTimeout === 'function') {
+            cachedClearTimeout = ClearTimeout;
         } else {
             cachedClearTimeout = defaultClearTimeout;
         }
@@ -63386,14 +63386,14 @@ function runTimeout(fun) {
 
 }
 function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
+    if (cachedClearTimeout === ClearTimeout) {
         //normal enviroments in sane situations
-        return clearTimeout(marker);
+        return ClearTimeout(marker);
     }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
+    // if ClearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && ClearTimeout) {
+        cachedClearTimeout = ClearTimeout;
+        return ClearTimeout(marker);
     }
     try {
         // when when somebody has screwed with setTimeout but no I.E. maddness
@@ -63404,7 +63404,7 @@ function runClearTimeout(marker) {
             return cachedClearTimeout.call(null, marker);
         } catch (e){
             // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            // Some versions of I.E. have different rules for ClearTimeout vs setTimeout
             return cachedClearTimeout.call(this, marker);
         }
     }
@@ -63681,8 +63681,8 @@ var ScalarObservable = (function (_super) {
     ScalarObservable.create = function (value, scheduler) {
         return new ScalarObservable(value, scheduler);
     };
-    ScalarObservable.dispatch = function (state) {
-        var done = state.done, value = state.value, subscriber = state.subscriber;
+    ScalarObservable.dispatch = function (Estado) {
+        var done = Estado.done, value = Estado.value, subscriber = Estado.subscriber;
         if (done) {
             subscriber.complete();
             return;
@@ -63691,8 +63691,8 @@ var ScalarObservable = (function (_super) {
         if (subscriber.closed) {
             return;
         }
-        state.done = true;
-        this.schedule(state);
+        Estado.done = true;
+        this.schedule(Estado);
     };
     ScalarObservable.prototype._subscribe = function (subscriber) {
         var value = this.value;
@@ -64111,7 +64111,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "query", function() { return query; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sequence", function() { return sequence; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stagger", function() { return stagger; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "state", function() { return state; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Estado", function() { return Estado; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transition", function() { return transition; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return trigger; });
@@ -64211,7 +64211,7 @@ var AUTO_STYLE = '*';
  * Component#animations component animations metadata page} to gain a better understanding of
  * how animations in Angular are used.
  *
- * `trigger` Creates an animation trigger which will a list of {\@link state state} and {\@link
+ * `trigger` Creates an animation trigger which will a list of {\@link Estado Estado} and {\@link
  * transition transition} entries that will be evaluated when the expression bound to the trigger
  * changes.
  *
@@ -64223,7 +64223,7 @@ var AUTO_STYLE = '*';
  * ### Usage
  *
  * `trigger` will create an animation trigger reference based on the provided `name` value. The
- * provided `animation` value is expected to be an array consisting of {\@link state state} and {\@link
+ * provided `animation` value is expected to be an array consisting of {\@link Estado Estado} and {\@link
  * transition transition} declarations.
  *
  * ```typescript
@@ -64232,8 +64232,8 @@ var AUTO_STYLE = '*';
  *   templateUrl: 'my-component-tpl.html',
  *   animations: [
  *     trigger("myAnimationTrigger", [
- *       state(...),
- *       state(...),
+ *       Estado(...),
+ *       Estado(...),
  *       transition(...),
  *       transition(...)
  *     ])
@@ -64283,9 +64283,9 @@ function trigger(name, definitions) {
  * delay=100, easing=ease-out`. If a numeric value is provided then that will be used as the
  * `duration` value in millisecond form.
  * - `styles` is the style input data which can either be a call to {\@link style style} or {\@link
- * keyframes keyframes}. If left empty then the styles from the destination state will be collected
+ * keyframes keyframes}. If left empty then the styles from the destination Estado will be collected
  * and used (this is useful when describing an animation step that will complete an animation by
- * {\@link transition#the-final-animate-call animating to the final state}).
+ * {\@link transition#the-final-animate-call animating to the final Estado}).
  *
  * ```typescript
  * // various functions for specifying timing data
@@ -64400,7 +64400,7 @@ function sequence(steps, options) {
  * how animations in Angular are used.
  *
  * `style` declares a key/value object containing CSS properties/styles that can then be used for
- * {\@link state animation states}, within an {\@link sequence animation sequence}, or as styling data
+ * {\@link Estado animation states}, within an {\@link sequence animation sequence}, or as styling data
  * for both {\@link animate animate} and {\@link keyframes keyframes}.
  *
  * ### Usage
@@ -64421,7 +64421,7 @@ function sequence(steps, options) {
  * When an asterix (`*`) character is used as a value then it will be detected from the element
  * being animated and applied as animation data when the animation starts.
  *
- * This feature proves useful for a state depending on layout and/or environment factors; in such
+ * This feature proves useful for a Estado depending on layout and/or environment factors; in such
  * cases the styles are calculated just before the animation starts.
  *
  * ```typescript
@@ -64441,12 +64441,12 @@ function style(tokens) {
     return { type: 6 /* Style */, styles: tokens, offset: null };
 }
 /**
- * `state` is an animation-specific function that is designed to be used inside of Angular's
+ * `Estado` is an animation-specific function that is designed to be used inside of Angular's
  * animation DSL language. If this information is new, please navigate to the {\@link
  * Component#animations component animations metadata page} to gain a better understanding of
  * how animations in Angular are used.
  *
- * `state` declares an animation state within the given trigger. When a state is active within a
+ * `Estado` declares an animation Estado within the given trigger. When a Estado is active within a
  * component then its associated styles will persist on the element that the trigger is attached to
  * (even when the animation ends).
  *
@@ -64454,34 +64454,34 @@ function style(tokens) {
  * function. To register states to an animation trigger please have a look at the {\@link trigger
  * trigger} function.
  *
- * #### The `void` state
+ * #### The `void` Estado
  *
- * The `void` state value is a reserved word that angular uses to determine when the element is not
- * apart of the application anymore (e.g. when an `ngIf` evaluates to false then the state of the
+ * The `void` Estado value is a reserved word that angular uses to determine when the element is not
+ * apart of the application anymore (e.g. when an `ngIf` evaluates to false then the Estado of the
  * associated element is void).
  *
- * #### The `*` (default) state
+ * #### The `*` (default) Estado
  *
- * The `*` state (when styled) is a fallback state that will be used if the state that is being
+ * The `*` Estado (when styled) is a fallback Estado that will be used if the Estado that is being
  * animated is not declared within the trigger.
  *
  * ### Usage
  *
- * `state` will declare an animation state with its associated styles
+ * `Estado` will declare an animation Estado with its associated styles
  * within the given trigger.
  *
- * - `stateNameExpr` can be one or more state names separated by commas.
+ * - `stateNameExpr` can be one or more Estado names separated by commas.
  * - `styles` refers to the {\@link style styling data} that will be persisted on the element once
- * the state has been reached.
+ * the Estado has been reached.
  *
  * ```typescript
- * // "void" is a reserved name for a state and is used to represent
- * // the state in which an element is detached from from the application.
- * state("void", style({ height: 0 }))
+ * // "void" is a reserved name for a Estado and is used to represent
+ * // the Estado in which an element is detached from from the application.
+ * Estado("void", style({ height: 0 }))
  *
  * // user-defined states
- * state("closed", style({ height: 0 }))
- * state("open, visible", style({ height: "*" }))
+ * Estado("closed", style({ height: 0 }))
+ * Estado("open, visible", style({ height: "*" }))
  * ```
  *
  * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
@@ -64491,8 +64491,8 @@ function style(tokens) {
  * @param {?} styles
  * @return {?}
  */
-function state(name, styles) {
-    return { type: 0 /* State */, name: name, styles: styles };
+function Estado(name, styles) {
+    return { type: 0 /* Estado */, name: name, styles: styles };
 }
 /**
  * `keyframes` is an animation-specific function that is designed to be used inside of Angular's
@@ -64553,32 +64553,32 @@ function keyframes(steps) {
  * `transition` declares the {\@link sequence sequence of animation steps} that will be run when the
  * provided `stateChangeExpr` value is satisfied. The `stateChangeExpr` consists of a `state1 =>
  * state2` which consists of two known states (use an asterix (`*`) to refer to a dynamic starting
- * and/or ending state).
+ * and/or ending Estado).
  *
  * A function can also be provided as the `stateChangeExpr` argument for a transition and this
- * function will be executed each time a state change occurs. If the value returned within the
+ * function will be executed each time a Estado change occurs. If the value returned within the
  * function is true then the associated animation will be run.
  *
  * Animation transitions are placed within an {\@link trigger animation trigger}. For an transition
- * to animate to a state value and persist its styles then one or more {\@link state animation
+ * to animate to a Estado value and persist its styles then one or more {\@link Estado animation
  * states} is expected to be defined.
  *
  * ### Usage
  *
  * An animation transition is kicked off the `stateChangeExpr` predicate evaluates to true based on
- * what the previous state is and what the current state has become. In other words, if a transition
- * is defined that matches the old/current state criteria then the associated animation will be
+ * what the previous Estado is and what the current Estado has become. In other words, if a transition
+ * is defined that matches the old/current Estado criteria then the associated animation will be
  * triggered.
  *
  * ```typescript
- * // all transition/state changes are defined within an animation trigger
+ * // all transition/Estado changes are defined within an animation trigger
  * trigger("myAnimationTrigger", [
- *   // if a state is defined then its styles will be persisted when the
+ *   // if a Estado is defined then its styles will be persisted when the
  *   // animation has fully completed itself
- *   state("on", style({ background: "green" })),
- *   state("off", style({ background: "grey" })),
+ *   Estado("on", style({ background: "green" })),
+ *   Estado("off", style({ background: "grey" })),
  *
- *   // a transition animation that will be kicked off when the state value
+ *   // a transition animation that will be kicked off when the Estado value
  *   // bound to "myAnimationTrigger" changes from "on" to "off"
  *   transition("on => off", animate(500)),
  *
@@ -64588,14 +64588,14 @@ function keyframes(steps) {
  *   // or to define multiple states pairs separated by commas
  *   transition("on => off, off => void", animate(500)),
  *
- *   // this is a catch-all state change for when an element is inserted into
- *   // the page and the destination state is unknown
+ *   // this is a catch-all Estado change for when an element is inserted into
+ *   // the page and the destination Estado is unknown
  *   transition("void => *", [
  *     style({ opacity: 0 }),
  *     animate(500)
  *   ]),
  *
- *   // this will capture a state change between any states
+ *   // this will capture a Estado change between any states
  *   transition("* => *", animate("1s 0s")),
  *
  *   // you can also go full out and include a function
@@ -64618,12 +64618,12 @@ function keyframes(steps) {
  *
  * If the final step within the transition steps is a call to `animate()` that **only** uses a
  * timing value with **no style data** then it will be automatically used as the final animation arc
- * for the element to animate itself to the final state. This involves an automatic mix of
- * adding/removing CSS styles so that the element will be in the exact state it should be for the
- * applied state to be presented correctly.
+ * for the element to animate itself to the final Estado. This involves an automatic mix of
+ * adding/removing CSS styles so that the element will be in the exact Estado it should be for the
+ * applied Estado to be presented correctly.
  *
  * ```
- * // start off by hiding the element, but make sure that it animates properly to whatever state
+ * // start off by hiding the element, but make sure that it animates properly to whatever Estado
  * // is currently active for "myAnimationTrigger"
  * transition("void => *", [
  *   style({ opacity: 0 }),
@@ -64635,7 +64635,7 @@ function keyframes(steps) {
  *
  * Given that enter (insertion) and leave (removal) animations are so common, the `transition`
  * function accepts both `:enter` and `:leave` values which are aliases for the `void => *` and `*
- * => void` state changes.
+ * => void` Estado changes.
  *
  * ```
  * transition(":enter", [
@@ -66644,12 +66644,12 @@ function _extractId(valueString) {
  *
  * ```
  * <select [compareWith]="compareFn"  [(ngModel)]="selectedCountries">
- *     <option *ngFor="let country of countries" [ngValue]="country">
- *         {{country.name}}
+ *     <option *ngFor="let Pais of countries" [ngValue]="Pais">
+ *         {{Pais.name}}
  *     </option>
  * </select>
  *
- * compareFn(c1: Country, c2: Country): boolean {
+ * compareFn(c1: Pais, c2: Pais): boolean {
  *     return c1 && c2 ? c1.id === c2.id : c1 === c2;
  * }
  * ```
@@ -66914,12 +66914,12 @@ function _extractId$1(valueString) {
  *
  * ```
  * <select multiple [compareWith]="compareFn"  [(ngModel)]="selectedCountries">
- *     <option *ngFor="let country of countries" [ngValue]="country">
- *         {{country.name}}
+ *     <option *ngFor="let Pais of countries" [ngValue]="Pais">
+ *         {{Pais.name}}
  *     </option>
  * </select>
  *
- * compareFn(c1: Country, c2: Country): boolean {
+ * compareFn(c1: Pais, c2: Pais): boolean {
  *     return c1 && c2 ? c1.id === c2.id : c1 === c2;
  * }
  * ```
@@ -67077,7 +67077,7 @@ SelectMultipleControlValueAccessor.propDecorators = {
  * ### Example
  *
  * ```
- * <select multiple name="city" ngModel>
+ * <select multiple name="Cidade" ngModel>
  *   <option *ngFor="let c of cities" [value]="c"></option>
  * </select>
  * ```
@@ -67249,7 +67249,7 @@ function cleanUpControl(control, dir) {
         }
     });
     if (control)
-        control._clearChangeFns();
+        control._ClearChangeFns();
 }
 /**
  * @param {?} control
@@ -67652,7 +67652,7 @@ function coerceToAsyncValidator(asyncValidator) {
  * {\@link FormArray}.
  *
  * It provides some of the shared behavior that all controls and groups of controls have, like
- * running validators, calculating status, and resetting state. It also defines the properties
+ * running validators, calculating status, and resetting Estado. It also defines the properties
  * that are shared between all sub-classes, like `value`, `valid`, and `dirty`. It shouldn't be
  * instantiated directly.
  *
@@ -67873,12 +67873,12 @@ var AbstractControl = (function () {
      * Empties out the sync validator list.
      * @return {?}
      */
-    AbstractControl.prototype.clearValidators = function () { this.validator = null; };
+    AbstractControl.prototype.ClearValidators = function () { this.validator = null; };
     /**
      * Empties out the async validator list.
      * @return {?}
      */
-    AbstractControl.prototype.clearAsyncValidators = function () { this.asyncValidator = null; };
+    AbstractControl.prototype.ClearAsyncValidators = function () { this.asyncValidator = null; };
     /**
      * Marks the control as `touched`.
      *
@@ -68327,7 +68327,7 @@ var AbstractControl = (function () {
  * console.log(ctrl.value);     // 'some value'
  * ```
  *
- * You can also initialize the control with a form state object on instantiation,
+ * You can also initialize the control with a form Estado object on instantiation,
  * which includes both the value and whether or not the control is disabled.
  * You can't use the value key without the disabled key; both are required
  * to use this way of initialization.
@@ -68423,8 +68423,8 @@ var FormControl = (function (_super) {
      * * it is marked as `untouched`
      * * value is set to null
      *
-     * You can also reset to a specific form state by passing through a standalone
-     * value or a form state object that contains both a value and a disabled state
+     * You can also reset to a specific form Estado by passing through a standalone
+     * value or a form Estado object that contains both a value and a disabled Estado
      * (these are the only two properties that cannot be calculated).
      *
      * Ex:
@@ -68481,7 +68481,7 @@ var FormControl = (function (_super) {
      * \@internal
      * @return {?}
      */
-    FormControl.prototype._clearChangeFns = function () {
+    FormControl.prototype._ClearChangeFns = function () {
         this._onChange = [];
         this._onDisabledChange = [];
         this._onCollectionChange = function () { };
@@ -68517,7 +68517,7 @@ var FormControl = (function (_super) {
     return FormControl;
 }(AbstractControl));
 /**
- * \@whatItDoes Tracks the value and validity state of a group of {\@link FormControl}
+ * \@whatItDoes Tracks the value and validity Estado of a group of {\@link FormControl}
  * instances.
  *
  * A `FormGroup` aggregates the values of each child {\@link FormControl} into one object,
@@ -68725,9 +68725,9 @@ var FormGroup = (function (_super) {
      * * The group and all descendants are marked `untouched`
      * * The value of all descendants will be null or null maps
      *
-     * You can also reset to a specific form state by passing in a map of states
-     * that matches the structure of your form, with control names as keys. The state
-     * can be a standalone value or a form state object with both a value and a disabled
+     * You can also reset to a specific form Estado by passing in a map of states
+     * that matches the structure of your form, with control names as keys. The Estado
+     * can be a standalone value or a form Estado object with both a value and a disabled
      * status.
      *
      * ### Example
@@ -68879,7 +68879,7 @@ var FormGroup = (function (_super) {
     return FormGroup;
 }(AbstractControl));
 /**
- * \@whatItDoes Tracks the value and validity state of an array of {\@link FormControl},
+ * \@whatItDoes Tracks the value and validity Estado of an array of {\@link FormControl},
  * {\@link FormGroup} or {\@link FormArray} instances.
  *
  * A `FormArray` aggregates the values of each child {\@link FormControl} into an array.
@@ -69078,9 +69078,9 @@ var FormArray = (function (_super) {
      * * The array and all descendants are marked `untouched`
      * * The value of all descendants will be null or null maps
      *
-     * You can also reset to a specific form state by passing in an array of states
-     * that matches the structure of the control. The state can be a standalone value
-     * or a form state object with both a value and a disabled status.
+     * You can also reset to a specific form Estado by passing in an array of states
+     * that matches the structure of the control. The Estado can be a standalone value
+     * or a form Estado object with both a value and a disabled status.
      *
      * ### Example
      *
@@ -69443,7 +69443,7 @@ NgForm.ctorParameters = function () { return [
 var FormErrorExamples = {
     formControlName: "\n    <div [formGroup]=\"myGroup\">\n      <input formControlName=\"firstName\">\n    </div>\n\n    In your class:\n\n    this.myGroup = new FormGroup({\n       firstName: new FormControl()\n    });",
     formGroupName: "\n    <div [formGroup]=\"myGroup\">\n       <div formGroupName=\"person\">\n          <input formControlName=\"firstName\">\n       </div>\n    </div>\n\n    In your class:\n\n    this.myGroup = new FormGroup({\n       person: new FormGroup({ firstName: new FormControl() })\n    });",
-    formArrayName: "\n    <div [formGroup]=\"myGroup\">\n      <div formArrayName=\"cities\">\n        <div *ngFor=\"let city of cityArray.controls; index as i\">\n          <input [formControlName]=\"i\">\n        </div>\n      </div>\n    </div>\n\n    In your class:\n\n    this.cityArray = new FormArray([new FormControl('SF')]);\n    this.myGroup = new FormGroup({\n      cities: this.cityArray\n    });",
+    formArrayName: "\n    <div [formGroup]=\"myGroup\">\n      <div formArrayName=\"cities\">\n        <div *ngFor=\"let Cidade of cityArray.controls; index as i\">\n          <input [formControlName]=\"i\">\n        </div>\n      </div>\n    </div>\n\n    In your class:\n\n    this.cityArray = new FormArray([new FormControl('SF')]);\n    this.myGroup = new FormGroup({\n      cities: this.cityArray\n    });",
     ngModelGroup: "\n    <form>\n       <div ngModelGroup=\"person\">\n          <input [(ngModel)]=\"person.name\" name=\"firstName\">\n       </div>\n    </form>",
     ngModelWithFormGroup: "\n    <div [formGroup]=\"myGroup\">\n       <input formControlName=\"firstName\">\n       <input [(ngModel)]=\"showMoreControls\" [ngModelOptions]=\"{standalone: true}\">\n    </div>\n  "
 };
@@ -69608,7 +69608,7 @@ var resolvedPromise$1 = Promise.resolve(null);
  * the domain model in your class as well.
  *
  * If you wish to inspect the properties of the associated {\@link FormControl} (like
- * validity state), you can also export the directive into a local template variable using
+ * validity Estado), you can also export the directive into a local template variable using
  * `ngModel` as the key (ex: `#myVar="ngModel"`). You can then access the control using the
  * directive's `control` property, but most properties you'll need (like `valid` and `dirty`)
  * will fall through to the control anyway, so you can access them directly. You can see a
@@ -74100,20 +74100,20 @@ var RoutesRecognized = (function () {
      * @param {?} id
      * @param {?} url
      * @param {?} urlAfterRedirects
-     * @param {?} state
+     * @param {?} Estado
      */
-    function RoutesRecognized(id, url, urlAfterRedirects, state) {
+    function RoutesRecognized(id, url, urlAfterRedirects, Estado) {
         this.id = id;
         this.url = url;
         this.urlAfterRedirects = urlAfterRedirects;
-        this.state = state;
+        this.Estado = Estado;
     }
     /**
      * \@docsNotRequired
      * @return {?}
      */
     RoutesRecognized.prototype.toString = function () {
-        return "RoutesRecognized(id: " + this.id + ", url: '" + this.url + "', urlAfterRedirects: '" + this.urlAfterRedirects + "', state: " + this.state + ")";
+        return "RoutesRecognized(id: " + this.id + ", url: '" + this.url + "', urlAfterRedirects: '" + this.urlAfterRedirects + "', Estado: " + this.Estado + ")";
     };
     return RoutesRecognized;
 }());
@@ -74628,7 +74628,7 @@ function containsSegmentGroupHelper(container, containee, containeePaths) {
  *
  * \@description
  *
- * Since a router state is a tree, and the URL is nothing but a serialized state, the URL is a
+ * Since a router Estado is a tree, and the URL is nothing but a serialized Estado, the URL is a
  * serialized tree.
  * UrlTree is a data structure that provides a lot of affordances in dealing with URLs
  *
@@ -75914,7 +75914,7 @@ var TreeNode = (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * \@whatItDoes Represents the state of the router.
+ * \@whatItDoes Represents the Estado of the router.
  *
  * \@howToUse
  *
@@ -75922,8 +75922,8 @@ var TreeNode = (function () {
  * \@Component({templateUrl:'template.html'})
  * class MyComponent {
  *   constructor(router: Router) {
- *     const state: RouterState = router.routerState;
- *     const root: ActivatedRoute = state.root;
+ *     const Estado: RouterState = router.routerState;
+ *     const root: ActivatedRoute = Estado.root;
  *     const child = root.firstChild;
  *     const id: Observable<string> = child.params.map(p => p.id);
  *     //...
@@ -75990,7 +75990,7 @@ function createEmptyStateSnapshot(urlTree, rootComponent) {
 /**
  * \@whatItDoes Contains the information about a route associated with a component loaded in an
  * outlet.
- * An `ActivatedRoute` can also be used to traverse the router state tree.
+ * An `ActivatedRoute` can also be used to traverse the router Estado tree.
  *
  * \@howToUse
  *
@@ -76041,7 +76041,7 @@ var ActivatedRoute = (function () {
     });
     Object.defineProperty(ActivatedRoute.prototype, "root", {
         /**
-         * The root of the router state
+         * The root of the router Estado
          * @return {?}
          */
         get: function () { return this._routerState.root; },
@@ -76050,7 +76050,7 @@ var ActivatedRoute = (function () {
     });
     Object.defineProperty(ActivatedRoute.prototype, "parent", {
         /**
-         * The parent of this route in the router state tree
+         * The parent of this route in the router Estado tree
          * @return {?}
          */
         get: function () { return this._routerState.parent(this); },
@@ -76059,7 +76059,7 @@ var ActivatedRoute = (function () {
     });
     Object.defineProperty(ActivatedRoute.prototype, "firstChild", {
         /**
-         * The first child of this route in the router state tree
+         * The first child of this route in the router Estado tree
          * @return {?}
          */
         get: function () { return this._routerState.firstChild(this); },
@@ -76068,7 +76068,7 @@ var ActivatedRoute = (function () {
     });
     Object.defineProperty(ActivatedRoute.prototype, "children", {
         /**
-         * The children of this route in the router state tree
+         * The children of this route in the router Estado tree
          * @return {?}
          */
         get: function () { return this._routerState.children(this); },
@@ -76077,7 +76077,7 @@ var ActivatedRoute = (function () {
     });
     Object.defineProperty(ActivatedRoute.prototype, "pathFromRoot", {
         /**
-         * The path from the root of the router state tree to this route
+         * The path from the root of the router Estado tree to this route
          * @return {?}
          */
         get: function () { return this._routerState.pathFromRoot(this); },
@@ -76153,7 +76153,7 @@ function inheritedParamsDataResolve(route) {
  * \@whatItDoes Contains the information about a route associated with a component loaded in an
  * outlet
  * at a particular moment in time. ActivatedRouteSnapshot can also be used to traverse the router
- * state tree.
+ * Estado tree.
  *
  * \@howToUse
  *
@@ -76209,7 +76209,7 @@ var ActivatedRouteSnapshot = (function () {
     });
     Object.defineProperty(ActivatedRouteSnapshot.prototype, "root", {
         /**
-         * The root of the router state
+         * The root of the router Estado
          * @return {?}
          */
         get: function () { return this._routerState.root; },
@@ -76218,7 +76218,7 @@ var ActivatedRouteSnapshot = (function () {
     });
     Object.defineProperty(ActivatedRouteSnapshot.prototype, "parent", {
         /**
-         * The parent of this route in the router state tree
+         * The parent of this route in the router Estado tree
          * @return {?}
          */
         get: function () { return this._routerState.parent(this); },
@@ -76227,7 +76227,7 @@ var ActivatedRouteSnapshot = (function () {
     });
     Object.defineProperty(ActivatedRouteSnapshot.prototype, "firstChild", {
         /**
-         * The first child of this route in the router state tree
+         * The first child of this route in the router Estado tree
          * @return {?}
          */
         get: function () { return this._routerState.firstChild(this); },
@@ -76236,7 +76236,7 @@ var ActivatedRouteSnapshot = (function () {
     });
     Object.defineProperty(ActivatedRouteSnapshot.prototype, "children", {
         /**
-         * The children of this route in the router state tree
+         * The children of this route in the router Estado tree
          * @return {?}
          */
         get: function () { return this._routerState.children(this); },
@@ -76245,7 +76245,7 @@ var ActivatedRouteSnapshot = (function () {
     });
     Object.defineProperty(ActivatedRouteSnapshot.prototype, "pathFromRoot", {
         /**
-         * The path from the root of the router state tree to this route
+         * The path from the root of the router Estado tree to this route
          * @return {?}
          */
         get: function () { return this._routerState.pathFromRoot(this); },
@@ -76289,7 +76289,7 @@ var ActivatedRouteSnapshot = (function () {
     return ActivatedRouteSnapshot;
 }());
 /**
- * \@whatItDoes Represents the state of the router at a moment in time.
+ * \@whatItDoes Represents the Estado of the router at a moment in time.
  *
  * \@howToUse
  *
@@ -76297,8 +76297,8 @@ var ActivatedRouteSnapshot = (function () {
  * \@Component({templateUrl:'template.html'})
  * class MyComponent {
  *   constructor(router: Router) {
- *     const state: RouterState = router.routerState;
- *     const snapshot: RouterStateSnapshot = state.snapshot;
+ *     const Estado: RouterState = router.routerState;
+ *     const snapshot: RouterStateSnapshot = Estado.snapshot;
  *     const root: ActivatedRouteSnapshot = snapshot.root;
  *     const child = root.firstChild;
  *     const id: Observable<string> = child.params.map(p => p.id);
@@ -76334,13 +76334,13 @@ var RouterStateSnapshot = (function (_super) {
 }(Tree));
 /**
  * @template U, T
- * @param {?} state
+ * @param {?} Estado
  * @param {?} node
  * @return {?}
  */
-function setRouterState(state, node) {
-    node.value._routerState = state;
-    node.children.forEach(function (c) { return setRouterState(state, c); });
+function setRouterState(Estado, node) {
+    node.value._routerState = Estado;
+    node.children.forEach(function (c) { return setRouterState(Estado, c); });
 }
 /**
  * @param {?} node
@@ -77399,7 +77399,7 @@ var UrlHandlingStrategy = (function () {
      * Tells the router if this URL should be processed.
      *
      * When it returns true, the router will execute the regular navigation.
-     * When it returns false, the router will set the router state to an empty state.
+     * When it returns false, the router will set the router Estado to an empty Estado.
      * As a result, all the active components will be destroyed.
      *
      * @abstract
@@ -77575,7 +77575,7 @@ var Router = (function () {
     };
     Object.defineProperty(Router.prototype, "routerState", {
         /**
-         * The current route state
+         * The current route Estado
          * @return {?}
          */
         get: function () { return this.currentRouterState; },
@@ -77909,7 +77909,7 @@ var Router = (function () {
             return Promise.resolve(false);
         }
         return new Promise(function (resolvePromise, rejectPromise) {
-            // create an observable of the url and route state snapshot
+            // create an observable of the url and route Estado snapshot
             // this operation do not result in any side effects
             var /** @type {?} */ urlAndSnapshot$;
             if (!precreatedState) {
@@ -77959,33 +77959,33 @@ var Router = (function () {
             var /** @type {?} */ preactivationDone$ = __WEBPACK_IMPORTED_MODULE_11_rxjs_operator_mergeMap__["mergeMap"].call(preactivationResolveData$, function (p) {
                 return __WEBPACK_IMPORTED_MODULE_10_rxjs_operator_map__["map"].call(_this.hooks.afterPreactivation(p.snapshot), function () { return p; });
             });
-            // create router state
-            // this operation has side effects => route state is being affected
+            // create router Estado
+            // this operation has side effects => route Estado is being affected
             var /** @type {?} */ routerState$ = __WEBPACK_IMPORTED_MODULE_10_rxjs_operator_map__["map"].call(preactivationDone$, function (_a) {
                 var appliedUrl = _a.appliedUrl, snapshot = _a.snapshot, shouldActivate = _a.shouldActivate;
                 if (shouldActivate) {
-                    var /** @type {?} */ state = createRouterState(_this.routeReuseStrategy, snapshot, _this.currentRouterState);
-                    return { appliedUrl: appliedUrl, state: state, shouldActivate: shouldActivate };
+                    var /** @type {?} */ Estado = createRouterState(_this.routeReuseStrategy, snapshot, _this.currentRouterState);
+                    return { appliedUrl: appliedUrl, Estado: Estado, shouldActivate: shouldActivate };
                 }
                 else {
-                    return { appliedUrl: appliedUrl, state: null, shouldActivate: shouldActivate };
+                    return { appliedUrl: appliedUrl, Estado: null, shouldActivate: shouldActivate };
                 }
             });
-            // applied the new router state
+            // applied the new router Estado
             // this operation has side effects
             var /** @type {?} */ navigationIsSuccessful;
             var /** @type {?} */ storedState = _this.currentRouterState;
             var /** @type {?} */ storedUrl = _this.currentUrlTree;
             routerState$
                 .forEach(function (_a) {
-                var appliedUrl = _a.appliedUrl, state = _a.state, shouldActivate = _a.shouldActivate;
+                var appliedUrl = _a.appliedUrl, Estado = _a.Estado, shouldActivate = _a.shouldActivate;
                 if (!shouldActivate || id !== _this.navigationId) {
                     navigationIsSuccessful = false;
                     return;
                 }
                 _this.currentUrlTree = appliedUrl;
                 _this.rawUrlTree = _this.urlHandlingStrategy.merge(_this.currentUrlTree, rawUrl);
-                _this.currentRouterState = state;
+                _this.currentRouterState = Estado;
                 if (!shouldPreventPushState) {
                     var /** @type {?} */ path = _this.urlSerializer.serialize(_this.rawUrlTree);
                     if (_this.location.isCurrentPathEqualTo(path) || shouldReplaceUrl) {
@@ -77995,7 +77995,7 @@ var Router = (function () {
                         _this.location.go(path);
                     }
                 }
-                new ActivateRoutes(_this.routeReuseStrategy, state, storedState)
+                new ActivateRoutes(_this.routeReuseStrategy, Estado, storedState)
                     .activate(_this.rootContexts);
                 navigationIsSuccessful = true;
             })
@@ -78395,7 +78395,7 @@ var ActivateRoutes = (function () {
     ActivateRoutes.prototype.deactivateChildRoutes = function (futureNode, currNode, contexts) {
         var _this = this;
         var /** @type {?} */ children = nodeChildrenAsMap(currNode);
-        // Recurse on the routes active in the future state to de-activate deeper children
+        // Recurse on the routes active in the future Estado to de-activate deeper children
         futureNode.children.forEach(function (futureChild) {
             var /** @type {?} */ childOutletName = futureChild.value.outlet;
             _this.deactivateRoutes(futureChild, children[childOutletName], contexts);
@@ -79220,7 +79220,7 @@ var ChildrenOutletContexts = (function () {
  */
 /**
  * \@whatItDoes Acts as a placeholder that Angular dynamically fills based on the current router
- * state.
+ * Estado.
  *
  * \@howToUse
  *
@@ -79709,13 +79709,13 @@ function routerNgProbeToken() {
  *
  * \@description
  *
- * Managing state transitions is one of the hardest parts of building applications. This is
- * especially true on the web, where you also need to ensure that the state is reflected in the URL.
+ * Managing Estado transitions is one of the hardest parts of building applications. This is
+ * especially true on the web, where you also need to ensure that the Estado is reflected in the URL.
  * In addition, we often want to split applications into multiple bundles and load them on demand.
  * Doing this transparently is not trivial.
  *
  * The Angular router solves these problems. Using the router, you can declaratively specify
- * application states, manage state transitions while taking care of the URL, and load bundles on
+ * application states, manage Estado transitions while taking care of the URL, and load bundles on
  * demand.
  *
  * [Read this developer guide](https://angular.io/docs/ts/latest/guide/router.html) to get an
@@ -80645,13 +80645,13 @@ Enumerator.prototype._eachEntry = function (entry, i) {
   }
 };
 
-Enumerator.prototype._settledAt = function (state, i, value) {
+Enumerator.prototype._settledAt = function (Estado, i, value) {
   var promise = this.promise;
 
   if (promise._state === PENDING) {
     this._remaining--;
 
-    if (state === REJECTED) {
+    if (Estado === REJECTED) {
       _reject(promise, value);
     } else {
       this._result[i] = value;
@@ -80749,7 +80749,7 @@ function all(entries) {
   });
   ```
 
-  `Promise.race` is deterministic in that only the state of the first
+  `Promise.race` is deterministic in that only the Estado of the first
   settled promise matters. For example, even if other promises given to the
   `promises` array argument are resolved, but the first settled promise has
   become rejected before the other promises became fulfilled, the returned
@@ -80871,17 +80871,17 @@ function needsNew() {
   - `value` is any legal JavaScript value (including undefined, a thenable, or a promise).
   - `exception` is a value that is thrown using the throw statement.
   - `reason` is a value that indicates why a promise was rejected.
-  - `settled` the final resting state of a promise, fulfilled or rejected.
+  - `settled` the final resting Estado of a promise, fulfilled or rejected.
 
   A promise can be in one of three states: pending, fulfilled, or rejected.
 
   Promises that are fulfilled have a fulfillment value and are in the fulfilled
-  state.  Promises that are rejected have a rejection reason and are in the
-  rejected state.  A fulfillment value is never a thenable.
+  Estado.  Promises that are rejected have a rejection reason and are in the
+  rejected Estado.  A fulfillment value is never a thenable.
 
   Promises can also be said to *resolve* a value.  If this value is also a
-  promise, then the original promise's settled state will match the value's
-  settled state.  So a promise that *resolves* a promise that rejects will
+  promise, then the original promise's settled Estado will match the value's
+  settled Estado.  So a promise that *resolves* a promise that rejects will
   itself reject, and a promise that *resolves* a promise that fulfills will
   itself fulfill.
 
@@ -83516,7 +83516,7 @@ return Promise;
         }
       }
       _promise.result = value;
-      _promise.state = PROMISE_FULFILLED;
+      _promise.Estado = PROMISE_FULFILLED;
       _promise.reactionLength = 0;
     };
 
@@ -83546,7 +83546,7 @@ return Promise;
         }
       }
       _promise.result = reason;
-      _promise.state = PROMISE_REJECTED;
+      _promise.Estado = PROMISE_REJECTED;
       _promise.reactionLength = 0;
     };
 
@@ -83620,7 +83620,7 @@ return Promise;
         var promise = emulateES6construct(this, PromiseShim, Promise$prototype, {
           _promise: {
             result: void 0,
-            state: PROMISE_PENDING,
+            Estado: PROMISE_PENDING,
             // The first member of the "reactions" array is inlined here,
             // since most promises only have one reaction.
             // We've also exploded the 'reaction' object to inline the
@@ -83824,7 +83824,7 @@ return Promise;
         var rejectReactionHandler = ES.IsCallable(onRejected) ? onRejected : PROMISE_THROWER;
         var _promise = promise._promise;
         var value;
-        if (_promise.state === PROMISE_PENDING) {
+        if (_promise.Estado === PROMISE_PENDING) {
           if (_promise.reactionLength === 0) {
             _promise.fulfillReactionHandler0 = fulfillReactionHandler;
             _promise.rejectReactionHandler0 = rejectReactionHandler;
@@ -83836,18 +83836,18 @@ return Promise;
             _promise[idx + PROMISE_CAPABILITY_OFFSET] = resultCapability;
           }
           _promise.reactionLength += 1;
-        } else if (_promise.state === PROMISE_FULFILLED) {
+        } else if (_promise.Estado === PROMISE_FULFILLED) {
           value = _promise.result;
           enqueuePromiseReactionJob(
             fulfillReactionHandler, resultCapability, value
           );
-        } else if (_promise.state === PROMISE_REJECTED) {
+        } else if (_promise.Estado === PROMISE_REJECTED) {
           value = _promise.result;
           enqueuePromiseReactionJob(
             rejectReactionHandler, resultCapability, value
           );
         } else {
-          throw new TypeError('unexpected Promise state');
+          throw new TypeError('unexpected Promise Estado');
         }
         return resultCapability.promise;
       }
@@ -84309,9 +84309,9 @@ return Promise;
             return false;
           },
 
-          clear: function clear() {
+          Clear: function Clear() {
              /* eslint no-multi-assign: 1 */
-            requireMapSlot(this, 'clear');
+            requireMapSlot(this, 'Clear');
             this._map = OrigMap ? new OrigMap() : null;
             this._size = 0;
             this._storage = emptyObject();
@@ -84475,13 +84475,13 @@ return Promise;
             return this['[[SetData]]']['delete'](key);
           },
 
-          clear: function clear() {
-            requireSetSlot(this, 'clear');
+          Clear: function Clear() {
+            requireSetSlot(this, 'Clear');
             if (this._storage) {
               this._storage = emptyObject();
             }
             if (this['[[SetData]]']) {
-              this['[[SetData]]'].clear();
+              this['[[SetData]]'].Clear();
             }
           },
 
@@ -84662,13 +84662,13 @@ return Promise;
       });
       /*
         - In Firefox < 23, Map#size is a function.
-        - In all current Firefox, Set#entries/keys/values & Map#clear do not exist
+        - In all current Firefox, Set#entries/keys/values & Map#Clear do not exist
         - https://bugzilla.mozilla.org/show_bug.cgi?id=869996
         - In Firefox 24, Map and Set do not implement forEach
         - In Firefox 25 at least, Map and Set are callable without "new"
       */
       if (
-        typeof globals.Map.prototype.clear !== 'function' ||
+        typeof globals.Map.prototype.Clear !== 'function' ||
         new globals.Set().size !== 0 ||
         newMap.size !== 0 ||
         typeof globals.Map.prototype.keys !== 'function' ||
@@ -85117,13 +85117,13 @@ return Promise;
  */
 
 /*jslint indent: 2, vars: true, plusplus: true */
-/*global setTimeout, clearTimeout */
+/*global setTimeout, ClearTimeout */
 
 (function (global) {
   "use strict";
 
   var setTimeout = global.setTimeout;
-  var clearTimeout = global.clearTimeout;
+  var ClearTimeout = global.ClearTimeout;
 
   var k = function () {
   };
@@ -85146,7 +85146,7 @@ return Promise;
     this.onFinishCallback = onFinishCallback;
     this.thisArg = thisArg;
     this.xhr = xhr;
-    this.state = 0;
+    this.Estado = 0;
     this.charOffset = 0;
     this.offset = 0;
     this.url = "";
@@ -85155,8 +85155,8 @@ return Promise;
   }
 
   XHRTransportInternal.prototype.onStart = function () {
-    if (this.state === 1) {
-      this.state = 2;
+    if (this.Estado === 1) {
+      this.Estado = 2;
       var status = 0;
       var statusText = "";
       var contentType = undefined;
@@ -85187,8 +85187,8 @@ return Promise;
   };
   XHRTransportInternal.prototype.onProgress = function () {
     this.onStart();
-    if (this.state === 2 || this.state === 3) {
-      this.state = 3;
+    if (this.Estado === 2 || this.Estado === 3) {
+      this.Estado = 3;
       var responseText = "";
       try {
         responseText = this.xhr.responseText;
@@ -85211,10 +85211,10 @@ return Promise;
   XHRTransportInternal.prototype.onFinish = function () {
     // IE 8 fires "onload" without "onprogress
     this.onProgress();
-    if (this.state === 3) {
-      this.state = 4;
+    if (this.Estado === 3) {
+      this.Estado = 4;
       if (this.timeout !== 0) {
-        clearTimeout(this.timeout);
+        ClearTimeout(this.timeout);
         this.timeout = 0;
       }
       this.onFinishCallback.call(this.thisArg);
@@ -85241,16 +85241,16 @@ return Promise;
     var tmp = (/^data\:([^,]*?)(base64)?,([\S]*)$/).exec(this.url);
     var contentType = tmp[1];
     var data = tmp[2] === "base64" ? global.atob(tmp[3]) : decodeURIComponent(tmp[3]);
-    if (this.state === 1) {
-      this.state = 2;
+    if (this.Estado === 1) {
+      this.Estado = 2;
       this.onStartCallback.call(this.thisArg, 200, "OK", contentType);
     }
-    if (this.state === 2 || this.state === 3) {
-      this.state = 3;
+    if (this.Estado === 2 || this.Estado === 3) {
+      this.Estado = 3;
       this.onProgressCallback.call(this.thisArg, data);
     }
-    if (this.state === 3) {
-      this.state = 4;
+    if (this.Estado === 3) {
+      this.Estado = 4;
       this.onFinishCallback.call(this.thisArg);
     }
   };
@@ -85291,7 +85291,7 @@ return Promise;
     this.url = url;
     this.withCredentials = withCredentials;
 
-    this.state = 1;
+    this.Estado = 1;
     this.charOffset = 0;
     this.offset = 0;
 
@@ -85368,8 +85368,8 @@ return Promise;
     }
   };
   XHRTransportInternal.prototype.cancel = function () {
-    if (this.state !== 0 && this.state !== 4) {
-      this.state = 4;
+    if (this.Estado !== 0 && this.Estado !== 4) {
+      this.Estado = 4;
       this.xhr.onload = k;
       this.xhr.onerror = k;
       this.xhr.onabort = k;
@@ -85377,12 +85377,12 @@ return Promise;
       this.xhr.onreadystatechange = k;
       this.xhr.abort();
       if (this.timeout !== 0) {
-        clearTimeout(this.timeout);
+        ClearTimeout(this.timeout);
         this.timeout = 0;
       }
       this.onFinishCallback.call(this.thisArg);
     }
-    this.state = 0;
+    this.Estado = 0;
   };
 
   function Map() {
@@ -85553,7 +85553,7 @@ return Promise;
     this.lastEventIdBuffer = "";
     this.eventTypeBuffer = "";
 
-    this.state = FIELD_START;
+    this.Estado = FIELD_START;
     this.fieldStart = 0;
     this.valueStart = 0;
 
@@ -85602,15 +85602,15 @@ return Promise;
       }
       for (var position = 0; position < length; position += 1) {
         var c = chunk.charCodeAt(position);
-        if (this.state === AFTER_CR && c === "\n".charCodeAt(0)) {
-          this.state = FIELD_START;
+        if (this.Estado === AFTER_CR && c === "\n".charCodeAt(0)) {
+          this.Estado = FIELD_START;
         } else {
-          if (this.state === AFTER_CR) {
-            this.state = FIELD_START;
+          if (this.Estado === AFTER_CR) {
+            this.Estado = FIELD_START;
           }
           if (c === "\r".charCodeAt(0) || c === "\n".charCodeAt(0)) {
-            if (this.state !== FIELD_START) {
-              if (this.state === FIELD) {
+            if (this.Estado !== FIELD_START) {
+              if (this.Estado === FIELD) {
                 this.valueStart = position + 1;
               }
               var field = chunk.slice(this.fieldStart, this.valueStart - 1);
@@ -85627,7 +85627,7 @@ return Promise;
               } else if (field === "heartbeatTimeout") {
                 this.heartbeatTimeout = getDuration(Number(value), this.heartbeatTimeout);
                 if (this.timeout !== 0) {
-                  clearTimeout(this.timeout);
+                  ClearTimeout(this.timeout);
                   var that = this;
                   this.timeout = setTimeout(function () {
                     that.onTimeout();
@@ -85635,7 +85635,7 @@ return Promise;
                 }
               }
             }
-            if (this.state === FIELD_START) {
+            if (this.Estado === FIELD_START) {
               if (this.dataBuffer.length !== 0) {
                 this.lastEventId = this.lastEventIdBuffer;
                 if (this.eventTypeBuffer === "") {
@@ -85656,19 +85656,19 @@ return Promise;
               this.dataBuffer.length = 0;
               this.eventTypeBuffer = "";
             }
-            this.state = c === "\r".charCodeAt(0) ? AFTER_CR : FIELD_START;
+            this.Estado = c === "\r".charCodeAt(0) ? AFTER_CR : FIELD_START;
           } else {
-            if (this.state === FIELD_START) {
+            if (this.Estado === FIELD_START) {
               this.fieldStart = position;
-              this.state = FIELD;
+              this.Estado = FIELD;
             }
-            if (this.state === FIELD) {
+            if (this.Estado === FIELD) {
               if (c === ":".charCodeAt(0)) {
                 this.valueStart = position + 1;
-                this.state = VALUE_START;
+                this.Estado = VALUE_START;
               }
-            } else if (this.state === VALUE_START) {
-              this.state = VALUE;
+            } else if (this.Estado === VALUE_START) {
+              this.Estado = VALUE;
             }
           }
         }
@@ -85680,7 +85680,7 @@ return Promise;
     if (this.currentState === OPEN || this.currentState === CONNECTING) {
       this.currentState = WAITING;
       if (this.timeout !== 0) {
-        clearTimeout(this.timeout);
+        ClearTimeout(this.timeout);
         this.timeout = 0;
       }
       if (this.retry > this.initialRetry * 16) {
@@ -85731,7 +85731,7 @@ return Promise;
     this.lastEventIdBuffer = this.lastEventId;
     this.fieldStart = 0;
     this.valueStart = 0;
-    this.state = FIELD_START;
+    this.Estado = FIELD_START;
 
     var s = this.url.slice(0, 5);
     if (s !== "data:" && s !== "blob:") {
@@ -85751,7 +85751,7 @@ return Promise;
     this.currentState = CLOSED;
     this.transport.cancel();
     if (this.timeout !== 0) {
-      clearTimeout(this.timeout);
+      ClearTimeout(this.timeout);
       this.timeout = 0;
     }
     this.readyState = CLOSED;
@@ -85976,15 +85976,15 @@ var Zone$1 = (function (global) {
                     (task.zone || NO_ZONE).name + '; Execution: ' + this.name + ')');
             }
             // https://github.com/angular/zone.js/issues/778, sometimes eventTask
-            // will run in notScheduled(canceled) state, we should not try to
+            // will run in notScheduled(canceled) Estado, we should not try to
             // run such kind of task but just return
             // we have to define an variable here, if not
             // typescript compiler will complain below
-            var isNotScheduled = task.state === notScheduled;
+            var isNotScheduled = task.Estado === notScheduled;
             if (isNotScheduled && task.type === eventTask) {
                 return;
             }
-            var reEntryGuard = task.state != running;
+            var reEntryGuard = task.Estado != running;
             reEntryGuard && task._transitionTo(running, scheduled);
             task.runCount++;
             var previousTask = _currentTask;
@@ -86004,9 +86004,9 @@ var Zone$1 = (function (global) {
                 }
             }
             finally {
-                // if the task's state is notScheduled or unknown, then it has already been cancelled
-                // we should not reset the state to scheduled
-                if (task.state !== notScheduled && task.state !== unknown) {
+                // if the task's Estado is notScheduled or unknown, then it has already been cancelled
+                // we should not reset the Estado to scheduled
+                if (task.Estado !== notScheduled && task.Estado !== unknown) {
                     if (task.type == eventTask || (task.data && task.data.isPeriodic)) {
                         reEntryGuard && task._transitionTo(scheduled, running);
                     }
@@ -86042,7 +86042,7 @@ var Zone$1 = (function (global) {
                 task = this._zoneDelegate.scheduleTask(this, task);
             }
             catch (err) {
-                // should set task's state to unknown when scheduleTask throw error
+                // should set task's Estado to unknown when scheduleTask throw error
                 // because the err may from reschedule, so the fromState maybe notScheduled
                 task._transitionTo(unknown, scheduling, notScheduled);
                 // TODO: @JiaLiPassion, should we check the result from handleError?
@@ -86053,7 +86053,7 @@ var Zone$1 = (function (global) {
                 // we have to check because internally the delegate can reschedule the task.
                 this._updateTaskCount(task, 1);
             }
-            if (task.state == scheduling) {
+            if (task.Estado == scheduling) {
                 task._transitionTo(scheduled, scheduling);
             }
             return task;
@@ -86076,7 +86076,7 @@ var Zone$1 = (function (global) {
                 this._zoneDelegate.cancelTask(this, task);
             }
             catch (err) {
-                // if error occurs when cancelTask, transit the state to unknown
+                // if error occurs when cancelTask, transit the Estado to unknown
                 task._transitionTo(unknown, canceling);
                 this._zoneDelegate.handleError(this, err);
                 throw err;
@@ -86307,7 +86307,7 @@ var Zone$1 = (function (global) {
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(ZoneTask.prototype, "state", {
+        Object.defineProperty(ZoneTask.prototype, "Estado", {
             get: function () {
                 return this._state;
             },
@@ -86325,7 +86325,7 @@ var Zone$1 = (function (global) {
                 }
             }
             else {
-                throw new Error(this.type + " '" + this.source + "': can not transition to '" + toState + "', expecting state '" + fromState1 + "'" + (fromState2 ?
+                throw new Error(this.type + " '" + this.source + "': can not transition to '" + toState + "', expecting Estado '" + fromState1 + "'" + (fromState2 ?
                     ' or \'' + fromState2 + '\'' :
                     '') + ", was '" + this._state + "'.");
             }
@@ -86343,7 +86343,7 @@ var Zone$1 = (function (global) {
         ZoneTask.prototype.toJSON = function () {
             return {
                 type: this.type,
-                state: this.state,
+                Estado: this.Estado,
                 source: this.source,
                 zone: this.zone.name,
                 invoke: this.invoke,
@@ -86490,17 +86490,17 @@ Zone.__load_patch('ZoneAwarePromise', function (global, Zone, api) {
     function forwardRejection(rejection) {
         return ZoneAwarePromise.reject(rejection);
     }
-    var symbolState = __symbol__('state');
+    var symbolState = __symbol__('Estado');
     var symbolValue = __symbol__('value');
     var source = 'Promise.then';
     var UNRESOLVED = null;
     var RESOLVED = true;
     var REJECTED = false;
     var REJECTED_NO_CATCH = 0;
-    function makeResolver(promise, state) {
+    function makeResolver(promise, Estado) {
         return function (v) {
             try {
-                resolvePromise(promise, state, v);
+                resolvePromise(promise, Estado, v);
             }
             catch (err) {
                 resolvePromise(promise, false, err);
@@ -86521,7 +86521,7 @@ Zone.__load_patch('ZoneAwarePromise', function (global, Zone, api) {
         };
     };
     // Promise Resolution
-    function resolvePromise(promise, state, value) {
+    function resolvePromise(promise, Estado, value) {
         var onceWrapper = once();
         if (promise === value) {
             throw new TypeError('Promise resolved with itself');
@@ -86541,16 +86541,16 @@ Zone.__load_patch('ZoneAwarePromise', function (global, Zone, api) {
                 return promise;
             }
             // if (value instanceof ZoneAwarePromise) {
-            if (state !== REJECTED && value instanceof ZoneAwarePromise &&
+            if (Estado !== REJECTED && value instanceof ZoneAwarePromise &&
                 value.hasOwnProperty(symbolState) && value.hasOwnProperty(symbolValue) &&
                 value[symbolState] !== UNRESOLVED) {
-                clearRejectedNoCatch(value);
+                ClearRejectedNoCatch(value);
                 resolvePromise(promise, value[symbolState], value[symbolValue]);
             }
-            else if (state !== REJECTED && typeof then === 'function') {
+            else if (Estado !== REJECTED && typeof then === 'function') {
                 try {
                     then.apply(value, [
-                        onceWrapper(makeResolver(promise, state)), onceWrapper(makeResolver(promise, false))
+                        onceWrapper(makeResolver(promise, Estado)), onceWrapper(makeResolver(promise, false))
                     ]);
                 }
                 catch (err) {
@@ -86560,18 +86560,18 @@ Zone.__load_patch('ZoneAwarePromise', function (global, Zone, api) {
                 }
             }
             else {
-                promise[symbolState] = state;
+                promise[symbolState] = Estado;
                 var queue = promise[symbolValue];
                 promise[symbolValue] = value;
                 // record task information in value when error occurs, so we can
                 // do some additional work such as render longStackTrace
-                if (state === REJECTED && value instanceof Error) {
+                if (Estado === REJECTED && value instanceof Error) {
                     value[__symbol__('currentTask')] = Zone.currentTask;
                 }
                 for (var i = 0; i < queue.length;) {
                     scheduleResolveOrReject(promise, queue[i++], queue[i++], queue[i++], queue[i++]);
                 }
-                if (queue.length == 0 && state == REJECTED) {
+                if (queue.length == 0 && Estado == REJECTED) {
                     promise[symbolState] = REJECTED_NO_CATCH;
                     try {
                         throw new Error('Uncaught (in promise): ' + value +
@@ -86592,7 +86592,7 @@ Zone.__load_patch('ZoneAwarePromise', function (global, Zone, api) {
         // Resolving an already resolved promise is a noop.
         return promise;
     }
-    function clearRejectedNoCatch(promise) {
+    function ClearRejectedNoCatch(promise) {
         if (promise[symbolState] === REJECTED_NO_CATCH) {
             // if the promise is rejected no catch status
             // and queue.length > 0, means there is a error handler
@@ -86616,7 +86616,7 @@ Zone.__load_patch('ZoneAwarePromise', function (global, Zone, api) {
         }
     }
     function scheduleResolveOrReject(promise, zone, chainPromise, onFulfilled, onRejected) {
-        clearRejectedNoCatch(promise);
+        ClearRejectedNoCatch(promise);
         var delegate = promise[symbolState] ?
             (typeof onFulfilled === 'function') ? onFulfilled : forwardResolution :
             (typeof onRejected === 'function') ? onRejected : forwardRejection;
@@ -87336,7 +87336,7 @@ Zone.__load_patch('toString', function (global, Zone, api) {
  */
 function patchTimer(window, setName, cancelName, nameSuffix) {
     var setNative = null;
-    var clearNative = null;
+    var ClearNative = null;
     setName += nameSuffix;
     cancelName += nameSuffix;
     var tasksByHandleId = {};
@@ -87363,12 +87363,12 @@ function patchTimer(window, setName, cancelName, nameSuffix) {
         }
         return task;
     }
-    function clearTask(task) {
+    function ClearTask(task) {
         if (typeof task.data.handleId === 'number') {
             // Node returns complex objects as handleIds
             delete tasksByHandleId[task.data.handleId];
         }
-        return clearNative(task.data.handleId);
+        return ClearNative(task.data.handleId);
     }
     setNative =
         patchMethod(window, setName, function (delegate) { return function (self, args) {
@@ -87380,7 +87380,7 @@ function patchTimer(window, setName, cancelName, nameSuffix) {
                     delay: (nameSuffix === 'Timeout' || nameSuffix === 'Interval') ? args[1] || 0 : null,
                     args: args
                 };
-                var task = zone.scheduleMacroTask(setName, args[0], options, scheduleTask, clearTask);
+                var task = zone.scheduleMacroTask(setName, args[0], options, scheduleTask, ClearTask);
                 if (!task) {
                     return task;
                 }
@@ -87400,11 +87400,11 @@ function patchTimer(window, setName, cancelName, nameSuffix) {
                 return delegate.apply(window, args);
             }
         }; });
-    clearNative =
+    ClearNative =
         patchMethod(window, cancelName, function (delegate) { return function (self, args) {
             var task = typeof args[0] === 'number' ? tasksByHandleId[args[0]] : args[0];
             if (task && typeof task.type === 'string') {
-                if (task.state !== 'notScheduled' &&
+                if (task.Estado !== 'notScheduled' &&
                     (task.cancelFn && task.data.isPeriodic || task.runCount === 0)) {
                     // Do not cancel already canceled functions
                     task.zone.cancelTask(task);
@@ -87986,10 +87986,10 @@ function registerElementPatch(_global) {
  */
 Zone.__load_patch('timers', function (global, Zone, api) {
     var set = 'set';
-    var clear = 'clear';
-    patchTimer(global, set, clear, 'Timeout');
-    patchTimer(global, set, clear, 'Interval');
-    patchTimer(global, set, clear, 'Immediate');
+    var Clear = 'Clear';
+    patchTimer(global, set, Clear, 'Timeout');
+    patchTimer(global, set, Clear, 'Interval');
+    patchTimer(global, set, Clear, 'Immediate');
     patchTimer(global, 'request', 'cancel', 'AnimationFrame');
     patchTimer(global, 'mozRequest', 'mozCancel', 'AnimationFrame');
     patchTimer(global, 'webkitRequest', 'webkitCancel', 'AnimationFrame');
@@ -88055,9 +88055,9 @@ Zone.__load_patch('XHR', function (global, Zone, api) {
             var newListener = data.target[XHR_LISTENER] = function () {
                 if (data.target.readyState === data.target.DONE) {
                     // sometimes on some browsers XMLHttpRequest will fire onreadystatechange with
-                    // readyState=4 multiple times, so we need to check task state here
+                    // readyState=4 multiple times, so we need to check task Estado here
                     if (!data.aborted && XMLHttpRequest[XHR_SCHEDULED] &&
-                        task.state === 'scheduled') {
+                        task.Estado === 'scheduled') {
                         task.invoke();
                     }
                 }
@@ -88072,7 +88072,7 @@ Zone.__load_patch('XHR', function (global, Zone, api) {
             return task;
         }
         function placeholderCallback() { }
-        function clearTask(task) {
+        function ClearTask(task) {
             var data = task.data;
             // Note - ideally, we would call data.target.removeEventListener here, but it's too late
             // to prevent it from firing. So instead, we store info for the event listener.
@@ -88091,7 +88091,7 @@ Zone.__load_patch('XHR', function (global, Zone, api) {
             }
             else {
                 var options = { target: self, isPeriodic: false, delay: null, args: args, aborted: false };
-                return zone.scheduleMacroTask('XMLHttpRequest.send', placeholderCallback, options, scheduleTask, clearTask);
+                return zone.scheduleMacroTask('XMLHttpRequest.send', placeholderCallback, options, scheduleTask, ClearTask);
             }
         }; });
         var abortNative = patchMethod(window.XMLHttpRequest.prototype, 'abort', function (delegate) { return function (self, args) {
@@ -88460,21 +88460,21 @@ Zone.__load_patch('util', function (global, Zone, api) {
     loadingText: 'loading...'
   }
 
-  Button.prototype.setState = function (state) {
+  Button.prototype.setState = function (Estado) {
     var d    = 'disabled'
     var $el  = this.$element
     var val  = $el.is('input') ? 'val' : 'html'
     var data = $el.data()
 
-    state += 'Text'
+    Estado += 'Text'
 
     if (data.resetText == null) $el.data('resetText', $el[val]())
 
     // push to event loop to allow forms to submit
     setTimeout($.proxy(function () {
-      $el[val](data[state] == null ? this.options[state] : data[state])
+      $el[val](data[Estado] == null ? this.options[Estado] : data[Estado])
 
-      if (state == 'loadingText') {
+      if (Estado == 'loadingText') {
         this.isLoading = true
         $el.addClass(d).attr(d, d).prop(d, true)
       } else if (this.isLoading) {
@@ -88622,7 +88622,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
   Carousel.prototype.cycle = function (e) {
     e || (this.paused = false)
 
-    this.interval && clearInterval(this.interval)
+    this.interval && ClearInterval(this.interval)
 
     this.options.interval
       && !this.paused
@@ -88666,7 +88666,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
       this.cycle(true)
     }
 
-    this.interval = clearInterval(this.interval)
+    this.interval = ClearInterval(this.interval)
 
     return this
   }
@@ -89064,7 +89064,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
     return $parent && $parent.length ? $parent : $this.parent()
   }
 
-  function clearMenus(e) {
+  function ClearMenus(e) {
     if (e && e.which === 3) return
     $(backdrop).remove()
     $(toggle).each(function () {
@@ -89093,7 +89093,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
     var $parent  = getParent($this)
     var isActive = $parent.hasClass('open')
 
-    clearMenus()
+    ClearMenus()
 
     if (!isActive) {
       if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
@@ -89101,7 +89101,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
         $(document.createElement('div'))
           .addClass('dropdown-backdrop')
           .insertAfter($(this))
-          .on('click', clearMenus)
+          .on('click', ClearMenus)
       }
 
       var relatedTarget = { relatedTarget: this }
@@ -89186,7 +89186,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
   // ===================================
 
   $(document)
-    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', ClearMenus)
     .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
     .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
     .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
@@ -89753,7 +89753,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
 
     if (activeTarget && scrollTop < offsets[0]) {
       this.activeTarget = null
-      return this.clear()
+      return this.Clear()
     }
 
     for (i = offsets.length; i--;) {
@@ -89767,7 +89767,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
   ScrollSpy.prototype.activate = function (target) {
     this.activeTarget = target
 
-    this.clear()
+    this.Clear()
 
     var selector = this.selector +
       '[data-target="' + target + '"],' +
@@ -89786,7 +89786,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
     active.trigger('activate.bs.scrollspy')
   }
 
-  ScrollSpy.prototype.clear = function () {
+  ScrollSpy.prototype.Clear = function () {
     $(this.selector)
       .parentsUntil(this.options.target, '.active')
       .removeClass('active')
@@ -90129,7 +90129,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
       return
     }
 
-    clearTimeout(self.timeout)
+    ClearTimeout(self.timeout)
 
     self.hoverState = 'in'
 
@@ -90163,7 +90163,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
 
     if (self.isInStateTrue()) return
 
-    clearTimeout(self.timeout)
+    ClearTimeout(self.timeout)
 
     self.hoverState = 'out'
 
@@ -90478,7 +90478,7 @@ Zone.__load_patch('util', function (global, Zone, api) {
 
   Tooltip.prototype.destroy = function () {
     var that = this
-    clearTimeout(this.timeout)
+    ClearTimeout(this.timeout)
     this.hide(function () {
       that.$element.off('.' + that.type).removeData('bs.' + that.type)
       if (that.$tip) {
@@ -90909,8 +90909,8 @@ var ArrayLikeObservable = (function (_super) {
             return new ArrayLikeObservable(arrayLike, scheduler);
         }
     };
-    ArrayLikeObservable.dispatch = function (state) {
-        var arrayLike = state.arrayLike, index = state.index, length = state.length, subscriber = state.subscriber;
+    ArrayLikeObservable.dispatch = function (Estado) {
+        var arrayLike = Estado.arrayLike, index = Estado.index, length = Estado.length, subscriber = Estado.subscriber;
         if (subscriber.closed) {
             return;
         }
@@ -90919,8 +90919,8 @@ var ArrayLikeObservable = (function (_super) {
             return;
         }
         subscriber.next(arrayLike[index]);
-        state.index = index + 1;
-        this.schedule(state);
+        Estado.index = index + 1;
+        this.schedule(Estado);
     };
     ArrayLikeObservable.prototype._subscribe = function (subscriber) {
         var index = 0;
@@ -91396,10 +91396,10 @@ var IteratorObservable = (function (_super) {
     IteratorObservable.create = function (iterator, scheduler) {
         return new IteratorObservable(iterator, scheduler);
     };
-    IteratorObservable.dispatch = function (state) {
-        var index = state.index, hasError = state.hasError, iterator = state.iterator, subscriber = state.subscriber;
+    IteratorObservable.dispatch = function (Estado) {
+        var index = Estado.index, hasError = Estado.hasError, iterator = Estado.iterator, subscriber = Estado.subscriber;
         if (hasError) {
-            subscriber.error(state.error);
+            subscriber.error(Estado.error);
             return;
         }
         var result = iterator.next();
@@ -91408,14 +91408,14 @@ var IteratorObservable = (function (_super) {
             return;
         }
         subscriber.next(result.value);
-        state.index = index + 1;
+        Estado.index = index + 1;
         if (subscriber.closed) {
             if (typeof iterator.return === 'function') {
                 iterator.return();
             }
             return;
         }
-        this.schedule(state);
+        this.schedule(Estado);
     };
     IteratorObservable.prototype._subscribe = function (subscriber) {
         var index = 0;

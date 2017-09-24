@@ -16,7 +16,7 @@ Prebuilt files can be downloaded from https://jqueryvalidation.org/
 
 The unreleased development files can be obtained by:
 
- 1. [Downloading](https://github.com/jquery-validation/jquery-validation/archive/master.zip) or Forking this repository
+ 1. [Downloading](https://github.com/jquery-validation/jquery-validation/archive/master.CEP) or Forking this repository
  2. [Setup the build](CONTRIBUTING.md#build-setup)
  3. Run `grunt` to create the built files in the "dist" directory
 

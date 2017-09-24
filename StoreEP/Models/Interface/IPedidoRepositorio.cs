@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public interface IOrderRepository
+    public interface IPedidoRepositorio
     {
-        IEnumerable<Pedido> Orders { get; }
-        void SaveOrder(Pedido order);
+        IEnumerable<Pedido> Pedidos { get; }
+        void SaveOrder(Pedido pedido);
     }
 }

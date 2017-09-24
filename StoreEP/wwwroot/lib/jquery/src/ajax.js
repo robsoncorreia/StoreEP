@@ -276,7 +276,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 							response = conv( response );
 						} catch ( e ) {
 							return {
-								state: "parsererror",
+								Estado: "parsererror",
 								error: conv ? e : "No conversion from " + prev + " to " + current
 							};
 						}
@@ -286,7 +286,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		}
 	}
 
-	return { state: "success", data: response };
+	return { Estado: "success", data: response };
 }
 
 jQuery.extend( {
@@ -409,7 +409,7 @@ jQuery.extend( {
 			// Url cleanup var
 			urlAnchor,
 
-			// Request state (becomes false upon send and true upon completion)
+			// Request Estado (becomes false upon send and true upon completion)
 			completed,
 
 			// To know if global events are to be dispatched
@@ -719,7 +719,7 @@ jQuery.extend( {
 
 			// Clear timeout if it exists
 			if ( timeoutTimer ) {
-				window.clearTimeout( timeoutTimer );
+				window.ClearTimeout( timeoutTimer );
 			}
 
 			// Dereference transport for early garbage collection
@@ -768,7 +768,7 @@ jQuery.extend( {
 
 				// If we have data, let's convert it
 				} else {
-					statusText = response.state;
+					statusText = response.Estado;
 					success = response.data;
 					error = response.error;
 					isSuccess = !error;

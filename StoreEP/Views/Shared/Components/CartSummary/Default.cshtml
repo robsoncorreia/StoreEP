@@ -6,7 +6,7 @@
         <small class="navbar-text">
             <b>Seu carrinho:</b>
             @Model.Lines.Sum(x => x.Quantidade) item(s)
-            @Model.ComputeTotalValue().ToString("c")
+            @Model.ValorTotal().ToString("c")
         </small>
     }
     <a class="btn btn-sm btn-default navbar-btn" asp-controller="Carrinho" asp-action="Index" asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">

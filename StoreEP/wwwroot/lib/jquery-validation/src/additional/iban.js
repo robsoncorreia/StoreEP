@@ -1,6 +1,6 @@
 /**
  * IBAN is the international bank account number.
- * It has a country - specific format, that is checked here too
+ * It has a Pais - specific format, that is checked here too
  *
  * Validation is case-insensitive. Please make sure to normalize input yourself.
  */
@@ -17,11 +17,11 @@ $.validator.addMethod( "iban", function( value, element ) {
 		leadingZeroes = true,
 		cRest = "",
 		cOperator = "",
-		countrycode, ibancheck, charAt, cChar, bbanpattern, bbancountrypatterns, ibanregexp, i, p;
+		Paiscode, ibancheck, charAt, cChar, bbanpattern, bbanPaispatterns, ibanregexp, i, p;
 
 	// Check for IBAN code length.
 	// It contains:
-	// country code ISO 3166-1 - two letters,
+	// Pais code ISO 3166-1 - two letters,
 	// two check digits,
 	// Basic Bank Account Number (BBAN) - up to 30 chars
 	var minimalIBANlength = 5;
@@ -29,9 +29,9 @@ $.validator.addMethod( "iban", function( value, element ) {
 		return false;
 	}
 
-	// Check the country code and find the country specific format
-	countrycode = iban.substring( 0, 2 );
-	bbancountrypatterns = {
+	// Check the Pais code and find the Pais specific format
+	Paiscode = iban.substring( 0, 2 );
+	bbanPaispatterns = {
 		"AL": "\\d{8}[\\dA-Z]{16}",
 		"AD": "\\d{8}[\\dA-Z]{12}",
 		"AT": "\\d{16}",
@@ -98,10 +98,10 @@ $.validator.addMethod( "iban", function( value, element ) {
 		"VG": "[\\dA-Z]{4}\\d{16}"
 	};
 
-	bbanpattern = bbancountrypatterns[ countrycode ];
+	bbanpattern = bbanPaispatterns[ Paiscode ];
 
 	// As new countries will start using IBAN in the
-	// future, we only check if the countrycode is known.
+	// future, we only check if the Paiscode is known.
 	// This prevents false negatives, while almost all
 	// false positives introduced by this, will be caught
 	// by the checksum validation below anyway.
@@ -110,7 +110,7 @@ $.validator.addMethod( "iban", function( value, element ) {
 	if ( typeof bbanpattern !== "undefined" ) {
 		ibanregexp = new RegExp( "^[A-Z]{2}\\d{2}" + bbanpattern + "$", "" );
 		if ( !( ibanregexp.test( iban ) ) ) {
-			return false; // Invalid country specific format
+			return false; // Invalid Pais specific format
 		}
 	}
 

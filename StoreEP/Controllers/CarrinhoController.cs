@@ -30,7 +30,7 @@ namespace StoreEP.Controllers
         }
         public RedirectToActionResult AddToCart(int produtoID, string returnUrl)
         {
-            Produto produto = _context.Produto.FirstOrDefault(p => p.ProdutoID == produtoID);
+            Produto produto = _context.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
             if(produto != null)
             {
                 Carrinho.AddItem(produto, 1);
@@ -39,7 +39,7 @@ namespace StoreEP.Controllers
         }
         public RedirectToActionResult RemoveFromCart(int produtoID, string returnUrl)
         {
-            Produto produto = _context.Produto.FirstOrDefault(p => p.ProdutoID == produtoID);
+            Produto produto = _context.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
             if (produto != null)
             {
                 Carrinho.RemoveLine(produto);

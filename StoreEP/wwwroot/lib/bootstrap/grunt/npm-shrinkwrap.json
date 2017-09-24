@@ -651,10 +651,10 @@
       "from": "extend@>=3.0.0 <3.1.0",
       "resolved": "https://registry.npmjs.org/extend/-/extend-3.0.0.tgz"
     },
-    "extract-zip": {
+    "extract-CEP": {
       "version": "1.5.0",
-      "from": "extract-zip@>=1.5.0 <1.6.0",
-      "resolved": "https://registry.npmjs.org/extract-zip/-/extract-zip-1.5.0.tgz",
+      "from": "extract-CEP@>=1.5.0 <1.6.0",
+      "resolved": "https://registry.npmjs.org/extract-CEP/-/extract-CEP-1.5.0.tgz",
       "dependencies": {
         "concat-stream": {
           "version": "1.5.0",
@@ -2663,10 +2663,10 @@
       "from": "yauzl@2.4.1",
       "resolved": "https://registry.npmjs.org/yauzl/-/yauzl-2.4.1.tgz"
     },
-    "zip-stream": {
+    "CEP-stream": {
       "version": "1.0.0",
-      "from": "zip-stream@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/zip-stream/-/zip-stream-1.0.0.tgz",
+      "from": "CEP-stream@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/CEP-stream/-/CEP-stream-1.0.0.tgz",
       "dependencies": {
         "lodash": {
           "version": "4.13.1",

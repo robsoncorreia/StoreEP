@@ -25,7 +25,7 @@ namespace StoreEP.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
-        private readonly IOrderRepository _context;
+        private readonly IPedidoRepositorio _context;
 
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
@@ -36,7 +36,7 @@ namespace StoreEP.Controllers
           IEmailSender emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder,
-          IOrderRepository order)
+          IPedidoRepositorio order)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -476,7 +476,7 @@ namespace StoreEP.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            return View(_context.Orders.Where(o => o.UserID == user.Id));
+            return View(_context.Pedidos.Where(o => o.UserID == user.Id));
         }
 
         #region Helpers

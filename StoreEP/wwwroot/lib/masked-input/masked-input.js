@@ -380,7 +380,7 @@
 			evtAdd(el, 'keypress', function(e) {
 				keyHandlerPress(e);
 			});
-			// Let us set the initial text state when focused
+			// Let us set the initial text Estado when focused
 			evtAdd(el, 'focus', function() {
 				startText = el.value;
 			});

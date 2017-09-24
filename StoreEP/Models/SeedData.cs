@@ -15,7 +15,7 @@ namespace StoreEP.Models
         {
             context.Database.EnsureCreated();
 
-            if (context.Produto.Any())
+            if (context.Produtos.Any())
             {
                 return;   // DB has been seeded
             }
@@ -86,7 +86,7 @@ namespace StoreEP.Models
                 };
             foreach (Produto p in produtos)
             {
-                context.Produto.Add(p);
+                context.Produtos.Add(p);
             }
             context.SaveChanges();
 

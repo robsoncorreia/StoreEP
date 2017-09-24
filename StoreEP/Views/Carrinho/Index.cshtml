@@ -32,12 +32,12 @@
         <tr>
             <td colspan="3" class="text-right">Total:</td>
             <td class="text-right">
-                @Model.Carrinho.ComputeTotalValue().ToString("c")
+                @Model.Carrinho.ValorTotal().ToString("c")
             </td>
         </tr>
     </tfoot>
 </table>
 <div class="text-center">
     <a class="btn btn-primary" href="@Model.ReturnUrl">Continue comprando</a>
-    <a class="btn btn-primary" asp-action="Index" asp-controller="Address">Finalizar</a>
+    <a class="btn btn-primary" asp-action="Index" asp-controller="Endereco">Finalizar</a>
 </div>

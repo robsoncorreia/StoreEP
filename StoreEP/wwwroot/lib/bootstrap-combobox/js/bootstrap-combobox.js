@@ -249,14 +249,14 @@
   , toggle: function () {
     if (!this.disabled) {
       if (this.$container.hasClass('combobox-selected')) {
-        this.clearTarget();
+        this.ClearTarget();
         this.triggerChange();
-        this.clearElement();
+        this.ClearElement();
       } else {
         if (this.shown) {
           this.hide();
         } else {
-          this.clearElement();
+          this.ClearElement();
           this.lookup();
         }
       }
@@ -268,11 +268,11 @@
           this.$element.off('blur');
       }
   }
-  , clearElement: function () {
+  , ClearElement: function () {
     this.$element.val('').focus();
   }
 
-  , clearTarget: function () {
+  , ClearTarget: function () {
     this.$source.val('');
     this.$target.val('');
     this.$container.removeClass('combobox-selected');
@@ -397,7 +397,7 @@
           break;
 
         default:
-          this.clearTarget();
+          this.ClearTarget();
           this.lookup();
       }
 

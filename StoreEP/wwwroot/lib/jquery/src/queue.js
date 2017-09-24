@@ -105,7 +105,7 @@ jQuery.fn.extend( {
 			jQuery.dequeue( this, type );
 		} );
 	},
-	clearQueue: function( type ) {
+	ClearQueue: function( type ) {
 		return this.queue( type || "fx", [] );
 	},
 

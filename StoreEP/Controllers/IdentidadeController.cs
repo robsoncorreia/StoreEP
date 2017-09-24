@@ -11,11 +11,11 @@ using System.Collections.Generic;
 
 namespace StoreEP.Controllers
 {
-    public class AdminIdentidadeController : Controller
+    public class IdentidadeController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
         private UserManager<ApplicationUser> userManager;
-        public AdminIdentidadeController(RoleManager<IdentityRole> role, UserManager<ApplicationUser> userMrg)
+        public IdentidadeController(RoleManager<IdentityRole> role, UserManager<ApplicationUser> userMrg)
         {
             userManager = userMrg;
             roleManager = role;

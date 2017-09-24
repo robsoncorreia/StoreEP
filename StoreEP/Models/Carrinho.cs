@@ -24,8 +24,8 @@ namespace StoreEP.Models
             }
         }
         public virtual void RemoveLine(Produto produto) => lineCollection.RemoveAll(l => l.Produto.ProdutoID == produto.ProdutoID);
-        public virtual decimal ComputeTotalValue() => lineCollection.Sum(e => e.Produto.PrecoPD * e.Quantidade);
-        public virtual void Clear() => lineCollection.Clear();
+        public virtual decimal ValorTotal() => lineCollection.Sum(e => e.Produto.PrecoPD * e.Quantidade);
+        public virtual void Limpar() => lineCollection.Clear();
         public virtual IEnumerable<CartLine> Lines => lineCollection;
     }
     public class CartLine

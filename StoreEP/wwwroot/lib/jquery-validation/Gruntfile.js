@@ -95,9 +95,9 @@ grunt.initConfig( {
 	compress: {
 		dist: {
 			options: {
-				mode: "zip",
+				mode: "CEP",
 				level: 1,
-				archive: "dist/<%= pkg.name %>-<%= pkg.version %>.zip",
+				archive: "dist/<%= pkg.name %>-<%= pkg.version %>.CEP",
 				pretty: true
 			},
 			src: [

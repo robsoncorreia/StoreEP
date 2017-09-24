@@ -5,22 +5,22 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public class EFProductRepository: IProductRepository
+    public class EFProdutoRepositorio: IProdutoRepositorio
     {
         private StoreEPContext context;
-        public EFProductRepository(StoreEPContext ctx)
+        public EFProdutoRepositorio(StoreEPContext ctx)
         {
             context = ctx;
         }
-        public IEnumerable<Produto> Produtos => context.Produto;
-        public void SaveProduct(Produto produto)
+        public IEnumerable<Produto> Produtos => context.Produtos;
+        public void RegistrarProduto(Produto produto)
         {
             if (produto.ProdutoID == 0) {
-                context.Produto.Add(produto);
+                context.Produtos.Add(produto);
             }
             else
             {
-                Produto dbEntry = context.Produto.FirstOrDefault(p => p.ProdutoID == produto.ProdutoID);
+                Produto dbEntry = context.Produtos.FirstOrDefault(p => p.ProdutoID == produto.ProdutoID);
                 if(dbEntry != null)
                 {
                     dbEntry.NomePD = produto.NomePD;
@@ -31,12 +31,12 @@ namespace StoreEP.Models
             }
             context.SaveChanges();
         }
-        public Produto DeleteProduto(int produtoId)
+        public Produto ApagarProduto(int produtoId)
         {
-            Produto dbEntry = context.Produto.FirstOrDefault(p => p.ProdutoID == produtoId);
+            Produto dbEntry = context.Produtos.FirstOrDefault(p => p.ProdutoID == produtoId);
             if (dbEntry != null)
             {
-                context.Produto.Remove(dbEntry);
+                context.Produtos.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;

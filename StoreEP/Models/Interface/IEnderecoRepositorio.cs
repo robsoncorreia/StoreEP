@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public interface IAddressRepositoty
+    public interface IEnderecoRepositorio
     {
-        IEnumerable<Endereco> Address { get; }
-        void SaveAddress(Endereco address);
+        IEnumerable<Endereco> Enderecos { get; }
+        void SalvarEndereco(Endereco endereco);
     }
 }

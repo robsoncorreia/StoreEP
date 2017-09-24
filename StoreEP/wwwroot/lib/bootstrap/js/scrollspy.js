@@ -90,7 +90,7 @@
 
     if (activeTarget && scrollTop < offsets[0]) {
       this.activeTarget = null
-      return this.clear()
+      return this.Clear()
     }
 
     for (i = offsets.length; i--;) {
@@ -104,7 +104,7 @@
   ScrollSpy.prototype.activate = function (target) {
     this.activeTarget = target
 
-    this.clear()
+    this.Clear()
 
     var selector = this.selector +
       '[data-target="' + target + '"],' +
@@ -123,7 +123,7 @@
     active.trigger('activate.bs.scrollspy')
   }
 
-  ScrollSpy.prototype.clear = function () {
+  ScrollSpy.prototype.Clear = function () {
     $(this.selector)
       .parentsUntil(this.options.target, '.active')
       .removeClass('active')

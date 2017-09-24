@@ -18,7 +18,7 @@ export default createServerRenderer(params => {
 
     return platformDynamicServer(providers).bootstrapModule(AppModule).then(moduleRef => {
         const appRef: ApplicationRef = moduleRef.injector.get(ApplicationRef);
-        const state = moduleRef.injector.get(PlatformState);
+        const Estado = moduleRef.injector.get(PlatformState);
         const zone = moduleRef.injector.get(NgZone);
 
         return new Promise<RenderResult>((resolve, reject) => {
@@ -28,7 +28,7 @@ export default createServerRenderer(params => {
                 // completing the request in case there's an error to report
                 setImmediate(() => {
                     resolve({
-                        html: state.renderToString()
+                        html: Estado.renderToString()
                     });
                     moduleRef.destroy();
                 });

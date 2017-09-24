@@ -15,7 +15,7 @@ jQuery.fn.delay = function( time, type ) {
 	return this.queue( type, function( next, hooks ) {
 		var timeout = window.setTimeout( next, time );
 		hooks.stop = function() {
-			window.clearTimeout( timeout );
+			window.ClearTimeout( timeout );
 		};
 	} );
 };

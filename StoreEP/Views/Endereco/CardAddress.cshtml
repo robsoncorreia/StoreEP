@@ -1,0 +1,10 @@
+@model Endereco
+<div class="card">
+    <div class="card-block">
+        <h3 class="card-subtitle">@Model.CEP</h3>
+        <h4 class="card-title">@Model.Cidade</h4>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.Rua<span> @Model.Numero</span></h6>
+        <p class="card-text">@Model.Bairro</p>
+        <a asp-action="Checkout" asp-controller="Pedido" class="btn btn-sm btn btn-warning" asp-route-enderecoid="@Model.ID">Usar este</a>
+    </div>
+</div>

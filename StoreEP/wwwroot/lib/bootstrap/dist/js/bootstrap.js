@@ -198,21 +198,21 @@ if (typeof jQuery === 'undefined') {
     loadingText: 'loading...'
   }
 
-  Button.prototype.setState = function (state) {
+  Button.prototype.setState = function (Estado) {
     var d    = 'disabled'
     var $el  = this.$element
     var val  = $el.is('input') ? 'val' : 'html'
     var data = $el.data()
 
-    state += 'Text'
+    Estado += 'Text'
 
     if (data.resetText == null) $el.data('resetText', $el[val]())
 
     // push to event loop to allow forms to submit
     setTimeout($.proxy(function () {
-      $el[val](data[state] == null ? this.options[state] : data[state])
+      $el[val](data[Estado] == null ? this.options[Estado] : data[Estado])
 
-      if (state == 'loadingText') {
+      if (Estado == 'loadingText') {
         this.isLoading = true
         $el.addClass(d).attr(d, d).prop(d, true)
       } else if (this.isLoading) {
@@ -354,7 +354,7 @@ if (typeof jQuery === 'undefined') {
   Carousel.prototype.cycle = function (e) {
     e || (this.paused = false)
 
-    this.interval && clearInterval(this.interval)
+    this.interval && ClearInterval(this.interval)
 
     this.options.interval
       && !this.paused
@@ -398,7 +398,7 @@ if (typeof jQuery === 'undefined') {
       this.cycle(true)
     }
 
-    this.interval = clearInterval(this.interval)
+    this.interval = ClearInterval(this.interval)
 
     return this
   }
@@ -784,7 +784,7 @@ if (typeof jQuery === 'undefined') {
     return $parent && $parent.length ? $parent : $this.parent()
   }
 
-  function clearMenus(e) {
+  function ClearMenus(e) {
     if (e && e.which === 3) return
     $(backdrop).remove()
     $(toggle).each(function () {
@@ -813,7 +813,7 @@ if (typeof jQuery === 'undefined') {
     var $parent  = getParent($this)
     var isActive = $parent.hasClass('open')
 
-    clearMenus()
+    ClearMenus()
 
     if (!isActive) {
       if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
@@ -821,7 +821,7 @@ if (typeof jQuery === 'undefined') {
         $(document.createElement('div'))
           .addClass('dropdown-backdrop')
           .insertAfter($(this))
-          .on('click', clearMenus)
+          .on('click', ClearMenus)
       }
 
       var relatedTarget = { relatedTarget: this }
@@ -906,7 +906,7 @@ if (typeof jQuery === 'undefined') {
   // ===================================
 
   $(document)
-    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', ClearMenus)
     .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
     .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
     .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
@@ -1381,7 +1381,7 @@ if (typeof jQuery === 'undefined') {
       return
     }
 
-    clearTimeout(self.timeout)
+    ClearTimeout(self.timeout)
 
     self.hoverState = 'in'
 
@@ -1415,7 +1415,7 @@ if (typeof jQuery === 'undefined') {
 
     if (self.isInStateTrue()) return
 
-    clearTimeout(self.timeout)
+    ClearTimeout(self.timeout)
 
     self.hoverState = 'out'
 
@@ -1730,7 +1730,7 @@ if (typeof jQuery === 'undefined') {
 
   Tooltip.prototype.destroy = function () {
     var that = this
-    clearTimeout(this.timeout)
+    ClearTimeout(this.timeout)
     this.hide(function () {
       that.$element.off('.' + that.type).removeData('bs.' + that.type)
       if (that.$tip) {
@@ -1976,7 +1976,7 @@ if (typeof jQuery === 'undefined') {
 
     if (activeTarget && scrollTop < offsets[0]) {
       this.activeTarget = null
-      return this.clear()
+      return this.Clear()
     }
 
     for (i = offsets.length; i--;) {
@@ -1990,7 +1990,7 @@ if (typeof jQuery === 'undefined') {
   ScrollSpy.prototype.activate = function (target) {
     this.activeTarget = target
 
-    this.clear()
+    this.Clear()
 
     var selector = this.selector +
       '[data-target="' + target + '"],' +
@@ -2009,7 +2009,7 @@ if (typeof jQuery === 'undefined') {
     active.trigger('activate.bs.scrollspy')
   }
 
-  ScrollSpy.prototype.clear = function () {
+  ScrollSpy.prototype.Clear = function () {
     $(this.selector)
       .parentsUntil(this.options.target, '.active')
       .removeClass('active')

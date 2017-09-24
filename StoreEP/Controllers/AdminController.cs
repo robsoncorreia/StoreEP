@@ -11,9 +11,9 @@ namespace StoreEP.Controllers
 {
     public class AdminController : Controller
     {
-        private IProductRepository repository;
+        private IProdutoRepositorio repository;
 
-        public AdminController(IProductRepository repo)
+        public AdminController(IProdutoRepositorio repo)
         {
             repository = repo;
         }
@@ -28,7 +28,7 @@ namespace StoreEP.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.SaveProduct(produto);
+                repository.RegistrarProduto(produto);
                 TempData["massage"] = $"{produto.NomePD} foi salvo com sucesso.";
                 return RedirectToAction(nameof(List));
             }
@@ -41,7 +41,7 @@ namespace StoreEP.Controllers
         [HttpPost]
         public IActionResult Delete(int produtoId)
         {
-            Produto deletedProduto = repository.DeleteProduto(produtoId);
+            Produto deletedProduto = repository.ApagarProduto(produtoId);
             if (deletedProduto != null)
             {
                 TempData["message"] = $"{deletedProduto.NomePD} foi apagado." ;

@@ -21,16 +21,16 @@ namespace StoreEP.Controllers
 
         public int PageSize = 3;
         //GET: Produtos
-        public async Task<IActionResult> Index() => View(await _context.Produto.ToListAsync());
+        public async Task<IActionResult> Index() => View(await _context.Produtos.ToListAsync());
 
         public async Task<IActionResult> List(string category, int page = 1) => View(new ProductsListViewModel
         {
-            Produtos = await _context.Produto.Where(p => category == null || p.CategoriaPD == category).OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+            Produtos = await _context.Produtos.Where(p => category == null || p.CategoriaPD == category).OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
             PagingInfo = new PagingInfo 
             {
                 CurrentPage = page,
                 ItensPerPage = PageSize,
-                TotalItems = _context.Produto.Count()
+                TotalItems = _context.Produtos.Count()
             },
             CurrentCategory = category
         });
@@ -43,7 +43,7 @@ namespace StoreEP.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produto
+            var produto = await _context.Produtos
                 .SingleOrDefaultAsync(m => m.ProdutoID == id);
             if (produto == null)
             {
@@ -83,7 +83,7 @@ namespace StoreEP.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produto.SingleOrDefaultAsync(m => m.ProdutoID == id);
+            var produto = await _context.Produtos.SingleOrDefaultAsync(m => m.ProdutoID == id);
             if (produto == null)
             {
                 return NotFound();
@@ -134,7 +134,7 @@ namespace StoreEP.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produto
+            var produto = await _context.Produtos
                 .SingleOrDefaultAsync(m => m.ProdutoID == id);
             if (produto == null)
             {
@@ -144,20 +144,19 @@ namespace StoreEP.Controllers
             return View(produto);
         }
 
-        // POST: Produtos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var produto = await _context.Produto.SingleOrDefaultAsync(m => m.ProdutoID == id);
-            _context.Produto.Remove(produto);
+            var produto = await _context.Produtos.SingleOrDefaultAsync(m => m.ProdutoID == id);
+            _context.Produtos.Remove(produto);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }
 
         private bool ProdutoExists(int id)
         {
-            return _context.Produto.Any(e => e.ProdutoID == id);
+            return _context.Produtos.Any(e => e.ProdutoID == id);
         }
     }
 }

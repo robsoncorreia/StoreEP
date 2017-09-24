@@ -1,15 +1,15 @@
 $(document).ready(function () {
-    $("#Zip").mask("99999-999");
+    $("#CEP").mask("99999-999");
     function limpa_formulário_cep() {
         // Limpa valores do formulário de cep.
-        $("#Line1").val("");
-        $("#Line2").val("");
-        $("#City").val("");
-        $("#State").val("");
+        $("#Rua").val("");
+        $("#Bairro").val("");
+        $("#Cidade").val("");
+        $("#Estado").val("");
     }
 
     //Quando o campo cep perde o foco.
-    $("#Zip").blur(function () {
+    $("#CEP").blur(function () {
 
         //Nova variável "cep" somente com dígitos.
         var cep = $(this).val().replace(/\D/g, '');
@@ -24,20 +24,20 @@ $(document).ready(function () {
             if (validacep.test(cep)) {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
-                $("#Line1").val("...");
-                $("#Line2").val("...");
-                $("#City").val("...");
-                $("#State").val("...");
+                $("#Rua").val("...");
+                $("#Bairro").val("...");
+                $("#Cidade").val("...");
+                $("#Estado").val("...");
 
                 //Consulta o webservice viacep.com.br/
                 $.getJSON("//viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
                     if (!("erro" in dados)) {
                         //Atualiza os campos com os valores da consulta.
-                        $("#Line1").val(dados.logradouro);
-                        $("#Line2").val(dados.bairro);
-                        $("#City").val(dados.localidade);
-                        $("#State").val(dados.uf);
+                        $("#Rua").val(dados.logradouro);
+                        $("#Bairro").val(dados.bairro);
+                        $("#Cidade").val(dados.localidade);
+                        $("#Estado").val(dados.uf);
                     } //end if.
                     else {
                         //CEP pesquisado não foi encontrado.

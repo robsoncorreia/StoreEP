@@ -17,7 +17,7 @@ namespace StoreEP.Properties {
     /// </summary>
     // Essa classe foi gerada automaticamente pela classe StronglyTypedResourceBuilder
     // através de uma ferramenta como ResGen ou Visual Studio.
-    // Para adicionar ou remover um associado, edite o arquivo .ResX e execute ResGen novamente
+    // Para adicionar ou remover um associado, Editare o arquivo .ResX e execute ResGen novamente
     // com a opção /str, ou recrie o projeto do VS.
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
