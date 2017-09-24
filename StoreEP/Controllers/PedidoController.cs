@@ -60,15 +60,12 @@ namespace StoreEP.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Checkout(string enderecoid)
         {
 
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
             Pedido pedido = new Pedido();
             var address = _addressRepositoty.Enderecos.SingleOrDefault(a => a.ID == int.Parse(enderecoid));
             pedido.Address = address;

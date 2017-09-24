@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StoreEP.Models;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -37,6 +38,7 @@ namespace StoreEP.Controllers
                 return View(produto);
             }
         }
+        [Authorize(Roles = "Administrador")]
         public ViewResult Create() => View("Edit", new Produto());
         [HttpPost]
         public IActionResult Delete(int produtoId)
@@ -44,7 +46,7 @@ namespace StoreEP.Controllers
             Produto deletedProduto = repository.ApagarProduto(produtoId);
             if (deletedProduto != null)
             {
-                TempData["message"] = $"{deletedProduto.NomePD} foi apagado." ;
+                TempData["message"] = $"{deletedProduto.NomePD} foi apagado.";
             }
             return RedirectToAction("List");
         }
