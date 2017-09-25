@@ -48,7 +48,10 @@ namespace StoreEP
             services.AddTransient<IPedidoRepositorio, EFPedidoRepositorio>();
             services.AddTransient<IEnderecoRepositorio, EFEnderecoRepositorio>();
 
-
+            services.AddAuthorization(options => 
+            {
+                options.AddPolicy("Administrador", policy => policy.RequireRole("Administrator"));
+            });
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings

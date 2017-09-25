@@ -13,7 +13,7 @@ using StoreEP.Models.ViewModels;
 
 namespace StoreEP.Controllers
 {
-
+    [Authorize]
     public class PedidoController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -60,7 +60,6 @@ namespace StoreEP.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Checkout(string enderecoid)
         {
 

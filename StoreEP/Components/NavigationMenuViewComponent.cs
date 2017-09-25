@@ -10,9 +10,9 @@ namespace StoreEP.Components
     public class NavigationMenuViewComponent : ViewComponent
     {
 
-        private readonly StoreEPContext _context;
+        private readonly IProdutoRepositorio _context;
 
-        public NavigationMenuViewComponent(StoreEPContext context)
+        public NavigationMenuViewComponent(IProdutoRepositorio context)
         {
             _context = context;
         }
