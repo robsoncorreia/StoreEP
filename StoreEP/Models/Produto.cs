@@ -20,8 +20,9 @@ namespace StoreEP.Models
         [Required(ErrorMessage = "Escreva um descrição sobre o produto.")]
         public string DescricaoPD { get; set; }
         //[Required(ErrorMessage = "Digite o link da imagem.")]
-        public string LinkImagemPD { get; set; }
+        public IEnumerable<Imagem> Imagens { get; set; }
         //[Required(ErrorMessage = "Quem é o fabricante.")]
         public string Fabricante { get; set; }
+        public Comentario Comentario { get; set; }
     }
 }

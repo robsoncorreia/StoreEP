@@ -40,6 +40,29 @@ namespace StoreEP.Migrations
                     b.ToTable("CartLine");
                 });
 
+            modelBuilder.Entity("StoreEP.Models.Comentario", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Data");
+
+                    b.Property<byte>("Estrela");
+
+                    b.Property<string>("NomeUsuario");
+
+                    b.Property<int>("ProdutoID");
+
+                    b.Property<string>("Texto");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProdutoID")
+                        .IsUnique();
+
+                    b.ToTable("Comentario");
+                });
+
             modelBuilder.Entity("StoreEP.Models.Endereco", b =>
                 {
                     b.Property<int>("ID")
@@ -75,6 +98,24 @@ namespace StoreEP.Migrations
                     b.ToTable("Endereco");
                 });
 
+            modelBuilder.Entity("StoreEP.Models.Imagem", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("LinkImagem");
+
+                    b.Property<string>("Nome");
+
+                    b.Property<int?>("ProdutoID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProdutoID");
+
+                    b.ToTable("Imagem");
+                });
+
             modelBuilder.Entity("StoreEP.Models.Pedido", b =>
                 {
                     b.Property<int>("ID")
@@ -106,8 +147,6 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("Fabricante");
 
-                    b.Property<string>("LinkImagemPD");
-
                     b.Property<string>("NomePD")
                         .IsRequired();
 
@@ -126,6 +165,21 @@ namespace StoreEP.Migrations
 
                     b.HasOne("StoreEP.Models.Produto", "Produto")
                         .WithMany()
+                        .HasForeignKey("ProdutoID");
+                });
+
+            modelBuilder.Entity("StoreEP.Models.Comentario", b =>
+                {
+                    b.HasOne("StoreEP.Models.Produto")
+                        .WithOne("Comentario")
+                        .HasForeignKey("StoreEP.Models.Comentario", "ProdutoID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StoreEP.Models.Imagem", b =>
+                {
+                    b.HasOne("StoreEP.Models.Produto")
+                        .WithMany("Imagens")
                         .HasForeignKey("ProdutoID");
                 });
 
