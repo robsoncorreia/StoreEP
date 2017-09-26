@@ -1,10 +1,28 @@
 @model Endereco
-<div class="card">
+@*<div class="card">
     <div class="card-block">
         <h3 class="card-subtitle">@Model.CEP</h3>
         <h4 class="card-title">@Model.Cidade</h4>
         <h6 class="card-subtitle mb-2 text-muted">@Model.Rua<span> @Model.Numero</span></h6>
         <p class="card-text">@Model.Bairro</p>
         <a asp-action="Checkout" asp-controller="Pedido" class="btn btn-sm btn btn-warning" asp-route-enderecoid="@Model.ID">Usar este</a>
+    </div>
+</div>*@
+<div class="demo-card-event mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title mdl-card--expand">
+        <h6>
+            @Model.Rua 
+            @Model.Numero<br>
+            @Model.Bairro<br>
+            @Model.Cidade<br>
+            @Model.Estado<br>         
+        </h6>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+        <div class="mdl-layout-spacer"></div> <a asp-action="Checkout" asp-controller="Pedido" class="btn btn-sm btn btn-warning" asp-route-enderecoid="@Model.ID">Usar este</a>
+        @*<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            Add to Calendar
+        </a>*@
+       
     </div>
 </div>

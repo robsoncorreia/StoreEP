@@ -26,15 +26,9 @@ namespace StoreEP.Models
                         DescricaoPD = "A boat for one person",
                         CategoriaPD = "Watersports",
                         PrecoPD = 275,
-                        Imagens = new List<Imagem>{
-                            new Imagem {
-                                LinkImagem = "https://www.decathlon.pt/media/838/8387868/big_8573f384-9dcd-44ec-8950-d59ae5afaf03.jpg",
-                                Nome = "Kayak1"
-                            }, 
-                            new Imagem{
-                                LinkImagem = "https://www.google.com.br/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwj9lcrNo8HWAhWJIZAKHcaqCQAQjBwIBA&url=https%3A%2F%2Fcdn.topbarcos.com%2Ftienda%2Fdeportes-acuaticos%2Fkayak%2Fkayaks-autovaciables%2Fkayak-bic-bilbao%2Fimage_1_large&psig=AFQjCNEvunZ-DDGgbw2VOCE2qf68fsRQhA&ust=1506460997877020",
-                                Nome = "Kayak2"
-                            }
+                        Imagem = new Imagem {
+                            LinkImagem = "https://www.decathlon.pt/media/838/8387868/big_8573f384-9dcd-44ec-8950-d59ae5afaf03.jpg",
+                            Nome = "Kayak1"
                         }
                     },
                     new Produto

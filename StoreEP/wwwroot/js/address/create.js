@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    var lat = '';
+    var lng = '';
+    
+
+
+
     $("#CEP").mask("99999-999");
     function limpa_formulário_cep() {
         // Limpa valores do formulário de cep.

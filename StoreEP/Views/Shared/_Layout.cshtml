@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
     <link rel="stylesheet" asp-href-include="/lib/fontawesome/css/*.css" />
     <link rel="stylesheet" asp-href-include="/lib/material-design-lite/material.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/material-design-lite/material.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap-combobox/js/bootstrap-combobox.js"></script>
@@ -25,7 +26,7 @@
         <div class="pull-right">
             @await Component.InvokeAsync("CartSummary")
         </div>
-        <a asp-action="Create" class="navbar-brand">Criar</a>
+        <a asp-controller="Admin" asp-action="Edit" class="navbar-brand">Criar</a>
     </div>
     <div class="panel">
         <div id="categories" class="col-xs-3">

@@ -11,7 +11,7 @@ using System;
 namespace StoreEP.Migrations
 {
     [DbContext(typeof(StoreEPContext))]
-    [Migration("20170924014050_Inicial")]
+    [Migration("20170926165132_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,29 @@ namespace StoreEP.Migrations
                     b.HasIndex("ProdutoID");
 
                     b.ToTable("CartLine");
+                });
+
+            modelBuilder.Entity("StoreEP.Models.Comentario", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Data");
+
+                    b.Property<byte>("Estrela");
+
+                    b.Property<string>("NomeUsuario");
+
+                    b.Property<int>("ProdutoID");
+
+                    b.Property<string>("Texto");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProdutoID")
+                        .IsUnique();
+
+                    b.ToTable("Comentario");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Endereco", b =>
@@ -76,6 +99,20 @@ namespace StoreEP.Migrations
                     b.ToTable("Endereco");
                 });
 
+            modelBuilder.Entity("StoreEP.Models.Imagem", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("LinkImagem");
+
+                    b.Property<string>("Nome");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Imagem");
+                });
+
             modelBuilder.Entity("StoreEP.Models.Pedido", b =>
                 {
                     b.Property<int>("ID")
@@ -107,7 +144,7 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("Fabricante");
 
-                    b.Property<string>("LinkImagemPD");
+                    b.Property<int?>("ImagemID");
 
                     b.Property<string>("NomePD")
                         .IsRequired();
@@ -115,6 +152,8 @@ namespace StoreEP.Migrations
                     b.Property<decimal>("PrecoPD");
 
                     b.HasKey("ProdutoID");
+
+                    b.HasIndex("ImagemID");
 
                     b.ToTable("Produto");
                 });
@@ -130,11 +169,26 @@ namespace StoreEP.Migrations
                         .HasForeignKey("ProdutoID");
                 });
 
+            modelBuilder.Entity("StoreEP.Models.Comentario", b =>
+                {
+                    b.HasOne("StoreEP.Models.Produto")
+                        .WithOne("Comentario")
+                        .HasForeignKey("StoreEP.Models.Comentario", "ProdutoID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("StoreEP.Models.Pedido", b =>
                 {
                     b.HasOne("StoreEP.Models.Endereco", "Address")
                         .WithMany()
                         .HasForeignKey("AddressID");
+                });
+
+            modelBuilder.Entity("StoreEP.Models.Produto", b =>
+                {
+                    b.HasOne("StoreEP.Models.Imagem", "Imagem")
+                        .WithMany()
+                        .HasForeignKey("ImagemID");
                 });
 #pragma warning restore 612, 618
         }

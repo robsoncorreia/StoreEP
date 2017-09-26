@@ -31,21 +31,17 @@ namespace StoreEP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Produto",
+                name: "Imagem",
                 columns: table => new
                 {
-                    ProdutoID = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CategoriaPD = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescricaoPD = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Fabricante = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LinkImagemPD = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NomePD = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PrecoPD = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    LinkImagem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produto", x => x.ProdutoID);
+                    table.PrimaryKey("PK_Imagem", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,6 +61,30 @@ namespace StoreEP.Migrations
                         name: "FK_Pedido_Endereco_AddressID",
                         column: x => x.AddressID,
                         principalTable: "Endereco",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Produto",
+                columns: table => new
+                {
+                    ProdutoID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CategoriaPD = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DescricaoPD = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fabricante = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagemID = table.Column<int>(type: "int", nullable: true),
+                    NomePD = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PrecoPD = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Produto", x => x.ProdutoID);
+                    table.ForeignKey(
+                        name: "FK_Produto_Imagem_ImagemID",
+                        column: x => x.ImagemID,
+                        principalTable: "Imagem",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -96,6 +116,29 @@ namespace StoreEP.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comentario",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Estrela = table.Column<byte>(type: "tinyint", nullable: false),
+                    NomeUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProdutoID = table.Column<int>(type: "int", nullable: false),
+                    Texto = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comentario", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Comentario_Produto_ProdutoID",
+                        column: x => x.ProdutoID,
+                        principalTable: "Produto",
+                        principalColumn: "ProdutoID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CartLine_PedidoID",
                 table: "CartLine",
@@ -107,15 +150,29 @@ namespace StoreEP.Migrations
                 column: "ProdutoID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comentario_ProdutoID",
+                table: "Comentario",
+                column: "ProdutoID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pedido_AddressID",
                 table: "Pedido",
                 column: "AddressID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Produto_ImagemID",
+                table: "Produto",
+                column: "ImagemID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "CartLine");
+
+            migrationBuilder.DropTable(
+                name: "Comentario");
 
             migrationBuilder.DropTable(
                 name: "Pedido");
@@ -125,6 +182,9 @@ namespace StoreEP.Migrations
 
             migrationBuilder.DropTable(
                 name: "Endereco");
+
+            migrationBuilder.DropTable(
+                name: "Imagem");
         }
     }
 }

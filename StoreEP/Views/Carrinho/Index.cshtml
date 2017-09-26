@@ -1,10 +1,10 @@
 @using StoreEP.Models.ViewModels
 @model CartIndexViewModel
 <h2>Seu carrinho</h2>
-<table class="table table-bordered table-striped">
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
     <thead>
         <tr>
-            <th>Quantidade</th>
+            <th class="mdl-data-table__cell--non-numeric">Quantidade</th>
             <th>Item</th>
             <th class="text-right">Preço</th>
             <th class="text-right">Subtotal</th>
@@ -14,7 +14,7 @@
         @foreach (var line in Model.Carrinho.Lines)
         {
         <tr>
-            <td class="text-center">@line.Quantidade</td>
+            <td class="mdl-data-table__cell--non-numeric">@line.Quantidade</td>
             <td class="text-left">@line.Produto.NomePD</td>
             <td class="text-right">@line.Produto.PrecoPD.ToString("c")</td>
             <td class="text-right">@((line.Quantidade * line.Produto.PrecoPD).ToString("c"))</td>
@@ -22,7 +22,9 @@
                 <form asp-action="RemoveFromCart" method="post">
                     <input type="hidden" name="ProdutoID" value="@line.Produto.ProdutoID" />
                     <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
-                    <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon">
+                        <i class="material-icons">remove_shopping_cart</i>
+                    </button>
                 </form>
             </td>
         </tr>
@@ -38,6 +40,6 @@
     </tfoot>
 </table>
 <div class="text-center">
-    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue comprando</a>
-    <a class="btn btn-primary" asp-action="Index" asp-controller="Endereco">Finalizar</a>
+    <a class="mdl-button mdl-js-button mdl-button--primary" href="@Model.ReturnUrl">Continue comprando</a>
+    <a class="mdl-button mdl-js-button mdl-button--accent" asp-action="Index" asp-controller="Endereco">Finalizar</a>
 </div>

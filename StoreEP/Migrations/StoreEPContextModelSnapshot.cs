@@ -107,11 +107,7 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("Nome");
 
-                    b.Property<int?>("ProdutoID");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("ProdutoID");
 
                     b.ToTable("Imagem");
                 });
@@ -147,12 +143,16 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("Fabricante");
 
+                    b.Property<int?>("ImagemID");
+
                     b.Property<string>("NomePD")
                         .IsRequired();
 
                     b.Property<decimal>("PrecoPD");
 
                     b.HasKey("ProdutoID");
+
+                    b.HasIndex("ImagemID");
 
                     b.ToTable("Produto");
                 });
@@ -176,18 +176,18 @@ namespace StoreEP.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("StoreEP.Models.Imagem", b =>
-                {
-                    b.HasOne("StoreEP.Models.Produto")
-                        .WithMany("Imagens")
-                        .HasForeignKey("ProdutoID");
-                });
-
             modelBuilder.Entity("StoreEP.Models.Pedido", b =>
                 {
                     b.HasOne("StoreEP.Models.Endereco", "Address")
                         .WithMany()
                         .HasForeignKey("AddressID");
+                });
+
+            modelBuilder.Entity("StoreEP.Models.Produto", b =>
+                {
+                    b.HasOne("StoreEP.Models.Imagem", "Imagem")
+                        .WithMany()
+                        .HasForeignKey("ImagemID");
                 });
 #pragma warning restore 612, 618
         }

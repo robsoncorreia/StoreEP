@@ -22,9 +22,11 @@ namespace StoreEP.Controllers
         public ViewResult List() => View(repository.Produtos);
 
         [AutoValidateAntiforgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ViewResult Edit(int batata) => View(repository.Produtos.FirstOrDefault(p => p.ProdutoID == batata));
 
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Edit(Produto produto)
         {
             if (ModelState.IsValid)
