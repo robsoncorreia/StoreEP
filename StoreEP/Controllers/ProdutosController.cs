@@ -19,7 +19,7 @@ namespace StoreEP.Controllers
             _context = context;
         }
 
-        public int PageSize = 3;
+        public int PageSize = 4;
         //GET: Produtos
         public async Task<IActionResult> Index() => View(await _context.Produtos.ToListAsync());
 
