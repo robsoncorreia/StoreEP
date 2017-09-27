@@ -8,9 +8,9 @@ namespace StoreEP.Models
 {
     public class EFPedidoRepositorio : IPedidoRepositorio
     {
-        private StoreEPContext context;
+        private StoreEPDbContext context;
 
-        public EFPedidoRepositorio(StoreEPContext ctx)
+        public EFPedidoRepositorio(StoreEPDbContext ctx)
         {
             context = ctx;
         }

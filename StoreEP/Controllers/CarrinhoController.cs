@@ -14,9 +14,9 @@ namespace StoreEP.Controllers
 {
     public class CarrinhoController : Controller
     {
-        private readonly StoreEPContext _context;
+        private readonly StoreEPDbContext _context;
         private Carrinho Carrinho;
-        public CarrinhoController(StoreEPContext repo, Carrinho carService)
+        public CarrinhoController(StoreEPDbContext repo, Carrinho carService)
         {
             _context = repo;
             Carrinho = carService;

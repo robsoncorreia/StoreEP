@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public class EFEnderecoRepositorio: IEnderecoRepositorio
+    public class EFEnderecoRepositorio : IEnderecoRepositorio
     {
-        private StoreEPContext context;
-        public EFEnderecoRepositorio(StoreEPContext ctx)
+        private StoreEPDbContext context;
+        public EFEnderecoRepositorio(StoreEPDbContext ctx)
         {
             context = ctx;
         }
@@ -34,16 +34,17 @@ namespace StoreEP.Models
                     dbEntry.Numero = endereco.Numero;
                     dbEntry.Estado = endereco.Estado;
                     dbEntry.CEP = endereco.CEP;
-                 }
+                }
             }
             context.SaveChanges();
         }
-        public Endereco ApagarEndereco(int ID)
+        public Endereco ApagarEndereco(int id)
         {
-            Endereco dbEntry = context.Enderecos.FirstOrDefault(a => a.ID == ID);
+            Endereco dbEntry = context.Enderecos.FirstOrDefault(a => a.ID == id);
             if (dbEntry != null)
             {
-                context.Enderecos.Remove(dbEntry);
+                dbEntry.UserID = "apagado";
+                context.Enderecos.Update(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;

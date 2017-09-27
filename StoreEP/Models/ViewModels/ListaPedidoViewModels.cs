@@ -9,5 +9,6 @@ namespace StoreEP.Models.ViewModels
     {
         public IEnumerable<Pedido> Pedidos { get; set; }
         public IEnumerable<Endereco> Enderecos { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

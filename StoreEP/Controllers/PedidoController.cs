@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using StoreEP.Models.ViewModels;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace StoreEP.Controllers
 {
     [Authorize]
@@ -20,12 +18,16 @@ namespace StoreEP.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private IPedidoRepositorio repository;
         private IEnderecoRepositorio _addressRepositoty;
-        private Carrinho Carrinho;
+        private Carrinho carrinho;
 
-        public PedidoController(IEnderecoRepositorio address,IPedidoRepositorio repoService, Carrinho cartService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public PedidoController(IEnderecoRepositorio address,
+            IPedidoRepositorio repoService,
+            Carrinho cartService,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             repository = repoService;
-            Carrinho = cartService;
+            carrinho = cartService;
             _userManager = userManager;
             _signInManager = signInManager;
             _addressRepositoty = address;
@@ -37,7 +39,7 @@ namespace StoreEP.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                
+
             }
             ListaPedidoViewModels listaPedido = new ListaPedidoViewModels
             {
@@ -68,7 +70,7 @@ namespace StoreEP.Controllers
             Pedido pedido = new Pedido();
             var address = _addressRepositoty.Enderecos.SingleOrDefault(a => a.ID == int.Parse(enderecoid));
             pedido.Address = address;
-            if (Carrinho.Lines?.Count() == 0)
+            if (carrinho.Lines?.Count() == 0)
             {
                 ModelState.AddModelError("", "Descupe sua lista está vazia.");
                 return RedirectToAction(actionName: "List", controllerName: "Produtos");
@@ -76,7 +78,7 @@ namespace StoreEP.Controllers
             if (ModelState.IsValid)
             {
                 pedido.UserID = user.Id;
-                pedido.Lines = Carrinho.Lines.ToArray();
+                pedido.Lines = carrinho.Lines.ToArray();
                 repository.SaveOrder(pedido);
                 return RedirectToAction(nameof(Completed));
             }
@@ -87,8 +89,22 @@ namespace StoreEP.Controllers
         }
         public ViewResult Completed()
         {
-            Carrinho.Limpar();
+            carrinho.Limpar();
             return View();
+        }
+        public async Task<ViewResult> Finalizar()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+
+            }
+            return View(new FinalizarPedidoViewModel
+            {
+                Carrinho = carrinho,
+                Enderecos = _addressRepositoty.Enderecos.Where(a => a.UserID.Equals(user.Id)).ToList()
+            });
         }
     }
 }

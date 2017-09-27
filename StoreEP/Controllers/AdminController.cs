@@ -42,6 +42,7 @@ namespace StoreEP.Controllers
         }
         [Authorize(Roles = "Administrador")]
         public ViewResult Create() => View("Edit", new Produto());
+
         [HttpPost]
         public IActionResult Delete(int produtoId)
         {

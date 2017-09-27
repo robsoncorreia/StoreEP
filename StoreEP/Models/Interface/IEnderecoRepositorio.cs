@@ -9,5 +9,6 @@ namespace StoreEP.Models
     {
         IEnumerable<Endereco> Enderecos { get; }
         void SalvarEndereco(Endereco endereco);
+        Endereco ApagarEndereco(int id);
     }
 }

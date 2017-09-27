@@ -26,8 +26,6 @@ namespace StoreEP
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .Build();
         }
-
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -35,7 +33,7 @@ namespace StoreEP
         {
             services.AddNodeServices();
 
-            services.AddDbContext<StoreEPContext>(options =>
+            services.AddDbContext<StoreEPDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("StoreEP")));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Identity")));
@@ -48,7 +46,7 @@ namespace StoreEP
             services.AddTransient<IPedidoRepositorio, EFPedidoRepositorio>();
             services.AddTransient<IEnderecoRepositorio, EFEnderecoRepositorio>();
 
-            services.AddAuthorization(options => 
+            services.AddAuthorization(options =>
             {
                 options.AddPolicy("Administrador", policy => policy.RequireRole("Administrator"));
             });
@@ -76,9 +74,9 @@ namespace StoreEP
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.Cookie.Expiration = TimeSpan.FromDays(7);
-                options.LoginPath = "/Account/Login"; 
-                options.LogoutPath = "/Account/Logout"; 
-                options.AccessDeniedPath = "/Account/AccessDenied"; 
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
 
@@ -140,9 +138,10 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "{controller=Endereco}/Index/{ID}");
-               
+
             });
-            //IdentitySeedData.EnsurePopulated(app);
+            //IdentityDbContext.CriarContaAdministrador(app.ApplicationServices, Configuration).Wait();
         }
+
     }
 }

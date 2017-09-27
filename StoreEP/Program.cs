@@ -22,7 +22,7 @@ namespace StoreEP
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<StoreEPContext>();
+                    var context = services.GetRequiredService<StoreEPDbContext>();
                     SeedData.EnsurePopulated(context);
                 }
                 catch (Exception ex)

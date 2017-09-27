@@ -7,8 +7,8 @@ namespace StoreEP.Models
 {
     public class EFProdutoRepositorio: IProdutoRepositorio
     {
-        private StoreEPContext context;
-        public EFProdutoRepositorio(StoreEPContext ctx)
+        private StoreEPDbContext context;
+        public EFProdutoRepositorio(StoreEPDbContext ctx)
         {
             context = ctx;
         }

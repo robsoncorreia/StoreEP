@@ -1,0 +1,75 @@
+﻿@model FinalizarPedidoViewModel
+@{
+    Layout = "_AdminLayout";
+}
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#carrinho">Carrinho</a></li>
+    <li><a data-toggle="tab" href="#endereco">Endereço</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+</ul>
+<div class="tab-content">
+    <div id="carrinho" class="tab-pane fade in active">
+        <div class="content-grid mdl-grid">
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--4dp mdl-cell">
+                <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Quantidade</th>
+                        <th>Item</th>
+                        <th class="text-right">Preço</th>
+                        <th class="text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model.Carrinho.Lines)
+                    {
+                        <tr>
+                            <td class="mdl-data-table__cell--non-numeric">@line.Quantidade</td>
+                            <td class="text-left">@line.Produto.NomePD</td>
+                            <td class="text-right">@line.Produto.PrecoPD.ToString("c")</td>
+                            <td class="text-right">@((line.Quantidade * line.Produto.PrecoPD).ToString("c"))</td>
+                            <td>
+                                <form asp-action="RemoveFromCart" method="post">
+                                    <input type="hidden" name="ProdutoID" value="@line.Produto.ProdutoID" />
+                                    @*<input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />*@
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon">
+                                        <i class="material-icons">remove_shopping_cart</i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">Total:</td>
+                        <td class="text-right">
+                            @Model.Carrinho.ValorTotal().ToString("c")
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="text-center">
+                @* <a class="mdl-button mdl-js-button mdl-button--primary" href="@Model.ReturnUrl">Continue comprando</a>*@
+                @*<a class="mdl-button mdl-js-button mdl-button--accent" asp-action="Index" asp-controller="Endereco">Finalizar</a>*@
+            </div>
+        </div>
+    </div>
+    <div id="endereco" class="tab-pane fade">
+        <div class="content-grid mdl-grid">
+            @foreach (var endereco in Model.Enderecos)
+            {
+                @Html.Partial("CardAddress", endereco)
+            }
+        </div>
+        <button asp-action="Criar" asp-controller="Endereco" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+            <i class="material-icons">add</i>
+        </button>
+        <div>
+            <a asp-action="Criar" asp-controller="Endereco">Criar Novo</a>
+        </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+        <h3>Menu 2</h3>
+        <p>Some content in menu 2.</p>
+    </div>
+</div>

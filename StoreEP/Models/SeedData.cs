@@ -11,7 +11,7 @@ namespace StoreEP.Models
     public static class SeedData
     {
 
-        public static void EnsurePopulated(StoreEPContext context)
+        public static void EnsurePopulated(StoreEPDbContext context)
         {
             context.Database.EnsureCreated();
 

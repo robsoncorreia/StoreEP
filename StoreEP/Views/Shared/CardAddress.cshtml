@@ -1,0 +1,21 @@
+@model Endereco
+<div class="demo-card-event mdl-card mdl-shadow--4dp mdl-cell" style="margin:10px">
+    <div class="mdl-card__title mdl-card--expand">
+        <h6>
+            @Model.Rua
+            @Model.Numero<br>
+            @Model.Bairro<br>
+            @Model.Cidade<br>
+            @Model.Estado<br>
+        </h6>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-@Model.ID">
+            Usar <input type="radio" id="option-@Model.ID" class="mdl-radio__button" name="options" value="@Model.ID" checked>
+            <span class="mdl-radio__label"></span>
+        </label>
+        <button class="mdl-button mdl-js-button mdl-button--icon" style="float:right">
+            <i class="material-icons" style="color: red">cancel</i>
+        </button>
+    </div>
+</div>

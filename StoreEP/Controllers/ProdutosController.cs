@@ -12,9 +12,9 @@ namespace StoreEP.Controllers
 {
     public class ProdutosController : Controller
     {
-        private readonly StoreEPContext _context;
+        private readonly StoreEPDbContext _context;
 
-        public ProdutosController(StoreEPContext context)
+        public ProdutosController(StoreEPDbContext context)
         {
             _context = context;
         }
