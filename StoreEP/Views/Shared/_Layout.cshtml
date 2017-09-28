@@ -6,10 +6,12 @@
     <title>@ViewData["Title"] - StoreEP</title>
     <base href="~/" />
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" asp-href-include="/lib/material-design-lite/material.css" />
+    <link rel="stylesheet" asp-href-include="/css/index.css" />
     <script type="text/javascript" src="~/lib/material-design-lite/material.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap-combobox/js/bootstrap-combobox.js"></script>
     <script type="text/javascript" src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
@@ -19,8 +21,8 @@
     <script type="text/javascript" src="~/js/produto/lista.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">Loja</a>
+    <div class="navbar navbar-default" role="navigation">
+        <a asp-controller="Produtos" asp-action="List" class="navbar-brand">Loja</a>
         @await Html.PartialAsync("_LoginPartial")
         <div class="pull-right">
             @await Component.InvokeAsync("CartSummary")

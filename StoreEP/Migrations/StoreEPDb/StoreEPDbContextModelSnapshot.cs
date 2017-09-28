@@ -112,6 +112,26 @@ namespace StoreEP.Migrations.StoreEPDb
                     b.ToTable("Imagem");
                 });
 
+            modelBuilder.Entity("StoreEP.Models.Pagamento", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CompraDT");
+
+                    b.Property<DateTime>("PagamentoDT");
+
+                    b.Property<int>("PedidoID");
+
+                    b.Property<string>("UserID");
+
+                    b.Property<decimal>("Valor");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Pagamento");
+                });
+
             modelBuilder.Entity("StoreEP.Models.Pedido", b =>
                 {
                     b.Property<int>("ID")

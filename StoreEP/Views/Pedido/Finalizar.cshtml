@@ -5,7 +5,7 @@
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#carrinho">Carrinho</a></li>
     <li><a data-toggle="tab" href="#endereco">Endereço</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#pagamento">Pagamento</a></li>
 </ul>
 <div class="tab-content">
     <div id="carrinho" class="tab-pane fade in active">
@@ -28,9 +28,8 @@
                             <td class="text-right">@line.Produto.PrecoPD.ToString("c")</td>
                             <td class="text-right">@((line.Quantidade * line.Produto.PrecoPD).ToString("c"))</td>
                             <td>
-                                <form asp-action="RemoveFromCart" method="post">
+                                <form asp-controller="Pedido" asp-action="RemoverCarrinho" method="post">
                                     <input type="hidden" name="ProdutoID" value="@line.Produto.ProdutoID" />
-                                    @*<input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />*@
                                     <button type="submit" class="mdl-button mdl-js-button mdl-button--icon">
                                         <i class="material-icons">remove_shopping_cart</i>
                                     </button>
@@ -46,12 +45,16 @@
                             @Model.Carrinho.ValorTotal().ToString("c")
                         </td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a asp-action="List" asp-controller="Produtos" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Continuar comprar</a>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
-            <div class="text-center">
-                @* <a class="mdl-button mdl-js-button mdl-button--primary" href="@Model.ReturnUrl">Continue comprando</a>*@
-                @*<a class="mdl-button mdl-js-button mdl-button--accent" asp-action="Index" asp-controller="Endereco">Finalizar</a>*@
-            </div>
         </div>
     </div>
     <div id="endereco" class="tab-pane fade">
@@ -61,15 +64,18 @@
                 @Html.Partial("CardAddress", endereco)
             }
         </div>
-        <button asp-action="Criar" asp-controller="Endereco" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+        <a asp-action="Criar" asp-controller="Endereco" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
             <i class="material-icons">add</i>
-        </button>
-        <div>
-            <a asp-action="Criar" asp-controller="Endereco">Criar Novo</a>
-        </div>
+        </a>
     </div>
-    <div id="menu2" class="tab-pane fade">
-        <h3>Menu 2</h3>
-        <p>Some content in menu 2.</p>
+    <div id="pagamento" class="tab-pane fade">
+        <form asp-action="Finalizar" method="post">
+            <div>
+                <label asp-for="@Model.Pagamento.Valor"></label>
+                <input asp-for="@Model.Pagamento.Valor" />
+                <input id="endereco_id" type="hidden" asp-for="@Model.EnderecoID" />
+            </div>
+            <button id="btn_finalizar">Teste</button>
+        </form>
     </div>
 </div>

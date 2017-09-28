@@ -9,6 +9,8 @@ namespace StoreEP.Models.ViewModels
     {
         public IEnumerable<Endereco> Enderecos { get; set; }
         public Carrinho Carrinho { get; set; }
+        public Pagamento Pagamento { get; set; }
+        public int EnderecoID { get; set; }
 
     }
 }

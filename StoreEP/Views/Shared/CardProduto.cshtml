@@ -9,7 +9,7 @@
     </div>
     <div class="mdl-layout-spacer"></div>
     <div class="mdl-card__actions mdl-card--border">
-        <form id="@Model?.ProdutoID" asp-action="AddToCart" asp-controller="Carrinho" method="post">
+        <form id="@Model?.ProdutoID" asp-action="AdicionarCarrinho" asp-controller="Carrinho" method="post">
             <input type="hidden" asp-for="ProdutoID" />
             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
             <span class="lead">

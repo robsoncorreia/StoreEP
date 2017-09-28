@@ -57,7 +57,7 @@ namespace StoreEP.Controllers
         }
         public IActionResult Criar() => View();
 
-         
+
         public IActionResult Apagar(string enderecoid)
         {
             Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(p => p.ID == int.Parse(enderecoid));
@@ -65,7 +65,7 @@ namespace StoreEP.Controllers
             {
                 _addressRepositoty.ApagarEndereco(int.Parse(enderecoid));
             }
-            return View();
+            return RedirectToAction("Finalizar", "Pedido");
         }
     }
 }

@@ -8,8 +8,6 @@ using StoreEP.Models;
 using StoreEP.Infrastructure;
 using StoreEP.Models.ViewModels;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace StoreEP.Controllers
 {
     public class CarrinhoController : Controller
@@ -28,14 +26,14 @@ namespace StoreEP.Controllers
                 ReturnUrl = returnUrl
             });
         }
-        public RedirectToActionResult AddToCart(int produtoID, string returnUrl)
+        public RedirectToActionResult AdicionarCarrinho(int produtoID, string returnUrl)
         {
             Produto produto = _context.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
             if(produto != null)
             {
                 Carrinho.AddItem(produto, 1);
             }
-            return RedirectToAction("Index", new { returnUrl });
+            return RedirectToAction("Finalizar", "Pedido", new { returnUrl });
         }
         public RedirectToActionResult RemoveFromCart(int produtoID, string returnUrl)
         {
