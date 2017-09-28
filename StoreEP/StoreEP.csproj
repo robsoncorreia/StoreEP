@@ -29,6 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Manage\Address.cshtml" />
+    <Content Remove="Views\Manage\Compras.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Views\Carrinho\" />
   </ItemGroup>
 
