@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using StoreEP.Models;
 using System;
 
-namespace StoreEP.Migrations.StoreEPDb
+namespace StoreEP.Migrations
 {
     [DbContext(typeof(StoreEPDbContext))]
-    [Migration("20170928174030_Pagamento")]
-    partial class Pagamento
+    partial class StoreEPDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,8 +57,7 @@ namespace StoreEP.Migrations.StoreEPDb
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ProdutoID")
-                        .IsUnique();
+                    b.HasIndex("ProdutoID");
 
                     b.ToTable("Comentario");
                 });
@@ -120,7 +118,7 @@ namespace StoreEP.Migrations.StoreEPDb
 
                     b.Property<DateTime>("CompraDT");
 
-                    b.Property<DateTime>("PagamentoDT");
+                    b.Property<DateTime?>("PagamentoDT");
 
                     b.Property<int>("PedidoID");
 
@@ -129,6 +127,9 @@ namespace StoreEP.Migrations.StoreEPDb
                     b.Property<decimal>("Valor");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("PedidoID")
+                        .IsUnique();
 
                     b.ToTable("Pagamento");
                 });
@@ -139,6 +140,8 @@ namespace StoreEP.Migrations.StoreEPDb
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("AddressID");
+
+                    b.Property<DateTime>("DataCompra");
 
                     b.Property<bool>("Shipped");
 
@@ -192,8 +195,16 @@ namespace StoreEP.Migrations.StoreEPDb
             modelBuilder.Entity("StoreEP.Models.Comentario", b =>
                 {
                     b.HasOne("StoreEP.Models.Produto")
-                        .WithOne("Comentario")
-                        .HasForeignKey("StoreEP.Models.Comentario", "ProdutoID")
+                        .WithMany("Comentarios")
+                        .HasForeignKey("ProdutoID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StoreEP.Models.Pagamento", b =>
+                {
+                    b.HasOne("StoreEP.Models.Pedido")
+                        .WithOne("Pagamento")
+                        .HasForeignKey("StoreEP.Models.Pagamento", "PedidoID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

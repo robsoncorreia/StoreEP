@@ -15,6 +15,6 @@ namespace StoreEP.Models
         public decimal Valor { get; set; }
         [Required]
         public DateTime CompraDT { get; set; }
-        public DateTime PagamentoDT { get; set; }
+        public DateTime? PagamentoDT { get; set; } = null;
     }
 }

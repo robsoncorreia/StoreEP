@@ -66,13 +66,17 @@ namespace StoreEP.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Finalizar (FinalizarPedidoViewModel finalizarPedidoViewModel)
+        public async Task<IActionResult> Finalizar(FinalizarPedidoViewModel finalizarPedidoViewModel)
         {
             ClaimsPrincipal currentUser = this.User;
             Pedido pedido = new Pedido();
             var user = await _userManager.GetUserAsync(User);
             var address = _enderecoRepositorio.Enderecos.SingleOrDefault(a => a.ID == int.Parse("1"));
             pedido.Address = address;
+            pedido.DataCompra = DateTime.Now;
+            finalizarPedidoViewModel.Pagamento.UserID = user.Id;
+            finalizarPedidoViewModel.Pagamento.CompraDT = DateTime.Now ;
+            pedido.Pagamento = finalizarPedidoViewModel.Pagamento;
             if (_carrinho.Lines?.Count() == 0)
             {
                 ModelState.AddModelError("", "Descupe sua lista está vazia.");
@@ -95,13 +99,16 @@ namespace StoreEP.Controllers
             _carrinho.Limpar();
             return View();
         }
-        public async Task<ViewResult> Finalizar()
+        public async Task<IActionResult> Finalizar()
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            if (user != null)
             {
-                return View(nameof(Finalizar));
+                if (_enderecoRepositorio.Enderecos.Where(e => e.UserID.Equals(user.Id) && !e.UserID.Equals("apagado")).Count() == 0)
+                {
+                    return RedirectToAction(actionName: "Criar", controllerName: "Endereco");
+                }
             }
             return View(new FinalizarPedidoViewModel
             {

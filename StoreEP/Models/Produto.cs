@@ -23,6 +23,6 @@ namespace StoreEP.Models
         public Imagem Imagem { get; set; }
         //[Required(ErrorMessage = "Quem é o fabricante.")]
         public string Fabricante { get; set; }
-        public Comentario Comentario { get; set; }
+        public ICollection<Comentario> Comentarios { get; set; }
     }
 }

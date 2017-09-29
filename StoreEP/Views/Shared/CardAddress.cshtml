@@ -1,13 +1,13 @@
 @model Endereco
 <div class="demo-card-event mdl-card mdl-shadow--4dp mdl-cell" style="margin:10px">
     <div class="mdl-card__title mdl-card--expand">
-        <h4>
+        <h6>
             @Model.Rua
             @Model.Numero<br>
             @Model.Bairro<br>
             @Model.Cidade<br>
             @Model.Estado<br>
-        </h4>
+        </h6>
     </div>
     <div class="mdl-card__actions mdl-card--border">
         <label id="@Model.ID" class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" for="icon-toggle-@Model.ID">

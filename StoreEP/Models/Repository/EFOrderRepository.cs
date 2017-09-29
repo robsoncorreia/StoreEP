@@ -24,7 +24,7 @@ namespace StoreEP.Models
             {
                 context.Pedidos.Add(pedido);
             }
-            context.SaveChanges();
-        }
+            var mensagem = context.SaveChanges();
+         }
     }
 }

@@ -10,6 +10,7 @@
         <th>Rua</th>
         <th>CEP</th>
         <th>Status</th>
+        <th>Data da compra</th>
         <th colspan="4">Detalhes</th>
     </tr>
     @foreach (Pedido pedido in Model.Pedidos)
@@ -18,6 +19,7 @@
             <td>@pedido.ID</td>
             <td>@pedido.Address.Rua</td>
             <td>@pedido.Address.CEP</td>
+            <td>@pedido?.Pagamento.CompraDT</td>
             @if (pedido.Shipped)
                 {
                 <td>Enviado</td>

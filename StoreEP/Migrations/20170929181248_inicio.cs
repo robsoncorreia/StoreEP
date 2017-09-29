@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace StoreEP.Migrations.StoreEPDb
+namespace StoreEP.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class inicio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,6 +51,7 @@ namespace StoreEP.Migrations.StoreEPDb
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddressID = table.Column<int>(type: "int", nullable: true),
+                    DataCompra = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Shipped = table.Column<bool>(type: "bit", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -87,6 +88,29 @@ namespace StoreEP.Migrations.StoreEPDb
                         principalTable: "Imagem",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pagamento",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CompraDT = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PagamentoDT = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PedidoID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Valor = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pagamento", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Pagamento_Pedido_PedidoID",
+                        column: x => x.PedidoID,
+                        principalTable: "Pedido",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,7 +176,12 @@ namespace StoreEP.Migrations.StoreEPDb
             migrationBuilder.CreateIndex(
                 name: "IX_Comentario_ProdutoID",
                 table: "Comentario",
-                column: "ProdutoID",
+                column: "ProdutoID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pagamento_PedidoID",
+                table: "Pagamento",
+                column: "PedidoID",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -175,16 +204,19 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "Comentario");
 
             migrationBuilder.DropTable(
-                name: "Pedido");
+                name: "Pagamento");
 
             migrationBuilder.DropTable(
                 name: "Produto");
 
             migrationBuilder.DropTable(
-                name: "Endereco");
+                name: "Pedido");
 
             migrationBuilder.DropTable(
                 name: "Imagem");
+
+            migrationBuilder.DropTable(
+                name: "Endereco");
         }
     }
 }

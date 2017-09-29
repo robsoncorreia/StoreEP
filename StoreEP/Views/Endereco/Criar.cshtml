@@ -4,49 +4,48 @@
     Layout = "_AdminLayout";
 }
 <form asp-action="Criar" method="post">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input asp-for="Rua" class="mdl-textfield__input" type="text">
+        <label asp-for="Rua" class="mdl-textfield__label">Rua</label>
+    </div>
+    <div><span asp-validation-for="Rua" class="text-danger"></span></div>
 
-    <div class="form-group">
-        <label>Rua</label>
-        <input asp-for="Rua" class="form-control" />
-        <div><span asp-validation-for="Rua" class="text-danger"></span></div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input asp-for="Bairro" class="mdl-textfield__input" type="text">
+        <label asp-for="Bairro" class="mdl-textfield__label">Bairro</label>
     </div>
-    <div class="form-group">
-        <label>Bairro</label>
-        <input asp-for="Bairro" class="form-control" />
-        <div><span asp-validation-for="Bairro" class="text-danger"></span></div>
+    <div><span asp-validation-for="Bairro" class="text-danger"></span></div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input asp-for="Numero" class="mdl-textfield__input" type="text">
+        <label asp-for="Numero" class="mdl-textfield__label">Número</label>
     </div>
-    <div class="form-group">
-        <label>Número</label>
-        <input asp-for="Numero" class="form-control" />
-        <div><span asp-validation-for="Numero" class="text-danger"></span></div>
+    <div><span asp-validation-for="Numero" class="text-danger"></span></div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input asp-for="Cidade" class="mdl-textfield__input" type="text">
+        <label asp-for="Cidade" class="mdl-textfield__label" for="txt_cidade">Cidade</label>
     </div>
-    <div class="form-group">
-        <label>Cidade</label>
-        <input asp-for="Cidade" class="form-control" />
-        <div><span asp-validation-for="Cidade" class="text-danger"></span></div>
+    <div><span asp-validation-for="Cidade" class="text-danger"></span></div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input asp-for="Estado" class="mdl-textfield__input" type="text">
+        <label asp-for="Estado" class="mdl-textfield__label" for="txt_estado">Estado</label>
     </div>
-    <div class="form-group">
-        <label>Estado</label>
-        <input asp-for="Estado" class="form-control" />
-        <div><span asp-validation-for="Estado" class="text-danger"></span></div>
+    <div><span asp-validation-for="Estado" class="text-danger"></span></div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input asp-for="CEP" class="mdl-textfield__input" type="text">
+        <label asp-for="CEP" class="mdl-textfield__label">Cep</label>
     </div>
-    <div class="form-group">
-        <label>Cep</label>
-        <input asp-for="CEP" class="form-control" />
-        <div><span asp-validation-for="CEP" class="text-danger"></span></div>
+    <div><span asp-validation-for="CEP" class="text-danger"></span></div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input asp-for="Pais" class="mdl-textfield__input" type="text">
+        <label asp-for="Pais" class="mdl-textfield__label">País</label>
     </div>
-    <div class="form-group">
-        <label>País</label>
-        <input asp-for="Pais" class="form-control" />
-        <div><span asp-validation-for="Pais" class="text-danger"></span></div>
-    </div>
-    <h3>Opções</h3>
-    <div class="checkbox">
-        <label>
-            <input asp-for="GifWrap" />Gift wrap these items
-        </label>
-    </div>
-    <div class="text-center">
-        <button class="btn btn-primary" type="submit" >Criar</button>
-    </div>
+    <div><span asp-validation-for="Pais" class="text-danger"></span></div>
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" type="submit">
+        <i class="material-icons">add</i>
+    </button>
 </form>

@@ -15,5 +15,7 @@ namespace StoreEP.Models
         public int ID { get; set; }
         public ICollection<CartLine> Lines { get; set; }
         public Endereco Address { get; set; }
+        public Pagamento Pagamento { get; set; }
+        public DateTime DataCompra { get; set; }
     }
 }
