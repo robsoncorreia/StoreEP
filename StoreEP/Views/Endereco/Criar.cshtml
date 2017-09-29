@@ -23,6 +23,12 @@
     <div><span asp-validation-for="Numero" class="text-danger"></span></div>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input asp-for="Complemento" class="mdl-textfield__input" type="text">
+        <label asp-for="Complemento" class="mdl-textfield__label">Complemento</label>
+    </div>
+    <div><span asp-validation-for="Complemento" class="text-danger"></span></div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input asp-for="Cidade" class="mdl-textfield__input" type="text">
         <label asp-for="Cidade" class="mdl-textfield__label" for="txt_cidade">Cidade</label>
     </div>

@@ -1,4 +1,4 @@
-@model ListaPedidoViewModels
+@model PedidoListaViewModel
 @{
     ViewBag.Title = "Pedidos";
     Layout = "_AdminLayout";
@@ -17,9 +17,8 @@
     {
         <tr>
             <td>@pedido.ID</td>
-            <td>@pedido.Address.Rua</td>
-            <td>@pedido.Address.CEP</td>
-            <td>@pedido?.Pagamento.CompraDT</td>
+            <td>@pedido?.Address?.Rua</td>
+            <td>@pedido?.Address?.CEP</td>
             @if (pedido.Shipped)
                 {
                 <td>Enviado</td>
@@ -33,9 +32,9 @@
         @foreach (var produto in pedido.Lines)
                 {
             <tr>
-                <td>@produto.Produto.NomePD</td>
-                <td>@produto.Produto.PrecoPD.ToString("c")</td>
-                <td>@produto.Produto.CategoriaPD</td>
+                <td>@produto?.Produto?.NomePD</td>
+                <td>@produto?.Produto?.PrecoPD.ToString("c")</td>
+                <td>@produto?.Produto?.CategoriaPD</td>
             </tr>
         }
     }

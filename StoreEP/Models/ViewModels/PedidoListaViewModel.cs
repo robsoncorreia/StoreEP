@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models.ViewModels
 {
-    public class ListaPedidoViewModels
+    public class PedidoListaViewModel
     {
         public IEnumerable<Pedido> Pedidos { get; set; }
-        public IEnumerable<Endereco> Enderecos { get; set; }
-        public string ReturnUrl { get; set; }
     }
 }

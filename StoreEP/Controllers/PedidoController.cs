@@ -45,12 +45,9 @@ namespace StoreEP.Controllers
             {
 
             }
-            ListaPedidoViewModels listaPedido = new ListaPedidoViewModels
-            {
-                Pedidos = _pedidoRepositorio.Pedidos.Where(o => o.UserID == user.Id),
-                Enderecos = _enderecoRepositorio.Enderecos.ToList()
-            };
-            return View(listaPedido);
+            return View(new PedidoListaViewModel {
+                Pedidos = _pedidoRepositorio.Pedidos.Where(o => o.UserID == user.Id)
+            });
         }
 
         [HttpPost]
@@ -70,13 +67,17 @@ namespace StoreEP.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             Pedido pedido = new Pedido();
+
             var user = await _userManager.GetUserAsync(User);
             var address = _enderecoRepositorio.Enderecos.SingleOrDefault(a => a.ID == int.Parse("1"));
+
             pedido.Address = address;
             pedido.DataCompra = DateTime.Now;
+            pedido.Pagamento = finalizarPedidoViewModel.Pagamento;
+
             finalizarPedidoViewModel.Pagamento.UserID = user.Id;
             finalizarPedidoViewModel.Pagamento.CompraDT = DateTime.Now ;
-            pedido.Pagamento = finalizarPedidoViewModel.Pagamento;
+            
             if (_carrinho.Lines?.Count() == 0)
             {
                 ModelState.AddModelError("", "Descupe sua lista está vazia.");

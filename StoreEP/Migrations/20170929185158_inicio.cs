@@ -18,6 +18,7 @@ namespace StoreEP.Migrations
                     Bairro = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CEP = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GifWrap = table.Column<bool>(type: "bit", nullable: false),
                     Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),

@@ -76,6 +76,8 @@ namespace StoreEP.Migrations
                     b.Property<string>("Cidade")
                         .IsRequired();
 
+                    b.Property<string>("Complemento");
+
                     b.Property<string>("Estado")
                         .IsRequired();
 

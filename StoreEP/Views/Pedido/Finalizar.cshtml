@@ -70,12 +70,23 @@
     </div>
     <div id="pagamento" class="tab-pane fade">
         <form asp-action="Finalizar" method="post">
-            <!-- Contact Chip -->
-            <span class="mdl-chip mdl-chip--contact">
-                <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white">T</span>
-                <span class="mdl-chip__text">@Model.Carrinho.ValorTotal().ToString("c")</span>
-            </span>
-            <button id="btn_finalizar">Teste</button>
+            <div>
+                <span class="mdl-chip mdl-chip--contact">
+                    <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white">T</span>
+                    <span class="mdl-chip__text">@Model.Carrinho.ValorTotal().ToString("c")</span>
+                </span>
+            </div>
+            <div>
+                <!-- Deletable Chip -->
+                <span class="mdl-chip mdl-chip--deletable">
+                    <span class="mdl-chip__text">Finalizar</span>
+                    <button type="submit" class="mdl-chip__action">
+                        <i class="material-icons" style="color: navy;">payment</i>
+                    </button>
+                </span>
+            </div>
+            @*<button  id="btn_finalizar"><i class="material-icons">payment</i></button>*@
             <input asp-for="@Model.Pagamento.Valor" value="@Model.Carrinho.ValorTotal()" class="mdl-textfield__input" type="hidden" id="txt_valor">
-        </form></div>
+        </form>
+    </div>
 </div>

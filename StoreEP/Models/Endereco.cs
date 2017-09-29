@@ -32,5 +32,6 @@ namespace StoreEP.Models
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
         public string Pais { get; set; }
         public bool GifWrap { get; set; }
+        public string Complemento { get; set; }
     }
 }

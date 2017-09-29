@@ -11,7 +11,7 @@ using System;
 namespace StoreEP.Migrations
 {
     [DbContext(typeof(StoreEPDbContext))]
-    [Migration("20170929181248_inicio")]
+    [Migration("20170929185158_inicio")]
     partial class inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,6 +76,8 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("Cidade")
                         .IsRequired();
+
+                    b.Property<string>("Complemento");
 
                     b.Property<string>("Estado")
                         .IsRequired();
