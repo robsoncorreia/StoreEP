@@ -1,0 +1,66 @@
+﻿@model RoleEditModel
+<div class="bg-primary panel-body">
+    <h4>Editar perfis</h4>
+</div>
+<div asp-validation-summary="All" class="text=danger"></div>
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <input type="hidden" name="roleName" value="@Model.Role.Id" />
+    <h6 class="bg-info panel-body">Adicionar ao perfil @Model.Role.Name</h6>
+    <table class="table table-condensed table-bordered">
+        @if (Model.NonMembers.Count() == 0)
+        {
+            <tr>
+                <td colspan="2">All Users Are Members</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (ApplicationUser usuario in Model.NonMembers)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="IdsToAdd" value="@usuario.Id" />
+                    </td>
+                    <td>
+                        @usuario.UserName
+                    </td>
+                    <td>
+                        @usuario.Email
+                    </td>
+                </tr>
+            }
+
+        }
+    </table>
+
+    <h6 class="bg-info panel-body">Remover do perfil @Model.Role.Name</h6>
+    <table class="table table-bordered table-condensed">
+        @if (Model.Members.Count() == 0)
+        {
+            <tr>
+                <td colspan="2">Nenhum usuário pertence a este perfil.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (ApplicationUser usuario in Model.Members)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="IdsToDelete" value="@usuario.Id" />
+                    </td>
+                    <td>
+                        @usuario.UserName
+                    </td>
+                    <td>
+                        @usuario.Email
+                    </td>
+                </tr>
+            }
+
+        }
+    </table>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+</form>

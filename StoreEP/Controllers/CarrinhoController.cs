@@ -12,11 +12,11 @@ namespace StoreEP.Controllers
 {
     public class CarrinhoController : Controller
     {
-        private readonly StoreEPDbContext _context;
+        private readonly StoreEPDbContext _lojaContexto;
         private Carrinho Carrinho;
         public CarrinhoController(StoreEPDbContext repo, Carrinho carService)
         {
-            _context = repo;
+            _lojaContexto = repo;
             Carrinho = carService;
         }
         public ViewResult Index(string returnUrl)
@@ -28,16 +28,16 @@ namespace StoreEP.Controllers
         }
         public RedirectToActionResult AdicionarCarrinho(int produtoID, string returnUrl)
         {
-            Produto produto = _context.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
+            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
             if(produto != null)
             {
                 Carrinho.AddItem(produto, 1);
             }
             return RedirectToAction("Finalizar", "Pedido", new { returnUrl });
         }
-        public RedirectToActionResult RemoveFromCart(int produtoID, string returnUrl)
+        public RedirectToActionResult RemoverCarrinho(int produtoID, string returnUrl)
         {
-            Produto produto = _context.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
+            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
             if (produto != null)
             {
                 Carrinho.RemoveLine(produto);

@@ -138,7 +138,6 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "{controller=Endereco}/Index/{ID}");
-
             });
             //IdentityDbContext.CriarContaAdministrador(app.ApplicationServices, Configuration).Wait();
         }

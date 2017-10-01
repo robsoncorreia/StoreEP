@@ -346,7 +346,7 @@ var _gsScope = (typeof module !== "undefined" && module.exports && typeof global
 
 		_colorProps = {tint:1, lineColor:1, fillColor:1},
 		_xyContexts = "position,scale,skew,pivot,anchor,tilePosition,tileScale".split(","),
-		_contexts = {x:"position", y:"position", tileX:"tilePosition", tileY:"tilePosition"},
+		_lojaContextos = {x:"position", y:"position", tileX:"tilePosition", tileY:"tilePosition"},
 		_colorMatrixFilterProps = {colorMatrixFilter:1, saturation:1, contrast:1, hue:1, colorize:1, colorizeAmount:1, brightness:1, combineCMF:1},
 		_DEG2RAD = Math.PI / 180,
         _degreesToRadians = function(value) {
@@ -356,8 +356,8 @@ var _gsScope = (typeof module !== "undefined" && module.exports && typeof global
 	//context setup...
 	for (i = 0; i < _xyContexts.length; i++) {
 		p = _xyContexts[i];
-		_contexts[p + "X"] = p;
-		_contexts[p + "Y"] = p;
+		_lojaContextos[p + "X"] = p;
+		_lojaContextos[p + "Y"] = p;
     }
 
     //color parsing setup...
@@ -393,7 +393,7 @@ var _gsScope = (typeof module !== "undefined" && module.exports && typeof global
             }
             var context, axis, value, colorMatrix, filter, p, padding, colorSetter, i, data;
             for (p in values) {
-                context = _contexts[p];
+                context = _lojaContextos[p];
                 value = values[p];
                 if (typeof(value) === "function") {
                     value = value(index || 0, target);

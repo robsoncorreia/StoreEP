@@ -10769,7 +10769,7 @@ var SafeSubscriber = (function (_super) {
                 context.unsubscribe = this.unsubscribe.bind(this);
             }
         }
-        this._context = context;
+        this._lojaContexto = context;
         this._next = next;
         this._error = error;
         this._complete = complete;
@@ -10814,7 +10814,7 @@ var SafeSubscriber = (function (_super) {
         if (!this.isStopped) {
             var _parentSubscriber = this._parentSubscriber;
             if (this._complete) {
-                var wrappedComplete = function () { return _this._complete.call(_this._context); };
+                var wrappedComplete = function () { return _this._complete.call(_this._lojaContexto); };
                 if (!_parentSubscriber.syncErrorThrowable) {
                     this.__tryOrUnsub(wrappedComplete);
                     this.unsubscribe();
@@ -10831,7 +10831,7 @@ var SafeSubscriber = (function (_super) {
     };
     SafeSubscriber.prototype.__tryOrUnsub = function (fn, value) {
         try {
-            fn.call(this._context, value);
+            fn.call(this._lojaContexto, value);
         }
         catch (err) {
             this.unsubscribe();
@@ -10840,7 +10840,7 @@ var SafeSubscriber = (function (_super) {
     };
     SafeSubscriber.prototype.__tryOrSetError = function (parent, fn, value) {
         try {
-            fn.call(this._context, value);
+            fn.call(this._lojaContexto, value);
         }
         catch (err) {
             parent.syncErrorValue = err;
@@ -10851,7 +10851,7 @@ var SafeSubscriber = (function (_super) {
     };
     SafeSubscriber.prototype._unsubscribe = function () {
         var _parentSubscriber = this._parentSubscriber;
-        this._context = null;
+        this._lojaContexto = null;
         this._parentSubscriber = null;
         _parentSubscriber.unsubscribe();
     };
@@ -12049,7 +12049,7 @@ Injector.NULL = new _NullInjector();
  * found in the LICENSE file at https://angular.io/license
  */
 var ERROR_COMPONENT_TYPE = 'ngComponentType';
-var ERROR_DEBUG_CONTEXT = 'ngDebugContext';
+var ERROR_DEBUG_lojaContexto = 'ngDebugContext';
 var ERROR_ORIGINAL_ERROR = 'ngOriginalError';
 var ERROR_LOGGER = 'ngErrorLogger';
 /**
@@ -12061,7 +12061,7 @@ var ERROR_LOGGER = 'ngErrorLogger';
  * @return {?}
  */
 function getDebugContext(error) {
-    return ((error))[ERROR_DEBUG_CONTEXT];
+    return ((error))[ERROR_DEBUG_lojaContexto];
 }
 /**
  * @param {?} error
@@ -19555,7 +19555,7 @@ function viewDebugError(msg, context) {
  * @return {?}
  */
 function _addDebugContext(err, context) {
-    ((err))[ERROR_DEBUG_CONTEXT] = context;
+    ((err))[ERROR_DEBUG_lojaContexto] = context;
     ((err))[ERROR_LOGGER] = context.logError.bind(context);
 }
 /**
@@ -20895,7 +20895,7 @@ function removeFromArray(arr, index) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var EMPTY_CONTEXT = new Object();
+var EMPTY_lojaContexto = new Object();
 /**
  * @param {?} selector
  * @param {?} componentType
@@ -20983,7 +20983,7 @@ var ComponentFactory_ = (function (_super) {
         }
         var /** @type {?} */ viewDef = resolveDefinition(this.viewDefFactory);
         var /** @type {?} */ componentNodeIndex = ((((viewDef.nodes[0].element)).componentProvider)).index;
-        var /** @type {?} */ view = Services.createRootView(injector, projectableNodes || [], rootSelectorOrNode, viewDef, ngModule, EMPTY_CONTEXT);
+        var /** @type {?} */ view = Services.createRootView(injector, projectableNodes || [], rootSelectorOrNode, viewDef, ngModule, EMPTY_lojaContexto);
         var /** @type {?} */ component = asProviderData(view, componentNodeIndex).instance;
         if (rootSelectorOrNode) {
             view.renderer.setAttribute(asElementData(view, 0).renderElement, 'ng-version', VERSION.full);
@@ -32690,7 +32690,7 @@ var NgIf = (function () {
      */
     function NgIf(_viewContainer, templateRef) {
         this._viewContainer = _viewContainer;
-        this._context = new NgIfContext();
+        this._lojaContexto = new NgIfContext();
         this._thenTemplateRef = null;
         this._elseTemplateRef = null;
         this._thenViewRef = null;
@@ -32703,7 +32703,7 @@ var NgIf = (function () {
          * @return {?}
          */
         set: function (condition) {
-            this._context.$implicit = this._context.ngIf = condition;
+            this._lojaContexto.$implicit = this._lojaContexto.ngIf = condition;
             this._updateView();
         },
         enumerable: true,
@@ -32739,13 +32739,13 @@ var NgIf = (function () {
      * @return {?}
      */
     NgIf.prototype._updateView = function () {
-        if (this._context.$implicit) {
+        if (this._lojaContexto.$implicit) {
             if (!this._thenViewRef) {
                 this._viewContainer.Clear();
                 this._elseViewRef = null;
                 if (this._thenTemplateRef) {
                     this._thenViewRef =
-                        this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._context);
+                        this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._lojaContexto);
                 }
             }
         }
@@ -32755,7 +32755,7 @@ var NgIf = (function () {
                 this._thenViewRef = null;
                 if (this._elseTemplateRef) {
                     this._elseViewRef =
-                        this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._context);
+                        this._viewContainer.createEmbeddedView(this._elseTemplateRef, this._lojaContexto);
                 }
             }
         }
@@ -45196,8 +45196,8 @@ var _FILE_TAG = 'file';
 var _SOURCE_TAG = 'source';
 var _TARGET_TAG = 'target';
 var _UNIT_TAG = 'trans-unit';
-var _CONTEXT_GROUP_TAG = 'context-group';
-var _CONTEXT_TAG = 'context';
+var _lojaContexto_GROUP_TAG = 'context-group';
+var _lojaContexto_TAG = 'context';
 var Xliff = (function (_super) {
     __WEBPACK_IMPORTED_MODULE_0_tslib__["__extends"](Xliff, _super);
     function Xliff() {
@@ -45214,8 +45214,8 @@ var Xliff = (function (_super) {
         messages.forEach(function (message) {
             var /** @type {?} */ contextTags = [];
             message.sources.forEach(function (source) {
-                var /** @type {?} */ contextGroupTag = new Tag(_CONTEXT_GROUP_TAG, { purpose: 'location' });
-                contextGroupTag.children.push(new CR(10), new Tag(_CONTEXT_TAG, { 'context-type': 'sourcefile' }, [new Text$2(source.filePath)]), new CR(10), new Tag(_CONTEXT_TAG, { 'context-type': 'linenumber' }, [new Text$2("" + source.startLine)]), new CR(8));
+                var /** @type {?} */ contextGroupTag = new Tag(_lojaContexto_GROUP_TAG, { purpose: 'location' });
+                contextGroupTag.children.push(new CR(10), new Tag(_lojaContexto_TAG, { 'context-type': 'sourcefile' }, [new Text$2(source.filePath)]), new CR(10), new Tag(_lojaContexto_TAG, { 'context-type': 'linenumber' }, [new Text$2("" + source.startLine)]), new CR(8));
                 contextTags.push(new CR(8), contextGroupTag);
             });
             var /** @type {?} */ transUnit = new Tag(_UNIT_TAG, { id: message.id, datatype: 'html' });
@@ -46585,7 +46585,7 @@ var I18nToHtmlVisitor = (function () {
         this._mapperFactory = _mapperFactory;
         this._missingTranslationStrategy = _missingTranslationStrategy;
         this._console = _console;
-        this._contextStack = [];
+        this._lojaContextoStack = [];
         this._errors = [];
     }
     /**
@@ -46593,7 +46593,7 @@ var I18nToHtmlVisitor = (function () {
      * @return {?}
      */
     I18nToHtmlVisitor.prototype.convert = function (srcMsg) {
-        this._contextStack.length = 0;
+        this._lojaContextoStack.length = 0;
         this._errors.length = 0;
         // i18n to text
         var /** @type {?} */ text = this._convertToText(srcMsg);
@@ -46688,7 +46688,7 @@ var I18nToHtmlVisitor = (function () {
         var /** @type {?} */ id = this._digest(srcMsg);
         var /** @type {?} */ mapper = this._mapperFactory ? this._mapperFactory(srcMsg) : null;
         var /** @type {?} */ nodes;
-        this._contextStack.push({ msg: this._srcMsg, mapper: this._mapper });
+        this._lojaContextoStack.push({ msg: this._srcMsg, mapper: this._mapper });
         this._srcMsg = srcMsg;
         if (this._i18nNodesByMsgId.hasOwnProperty(id)) {
             // When there is a translation use its nodes as the source
@@ -46714,7 +46714,7 @@ var I18nToHtmlVisitor = (function () {
             this._mapper = function (name) { return name; };
         }
         var /** @type {?} */ text = nodes.map(function (node) { return node.visit(_this); }).join('');
-        var /** @type {?} */ context = ((this._contextStack.pop()));
+        var /** @type {?} */ context = ((this._lojaContextoStack.pop()));
         this._srcMsg = context.msg;
         this._mapper = context.mapper;
         return text;
@@ -48630,7 +48630,7 @@ var TemplateParser = (function () {
             }
             var /** @type {?} */ bindingParser = new BindingParser(this._exprParser, /** @type {?} */ ((interpolationConfig)), this._schemaRegistry, uniqPipes, errors);
             var /** @type {?} */ parseVisitor = new TemplateParseVisitor(this._reflector, this._config, providerViewContext, uniqDirectives, bindingParser, this._schemaRegistry, schemas, errors);
-            result = visitAll(parseVisitor, htmlAstWithErrors.rootNodes, EMPTY_ELEMENT_CONTEXT);
+            result = visitAll(parseVisitor, htmlAstWithErrors.rootNodes, EMPTY_ELEMENT_lojaContexto);
             errors.push.apply(errors, providerViewContext.errors);
             usedPipes.push.apply(usedPipes, bindingParser.getUsedPipes());
         }
@@ -49267,7 +49267,7 @@ var NonBindableVisitor = (function () {
         var /** @type {?} */ attrNameAndValues = ast.attrs.map(function (attr) { return [attr.name, attr.value]; });
         var /** @type {?} */ selector = createElementCssSelector(ast.name, attrNameAndValues);
         var /** @type {?} */ ngContentIndex = parent.findNgContentIndex(selector);
-        var /** @type {?} */ children = visitAll(this, ast.children, EMPTY_ELEMENT_CONTEXT);
+        var /** @type {?} */ children = visitAll(this, ast.children, EMPTY_ELEMENT_lojaContexto);
         return new ElementAst(ast.name, visitAll(this, ast.attrs), [], [], [], [], [], false, [], children, ngContentIndex, ast.sourceSpan, ast.endSourceSpan);
     };
     /**
@@ -49400,7 +49400,7 @@ function createElementCssSelector(elementName, attributes) {
     }
     return cssSelector;
 }
-var EMPTY_ELEMENT_CONTEXT = new ElementContext(true, new SelectorMatcher(), null, null);
+var EMPTY_ELEMENT_lojaContexto = new ElementContext(true, new SelectorMatcher(), null, null);
 var NON_BINDABLE_VISITOR = new NonBindableVisitor();
 /**
  * @param {?} node

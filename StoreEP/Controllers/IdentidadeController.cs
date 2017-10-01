@@ -23,10 +23,10 @@ namespace StoreEP.Controllers
 
         public ViewResult Index() => View(roleManager.Roles);
 
-        public IActionResult Create() => View();
+        public IActionResult Criar() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Create([Required] string name)
+        public async Task<IActionResult> Criar([Required] string name)
         {
             if (ModelState.IsValid)
             {
@@ -43,7 +43,7 @@ namespace StoreEP.Controllers
             return View(name);
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Apagar(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
             if (role != null)
@@ -65,7 +65,7 @@ namespace StoreEP.Controllers
             return View("Index", roleManager.Roles);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Editar(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
             List<ApplicationUser> members = new List<ApplicationUser>();
@@ -84,7 +84,7 @@ namespace StoreEP.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(RoleModificationModel model)
+        public async Task<IActionResult> Editar(RoleModificationModel model)
         {
             IdentityResult result;
             if (ModelState.IsValid)
@@ -121,7 +121,7 @@ namespace StoreEP.Controllers
             }
             else
             {
-                return await Edit(model.RoleID);
+                return await Editar(model.RoleID);
             }
         }
         private void AddErrorsFromResult(IdentityResult result)

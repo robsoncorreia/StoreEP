@@ -12,25 +12,25 @@ namespace StoreEP.Controllers
 {
     public class ProdutosController : Controller
     {
-        private readonly StoreEPDbContext _context;
+        private readonly StoreEPDbContext _lojaContexto;
 
         public ProdutosController(StoreEPDbContext context)
         {
-            _context = context;
+            _lojaContexto = context;
         }
 
         public int PageSize = 4;
         //GET: Produtos
-        public async Task<IActionResult> Index() => View(await _context.Produtos.ToListAsync());
+        public async Task<IActionResult> Index() => View(await _lojaContexto.Produtos.ToListAsync());
 
         public async Task<IActionResult> List(string category, int page = 1) => View(new ProductsListViewModel
         {
-            Produtos = await _context.Produtos.Where(p => category == null || p.CategoriaPD == category).OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+            Produtos = await _lojaContexto.Produtos.Where(p => category == null || p.CategoriaPD == category).OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
             PagingInfo = new PagingInfo 
             {
                 CurrentPage = page,
                 ItensPerPage = PageSize,
-                TotalItems = _context.Produtos.Count()
+                TotalItems = _lojaContexto.Produtos.Count()
             },
             CurrentCategory = category
         });
@@ -43,7 +43,7 @@ namespace StoreEP.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produtos
+            var produto = await _lojaContexto.Produtos
                 .SingleOrDefaultAsync(m => m.ProdutoID == id);
             if (produto == null)
             {
@@ -68,8 +68,8 @@ namespace StoreEP.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(produto);
-                await _context.SaveChangesAsync();
+                _lojaContexto.Add(produto);
+                await _lojaContexto.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(produto);
@@ -83,7 +83,7 @@ namespace StoreEP.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produtos.SingleOrDefaultAsync(m => m.ProdutoID == id);
+            var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(m => m.ProdutoID == id);
             if (produto == null)
             {
                 return NotFound();
@@ -107,8 +107,8 @@ namespace StoreEP.Controllers
             {
                 try
                 {
-                    _context.Update(produto);
-                    await _context.SaveChangesAsync();
+                    _lojaContexto.Update(produto);
+                    await _lojaContexto.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -134,7 +134,7 @@ namespace StoreEP.Controllers
                 return NotFound();
             }
 
-            var produto = await _context.Produtos
+            var produto = await _lojaContexto.Produtos
                 .SingleOrDefaultAsync(m => m.ProdutoID == id);
             if (produto == null)
             {
@@ -148,15 +148,21 @@ namespace StoreEP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var produto = await _context.Produtos.SingleOrDefaultAsync(m => m.ProdutoID == id);
-            _context.Produtos.Remove(produto);
-            await _context.SaveChangesAsync();
+            var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(m => m.ProdutoID == id);
+            _lojaContexto.Produtos.Remove(produto);
+            await _lojaContexto.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }
 
         private bool ProdutoExists(int id)
         {
-            return _context.Produtos.Any(e => e.ProdutoID == id);
+            return _lojaContexto.Produtos.Any(e => e.ProdutoID == id);
+        }
+        [HttpGet("[controller]/[action]/{produtoid}")]
+        public async Task<IActionResult> Detalhes(int produtoid)
+        {
+            Produto produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoID == produtoid);
+            return View(produto);
         }
     }
 }

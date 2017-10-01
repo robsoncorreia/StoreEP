@@ -10,17 +10,17 @@ namespace StoreEP.Components
     public class NavigationMenuViewComponent : ViewComponent
     {
 
-        private readonly IProdutoRepositorio _context;
+        private readonly IProdutoRepositorio _lojaContexto;
 
         public NavigationMenuViewComponent(IProdutoRepositorio context)
         {
-            _context = context;
+            _lojaContexto = context;
         }
 
         public IViewComponentResult Invoke()
         {
             ViewBag.SelectedCategory = RouteData?.Values["category"];
-            return View(_context.Produtos.Select(x => x.CategoriaPD).Distinct().OrderBy(x => x));
+            return View(_lojaContexto.Produtos.Select(x => x.CategoriaPD).Distinct().OrderBy(x => x));
         }
     }
 }
