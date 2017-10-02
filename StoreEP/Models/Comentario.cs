@@ -14,5 +14,8 @@ namespace StoreEP.Models
         public string Texto { get; set; }
         public string NomeUsuario { get; set; }
         public DateTime Data { get; set; }
+        public int ProdutoId { get; set; }
+        public string UsuarioID { get; set; }
+        public IEnumerable<Comentario> Respostas { get; set; }
     }
 }

@@ -164,9 +164,10 @@ namespace StoreEP.Controllers
         {
             
             Produto produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID);
-            return View(new ImagemProdutoViewModels {
+            return View(new DetalheProdutoViewModels {
                 Produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID),
-                Imagens = await _lojaContexto.Imagens.Where(i => i.ProdutoId == ID).ToListAsync()
+                Imagens = await _lojaContexto.Imagens.Where(i => i.ProdutoId == ID).ToListAsync(),
+                Comentarios = await _lojaContexto.Comentarios.Where(c => c.ProdutoId == ID).ToListAsync()
             });
         }
     }

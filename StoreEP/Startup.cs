@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using StoreEP.Data;
 using StoreEP.Services;
+using StoreEP.Models.Interface;
+using StoreEP.Models.Repositorio;
 
 namespace StoreEP
 {
@@ -45,6 +47,7 @@ namespace StoreEP
             services.AddTransient<IProdutoRepositorio, EFProdutoRepositorio>();
             services.AddTransient<IPedidoRepositorio, EFPedidoRepositorio>();
             services.AddTransient<IEnderecoRepositorio, EFEnderecoRepositorio>();
+            services.AddTransient<IComentariosRepositorio, EFComentariosRepository>();
 
             services.AddAuthorization(options =>
             {

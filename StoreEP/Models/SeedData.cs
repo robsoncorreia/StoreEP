@@ -29,7 +29,11 @@ namespace StoreEP.Models
                         Imagens =  new List<Imagem>{
                             new Imagem {
                                 Link = "https://www.decathlon.pt/media/838/8387868/big_8573f384-9dcd-44ec-8950-d59ae5afaf03.jpg",
-                                Nome = "Kayak1"
+                                Nome = "Kayak-1"
+                            },
+                            new Imagem {
+                                Link = "http://www.dunhamssports.com/wp-content/uploads/2017/03/0709042561400-explorer-sit-on-lime.jpg",
+                                Nome = "Kayak-2"
                             }
                         }
                     },

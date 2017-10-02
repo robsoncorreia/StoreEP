@@ -18,11 +18,7 @@
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
-    <Compile Remove="Migrations\**" />
     <Content Remove="ClientApp\**" />
-    <Content Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,12 +31,6 @@
   <ItemGroup>
     <Content Remove="Views\Manage\Address.cshtml" />
     <Content Remove="Views\Manage\Compras.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Migrations\20171001231614_initial.cs" />
-    <Compile Include="Migrations\20171001231614_initial.Designer.cs" />
-    <Compile Include="Migrations\StoreEPDbContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>

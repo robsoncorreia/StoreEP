@@ -1,6 +1,13 @@
-@model ImagemProdutoViewModels
+@model DetalheProdutoViewModels
+
 @Model.Produto.Nome
-@{ 
-    Imagem img = Model?.Imagens?.FirstOrDefault();@*https://www.dotnetperls.com/firstordefault*@
-}
-<img src="@img?.Link" alt="@Model?.Produto.Nome"/> 
+<form asp-action="Comentar" asp-controller="Comentarios" method="post">
+    <div class="form-group">
+        <label asp-for="Comentario.NomeUsuario">Nome</label>
+        <input type="text" class="form-control"  asp-for="Comentario.NomeUsuario" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-default">Comentar</button>  
+        <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId"/>
+    </div>
+</form> 

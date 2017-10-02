@@ -45,17 +45,23 @@ namespace StoreEP.Migrations
                     b.Property<int>("ComentarioId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("ComentarioId1");
+
                     b.Property<DateTime>("Data");
 
                     b.Property<byte>("Estrela");
 
                     b.Property<string>("NomeUsuario");
 
-                    b.Property<int?>("ProdutoId");
+                    b.Property<int>("ProdutoId");
 
                     b.Property<string>("Texto");
 
+                    b.Property<string>("UsuarioID");
+
                     b.HasKey("ComentarioId");
+
+                    b.HasIndex("ComentarioId1");
 
                     b.HasIndex("ProdutoId");
 
@@ -196,9 +202,14 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.Comentario", b =>
                 {
+                    b.HasOne("StoreEP.Models.Comentario")
+                        .WithMany("Respostas")
+                        .HasForeignKey("ComentarioId1");
+
                     b.HasOne("StoreEP.Models.Produto")
                         .WithMany("Comentarios")
-                        .HasForeignKey("ProdutoId");
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("StoreEP.Models.Imagem", b =>
