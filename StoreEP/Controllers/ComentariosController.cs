@@ -36,7 +36,7 @@ namespace StoreEP.Controllers
                 comentario.Data = DateTime.Now;
                 _comentariosRepositorio.RegistrarComentario(comentario);
             }
-            return View();
+            return RedirectToAction(actionName:"Finalizar", controllerName:"Pedido");
         }
     }
 }

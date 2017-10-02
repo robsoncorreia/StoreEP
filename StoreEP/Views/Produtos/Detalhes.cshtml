@@ -11,3 +11,7 @@
         <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId"/>
     </div>
 </form> 
+@foreach (var comentario in Model.Comentarios)
+{
+    <div>@comentario.NomeUsuario</div>
+}
