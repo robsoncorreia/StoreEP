@@ -89,9 +89,9 @@ namespace StoreEP.Controllers
             IdentityResult result;
             if (ModelState.IsValid)
             {
-                foreach (string userId in model.IdsToAdd ?? new string[] { })
+                foreach (string UserId in model.IdsToAdd ?? new string[] { })
                 {
-                    ApplicationUser user = await userManager.FindByIdAsync(userId);
+                    ApplicationUser user = await userManager.FindByIdAsync(UserId);
                     if (user != null)
                     {
                         result = await userManager.AddToRoleAsync(user, model.RoleName);
@@ -102,9 +102,9 @@ namespace StoreEP.Controllers
                         }
                     }
                 }
-                foreach (string userId in model.IdsToDelete?? new string[] { })
+                foreach (string UserId in model.IdsToDelete?? new string[] { })
                 {
-                    ApplicationUser user = await userManager.FindByEmailAsync(userId);
+                    ApplicationUser user = await userManager.FindByEmailAsync(UserId);
                     if (user != null)
                     {
                         result = await userManager.RemoveFromRoleAsync(user, model.RoleName);

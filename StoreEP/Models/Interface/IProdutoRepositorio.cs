@@ -9,6 +9,6 @@ namespace StoreEP.Models
     {
         IEnumerable<Produto> Produtos { get; }
         void RegistrarProduto(Produto produto);
-        Produto ApagarProduto(int produtoId);
+        Produto ApagarProduto(int ID);
     }
 }

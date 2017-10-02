@@ -15,15 +15,15 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td class="text-right">@item?.ProdutoID</td>
-            <td>@item?.NomePD</td>
-            <td class="text-right">@item?.PrecoPD.ToString("c")</td>
-            <td class="text-right">@item?.CategoriaPD</td>
-            <td class="text-right">@item?.DescricaoPD</td>
+            <td class="text-right">@item?.ID</td>
+            <td>@item?.Nome</td>
+            <td class="text-right">@item?.Preco.ToString("c")</td>
+            <td class="text-right">@item?.Categoria</td>
+            <td class="text-right">@item?.Descricao</td>
             <td class="text-center">
                 <form asp-action="Delete" method="post">
-                    <a asp-action="Edit" class="btn btn-sm btn btn-warning" asp-route-batata="@item.ProdutoID">Edit</a>
-                    <input type="hidden" name="ProdutoID" value="@item.ProdutoID" />
+                    <a asp-action="Edit" class="btn btn-sm btn btn-warning" asp-route-batata="@item.ID">Edit</a>
+                    <input type="hidden" name="ID" value="@item.ID" />
                     <button type="submit" class="btn btn-danger btn-sm" >Delete</button>
                 </form>
             </td>

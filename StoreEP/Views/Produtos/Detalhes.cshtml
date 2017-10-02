@@ -1,2 +1,6 @@
-﻿@model Produto
-@Model.NomePD
+@model ImagemProdutoViewModels
+@Model.Produto.Nome
+@{ 
+    Imagem img = Model?.Imagens?.FirstOrDefault();@*https://www.dotnetperls.com/firstordefault*@
+}
+<img src="@img?.Link" alt="@Model?.Produto.Nome"/> 

@@ -1,5 +1,4 @@
 @model IEnumerable<string>
-<a class="btn btn-block btn-group" asp-action="List" asp-controller="Produto" asp-route-category="">Home</a>
 @foreach (string category in Model)
 {
     <a class="btn btn-block @(category == ViewBag.SelectedCAtegory ? "btn-primary" : "btn-default")"

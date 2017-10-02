@@ -7,6 +7,6 @@ namespace StoreEP.Models.ManageViewModels
 {
     public class ComprasViewModel
     {
-        public string UserID { get; set; }
+        public string UserId { get; set; }
     }
 }

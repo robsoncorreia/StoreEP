@@ -8,8 +8,9 @@ namespace StoreEP.Models
 {
     public class Endereco
     {
-        public int ID { get; set; }
-        public string UserID { get; set; }
+        [Key]
+        public int EnderecoId { get; set; }
+        public string UserId { get; set; }
         [Required(ErrorMessage = "Entre com o endereço.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
         [Display(Name = "Rua")]

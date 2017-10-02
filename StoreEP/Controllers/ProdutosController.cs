@@ -25,7 +25,7 @@ namespace StoreEP.Controllers
 
         public async Task<IActionResult> List(string category, int page = 1) => View(new ProductsListViewModel
         {
-            Produtos = await _lojaContexto.Produtos.Where(p => category == null || p.CategoriaPD == category).OrderBy(p => p.ProdutoID).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+            Produtos = await _lojaContexto.Produtos.Where(p => category == null || p.Categoria == category).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
             PagingInfo = new PagingInfo 
             {
                 CurrentPage = page,
@@ -44,7 +44,7 @@ namespace StoreEP.Controllers
             }
 
             var produto = await _lojaContexto.Produtos
-                .SingleOrDefaultAsync(m => m.ProdutoID == id);
+                .SingleOrDefaultAsync(m => m.ProdutoId == id);
             if (produto == null)
             {
                 return NotFound();
@@ -64,7 +64,7 @@ namespace StoreEP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProdutoID,NomePD,CategoriaPD,PrecoPD,DescricaoPD,LinkImagemPD,Fabricante")] Produto produto)
+        public async Task<IActionResult> Create([Bind("ID,Nome,Categoria,Preco,Descricao,LinkImagemPD,Fabricante")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace StoreEP.Controllers
                 return NotFound();
             }
 
-            var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(m => m.ProdutoID == id);
+            var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
             if (produto == null)
             {
                 return NotFound();
@@ -96,9 +96,9 @@ namespace StoreEP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProdutoID,NomePD,CategoriaPD,PrecoPD,DescricaoPD,LinkImagemPD,Fabricante")] Produto produto)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Nome,Categoria,Preco,Descricao,LinkImagemPD,Fabricante")] Produto produto)
         {
-            if (id != produto.ProdutoID)
+            if (id != produto.ProdutoId)
             {
                 return NotFound();
             }
@@ -112,7 +112,7 @@ namespace StoreEP.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProdutoExists(produto.ProdutoID))
+                    if (!ProdutoExists(produto.ProdutoId))
                     {
                         return NotFound();
                     }
@@ -135,7 +135,7 @@ namespace StoreEP.Controllers
             }
 
             var produto = await _lojaContexto.Produtos
-                .SingleOrDefaultAsync(m => m.ProdutoID == id);
+                .SingleOrDefaultAsync(p => p.ProdutoId == id);
             if (produto == null)
             {
                 return NotFound();
@@ -148,7 +148,7 @@ namespace StoreEP.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(m => m.ProdutoID == id);
+            var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
             _lojaContexto.Produtos.Remove(produto);
             await _lojaContexto.SaveChangesAsync();
             return RedirectToAction(nameof(List));
@@ -156,13 +156,18 @@ namespace StoreEP.Controllers
 
         private bool ProdutoExists(int id)
         {
-            return _lojaContexto.Produtos.Any(e => e.ProdutoID == id);
+            return _lojaContexto.Produtos.Any(p => p.ProdutoId == id);
         }
-        [HttpGet("[controller]/[action]/{produtoid}")]
-        public async Task<IActionResult> Detalhes(int produtoid)
+        
+        [HttpGet("[controller]/[action]/{ID}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
+        public async Task<IActionResult> Detalhes(int ID)
         {
-            Produto produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoID == produtoid);
-            return View(produto);
+            
+            Produto produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID);
+            return View(new ImagemProdutoViewModels {
+                Produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID),
+                Imagens = await _lojaContexto.Imagens.Where(i => i.ProdutoId == ID).ToListAsync()
+            });
         }
     }
 }

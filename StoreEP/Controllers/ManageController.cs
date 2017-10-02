@@ -476,7 +476,7 @@ namespace StoreEP.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            return View(_lojaContexto.Pedidos.Where(o => o.UserID == user.Id));
+            return View(_lojaContexto.Pedidos.Where(o => o.UserId == user.Id));
         }
 
         #region Helpers

@@ -32,9 +32,9 @@
         @foreach (var produto in pedido.Lines)
                 {
             <tr>
-                <td>@produto?.Produto?.NomePD</td>
-                <td>@produto?.Produto?.PrecoPD.ToString("c")</td>
-                <td>@produto?.Produto?.CategoriaPD</td>
+                <td>@produto?.Produto?.Nome</td>
+                <td>@produto?.Produto?.Preco.ToString("c")</td>
+                <td>@produto?.Produto?.Categoria</td>
             </tr>
         }
     }

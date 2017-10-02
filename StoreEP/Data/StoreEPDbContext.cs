@@ -17,6 +17,7 @@ namespace StoreEP.Models
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
+        public DbSet<Imagem> Imagens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,7 @@ namespace StoreEP.Models
             modelBuilder.Entity<Endereco>().ToTable("Endereco");
             modelBuilder.Entity<Comentario>().ToTable("Comentario");
             modelBuilder.Entity<Pagamento>().ToTable("Pagamento");
+            modelBuilder.Entity<Imagem>().ToTable("Imagem");
         }
     }
 }

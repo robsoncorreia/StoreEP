@@ -4,22 +4,22 @@
     Layout = "_AdminLayout";
 }
 <form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="ProdutoID"/>
+    <input type="hidden" asp-for="ID"/>
     <div class="form-group">
         <label>Nome</label>
-        <div><span asp-validation-for="NomePD" class="text-danger"></span></div>
-        <input asp-for="NomePD" class="form-control" />
+        <div><span asp-validation-for="Nome" class="text-danger"></span></div>
+        <input asp-for="Nome" class="form-control" />
     </div>
     <div class="form-group">
         <label>Descrição</label>
-        <div><span asp-validation-for="DescricaoPD" class="text-danger"></span></div>
-        <textarea asp-for="DescricaoPD" class="form-control"></textarea>
+        <div><span asp-validation-for="Descricao" class="text-danger"></span></div>
+        <textarea asp-for="Descricao" class="form-control"></textarea>
     </div>
     <div class="form-group">
-        <label asp-for="CategoriaPD">Categoria</label>
-        <div><span asp-validation-for="CategoriaPD" class="text-danger"></span></div>
+        <label asp-for="Categoria">Categoria</label>
+        <div><span asp-validation-for="Categoria" class="text-danger"></span></div>
         <div >
-            <select asp-for="CategoriaPD" class="combobox input-large form-control">
+            <select asp-for="Categoria" class="combobox input-large form-control">
                 <option></option>
                 <option value="Chess">Chess</option>
                 <option value="Soccer">Soccer</option>
@@ -29,8 +29,8 @@
     </div>
     <div class="form-group">
         <label>Preço</label>
-        <div><span asp-validation-for="PrecoPD" class="text-danger"></span></div>
-        <input asp-for="PrecoPD" class="form-control" />
+        <div><span asp-validation-for="Preco" class="text-danger"></span></div>
+        <input asp-for="Preco" class="form-control" />
     </div>
     <div class="text-center">
         <button class="btn btn-primary" type="submit">Salvar</button>

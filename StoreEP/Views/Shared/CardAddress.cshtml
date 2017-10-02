@@ -10,11 +10,11 @@
         </h6>
     </div>
     <div class="mdl-card__actions mdl-card--border">
-        <label id="@Model.ID" class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" for="icon-toggle-@Model.ID">
-            <input type="checkbox" id="endereco-id-@Model.ID" class="mdl-icon-toggle__input" value="@Model.ID">
+        <label id="@Model.EnderecoId" class="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" for="icon-toggle-@Model.EnderecoId">
+            <input type="checkbox" id="endereco-id-@Model.EnderecoId" class="mdl-icon-toggle__input" value="@Model.EnderecoId">
             <i class="mdl-icon-toggle__label material-icons">send</i>
         </label>
-        <a asp-action="Apagar" asp-controller="Endereco" class="mdl-button mdl-js-button mdl-button--icon" style="float:right" asp-route-enderecoid="@Model.ID">
+        <a asp-action="Apagar" asp-controller="Endereco" class="mdl-button mdl-js-button mdl-button--icon" style="float:right" asp-route-EnderecoId="@Model.EnderecoId">
             <i class="material-icons">delete_forever</i>
         </a>
     </div>

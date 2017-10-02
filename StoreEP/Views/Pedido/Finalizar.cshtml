@@ -1,4 +1,4 @@
-﻿@model FinalizarPedidoViewModel
+@model FinalizarPedidoViewModel
 @{
     Layout = "_AdminLayout";
 }
@@ -24,12 +24,12 @@
                     {
                         <tr>
                             <td class="mdl-data-table__cell--non-numeric">@line.Quantidade</td>
-                            <td class="text-left"><a asp-action="Detalhes" asp-controller="Produtos" asp-route-produtoid="@line.Produto.ProdutoID">@line.Produto.NomePD</a></td>
-                            <td class="text-right">@line.Produto.PrecoPD.ToString("c")</td>
-                            <td class="text-right">@((line.Quantidade * line.Produto.PrecoPD).ToString("c"))</td>
+                            <td class="text-left"><a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@line.Produto.ProdutoId">@line.Produto.Nome</a></td>
+                            <td class="text-right">@line.Produto.Preco.ToString("c")</td>
+                            <td class="text-right">@((line.Quantidade * line.Produto.Preco).ToString("c"))</td>
                             <td>
                                 <form asp-controller="Pedido" asp-action="RemoverCarrinho" method="post">
-                                    <input type="hidden" name="ProdutoID" value="@line.Produto.ProdutoID" />
+                                    <input type="hidden" name="ID" value="@line.Produto.ProdutoId" />
                                     <button type="submit" class="mdl-button mdl-js-button mdl-button--icon">
                                         <i class="material-icons">remove_shopping_cart</i>
                                     </button>

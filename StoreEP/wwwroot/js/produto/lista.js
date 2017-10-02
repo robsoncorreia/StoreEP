@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
 
     $(".mdl-card").hover(function () {
         var preco = "#" + $(this).attr('id') + "-preco";
@@ -9,6 +9,8 @@
             y: 40,
         });
         TweenMax.to(this, .25, { rotationZ: 1, onComplete: voltar, onCompleteParams: [this, preco] });
+        //var card_bottom = "#" + $(this).attr('id') + "-bottom-card";
+        //TweenMax.to(card_bottom, .25, { rotation: 30 });
     });
     function voltar(x, preco) {
         TweenMax.to(x, .25, { rotationZ: -1, onComplete: inicio, onCompleteParams: [x] });
@@ -17,7 +19,7 @@
             scaleY: 1,
             ease:
             Elastic.easeOut.config(1, 0.3),
-            y: 0,
+            y: 0
         });
     }
     function inicio(x) {

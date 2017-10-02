@@ -9,7 +9,7 @@ namespace StoreEP.Models
     {
         private List<CartLine> lineCollection = new List<CartLine>();
         public virtual void AddItem(Produto produto, int quantidade) {
-            CartLine line = lineCollection.Where(p => p.Produto.ProdutoID == produto.ProdutoID).FirstOrDefault();
+            CartLine line = lineCollection.Where(p => p.Produto.ProdutoId == produto.ProdutoId).FirstOrDefault();
             if (line == null)
             {
                 lineCollection.Add(new CartLine
@@ -23,8 +23,8 @@ namespace StoreEP.Models
                 line.Quantidade += quantidade;
             }
         }
-        public virtual void RemoveLine(Produto produto) => lineCollection.RemoveAll(l => l.Produto.ProdutoID == produto.ProdutoID);
-        public virtual decimal ValorTotal() => lineCollection.Sum(e => e.Produto.PrecoPD * e.Quantidade);
+        public virtual void RemoveLine(Produto produto) => lineCollection.RemoveAll(l => l.Produto.ProdutoId == produto.ProdutoId);
+        public virtual decimal ValorTotal() => lineCollection.Sum(e => e.Produto.Preco * e.Quantidade);
         public virtual void Limpar() => lineCollection.Clear();
         public virtual IEnumerable<CartLine> Lines => lineCollection;
     }

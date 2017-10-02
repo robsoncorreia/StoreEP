@@ -26,18 +26,18 @@ namespace StoreEP.Controllers
                 ReturnUrl = returnUrl
             });
         }
-        public RedirectToActionResult AdicionarCarrinho(int produtoID, string returnUrl)
+        public RedirectToActionResult AdicionarCarrinho(int ProdutoId, string returnUrl)
         {
-            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
+            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoId ==  ProdutoId);
             if(produto != null)
             {
                 Carrinho.AddItem(produto, 1);
             }
             return RedirectToAction("Finalizar", "Pedido", new { returnUrl });
         }
-        public RedirectToActionResult RemoverCarrinho(int produtoID, string returnUrl)
+        public RedirectToActionResult RemoverCarrinho(int ID, string returnUrl)
         {
-            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
+            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoId == ID);
             if (produto != null)
             {
                 Carrinho.RemoveLine(produto);

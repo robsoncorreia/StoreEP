@@ -15,12 +15,12 @@
         {
         <tr>
             <td class="mdl-data-table__cell--non-numeric">@line.Quantidade</td>
-            <td class="text-left">@line.Produto.NomePD</td>
-            <td class="text-right">@line.Produto.PrecoPD.ToString("c")</td>
-            <td class="text-right">@((line.Quantidade * line.Produto.PrecoPD).ToString("c"))</td>
+            <td class="text-left">@line.Produto.Nome</td>
+            <td class="text-right">@line.Produto.Preco.ToString("c")</td>
+            <td class="text-right">@((line.Quantidade * line.Produto.Preco).ToString("c"))</td>
             <td>
                 <form asp-action="RemoverCarrinho" method="post">
-                    <input type="hidden" name="ProdutoID" value="@line.Produto.ProdutoID" />
+                    <input type="hidden" name="ID" value="@line.Produto.ID" />
                     <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
                     <button type="submit" class="mdl-button mdl-js-button mdl-button--icon">
                         <i class="material-icons">remove_shopping_cart</i>

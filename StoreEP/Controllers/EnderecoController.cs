@@ -31,10 +31,10 @@ namespace StoreEP.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            if (user != null && _addressRepositoty.Enderecos.Where(a => a.UserID.Equals(user.Id)).Count() != 0)
+            if (user != null && _addressRepositoty.Enderecos.Where(a => a.UserId.Equals(user.Id)).Count() != 0)
             {
                 IEnumerable<Endereco> enderecos;
-                enderecos = _addressRepositoty.Enderecos.Where(a => a.UserID.Equals(user.Id)).ToList();
+                enderecos = _addressRepositoty.Enderecos.Where(a => a.UserId.Equals(user.Id)).ToList();
                 return View(enderecos);
             }
             return RedirectToAction(nameof(Criar));
@@ -46,7 +46,7 @@ namespace StoreEP.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
-                address.UserID = user.Id;
+                address.UserId = user.Id;
             }
             if (ModelState.IsValid)
             {
@@ -58,12 +58,12 @@ namespace StoreEP.Controllers
         public IActionResult Criar() => View();
 
 
-        public IActionResult Apagar(string enderecoid)
+        public IActionResult Apagar(string EnderecoId)
         {
-            Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(p => p.ID == int.Parse(enderecoid));
+            Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoId == int.Parse(EnderecoId));
             if (apagarEndereco != null)
             {
-                _addressRepositoty.ApagarEndereco(int.Parse(enderecoid));
+                _addressRepositoty.ApagarEndereco(int.Parse(EnderecoId));
             }
             return RedirectToAction("Finalizar", "Pedido");
         }

@@ -322,16 +322,16 @@ namespace StoreEP.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        public async Task<IActionResult> ConfirmEmail(string UserId, string code)
         {
-            if (userId == null || code == null)
+            if (UserId == null || code == null)
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(UserId);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+                throw new ApplicationException($"Unable to load user with ID '{UserId}'.");
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");

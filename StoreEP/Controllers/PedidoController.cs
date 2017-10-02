@@ -46,18 +46,18 @@ namespace StoreEP.Controllers
 
             }
             return View(new PedidoListaViewModel {
-                Pedidos = _pedidoRepositorio.Pedidos.Where(o => o.UserID == user.Id)
+                Pedidos = _pedidoRepositorio.Pedidos.Where(o => o.UserId == user.Id)
             });
         }
 
         [HttpPost]
         public IActionResult MarkShipped(int ID)
         {
-            Pedido order = _pedidoRepositorio.Pedidos.FirstOrDefault(o => o.ID == ID);
-            if (order != null)
+            Pedido pedido = _pedidoRepositorio.Pedidos.FirstOrDefault(p => p.PedidoId == ID);
+            if (pedido != null)
             {
-                order.Shipped = true;
-                _pedidoRepositorio.SaveOrder(order);
+                pedido.Shipped = true;
+                _pedidoRepositorio.SaveOrder(pedido);
             }
             return RedirectToAction(nameof(Lista));
         }
@@ -69,13 +69,13 @@ namespace StoreEP.Controllers
             Pedido pedido = new Pedido();
 
             var user = await _userManager.GetUserAsync(User);
-            var address = _enderecoRepositorio.Enderecos.SingleOrDefault(a => a.ID == int.Parse("1"));
+            Endereco endereco = _enderecoRepositorio.Enderecos.SingleOrDefault(e => e.EnderecoId == int.Parse("1"));
 
-            pedido.Address = address;
+            pedido.Endereco = endereco;
             pedido.DataCompra = DateTime.Now;
             pedido.Pagamento = finalizarPedidoViewModel.Pagamento;
 
-            finalizarPedidoViewModel.Pagamento.UserID = user.Id;
+            finalizarPedidoViewModel.Pagamento.UserId = user.Id;
             finalizarPedidoViewModel.Pagamento.CompraDT = DateTime.Now ;
             
             if (_carrinho.Lines?.Count() == 0)
@@ -85,7 +85,7 @@ namespace StoreEP.Controllers
             }
             if (ModelState.IsValid)
             {
-                pedido.UserID = user.Id;
+                pedido.UserId = user.Id;
                 pedido.Lines = _carrinho.Lines.ToArray();
                 _pedidoRepositorio.SaveOrder(pedido);
                 return RedirectToAction(nameof(Completed));
@@ -106,7 +106,7 @@ namespace StoreEP.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
-                if (_enderecoRepositorio.Enderecos.Where(e => e.UserID.Equals(user.Id) && !e.UserID.Equals("apagado")).Count() == 0)
+                if (_enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id) && !e.UserId.Equals("apagado")).Count() == 0)
                 {
                     return RedirectToAction(actionName: "Criar", controllerName: "Endereco");
                 }
@@ -114,12 +114,12 @@ namespace StoreEP.Controllers
             return View(new FinalizarPedidoViewModel
             {
                 Carrinho = _carrinho,
-                Enderecos = _enderecoRepositorio.Enderecos.Where(a => a.UserID.Equals(user.Id)).ToList()
+                Enderecos = _enderecoRepositorio.Enderecos.Where(a => a.UserId.Equals(user.Id)).ToList()
             });
         }
-        public RedirectToActionResult RemoverCarrinho(int produtoID)
+        public RedirectToActionResult RemoverCarrinho(int ID)
         {
-            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
+            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoId == ID);
             if (produto != null)
             {
                 _carrinho.RemoveLine(produto);

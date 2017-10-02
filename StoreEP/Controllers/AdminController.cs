@@ -23,7 +23,7 @@ namespace StoreEP.Controllers
 
         [AutoValidateAntiforgeryToken]
         [Authorize(Roles = "Administrador")]
-        public ViewResult Edit(int batata) => View(repository.Produtos.FirstOrDefault(p => p.ProdutoID == batata));
+        public ViewResult Edit(int batata) => View(repository.Produtos.FirstOrDefault(p => p.ProdutoId == batata));
 
         [HttpPost]
         [Authorize(Roles = "Administrador")]
@@ -32,7 +32,7 @@ namespace StoreEP.Controllers
             if (ModelState.IsValid)
             {
                 repository.RegistrarProduto(produto);
-                TempData["massage"] = $"{produto.NomePD} foi salvo com sucesso.";
+                TempData["massage"] = $"{produto.Nome} foi salvo com sucesso.";
                 return RedirectToAction(nameof(List));
             }
             else
@@ -44,12 +44,12 @@ namespace StoreEP.Controllers
         public ViewResult Create() => View("Edit", new Produto());
 
         [HttpPost]
-        public IActionResult Delete(int produtoId)
+        public IActionResult Delete(int ID)
         {
-            Produto deletedProduto = repository.ApagarProduto(produtoId);
+            Produto deletedProduto = repository.ApagarProduto(ID);
             if (deletedProduto != null)
             {
-                TempData["message"] = $"{deletedProduto.NomePD} foi apagado.";
+                TempData["message"] = $"{deletedProduto.Nome} foi apagado.";
             }
             return RedirectToAction("List");
         }

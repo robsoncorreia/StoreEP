@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,9 +8,10 @@ namespace StoreEP.Models
 {
     public class Pagamento
     {
-        public int ID { get; set; }
-        public string UserID { get; set; }
-        public int PedidoID { get; set; }
+        [Key]
+        public int PagamentoId { get; set; }
+        public string UserId { get; set; }
+        public int PedidoId { get; set; }
         [Required]
         public decimal Valor { get; set; }
         [Required]

@@ -22,70 +22,72 @@ namespace StoreEP.Models
             var produtos = new Produto[] {
                     new Produto
                     {
-                        NomePD = "Kayak",
-                        DescricaoPD = "A boat for one person",
-                        CategoriaPD = "Watersports",
-                        PrecoPD = 275,
-                        Imagem = new Imagem {
-                            LinkImagem = "https://www.decathlon.pt/media/838/8387868/big_8573f384-9dcd-44ec-8950-d59ae5afaf03.jpg",
-                            Nome = "Kayak1"
+                        Nome = "Kayak",
+                        Descricao = "A boat for one person",
+                        Categoria = "Watersports",
+                        Preco = 275,
+                        Imagens =  new List<Imagem>{
+                            new Imagem {
+                                Link = "https://www.decathlon.pt/media/838/8387868/big_8573f384-9dcd-44ec-8950-d59ae5afaf03.jpg",
+                                Nome = "Kayak1"
+                            }
                         }
                     },
                     new Produto
                     {
-                        NomePD = "Lifejacket",
-                        DescricaoPD = "Protective and fashionable",
-                        CategoriaPD = "Watersports",
-                        PrecoPD = 48.95m
+                        Nome = "Lifejacket",
+                        Descricao = "Protective and fashionable",
+                        Categoria = "Watersports",
+                        Preco = 48.95m
                     },
                     new Produto
                     {
-                        NomePD = "Soccer Ball",
-                        DescricaoPD = "FIFA-approved size and weight",
-                        CategoriaPD = "Soccer",
-                        PrecoPD = 19.50m
+                        Nome = "Soccer Ball",
+                        Descricao = "FIFA-approved size and weight",
+                        Categoria = "Soccer",
+                        Preco = 19.50m
                     },
                     new Produto
                     {
-                        NomePD = "Corner Flags",
-                        DescricaoPD = "Give your playing field a professional touch",
-                        CategoriaPD = "Soccer",
-                        PrecoPD = 34.95m
+                        Nome = "Corner Flags",
+                        Descricao = "Give your playing field a professional touch",
+                        Categoria = "Soccer",
+                        Preco = 34.95m
                     },
                     new Produto
                     {
-                        NomePD = "Stadium",
-                        DescricaoPD = "Flat-packed 35,000-seat stadium",
-                        CategoriaPD = "Soccer",
-                        PrecoPD = 79500
+                        Nome = "Stadium",
+                        Descricao = "Flat-packed 35,000-seat stadium",
+                        Categoria = "Soccer",
+                        Preco = 79500
                     },
                     new Produto
                     {
-                        NomePD = "Thinking Cap",
-                        DescricaoPD = "Improve brain efficiency by 75%",
-                        CategoriaPD = "Chess",
-                        PrecoPD = 16
+                        Nome = "Thinking Cap",
+                        Descricao = "Improve brain efficiency by 75%",
+                        Categoria = "Chess",
+                        Preco = 16
                     },
                     new Produto
                     {
-                        NomePD = "Unsteady Chair",
-                        DescricaoPD = "Secretly give your opponent a disadvantage",
-                        CategoriaPD = "Chess",
-                        PrecoPD = 29.95m
+                        Nome = "Unsteady Chair",
+                        Descricao = "Secretly give your opponent a disadvantage",
+                        Categoria = "Chess",
+                        Preco = 29.95m
                     },
                     new Produto
                     {
-                        NomePD = "Human Chess Board",
-                        DescricaoPD = "A fun game for the family",
-                        CategoriaPD = "Chess",
-                        PrecoPD = 75
+                        Nome = "Human Chess Board",
+                        Descricao = "A fun game for the family",
+                        Categoria = "Chess",
+                        Preco = 75
                     },
                     new Produto
                     {
-                        NomePD = "Bling-Bling King",
-                        DescricaoPD = "Gold-plated, diamond-studded King",
-                        CategoriaPD = "Chess",
-                        PrecoPD = 1200
+                        Nome = "Bling-Bling King",
+                        Descricao = "Gold-plated, diamond-studded King",
+                        Categoria = "Chess",
+                        Preco = 1200
                     }
                 };
             foreach (Produto p in produtos)

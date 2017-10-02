@@ -77201,7 +77201,7 @@ var Router = (function () {
      * router.createUrlTree(['/team', 33, {expand: true}, 'user', 11]);
      *
      * // you can collapse static segments like this (this works only with the first passed-in value):
-     * router.createUrlTree(['/team/33/user', userId]);
+     * router.createUrlTree(['/team/33/user', UserId]);
      *
      * // If the first segment can contain slashes, and you do not want the router to split it, you
      * // can do the following:
