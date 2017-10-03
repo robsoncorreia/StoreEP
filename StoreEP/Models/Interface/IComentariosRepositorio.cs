@@ -9,5 +9,6 @@ namespace StoreEP.Models.Interface
     {
         void RegistrarComentario(Comentario comentario);
         IEnumerable<Comentario> Comentarios { get; }
+        int ApagarComentario(Comentario comentario);
     }
 }

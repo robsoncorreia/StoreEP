@@ -45,6 +45,8 @@ namespace StoreEP.Migrations
                     b.Property<int>("ComentarioId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Aprovado");
+
                     b.Property<int?>("ComentarioId1");
 
                     b.Property<DateTime>("Data");

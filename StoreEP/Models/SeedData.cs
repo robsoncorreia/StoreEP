@@ -22,18 +22,23 @@ namespace StoreEP.Models
             var produtos = new Produto[] {
                     new Produto
                     {
-                        Nome = "Kayak",
-                        Descricao = "A boat for one person",
-                        Categoria = "Watersports",
+                        Nome = "Aparador de Pelos",
+                        Descricao = "Kit Aparador de Pelos Philips Multigroom QG3339/15 Bateria Recarregável 12W",
+                        Categoria = "Beleza & Perfumaria",
                         Preco = 275,
                         Imagens =  new List<Imagem>{
                             new Imagem {
-                                Link = "https://www.decathlon.pt/media/838/8387868/big_8573f384-9dcd-44ec-8950-d59ae5afaf03.jpg",
-                                Nome = "Kayak-1"
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/119371/0/119371001_1GG.png",
+                                Nome = "Aparador de Pelos 1"
                             },
                             new Imagem {
-                                Link = "http://www.dunhamssports.com/wp-content/uploads/2017/03/0709042561400-explorer-sit-on-lime.jpg",
-                                Nome = "Kayak-2"
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/119371/0/119371001_2GG.jpg",
+                                Nome = "Aparador de Pelos 2"
+                            },
+                            new Imagem
+                            {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/119371/0/119371001_3GG.jpg",
+                                Nome = "Aparador de Pelos 3"
                             }
                         }
                     },

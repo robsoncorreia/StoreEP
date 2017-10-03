@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Comentario>
+@if (TempData["massage"] != null)
+{
+    <div class="alert alert-success">@TempData["massage"]</div>
+    TempData["massage"] = null;
+}
+<a asp-action="ValidarComentarios" asp-route-aprovado="true">Exibir aprovados</a>
+<br>
+<a asp-action="ValidarComentarios">Exibir ainda não aprovados</a>
+@if (Model.Count() == 0)
+{
+    <div>Todos os comentários foram validados</div>
+}
+else
+{
+    @foreach (Comentario c in Model)
+    {
+        <div>
+            <i class="material-icons data-comentario">today</i>@String.Format("{0:MM/dd/yyyy}", c.Data)
+        </div>
+        <div>
+            @c.ComentarioId
+        </div>
+        <div>
+            <i class="material-icons data-comentario">account_box</i>@c.NomeUsuario
+        </div>
+        <div>
+            @c.ProdutoId
+        </div>
+        <div>
+            <i class="material-icons data-comentario">message</i>@c.Texto
+        </div>
+        <div>
+            @c.UsuarioID
+        </div>
+        <a class="btn btn-primary" asp-action="DetalhesComentario" asp-route-comentarioId="@c.ComentarioId">Detalhes</a>
+        <a class="btn btn-danger" asp-action="RemoverComentario" asp-route-comentarioId="@c.ComentarioId">Remover comentário</a>
+        <a class="btn btn-success" asp-action="AprovarComentario" asp-route-comentarioId="@c.ComentarioId">Aprovar comentário</a>
+    }
+}

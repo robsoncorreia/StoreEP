@@ -1,17 +1,61 @@
 @model DetalheProdutoViewModels
+<div class="row">
+    <div id="produtos_carousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            @{
+                int cont = 0;
+                @foreach (var imagem in Model.Imagens)
+            {
+                if (cont == 0)
+                {
+                        <li data-target="#produtos_carousel" data-slide-to="@cont" class="active"></li>
+                    }
+                    else
+                    {
+                        <li data-target="#produtos_carousel" data-slide-to="@cont"></li>
+                    }
+                    cont++;
+                }
+            }
+        </ol>
+        <div class="carousel-inner">
+            @{
+                int cont2 = 0;
+                @foreach (var imagem in Model.Imagens)
+            {
+                if (cont2 == 0)
+                {
+                        <div class="item active"><img src="@imagem.Link" alt="@imagem.Nome" /></div>
+                    }
+                    else
+                    {
+                        <div class="item"><img src="@imagem.Link" alt="@imagem.Nome" /></div>
+                    }
+                    cont2++;
+                }
+            }
+        </div>
+        <a class="left carousel-control" href="#produtos_carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#produtos_carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+</div>
+<div class="row">
+    @foreach (var comentario in Model.Comentarios)
+    {
+        <div>@comentario.NomeUsuario</div>
+    }
+</div>
+<div class="row">
+    <form asp-action="Comentar" asp-controller="Comentarios" method="post">
+        <div class="form-group">
+            <label asp-for="Comentario.NomeUsuario">Nome</label>
+            <input type="text" class="form-control" asp-for="Comentario.NomeUsuario" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-default">Comentar</button>
+            <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId" />
+        </div>
+    </form>
+</div>
 
-@Model.Produto.Nome
-<form asp-action="Comentar" asp-controller="Comentarios" method="post">
-    <div class="form-group">
-        <label asp-for="Comentario.NomeUsuario">Nome</label>
-        <input type="text" class="form-control"  asp-for="Comentario.NomeUsuario" />
-    </div>
-    <div>
-        <button type="submit" class="btn btn-default">Comentar</button>  
-        <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId"/>
-    </div>
-</form> 
-@foreach (var comentario in Model.Comentarios)
-{
-    <div>@comentario.NomeUsuario</div>
-}
+

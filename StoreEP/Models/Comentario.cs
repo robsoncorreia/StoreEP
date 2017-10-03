@@ -17,5 +17,6 @@ namespace StoreEP.Models
         public int ProdutoId { get; set; }
         public string UsuarioID { get; set; }
         public IEnumerable<Comentario> Respostas { get; set; }
+        public bool Aprovado { get; set; } = false;
     }
 }

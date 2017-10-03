@@ -33,11 +33,16 @@ namespace StoreEP.Models.Repositorio
                     dbEntry.ProdutoId = comentario.ProdutoId;
                     dbEntry.Respostas = comentario.Respostas;
                     dbEntry.Texto = comentario.Texto;
+                    dbEntry.Aprovado = comentario.Aprovado;
                 }
             }
             _context.SaveChanges();
         } 
-        
+        public int ApagarComentario(Comentario comentario)
+        {
+            _context.Remove(comentario);
+            return _context.SaveChanges();
+        } 
     }
 }
 

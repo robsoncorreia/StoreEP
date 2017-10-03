@@ -7,6 +7,7 @@
     <base href="~/" />
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="~/css/index.css" />
     <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
     <link rel="stylesheet" asp-href-include="/lib/material-design-lite/material.css" />
@@ -19,7 +20,7 @@
     <script type="text/javascript" src="~/lib/greensock/src/minified/TimelineMax.min.js"></script>
     <script type="text/javascript" src="~/lib/greensock/src/minified/TweenMax.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="~/js/produto/lista.js"></script>
+    <script type="text/javascript" src="~/js/produto/listar.js"></script>
 </head>
 <body>
     <div class="navbar navbar-default" role="navigation">
@@ -28,7 +29,7 @@
         <div class="pull-right">
             @await Component.InvokeAsync("CartSummary")
         </div>
-        <a asp-controller="Admin" asp-action="Edit" class="navbar-brand">Criar</a>
+        <a asp-controller="Admin" asp-action="Index" class="navbar-brand">Gerenciar</a>
     </div>
     <div class="panel">
         <div id="categories" class="col-xs-3">

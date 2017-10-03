@@ -25,18 +25,15 @@
         <div class="pull-right">
             @await Component.InvokeAsync("CartSummary")
         </div>
-        <a asp-controller="Admin" asp-action="Edit" class="navbar-brand">Criar</a>
+        <a asp-controller="Admin" asp-action="Index" class="navbar-brand">Gerenciar</a>
     </div>
     <div class="panel-body">
-        @if (TempData["massage"] != null)
-            {
-            <div class="alert alert-success">@TempData["massage"]</div>
-        }
         @RenderBody()
     </div>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript" src="~/lib/masked-input/masked-input.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap-combobox/js/bootstrap-combobox.js"></script>
     <script type="text/javascript" src="~/lib/material-design-lite/material.min.js"></script>
     <script type="text/javascript" src="~/js/produto/create.js"></script>

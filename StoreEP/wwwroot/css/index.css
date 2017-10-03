@@ -1,5 +1,9 @@
-﻿body {
+﻿#produtos_carousel{
+    width: 500px;
 }
-a, u {
-    text-decoration: none;
+.data-comentario {
+    font-size: 16px;
+    top: 3px;
+    position: relative;
+    color: darkgrey;
 }

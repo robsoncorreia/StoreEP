@@ -48,6 +48,7 @@ namespace StoreEP
             services.AddTransient<IPedidoRepositorio, EFPedidoRepositorio>();
             services.AddTransient<IEnderecoRepositorio, EFEnderecoRepositorio>();
             services.AddTransient<IComentariosRepositorio, EFComentariosRepository>();
+            services.AddTransient<IImagensRepositorio, EFImagemRepositorio>();
 
             services.AddAuthorization(options =>
             {

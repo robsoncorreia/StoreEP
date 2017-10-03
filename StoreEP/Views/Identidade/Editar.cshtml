@@ -3,7 +3,7 @@
     <h4>Editar perfis</h4>
 </div>
 <div asp-validation-summary="All" class="text=danger"></div>
-<form asp-action="Edit" method="post">
+<form asp-action="Editar" method="post">
     <input type="hidden" name="roleName" value="@Model.Role.Name" />
     <input type="hidden" name="roleName" value="@Model.Role.Id" />
     <h6 class="bg-info panel-body">Adicionar ao perfil @Model.Role.Name</h6>

@@ -161,13 +161,12 @@ namespace StoreEP.Controllers
         
         [HttpGet("[controller]/[action]/{ID}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
         public async Task<IActionResult> Detalhes(int ID)
-        {
-            
+        {     
             Produto produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID);
             return View(new DetalheProdutoViewModels {
                 Produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID),
                 Imagens = await _lojaContexto.Imagens.Where(i => i.ProdutoId == ID).ToListAsync(),
-                Comentarios = await _lojaContexto.Comentarios.Where(c => c.ProdutoId == ID).ToListAsync()
+                Comentarios = await _lojaContexto.Comentarios.Where(c => c.ProdutoId == ID && c.Aprovado == true).ToListAsync()
             });
         }
     }
