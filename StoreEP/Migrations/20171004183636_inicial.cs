@@ -41,7 +41,8 @@ namespace StoreEP.Migrations
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fabricante = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Preco = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    Preco = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,7 +110,7 @@ namespace StoreEP.Migrations
                     ImagemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProdutoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

@@ -5,10 +5,10 @@
             @{
                 int cont = 0;
                 @foreach (var imagem in Model.Imagens)
-            {
-                if (cont == 0)
                 {
-                        <li data-target="#produtos_carousel" data-slide-to="@cont" class="active"></li>
+                    if (cont == 0)
+                    {
+                            <li data-target="#produtos_carousel" data-slide-to="@cont" class="active"></li>
                     }
                     else
                     {
@@ -22,9 +22,9 @@
             @{
                 int cont2 = 0;
                 @foreach (var imagem in Model.Imagens)
-            {
-                if (cont2 == 0)
                 {
+                    if (cont2 == 0)
+                    {
                         <div class="item active"><img src="@imagem.Link" alt="@imagem.Nome" /></div>
                     }
                     else

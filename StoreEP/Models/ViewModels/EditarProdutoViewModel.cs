@@ -10,5 +10,6 @@ namespace StoreEP.Models.ViewModels
         public Produto Produto { get; set; }
         public IEnumerable<string> Categorias { get; set; }
         public Imagem Imagem { get; set; }
+        public IEnumerable<string> Fabricantes { get; set; }
     }
 }

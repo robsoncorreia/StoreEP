@@ -25,7 +25,8 @@ namespace StoreEP.Models
                         Nome = "Aparador de Pelos",
                         Descricao = "Kit Aparador de Pelos Philips Multigroom QG3339/15 Bateria Recarregável 12W",
                         Categoria = "Beleza & Perfumaria",
-                        Preco = 275,
+                        Preco = 275m,
+                        Fabricante ="Philips",
                         Imagens =  new List<Imagem>{
                             new Imagem {
                                 Link = "https://images-submarino.b2w.io/produtos/01/00/item/119371/0/119371001_1GG.png",
@@ -44,31 +45,105 @@ namespace StoreEP.Models
                     },
                     new Produto
                     {
-                        Nome = "Lifejacket",
-                        Descricao = "Protective and fashionable",
-                        Categoria = "Watersports",
-                        Preco = 48.95m
+                        Nome = "HD Externo Portátil WD Elements 1TB USB 3.0",
+                        Descricao = "O HD Externo Portátil WD faz transferências de dados ultrarrápidas e possui 1TB de capacidade.",
+                        Categoria = "Acessórios de Informática",
+                        Preco = 254.9m,
+                        Fabricante = "Wester Digital",
+                        Imagens =  new List<Imagem>{
+                            new Imagem {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/123403/3/123403301_1GG.png",
+                                Nome = "HD Externo 1"
+                            },
+                            new Imagem {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/123403/3/123403301_2GG.jpg",
+                                Nome = "HD Externo 2"
+                            },
+                            new Imagem
+                            {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/123403/3/123403301_3GG.jpg",
+                                Nome = "HD Externo 3"
+                            }
+                        }
                     },
                     new Produto
                     {
-                        Nome = "Soccer Ball",
-                        Descricao = "FIFA-approved size and weight",
-                        Categoria = "Soccer",
-                        Preco = 19.50m
+                        Nome = "Notebook Dell Inspiron i15-7560-A30S Intel Core i7 16GB",
+                        Descricao = "Notebook Dell Inspiron i15-7560-A30S Intel Core i7 16GB ((GeForce 940MX de 4GB)) 1TB 128GB SSD Tela Full HD 15,6 Windows 10",
+                        Categoria = "Informática",
+                        Preco = 4519m,
+                        Fabricante = "Dell",
+                        Imagens =  new List<Imagem>{
+                            new Imagem {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/131501/6/131501665_1GG.jpg",
+                                Nome = "Notebook 1"
+                            },
+                            new Imagem {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/131501/6/131501665_2SZ.jpg",
+                                Nome = "Notebook 2"
+                            },
+                            new Imagem
+                            {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/131501/6/131501665_3SZ.jpg",
+                                Nome = "Notebook 3"
+                            }
+                        }
                     },
                     new Produto
                     {
-                        Nome = "Corner Flags",
-                        Descricao = "Give your playing field a professional touch",
-                        Categoria = "Soccer",
-                        Preco = 34.95m
+                        Nome = "Notebook Gamer Acer VX5-591G-54PG Intel Core i5 8GB",
+                        Descricao = "Notebook Gamer Acer VX5-591G-54PG Intel Core i5 8GB (GeForce GTX 1050 com 4GB) 1TB Tela LED 15,6 Windows 10 - Preto",
+                        Categoria = "Informática",
+                        Preco = 3329.99m,
+                        Fabricante = "Acer",
+                        Imagens =  new List<Imagem>{
+                            new Imagem {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/132134/3/132134369SZ.jpg",
+                                Nome = "Notebook 1"
+                            },
+                            new Imagem {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/132134/3/132134369_2SZ.jpg",
+                                Nome = "Notebook 2"
+                            },
+                            new Imagem
+                            {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/132134/3/132134369_3SZ.jpg",
+                                Nome = "Notebook 3"
+                            },
+                            new Imagem
+                            {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/132134/3/132134369_4SZ.jpg",
+                                Nome = "Notebook 4"
+                            }
+                        }
                     },
                     new Produto
                     {
-                        Nome = "Stadium",
-                        Descricao = "Flat-packed 35,000-seat stadium",
-                        Categoria = "Soccer",
-                        Preco = 79500
+                        Nome = "Notebook Acer A515-51-56K6",
+                        Descricao = "Notebook Acer A515-51-56K6 Intel Core I5 8GB 1TB Tela LED 15.6 Windows 10 - Preto",
+                        Categoria = "Informática",
+                        Preco = 2222.21m,
+                        Fabricante = "Acer",
+                        Imagens =  new List<Imagem>{
+                            new Imagem {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/132538/3/132538321SZ.jpg",
+                                Nome = "Notebook 1"
+                            },
+                            new Imagem {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/132538/3/132538321_2SZ.jpg",
+                                Nome = "Notebook 2"
+                            },
+                            new Imagem
+                            {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/132538/3/132538321_3SZ.jpg",
+                                Nome = "Notebook 3"
+                            },
+                            new Imagem
+                            {
+                                Link = "https://images-submarino.b2w.io/produtos/01/00/item/132538/3/132538321_5SZ.jpg",
+                                Nome = "Notebook 4"
+                            }
+                        }
                     },
                     new Produto
                     {
@@ -104,7 +179,6 @@ namespace StoreEP.Models
                 context.Produtos.Add(p);
             }
             context.SaveChanges();
-
         }
     }
 }

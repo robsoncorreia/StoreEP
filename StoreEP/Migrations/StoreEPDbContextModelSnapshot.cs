@@ -114,7 +114,8 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("Link");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired();
 
                     b.Property<int>("ProdutoId");
 
@@ -185,6 +186,8 @@ namespace StoreEP.Migrations
                         .IsRequired();
 
                     b.Property<decimal>("Preco");
+
+                    b.Property<int>("Quantidade");
 
                     b.HasKey("ProdutoId");
 

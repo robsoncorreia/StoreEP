@@ -11,7 +11,7 @@ using System;
 namespace StoreEP.Migrations
 {
     [DbContext(typeof(StoreEPDbContext))]
-    [Migration("20171003164441_inicial")]
+    [Migration("20171004183636_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,7 +115,8 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("Link");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired();
 
                     b.Property<int>("ProdutoId");
 
@@ -186,6 +187,8 @@ namespace StoreEP.Migrations
                         .IsRequired();
 
                     b.Property<decimal>("Preco");
+
+                    b.Property<int>("Quantidade");
 
                     b.HasKey("ProdutoId");
 

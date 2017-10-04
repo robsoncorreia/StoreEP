@@ -58,14 +58,27 @@ namespace StoreEP.Controllers
                 return View(editarProdutoViewModel);
             }
         }
-        public ViewResult CriarProduto() => View(new EditarProdutoViewModel
-        {
-            Categorias = _produtoRepositorio.Produtos.Select(c => c.Categoria).Distinct().OrderBy(c => c)
-        });
         public ActionResult CriarProduto(EditarProdutoViewModel editarProdutoViewModel)
         {
-            _produtoRepositorio.RegistrarProduto(editarProdutoViewModel.Produto);
-            return RedirectToAction(nameof(Listar));
+            bool parametro = editarProdutoViewModel.Produto == null || editarProdutoViewModel == null;
+            IEnumerable<string> categorias = _produtoRepositorio.Produtos.Select(c => c.Categoria).Distinct().OrderBy(c => c);
+            IEnumerable<string> fabricantes = _produtoRepositorio.Produtos.Select(f => f.Fabricante).Distinct().OrderBy(f => f);
+            if (parametro)
+            {
+                return View(new EditarProdutoViewModel
+                {
+                    Categorias = categorias,
+                    Fabricantes = fabricantes
+                });
+            }
+            ModelState.Remove("Imagem.ProdutoId");
+            ModelState.Remove("Produto.ProdutoId");
+            if (ModelState.IsValid)
+            {
+                _produtoRepositorio.RegistrarProduto(editarProdutoViewModel.Produto);
+                return RedirectToAction(nameof(Listar));
+            }
+            return View(new EditarProdutoViewModel { Categorias = categorias, Fabricantes = fabricantes });
         }
         [HttpPost]
         public IActionResult Apagar(int ID)

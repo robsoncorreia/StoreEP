@@ -1,4 +1,5 @@
 ﻿@model EditarProdutoViewModel
+@*<div asp-validation-summary="All" class="text-danger"></div>*@
 <form asp-action="CriarProduto" method="post">
     <input type="hidden" asp-for="Produto.ProdutoId" />
     <div class="form-group">
@@ -11,11 +12,38 @@
         <div><span asp-validation-for="Produto.Descricao" class="text-danger"></span></div>
         <textarea asp-for="Produto.Descricao" class="form-control"></textarea>
     </div>
-    <div class="form-group">
-        <label asp-for="Produto.Categoria">Categoria</label>
-        <div><span asp-validation-for="Produto.Categoria" class="text-danger"></span></div>
-        <div>
-            <select asp-for="Produto.Categoria" asp-items="@(new SelectList(Model.Categorias))" class="combobox input-large form-control"></select>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="form-group col-6 col-sm-3">
+                <label asp-for="Produto.Categoria">Categoria</label>
+                <div><span asp-validation-for="Produto.Categoria" class="text-danger"></span></div>
+                <div>
+                    <select asp-for="Produto.Categoria" asp-items="@(new SelectList(Model.Categorias))" class="combobox input-large form-control"></select>
+                </div>
+            </div>
+            <div class="form-group col-6 col-sm-3">
+                <div class="input-group">
+                    <input id="txt_nova_categoria" type="text" class="form-control" placeholder="Criar nova categoria" aria-label="Criar nova categoria">
+                    <span class="input-group-btn">
+                        <button id="btn_criar_nova_categoria" class="btn btn-secondary" type="button">Criar</button>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-6 col-sm-3">
+                <label asp-for="Produto.Fabricante">Fabricante</label>
+                <div><span asp-validation-for="Produto.Fabricante" class="text-danger"></span></div>
+                <div>
+                    <select asp-for="Produto.Fabricante" asp-items="@(new SelectList(Model.Fabricantes))" class="combobox input-large form-control"></select>
+                </div>
+            </div>
+            <div class="form-group col-6 col-sm-3">
+                <div class="input-group">
+                    <input id="txt_novo_fabricante" type="text" class="form-control" placeholder="Criar novo fabricante" aria-label="Criar novo fabricante">
+                    <span class="input-group-btn">
+                        <button id="btn_criar_novo_fabricante" class="btn btn-secondary" type="button">Criar</button>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
     <div class="form-group">
@@ -39,3 +67,33 @@
         <a asp-action="Listar" class="btn btn-default">Cancelar</a>
     </div>
 </form>
+<script>
+    document.getElementById("btn_criar_nova_categoria").addEventListener("click", adicionar);
+    var txt_nova_categoria = document.getElementById("txt_nova_categoria");
+    var txt_novo_fabricante = document.getElementById("txt_novo_fabricante");
+    var produto_categoria = document.getElementById("Produto_Categoria");
+    var btn_criar_novo_fabricante = document.getElementById("btn_criar_novo_fabricante").addEventListener("click", adicionar)
+    var produto_fabricante = document.getElementById("Produto_Fabricante");
+
+
+    function adicionar() {
+        var btn = this.id === "btn_criar_nova_categoria";
+        if (btn) {
+            if (txt_nova_categoria.value == "") {
+                return;
+            }
+            var option = document.createElement("option");
+            option.textContent = txt_nova_categoria.value;
+            produto_categoria.appendChild(option);
+            txt_nova_categoria.value = "";
+        } else {
+            if (txt_novo_fabricante.value == "") {
+                return;
+            }
+            var option = document.createElement("option");
+            option.textContent = txt_novo_fabricante.value;
+            produto_fabricante.appendChild(option);
+            txt_novo_fabricante.value = "";
+        }
+    }
+</script>
