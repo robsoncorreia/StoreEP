@@ -38,8 +38,6 @@ namespace StoreEP.Controllers
                 Categorias = _produtoRepositorio.Produtos.Select(x => x.Categoria).Distinct().OrderBy(x => x)
             });
         }
-
-
         [HttpPost]
         public IActionResult Editar(EditarProdutoViewModel editarProdutoViewModel)
         {
@@ -75,6 +73,12 @@ namespace StoreEP.Controllers
             ModelState.Remove("Produto.ProdutoId");
             if (ModelState.IsValid)
             {
+                Produto produto = editarProdutoViewModel.Produto;
+                produto?.Imagens.Add(new Imagem {
+                    ProdutoId = produto.ProdutoId,
+                    Nome = editarProdutoViewModel.Imagem.Nome,
+                    Link = editarProdutoViewModel.Imagem.Link
+                });
                 _produtoRepositorio.RegistrarProduto(editarProdutoViewModel.Produto);
                 return RedirectToAction(nameof(Listar));
             }
