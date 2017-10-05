@@ -18,7 +18,7 @@
                 <label asp-for="Produto.Categoria">Categoria</label>
                 <div><span asp-validation-for="Produto.Categoria" class="text-danger"></span></div>
                 <div>
-                    <select asp-for="Produto.Categoria" asp-items="@(new SelectList(Model.Categorias))" class="combobox input-large form-control"></select>
+                    <select asp-for="Produto.Categoria" asp-items="@(new SelectList(Model.Categorias))" class="combobox input-large form-control categoria"></select>
                 </div>
             </div>
             <div class="form-group col-6 col-sm-3">
@@ -33,7 +33,7 @@
                 <label asp-for="Produto.Fabricante">Fabricante</label>
                 <div><span asp-validation-for="Produto.Fabricante" class="text-danger"></span></div>
                 <div>
-                    <select asp-for="Produto.Fabricante" asp-items="@(new SelectList(Model.Fabricantes))" class="combobox input-large form-control"></select>
+                    <select asp-for="Produto.Fabricante" asp-items="@(new SelectList(Model.Fabricantes))" class="combobox input-large form-control fabricante"></select>
                 </div>
             </div>
             <div class="form-group col-6 col-sm-3">
@@ -67,6 +67,19 @@
         <a asp-action="Listar" class="btn btn-default">Cancelar</a>
     </div>
 </form>
+
+@if (Model?.Imagens.Count() > 0)
+{
+    <div>
+        @foreach (Imagem imagem in Model.Imagens)
+        {
+            <div>
+                <img  src="@imagem.Link" alt="@imagem.Nome" id="@imagem.ImagemId" width="80" style="float:left; margin: 4px;" />
+                <a asp-route-returnurl="@ViewData["ReturnUrl"]" class="btn btn-danger" asp-action="ApagarImagem" asp-controller="Admin" asp-route-id="@imagem.ImagemId" asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()">Apagar</a>
+            </div>
+        }
+    </div>
+}
 <script>
     document.getElementById("btn_criar_nova_categoria").addEventListener("click", adicionar);
     var txt_nova_categoria = document.getElementById("txt_nova_categoria");

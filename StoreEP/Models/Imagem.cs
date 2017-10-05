@@ -12,6 +12,7 @@ namespace StoreEP.Models
         public int ImagemId { get; set; }
         public int ProdutoId { get; set; }
         [Url]
+        [Required]
         public string Link { get; set; }
         [Required]
         public string Nome { get; set; }

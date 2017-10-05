@@ -30,7 +30,6 @@ namespace StoreEP
         }
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddNodeServices();
@@ -65,7 +64,7 @@ namespace StoreEP
                 options.Password.RequiredUniqueChars = 6;
 
                 // Lockout settings
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(7);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
                 options.Lockout.MaxFailedAccessAttempts = 10;
                 options.Lockout.AllowedForNewUsers = true;
 
@@ -110,6 +109,7 @@ namespace StoreEP
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+        
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
@@ -145,6 +145,5 @@ namespace StoreEP
             });
             //IdentityDbContext.CriarContaAdministrador(app.ApplicationServices, Configuration).Wait();
         }
-
     }
 }

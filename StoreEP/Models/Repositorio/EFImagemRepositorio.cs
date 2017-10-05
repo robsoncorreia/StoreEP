@@ -32,5 +32,15 @@ namespace StoreEP.Models.Repositorio
             }
             _bancoContexto.SaveChanges();
         }
+        public Imagem ApagarImagem(int id)
+        {
+            Imagem dbEntry = _bancoContexto.Imagens.FirstOrDefault(i => i.ImagemId == id);
+            if (dbEntry != null)
+            {
+                _bancoContexto.Imagens.Remove(dbEntry);
+                _bancoContexto.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

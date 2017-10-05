@@ -24,6 +24,6 @@ namespace StoreEP.Models
         //[Required(ErrorMessage = "Quem é o fabricante.")]
         public string Fabricante { get; set; }
         public List<Comentario> Comentarios { get; set; }
-        public int Quantidade { get; set; }
+        public int Quantidade { get; set; } = 1;
     }
 }
