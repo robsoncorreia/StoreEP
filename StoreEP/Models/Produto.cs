@@ -11,7 +11,6 @@ namespace StoreEP.Models
         [Key]
         public int ProdutoId { get; set; }
         [Required(ErrorMessage = "Escreva um nome válido.")]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Apenas caractéres.")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Defina a categoria.")]
         public string Categoria { get; set; }
@@ -25,5 +24,6 @@ namespace StoreEP.Models
         public string Fabricante { get; set; }
         public List<Comentario> Comentarios { get; set; }
         public int Quantidade { get; set; } = 1;
+        public bool Publicado { get; set; } = false;
     }
 }

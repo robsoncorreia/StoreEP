@@ -8,7 +8,7 @@
                 {
                     if (cont == 0)
                     {
-                            <li data-target="#produtos_carousel" data-slide-to="@cont" class="active"></li>
+                        <li data-target="#produtos_carousel" data-slide-to="@cont" class="active"></li>
                     }
                     else
                     {
@@ -43,6 +43,24 @@
     @foreach (var comentario in Model.Comentarios)
     {
         <div>@comentario.NomeUsuario</div>
+        <div>@comentario.Texto</div>
+        <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-comentarioid="@comentario.ComentarioId">
+            <label>Nome</label>
+            <input asp-for="@Model.Resposta.NomeUsuario" />
+            <label>Texto</label>
+            <input asp-for="@Model.Resposta.Texto" />
+            <button type="submit" class="btn btn-success">Responder</button>
+            <input type="hidden" asp-for="@Model.Resposta.ProdutoId" value="@Model.Produto.ProdutoId" />
+        </form>
+        if (comentario.Respostas != null)
+        {
+            @foreach (var resposta in comentario.Respostas)
+            {
+                <div>@resposta.NomeUsuario</div>
+                <div>@resposta.Texto</div>
+            }
+        }
+
     }
 </div>
 <div class="row">

@@ -21,11 +21,11 @@ namespace StoreEP.Controllers
 
         public int PageSize = 4;
         //GET: Produtos
-        public async Task<IActionResult> Index() => View(await _lojaContexto.Produtos.ToListAsync());
+        public async Task<IActionResult> Index() => View(await _lojaContexto.Produtos.Where(p => p.Publicado == true).ToListAsync());
 
         public async Task<IActionResult> List(string category, int page = 1) => View(new ProductsListViewModel
         {
-            Produtos = await _lojaContexto.Produtos.Where(p => category == null || p.Categoria == category).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+            Produtos = await _lojaContexto.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
             PagingInfo = new PagingInfo 
             {
                 CurrentPage = page,

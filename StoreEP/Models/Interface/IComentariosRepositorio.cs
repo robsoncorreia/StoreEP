@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,5 +10,6 @@ namespace StoreEP.Models.Interface
         void RegistrarComentario(Comentario comentario);
         IEnumerable<Comentario> Comentarios { get; }
         int ApagarComentario(Comentario comentario);
+        int RegistrarResposta(Comentario comentario);
     }
 }

@@ -49,8 +49,7 @@ namespace StoreEP.Controllers
                 {
                     _imagensRepositorio.RegistrarImagem(editarProdutoViewModel.Imagem);
                 }
-                TempData["massage"] = $"{editarProdutoViewModel.Produto.Nome} foi salvo com sucesso.";
-                _produtoRepositorio.RegistrarProduto(editarProdutoViewModel.Produto);
+                TempData["massage"] = $"{editarProdutoViewModel.Produto.Nome} foi salvo com sucesso.";              
                 editarProdutoViewModel.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == editarProdutoViewModel.Produto.ProdutoId).ToList();
                 editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Select(f => f.Fabricante).OrderBy(f => f).ToList();
                 editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Select(x => x.Categoria).Distinct().OrderBy(x => x);
@@ -58,10 +57,15 @@ namespace StoreEP.Controllers
             }
             else
             {
+                ModelState.Remove("Imagem.Link");
+                ModelState.Remove("Imagem.Nome");
+                if (ModelState.IsValid)
+                {
+                    _produtoRepositorio.RegistrarProduto(editarProdutoViewModel.Produto);
+                }
                 editarProdutoViewModel.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == editarProdutoViewModel.Produto.ProdutoId).ToList();
-                editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Select(f => f.Fabricante).OrderBy(f => f).ToList();
-                editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Select(x => x.Categoria).Distinct().OrderBy(x => x);
-
+                editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).Distinct().OrderBy(f => f).ToList();
+                editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Select(c => c.Categoria).Distinct().OrderBy(c => c);
                 return View(editarProdutoViewModel);
             }
         }

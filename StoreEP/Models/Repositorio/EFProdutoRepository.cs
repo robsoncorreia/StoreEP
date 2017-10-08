@@ -23,10 +23,14 @@ namespace StoreEP.Models
                 Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ProdutoId == produto.ProdutoId);
                 if(dbEntry != null)
                 {
-                    dbEntry.Nome = produto.Nome;
-                    dbEntry.Descricao = produto.Descricao;
-                    dbEntry.Preco = produto.Preco;
+
                     dbEntry.Categoria = produto.Categoria;
+                    dbEntry.Descricao = produto.Descricao;
+                    dbEntry.Fabricante = produto.Fabricante;
+                    dbEntry.Nome = produto.Nome;
+                    dbEntry.Preco = produto.Preco;
+                    dbEntry.Publicado = produto.Publicado;
+                    dbEntry.Quantidade = dbEntry.Quantidade;
                 }
             }
             _bancoContexto.SaveChanges();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using StoreEP.Models.Interface;
 using StoreEP.Models;
+using StoreEP.Models.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,7 +37,20 @@ namespace StoreEP.Controllers
                 comentario.Data = DateTime.Now;
                 _comentariosRepositorio.RegistrarComentario(comentario);
             }
-            return RedirectToAction(actionName:"Finalizar", controllerName:"Pedido");
+            return RedirectToAction(actionName: "Finalizar", controllerName: "Pedido");
+        }
+        public IActionResult Responder(DetalheProdutoViewModels detalheProdutoViewModels, int comentarioid)
+        {
+            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ComentarioId == comentarioid);
+            if (comentario == null)
+            {
+                return RedirectToAction(actionName: "Finalizar", controllerName: "Pedido");
+            }
+            comentario.Respostas = new List<Comentario> {
+                detalheProdutoViewModels.Resposta
+            };
+            _comentariosRepositorio.RegistrarComentario(comentario);
+            return RedirectToAction(actionName: "Finalizar", controllerName: "Pedido");
         }
     }
 }

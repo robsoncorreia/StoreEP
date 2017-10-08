@@ -16,7 +16,7 @@ namespace StoreEP.Models
         public DateTime Data { get; set; }
         public int ProdutoId { get; set; }
         public string UsuarioID { get; set; }
-        public IEnumerable<Comentario> Respostas { get; set; }
+        public List<Comentario> Respostas { get; set; }
         public bool Aprovado { get; set; } = false;
     }
 }

@@ -1,5 +1,6 @@
-﻿@model EditarProdutoViewModel
+@model EditarProdutoViewModel
 @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
 <form asp-action="Editar" method="post">
     <input type="hidden" asp-for="Produto.ProdutoId" />
     <div class="form-group">
@@ -29,6 +30,10 @@
                     </span>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center">
             <div class="form-group col-6 col-sm-3">
                 <label asp-for="Produto.Fabricante">Fabricante</label>
                 <div><span asp-validation-for="Produto.Fabricante" class="text-danger"></span></div>
@@ -62,6 +67,9 @@
         <div><span asp-validation-for="Produto.Preco" class="text-danger"></span></div>
         <input asp-for="Produto.Preco" class="form-control" />
     </div>
+    <div class="checkbox">
+        <label><input asp-for="Produto.Publicado" type="checkbox">Publicar</label>
+    </div>
     <div class="text-center">
         <button class="btn btn-primary" type="submit">Salvar</button>
         <a asp-action="Listar" class="btn btn-default">Cancelar</a>
@@ -78,7 +86,7 @@
                 <span>
                     <a style="left: -50px;bottom: -50px;background: aliceblue;box-shadow: 0px 0px 10px black;" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" asp-action="ApagarImagem" asp-controller="Admin" asp-route-id="@imagem.ImagemId" asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()"><i style="color: red;" class="material-icons">delete</i></a>
                 </span>
-            </div>          
+            </div>
         }
     </div>
 }

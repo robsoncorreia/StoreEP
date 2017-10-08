@@ -1,4 +1,4 @@
-﻿using StoreEP.Models.Interface;
+using StoreEP.Models.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,23 +26,21 @@ namespace StoreEP.Models.Repositorio
                 Comentario dbEntry = _context.Comentarios.FirstOrDefault(c => c.ComentarioId == comentario.ComentarioId);
                 if (dbEntry != null)
                 {
-                    dbEntry.UsuarioID = comentario.UsuarioID;
-                    dbEntry.Data = comentario.Data;
-                    dbEntry.Estrela = comentario.Estrela;
-                    dbEntry.NomeUsuario = comentario.NomeUsuario;
-                    dbEntry.ProdutoId = comentario.ProdutoId;
-                    dbEntry.Respostas = comentario.Respostas;
-                    dbEntry.Texto = comentario.Texto;
-                    dbEntry.Aprovado = comentario.Aprovado;
+                    _context.Comentarios.Update(comentario);
                 }
             }
             _context.SaveChanges();
-        } 
+        }
         public int ApagarComentario(Comentario comentario)
         {
             _context.Remove(comentario);
             return _context.SaveChanges();
-        } 
+        }
+        public int RegistrarResposta(Comentario comentario)
+        {
+            _context.Comentarios.Add(comentario);
+            return _context.SaveChanges();
+        }
     }
 }
 

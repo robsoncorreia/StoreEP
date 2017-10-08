@@ -12,11 +12,9 @@ namespace StoreEP.Models
         public int EnderecoId { get; set; }
         public string UserId { get; set; }
         [Required(ErrorMessage = "Entre com o endereço.")]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
         [Display(Name = "Rua")]
         public string Rua { get; set; }
         [Required(ErrorMessage = "Entre com o nome bairro.")]
-        [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
         public string Bairro { get; set; }
         [Required(ErrorMessage = "Entre com o número.")]
         [RegularExpression(@"^[0-9]{1,100}$", ErrorMessage = "Apenas números.")]
