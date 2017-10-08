@@ -61,6 +61,7 @@ namespace StoreEP.Controllers
                 ModelState.Remove("Imagem.Nome");
                 if (ModelState.IsValid)
                 {
+                    TempData["massage"] = $"{editarProdutoViewModel.Produto.Nome} foi salvo com sucesso.";
                     _produtoRepositorio.RegistrarProduto(editarProdutoViewModel.Produto);
                 }
                 editarProdutoViewModel.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == editarProdutoViewModel.Produto.ProdutoId).ToList();
