@@ -4,10 +4,54 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    img {
+        width: 100%;
+    }
+    .mdl-cell:hover {
+        box-shadow: 0 0 6px yellow;
+    }
+    .mdl-cell, .mdl-card__supporting-text {
+        background-color: #0e0e0e;
+        color: white;
+    }
+    .mdl-card__title-text {
+        color: yellow;
+    }
+</style>
 <div class="mdl-grid">
     @foreach (var p in Model.Produtos)
     {
-        @Html.Partial("CardProduto", p);
+        <div id="@p.ProdutoId" class="mdl-cell mdl-cell--4-col demo-card-square mdl-card mdl-shadow--4dp">
+            <div>
+                <img src="@Model.Imagens.Where(i => i.ProdutoId == p.ProdutoId).Select(i => i.Link).FirstOrDefault()" />
+            </div>
+            <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@p.ProdutoId">
+                <div class="mdl-card__title mdl-card--expand">
+                    <h2 class="mdl-card__title-text">@p.Nome</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    @p.Descricao
+                    <br />
+                </div>
+            </a>
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-card__actions mdl-card--border" id="@p.ProdutoId-bottom-card">
+                <form id="@p.ProdutoId" asp-action="AdicionarCarrinho" asp-controller="Carrinho" method="post">
+                    <input type="hidden" asp-for="@p.ProdutoId" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <span class="lead">
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                            <i class="material-icons">add_shopping_cart</i>
+                        </button>
+                        <span id="@p.ProdutoId-preco" style="float:right; color: white;">
+                            @p.Preco.ToString("c")
+                        </span>
+                    </span>
+                </form>
+            </div>
+
+        </div>
     }
 </div>
 <div class="row text-center">

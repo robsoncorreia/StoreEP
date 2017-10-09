@@ -26,6 +26,7 @@ namespace StoreEP.Controllers
         public async Task<IActionResult> List(string category, int page = 1) => View(new ProductsListViewModel
         {
             Produtos = await _lojaContexto.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+            Imagens = await _lojaContexto.Imagens.ToListAsync(),
             PagingInfo = new PagingInfo 
             {
                 CurrentPage = page,
