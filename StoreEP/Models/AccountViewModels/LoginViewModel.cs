@@ -8,12 +8,12 @@ namespace StoreEP.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Digite seu email.")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Digite uma senha válida.")]
+        [DataType(DataType.Password, ErrorMessage ="Digite uma senha válida.")]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]

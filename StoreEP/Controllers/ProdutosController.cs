@@ -21,13 +21,17 @@ namespace StoreEP.Controllers
 
         public int PageSize = 4;
         //GET: Produtos
-        public async Task<IActionResult> Index() => View(await _lojaContexto.Produtos.Where(p => p.Publicado == true).ToListAsync());
+        public async Task<IActionResult> Index() => View(new ProductsListViewModel
+        {
+            Produtos = await _lojaContexto.Produtos.Where(p => p.Publicado == true).ToListAsync(),
+            Imagens = await _lojaContexto.Imagens.ToListAsync()
+        });
 
         public async Task<IActionResult> List(string category, int page = 1) => View(new ProductsListViewModel
         {
             Produtos = await _lojaContexto.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
             Imagens = await _lojaContexto.Imagens.ToListAsync(),
-            PagingInfo = new PagingInfo 
+            PagingInfo = new PagingInfo
             {
                 CurrentPage = page,
                 ItensPerPage = PageSize,
@@ -159,12 +163,13 @@ namespace StoreEP.Controllers
         {
             return _lojaContexto.Produtos.Any(p => p.ProdutoId == id);
         }
-        
+
         [HttpGet("[controller]/[action]/{ID}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
         public async Task<IActionResult> Detalhes(int ID)
-        {     
+        {
             Produto produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID);
-            return View(new DetalheProdutoViewModels {
+            return View(new DetalheProdutoViewModels
+            {
                 Produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID),
                 Imagens = await _lojaContexto.Imagens.Where(i => i.ProdutoId == ID).ToListAsync(),
                 Comentarios = await _lojaContexto.Comentarios.Where(c => c.ProdutoId == ID && c.Aprovado == true).ToListAsync()

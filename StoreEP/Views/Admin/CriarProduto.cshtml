@@ -1,4 +1,4 @@
-@model EditarProdutoViewModel
+﻿@model EditarProdutoViewModel
 @*<div asp-validation-summary="All" class="text-danger"></div>*@
 <form asp-action="CriarProduto" method="post">
     <input type="hidden" asp-for="Produto.ProdutoId" />
@@ -68,7 +68,7 @@
     </div>
 </form>
 
-@if (Model?.Imagens?.Count() > 0)
+@if (Model?.Imagens.Count() > 0)
 {
     <div>
         @foreach (Imagem imagem in Model.Imagens)

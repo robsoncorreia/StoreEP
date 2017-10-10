@@ -1,35 +1,46 @@
 @using StoreEP.Models.ViewModels
+@using StoreEP.Models
 @model ProductsListViewModel
-
 @{
     ViewData["Title"] = "Index";
 }
 <style>
     img {
         width: 100%;
+        height: 100%;
+        padding: 10px;
     }
-    .mdl-cell:hover {
-        box-shadow: 0 0 6px yellow;
+
+    a {
+        text-decoration: none;
     }
-    .mdl-cell, .mdl-card__supporting-text {
-        background-color: #0e0e0e;
+
+    .mdl-cell {
+        background-color: #1a1a1a;
+    }
+    .mdl-card__supporting-text :hover {
+        border: 1px solid yellow;
+    }
+    .mdl-card__supporting-text {
         color: white;
     }
-    .mdl-card__title-text {
-        color: yellow;
+
+    .material-icons, .mdl-card__title-text {
+        color: #fbb813;
     }
 </style>
 <div class="mdl-grid">
     @foreach (var p in Model.Produtos)
     {
         <div id="@p.ProdutoId" class="mdl-cell mdl-cell--4-col demo-card-square mdl-card mdl-shadow--4dp">
-            <div>
-                <img src="@Model.Imagens.Where(i => i.ProdutoId == p.ProdutoId).Select(i => i.Link).FirstOrDefault()" />
+            <div class="text-center">
+                <img src="@p.Imagens.Select(i => i.Link).FirstOrDefault()" alt="@p.Imagens.Select(i => i.Nome).FirstOrDefault()" />
             </div>
             <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@p.ProdutoId">
                 <div class="mdl-card__title mdl-card--expand">
                     <h2 class="mdl-card__title-text">@p.Nome</h2>
                 </div>
+                
                 <div class="mdl-card__supporting-text">
                     @p.Descricao
                     <br />
@@ -41,16 +52,15 @@
                     <input type="hidden" asp-for="@p.ProdutoId" />
                     <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                     <span class="lead">
-                        <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                        <a class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
                             <i class="material-icons">add_shopping_cart</i>
-                        </button>
-                        <span id="@p.ProdutoId-preco" style="float:right; color: white;">
+                        </a>
+                        <span id="@p.ProdutoId-preco" style="float:right; color:white;">
                             @p.Preco.ToString("c")
                         </span>
                     </span>
                 </form>
             </div>
-
         </div>
     }
 </div>
