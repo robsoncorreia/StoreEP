@@ -20,6 +20,12 @@ namespace StoreEP.Controllers
         }
 
         public int PageSize = 4;
+        [HttpPost]
+        public async Task<IActionResult> Index(string busca) => View(new ProductsListViewModel
+        {
+            Produtos = await _lojaContexto.Produtos.Where(p => p.Publicado == true).ToListAsync(),
+            Imagens = await _lojaContexto.Imagens.ToListAsync()
+        });
         //GET: Produtos
         public async Task<IActionResult> Index() => View(new ProductsListViewModel
         {
@@ -27,18 +33,22 @@ namespace StoreEP.Controllers
             Imagens = await _lojaContexto.Imagens.ToListAsync()
         });
 
-        public async Task<IActionResult> List(string category, int page = 1) => View(new ProductsListViewModel
+        public async Task<IActionResult> Listar(string category, int page = 1)
         {
-            Produtos = await _lojaContexto.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
-            Imagens = await _lojaContexto.Imagens.ToListAsync(),
-            PagingInfo = new PagingInfo
+            ProductsListViewModel productsListViewModel = new ProductsListViewModel
             {
-                CurrentPage = page,
-                ItensPerPage = PageSize,
-                TotalItems = _lojaContexto.Produtos.Count()
-            },
-            CurrentCategory = category
-        });
+                Produtos = await _lojaContexto.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+                Imagens = await _lojaContexto.Imagens.ToListAsync(),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItensPerPage = PageSize,
+                    TotalItems = _lojaContexto.Produtos.Count()
+                },
+                CurrentCategory = category
+            };
+            return View(productsListViewModel);
+        }
 
         // GET: Produtos/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -156,7 +166,7 @@ namespace StoreEP.Controllers
             var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
             _lojaContexto.Produtos.Remove(produto);
             await _lojaContexto.SaveChangesAsync();
-            return RedirectToAction(nameof(List));
+            return RedirectToAction(nameof(Listar));
         }
 
         private bool ProdutoExists(int id)

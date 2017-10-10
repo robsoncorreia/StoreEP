@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using StoreEP.Models;
+using StoreEP.Data;
 
 namespace StoreEP
 {

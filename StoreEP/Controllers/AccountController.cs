@@ -68,7 +68,7 @@ namespace StoreEP.Controllers
                     if (result.Succeeded)
                     {
                         _logger.LogInformation(message: $"Usuário {user.UserName} logado.");
-                        return RedirectToAction(actionName: "List", controllerName: "Produtos");
+                        return RedirectToAction(actionName: "Listar", controllerName: "Produtos");
                     }
                     else
                     {
@@ -237,8 +237,8 @@ namespace StoreEP.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-            return RedirectToAction(actionName: "List", controllerName: "Produtos");
+            _logger.LogInformation("Usário saiu.");
+            return RedirectToAction(actionName: "Listar", controllerName: "Produtos");
         }
 
         [HttpPost]

@@ -31,6 +31,7 @@
   <ItemGroup>
     <Content Remove="Views\Manage\Address.cshtml" />
     <Content Remove="Views\Manage\Compras.cshtml" />
+    <Content Remove="Views\Shared\CardProduto.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

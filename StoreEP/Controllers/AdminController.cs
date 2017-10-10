@@ -26,13 +26,15 @@ namespace StoreEP.Controllers
             _comentariosRepositorio = comentariosRepositorio;
         }
         public ViewResult Index() => View();
+
+        [HttpGet("[controller]/[action]/")]
         public ViewResult Listar() => View(_produtoRepositorio.Produtos);
 
         [AutoValidateAntiforgeryToken]
         [HttpGet("[controller]/[action]/Produto{batata}")]
         public ViewResult Editar(int batata)
         {
-            return View(new EditarProdutoViewModel
+            return View("CriarProduto", new EditarProdutoViewModel
             {
                 Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == batata).ToList(),
                 Fabricantes = _produtoRepositorio.Produtos.Select(f => f.Fabricante).OrderBy(f => f).ToList(),
@@ -49,14 +51,15 @@ namespace StoreEP.Controllers
                 {
                     _imagensRepositorio.RegistrarImagem(editarProdutoViewModel.Imagem);
                 }
-                TempData["massage"] = $"{editarProdutoViewModel.Produto.Nome} foi salvo com sucesso.";              
+                TempData["massage"] = $"{editarProdutoViewModel.Produto.Nome} foi salvo com sucesso.";
                 editarProdutoViewModel.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == editarProdutoViewModel.Produto.ProdutoId).ToList();
-                editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Select(f => f.Fabricante).OrderBy(f => f).ToList();
-                editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Select(x => x.Categoria).Distinct().OrderBy(x => x);
-                return View(editarProdutoViewModel);
+                editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).Distinct().OrderBy(f => f).ToList();
+                editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null).Select(x => x.Categoria).Distinct().OrderBy(x => x).ToList();
+                return RedirectToAction("CriarProduto", editarProdutoViewModel);
             }
             else
             {
+                ModelState.Remove("Imagem.ProdutoId");
                 ModelState.Remove("Imagem.Link");
                 ModelState.Remove("Imagem.Nome");
                 if (ModelState.IsValid)
@@ -66,8 +69,8 @@ namespace StoreEP.Controllers
                 }
                 editarProdutoViewModel.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == editarProdutoViewModel.Produto.ProdutoId).ToList();
                 editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).Distinct().OrderBy(f => f).ToList();
-                editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Select(c => c.Categoria).Distinct().OrderBy(c => c);
-                return View(editarProdutoViewModel);
+                editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null).Select(c => c.Categoria).Distinct().OrderBy(c => c);
+                return RedirectToAction("CriarProduto", editarProdutoViewModel);
             }
         }
         public LocalRedirectResult ApagarImagem(int id, string url = null)
@@ -88,10 +91,11 @@ namespace StoreEP.Controllers
                     Fabricantes = fabricantes
                 });
             }
-            ModelState.Remove("Imagem.ProdutoId");
-            ModelState.Remove("Produto.ProdutoId");
+            ModelState.Remove("Imagem.Link");
+            ModelState.Remove("Imagem.Nome");
             if (ModelState.IsValid)
             {
+                TempData["massage"] = $"{editarProdutoViewModel.Produto.Nome} criado com sucesso.";
                 Produto produto = editarProdutoViewModel.Produto;
                 produto.Imagens = new List<Imagem>{
                     new Imagem {
@@ -101,7 +105,7 @@ namespace StoreEP.Controllers
                     }
                 };
                 _produtoRepositorio.RegistrarProduto(editarProdutoViewModel.Produto);
-                return RedirectToAction(nameof(Listar));
+                return View(new EditarProdutoViewModel { Categorias = categorias, Fabricantes = fabricantes });
             }
             return View(new EditarProdutoViewModel { Categorias = categorias, Fabricantes = fabricantes });
         }

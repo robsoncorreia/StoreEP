@@ -20,7 +20,12 @@ namespace StoreEP.Components
         public IViewComponentResult Invoke()
         {
             ViewBag.SelectedCategory = RouteData?.Values["category"];
-            return View(_lojaContexto.Produtos.Select(x => x.Categoria).Distinct().OrderBy(x => x));
+            return View(_lojaContexto.Produtos
+                .Where(p => p.Publicado == true)
+                .Select(x => x.Categoria)
+                .Distinct()
+                .OrderBy(x => x)
+            );
         }
     }
 }

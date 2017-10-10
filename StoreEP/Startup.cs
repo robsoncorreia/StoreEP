@@ -119,7 +119,7 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "{category}/Page{page:int}",
-                    defaults: new { controller = "Produtos", action = "List" });
+                    defaults: new { controller = "Produtos", action = "Listar" });
                 routes.MapRoute(
                   name: null,
                   template: "{controller}/Produto{batata:int}",
@@ -127,22 +127,22 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "Page{page:int}",
-                    defaults: new { controller = "Produtos", action = "List" });
+                    defaults: new { controller = "Produtos", action = "Listar" });
                 routes.MapRoute(
                     name: null,
                     template: "{category}",
-                    defaults: new { controller = "Produtos", action = "List" });
+                    defaults: new { controller = "Produtos", action = "Listar" });
                 routes.MapRoute(
                     name: null,
                     template: "",
-                    defaults: new { controller = "Produtos", action = "List" });
+                    defaults: new { controller = "Produtos", action = "Listar" });
                 routes.MapRoute(
                     name: null,
-                    template: "{controller=Produtos}/{action=List}/{id?}");
+                    template: "{controller=Produtos}/{action=Listar}/{id?}");
                 routes.MapRoute(
                     name: null,
                     template: "{controller=Endereco}/Index/{ID}");
-            });
+        });
             //IdentityDbContext.CriarContaAdministrador(app.ApplicationServices, Configuration).Wait();
         }
     }
