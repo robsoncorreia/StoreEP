@@ -8,22 +8,24 @@ namespace StoreEP.Models
     public class EFProdutoRepositorio: IProdutoRepositorio
     {
         private StoreEPDbContext _bancoContexto;
+        private int produtoid = 0;
         public EFProdutoRepositorio(StoreEPDbContext ctx)
         {
             _bancoContexto = ctx;
         }
         public IEnumerable<Produto> Produtos => _bancoContexto.Produtos;
-        public void RegistrarProduto(Produto produto)
+        public int RegistrarProduto(Produto produto)
         {
             if (produto.ProdutoId == 0) {
                 _bancoContexto.Produtos.Add(produto);
+                produtoid = produto.ProdutoId;
             }
             else
             {
                 Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ProdutoId == produto.ProdutoId);
                 if(dbEntry != null)
                 {
-
+                    produtoid = produto.ProdutoId;
                     dbEntry.Categoria = produto.Categoria;
                     dbEntry.Descricao = produto.Descricao;
                     dbEntry.Fabricante = produto.Fabricante;
@@ -34,6 +36,7 @@ namespace StoreEP.Models
                 }
             }
             _bancoContexto.SaveChanges();
+            return produtoid;
         }
         public Produto ApagarProduto(int ID)
         {

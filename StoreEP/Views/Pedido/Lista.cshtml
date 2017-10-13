@@ -4,38 +4,51 @@
     Layout = "_AdminLayout";
 }
 
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>Pedido</th>
-        <th>Rua</th>
-        <th>CEP</th>
-        <th>Status</th>
-        <th>Data da compra</th>
-        <th colspan="4">Detalhes</th>
-    </tr>
-    @foreach (Pedido pedido in Model.Pedidos)
-    {
+@foreach (Pedido pedido in Model.Pedidos)
+{
+    <table class="table table-bordered table-striped">
         <tr>
-            <td>@pedido.ID</td>
-            <td>@pedido?.Address?.Rua</td>
-            <td>@pedido?.Address?.CEP</td>
+            <th>Pedido</th>
+            <th>Rua</th>
+            <th>Número</th>
+            <th>Bairro</th>
+            <th>Cidede</th>
+            <th>CEP</th>
+            <th>Status</th>
+            <th>Data da compra</th>
+        </tr>
+        <tr>
+            <td>@pedido.PedidoId</td>
+            <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Rua).FirstOrDefault()</td>
+            <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Numero).FirstOrDefault()</td>
+            <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Bairro).FirstOrDefault()</td>
+            <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Cidade).FirstOrDefault()</td>
+            <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.CEP).FirstOrDefault()</td>
             @if (pedido.Shipped)
                 {
                 <td>Enviado</td>
             }
             else
             {
-                <td>N�o Enviado</td>
+                <td>Não Enviado</td>
             }
             <td>@pedido.DataCompra</td>
+        </tr>
+        <tr>
+            <th colspan="1"></th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Categoria</th>
         </tr>
         @foreach (var produto in pedido.Lines)
                 {
             <tr>
-                <td>@produto?.Produto?.Nome</td>
+                <td></td>
+                <td><a asp-action="Detalhes" asp-controller="Produtos" asp-route-produtoid="@produto.Produto.ProdutoId">@produto?.Produto?.Nome</a></td>
                 <td>@produto?.Produto?.Preco.ToString("c")</td>
                 <td>@produto?.Produto?.Categoria</td>
             </tr>
         }
-    }
-</table>
+    </table>
+}
+

@@ -1,6 +1,6 @@
 using System;
 
-namespace StoreEP.Models
+namespace StoreEP
 {
     public class ErrorViewModel
     {

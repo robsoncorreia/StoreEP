@@ -100,10 +100,7 @@ namespace StoreEP
                 app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                {
-                    HotModuleReplacement = true
-                });
+     
             }
             else
             {

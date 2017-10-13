@@ -67,5 +67,15 @@ namespace StoreEP.Controllers
             }
             return RedirectToAction("Finalizar", "Pedido");
         }
+        public IActionResult Utilizar(int enderecoId)
+        {
+            Endereco endereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoId == enderecoId);
+            if (endereco != null)
+            {
+                endereco.Utilizado = DateTime.Now;
+                _addressRepositoty.SalvarEndereco(endereco);
+            }
+            return RedirectToAction("Finalizar", "Pedido");
+        }
     }
 }

@@ -26,7 +26,7 @@
             <td class="text-right">@item?.Descricao</td>
             <td class="text-center">
                 <form asp-action="Apagar" method="post">
-                    <a asp-action="Editar" class="btn btn-sm btn btn-warning" asp-route-batata="@item.ProdutoId">Editar</a>
+                    <a asp-action="EditarProduto" class="btn btn-sm btn btn-warning" asp-route-produtoid="@item.ProdutoId">Editar</a>
                     <input type="hidden" name="ID" value="@item.ProdutoId" />
                     <button type="submit" class="btn btn-danger btn-sm" >Apagar</button>
                 </form>

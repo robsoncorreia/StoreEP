@@ -102,6 +102,8 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("UserId");
 
+                    b.Property<DateTime>("Utilizado");
+
                     b.HasKey("EnderecoId");
 
                     b.ToTable("Endereco");

@@ -8,7 +8,7 @@ namespace StoreEP.Models
     public interface IProdutoRepositorio 
     {
         IEnumerable<Produto> Produtos { get; }
-        void RegistrarProduto(Produto produto);
+        int RegistrarProduto(Produto produto);
         Produto ApagarProduto(int ID);
     }
 }

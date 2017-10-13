@@ -49,25 +49,6 @@ namespace StoreEP.Controllers
             };
             return View(productsListViewModel);
         }
-
-        // GET: Produtos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var produto = await _lojaContexto.Produtos
-                .SingleOrDefaultAsync(m => m.ProdutoId == id);
-            if (produto == null)
-            {
-                return NotFound();
-            }
-
-            return View(produto);
-        }
-
         // GET: Produtos/Create
         public IActionResult Create()
         {
@@ -159,30 +140,30 @@ namespace StoreEP.Controllers
             return View(produto);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
-            _lojaContexto.Produtos.Remove(produto);
-            await _lojaContexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Listar));
-        }
+       
 
         private bool ProdutoExists(int id)
         {
             return _lojaContexto.Produtos.Any(p => p.ProdutoId == id);
         }
 
-        [HttpGet("[controller]/[action]/{ID}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
-        public async Task<IActionResult> Detalhes(int ID)
+        [HttpGet("[controller]/[action]/{produtoid}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
+        public async Task<IActionResult> Detalhes(int? produtoid)
         {
-            Produto produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID);
+            if (produtoid == null)
+            {
+                return NotFound();
+            }
+            Produto produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == produtoid);
+            if (produto == null)
+            {
+                return NotFound();
+            }
             return View(new DetalheProdutoViewModels
             {
-                Produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == ID),
-                Imagens = await _lojaContexto.Imagens.Where(i => i.ProdutoId == ID).ToListAsync(),
-                Comentarios = await _lojaContexto.Comentarios.Where(c => c.ProdutoId == ID && c.Aprovado == true).ToListAsync()
+                Produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == produtoid),
+                Imagens = await _lojaContexto.Imagens.Where(i => i.ProdutoId == produtoid).ToListAsync(),
+                Comentarios = await _lojaContexto.Comentarios.Where(c => c.ProdutoId == produtoid && c.Aprovado == true).ToListAsync()
             });
         }
     }

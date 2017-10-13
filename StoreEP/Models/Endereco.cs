@@ -32,5 +32,6 @@ namespace StoreEP.Models
         public string Pais { get; set; }
         public bool GifWrap { get; set; }
         public string Complemento { get; set; }
+        public DateTime Utilizado { get; set; } = DateTime.Now;
     }
 }

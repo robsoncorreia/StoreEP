@@ -1,4 +1,4 @@
-@model IEnumerable<Order>
+@model IEnumerable<Pedido>
 @{
     ViewBag.Title = "Pedidos";
     Layout = "_AdminLayout";
@@ -13,17 +13,17 @@
             <th colspan="2">Detalhes</th>
             <th></th>
         </tr>
-        @foreach (Order o in Model)
+        @foreach (Pedido o in Model)
         {
             <tr>
-                <td>@o?.ID</td>
+                <td>@o?.PedidoId</td>
                 @*<td>@o?.Nome</td>
                 <td>@o?.CEP</td>*@
                 <td>Produto</td>
                 <td>Quantidade</td>
                 <td>
                     <form asp-action="MarkShipped" method="post">
-                        <input type="hidden" name="ID" value="@o.ID" />
+                        <input type="hidden" name="ID" value="@o.PedidoId" />
                         <button  type="submit" class="btn btn-sm btn-danger">Enviar</button>
                     </form>
                 </td>
@@ -33,7 +33,7 @@
                 <tr>
                     <td colspan="2"></td>
                     <td></td>
-                    <td>@line.Produto?.NomePD</td>
+                    <td>@line.Produto?.Nome</td>
                     <td>@line?.Quantidade</td>
                 </tr>
             }

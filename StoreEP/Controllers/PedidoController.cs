@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using StoreEP.Models.ViewModels;
+using StoreEP.Models.Interface;
 
 namespace StoreEP.Controllers
 {
@@ -19,9 +20,11 @@ namespace StoreEP.Controllers
         private IPedidoRepositorio _pedidoRepositorio;
         private IEnderecoRepositorio _enderecoRepositorio;
         private IProdutoRepositorio _produtoRepositorio;
+        private IImagensRepositorio _imagemRepositorio;
         private Carrinho _carrinho;
 
         public PedidoController(
+            IImagensRepositorio imagemRepositorio,
             IProdutoRepositorio produtoRepositorio,
             IEnderecoRepositorio address,
             IPedidoRepositorio repoService,
@@ -35,18 +38,17 @@ namespace StoreEP.Controllers
             _signInManager = signInManager;
             _enderecoRepositorio = address;
             _produtoRepositorio = produtoRepositorio;
+            _imagemRepositorio = imagemRepositorio;
         }
 
         public async Task<ViewResult> Lista()
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            return View(new PedidoListaViewModel
             {
-
-            }
-            return View(new PedidoListaViewModel {
-                Pedidos = _pedidoRepositorio.Pedidos.Where(o => o.UserId == user.Id)
+                Pedidos = _pedidoRepositorio.Pedidos.Where(o => o.UserId == user.Id),
+                Enderecos = _enderecoRepositorio.Enderecos.Where(e => e.UserId == user.Id)
             });
         }
 
@@ -76,8 +78,8 @@ namespace StoreEP.Controllers
             pedido.Pagamento = finalizarPedidoViewModel.Pagamento;
 
             finalizarPedidoViewModel.Pagamento.UserId = user.Id;
-            finalizarPedidoViewModel.Pagamento.CompraDT = DateTime.Now ;
-            
+            finalizarPedidoViewModel.Pagamento.CompraDT = DateTime.Now;
+
             if (_carrinho.Lines?.Count() == 0)
             {
                 ModelState.AddModelError("", "Descupe sua lista está vazia.");
@@ -104,17 +106,15 @@ namespace StoreEP.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
-            if (user != null)
+            if (_enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id) && !e.UserId.Equals("apagado")).Count() == 0)
             {
-                if (_enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id) && !e.UserId.Equals("apagado")).Count() == 0)
-                {
-                    return RedirectToAction(actionName: "Criar", controllerName: "Endereco");
-                }
+                return RedirectToAction(actionName: "Criar", controllerName: "Endereco");
             }
             return View(new FinalizarPedidoViewModel
             {
                 Carrinho = _carrinho,
-                Enderecos = _enderecoRepositorio.Enderecos.Where(a => a.UserId.Equals(user.Id)).ToList()
+                Enderecos = _enderecoRepositorio.Enderecos.Where(a => a.UserId.Equals(user.Id)).ToList(),
+                Imagens = _imagemRepositorio.Imagens.ToList()
             });
         }
         public RedirectToActionResult RemoverCarrinho(int ID)
