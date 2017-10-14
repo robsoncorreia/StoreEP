@@ -48,6 +48,7 @@
                 </button>
                 <a asp-controller="Produtos" asp-action="Listar" asp-route-category="" class="navbar-brand">Loja</a>
                 @await Component.InvokeAsync("CartSummary")
+                @await Component.InvokeAsync("ComboboxCategorias")
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">

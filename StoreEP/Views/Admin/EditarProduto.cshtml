@@ -26,7 +26,7 @@
                 <label asp-for="Produto.Categoria">Categoria</label>
                 <div><span asp-validation-for="Produto.Categoria" class="text-danger"></span></div>
                 <div>
-                    <select asp-for="Produto.Categoria" asp-items="@(new SelectList(Model.Categorias))" class="combobox input-large form-control categoria"></select>
+                    @await Component.InvokeAsync("ComboboxCategorias")
                 </div>
             </div>
             <div class="form-group col-6 col-sm-3">

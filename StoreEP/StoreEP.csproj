@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\ComboboxCategoriaTagHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Properties\PublishProfiles\StoreEP20171013024017 - Web Deploy.pubxml" />
   </ItemGroup>
 
