@@ -33,22 +33,7 @@ namespace StoreEP.Controllers
             Imagens = await _lojaContexto.Imagens.ToListAsync()
         });
 
-        public async Task<IActionResult> Listar(string category, int page = 1)
-        {
-            ProductsListViewModel productsListViewModel = new ProductsListViewModel
-            {
-                Produtos = await _lojaContexto.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
-                Imagens = await _lojaContexto.Imagens.ToListAsync(),
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItensPerPage = PageSize,
-                    TotalItems = _lojaContexto.Produtos.Count()
-                },
-                CurrentCategory = category
-            };
-            return View(productsListViewModel);
-        }
+
         // GET: Produtos/Create
         public IActionResult Create()
         {
@@ -140,11 +125,44 @@ namespace StoreEP.Controllers
             return View(produto);
         }
 
-       
+
 
         private bool ProdutoExists(int id)
         {
             return _lojaContexto.Produtos.Any(p => p.ProdutoId == id);
+        }
+        public async Task<IActionResult> Buscar(Filtro filtro)
+        {
+            ProductsListViewModel productsListViewModel = new ProductsListViewModel
+            {
+                Produtos = await _lojaContexto.Produtos.Where(p => p.Publicado == true && p.Nome.Contains(filtro.Nome)).OrderBy(p => p.ProdutoId).Skip((0) * PageSize).Take(PageSize).ToListAsync(),
+                Imagens = await _lojaContexto.Imagens.ToListAsync(),
+                PagingInfo = new PagingInfo
+                {
+                    ItensPerPage = PageSize,
+                    TotalItems = _lojaContexto.Produtos.Count()
+                }
+            };
+            char s = productsListViewModel.Produtos.Count() < 2 ? ' ' : 's';
+            ViewData["filtro.Nome"] = $"{productsListViewModel.Produtos.Count()} resultado{s} para a busca {filtro.Nome}.";
+            return View("Listar",productsListViewModel);
+        }
+
+        public async Task<IActionResult> Listar(string category, int page = 1)
+        {
+            ProductsListViewModel productsListViewModel = new ProductsListViewModel
+            {
+                Produtos = await _lojaContexto.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToListAsync(),
+                Imagens = await _lojaContexto.Imagens.ToListAsync(),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItensPerPage = PageSize,
+                    TotalItems = _lojaContexto.Produtos.Count()
+                },
+                CurrentCategory = category
+            };
+            return View(productsListViewModel);
         }
 
         [HttpGet("[controller]/[action]/{produtoid}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
