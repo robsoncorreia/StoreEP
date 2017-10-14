@@ -33,6 +33,7 @@ namespace StoreEP.Controllers
             }
             if (ModelState.IsValid)
             {
+                comentario.NomeUsuario = user.Nome;
                 comentario.UsuarioID = user.Id;
                 comentario.Data = DateTime.Now;
                 _comentariosRepositorio.RegistrarComentario(comentario);

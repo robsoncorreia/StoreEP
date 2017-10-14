@@ -63,17 +63,45 @@
 
     }
 </div>
-<div class="row">
-    <form asp-action="Comentar" asp-controller="Comentarios" method="post">
-        <div class="form-group">
-            <label asp-for="Comentario.NomeUsuario">Nome</label>
-            <input type="text" class="form-control" asp-for="Comentario.NomeUsuario" />
-        </div>
-        <div>
-            <button type="submit" class="btn btn-default">Comentar</button>
-            <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId" />
-        </div>
-    </form>
-</div>
+@*<div class="row">
+        <form asp-action="Comentar" asp-controller="Comentarios" method="post">
+            <div class="form-group">
+                <label asp-for="Comentario.NomeUsuario">Nome</label>
+                <input type="text" class="form-control" asp-for="Comentario.NomeUsuario" />
+            </div>
+            <div>
+                <button type="submit" class="btn btn-default">Comentar</button>
+                <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId" />
+            </div>
+        </form>
+    </div>*@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@@mdo">Comentar</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <form asp-action="Comentar" asp-controller="Comentarios">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Novo comentário</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="Comentario.Assunto" class="control-label">Assunto:</label>
+                        <input asp-for="Comentario.Assunto" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Comentario.Texto" class="control-label">Mensagem:</label>
+                        <textarea class="form-control" asp-for="Comentario.Texto"></textarea>
+                    </div>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-default">Enviar comentário</button>
+                    <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 

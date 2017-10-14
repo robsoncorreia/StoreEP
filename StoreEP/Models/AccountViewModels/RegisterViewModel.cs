@@ -9,9 +9,15 @@ namespace StoreEP.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Nome")]
-        public string Name { get; set; }
+        [Display(Name = "Nome de usuário")]
+        public string NomeUsuario { get; set; }
 
+        [Required]
+        [Display(Name = "Nome")]
+        public string Nome { get; set; }
+        public string Apelido { get; set; }
+        [Display(Name = "Nome socials")]
+        public string NomeSocial { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

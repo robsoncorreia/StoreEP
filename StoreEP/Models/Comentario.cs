@@ -10,6 +10,7 @@ namespace StoreEP.Models
     {
         [Key]
         public int ComentarioId { get; set; }
+        public string Assunto { get; set; }
         public byte Estrela { get; set; }
         public string Texto { get; set; }
         public string NomeUsuario { get; set; }

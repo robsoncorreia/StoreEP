@@ -52,10 +52,11 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Admin" asp-action="Index" class="navbar-brand">Gerenciar</a></li>
-                    <li class="active">@await Html.PartialAsync("_LoginPartial")</li>
+                    <li><a asp-controller="Admin" asp-action="Index">Gerenciar</a></li>
+                    <li>@await Html.PartialAsync("_LoginPartial")</li>
+                    <li>@await Html.PartialAsync("_BuscaPartial", new Filtro())</li>
                 </ul>
-                @await Html.PartialAsync("_BuscaPartial", new Filtro())           
+                       
             </div>
         </div>
     </nav>

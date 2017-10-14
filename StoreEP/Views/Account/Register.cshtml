@@ -1,4 +1,4 @@
-﻿@model RegisterViewModel
+@model RegisterViewModel
 @{
     ViewData["Title"] = "Nova Conta";
 }
@@ -8,31 +8,40 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <label asp-for="Name" class="mdl-textfield__label"></label>
-                <input asp-for="Name" class="mdl-textfield__input" />
-                @*<span asp-validation-for="Name" class="text-danger"></span>*@
+                <label asp-for="Apelido" class="mdl-textfield__label"></label>
+                <input asp-for="Apelido" class="mdl-textfield__input" />
+                <span asp-validation-for="Apelido" class="text-danger"></span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <label asp-for="NomeUsuario" class="mdl-textfield__label"></label>
+                <input asp-for="NomeUsuario" class="mdl-textfield__input" />
+                <span asp-validation-for="NomeUsuario" class="text-danger"></span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <label asp-for="Nome" class="mdl-textfield__label"></label>
+                <input asp-for="Nome" class="mdl-textfield__input" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label asp-for="PhoneNumber" class="mdl-textfield__label"></label>
                 <input asp-for="PhoneNumber" class="mdl-textfield__input" />
-                @*<span asp-validation-for="PhoneNumber" class="text-danger"></span>*@
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label asp-for="Email" class="mdl-textfield__label"></label>
                 <input asp-for="Email" class="mdl-textfield__input" />
-                @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label asp-for="Password" class="mdl-textfield__label">Senha</label>
                 <input asp-for="Password" class="mdl-textfield__input" />
-                @*<span asp-validation-for="Password" class="text-danger"></span>*@
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <label asp-for="ConfirmPassword" class="mdl-textfield__label">Confirmar Senha</label>
                 <input asp-for="ConfirmPassword" class="mdl-textfield__input" />
-                @*<span asp-validation-for="ConfirmPassword" class="text-danger"></span>*@
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-default">Registrar</button>
         </form>

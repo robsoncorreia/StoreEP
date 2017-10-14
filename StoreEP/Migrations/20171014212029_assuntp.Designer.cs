@@ -11,9 +11,10 @@ using System;
 namespace StoreEP.Migrations
 {
     [DbContext(typeof(StoreEPDbContext))]
-    partial class StoreEPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171014212029_assuntp")]
+    partial class assuntp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

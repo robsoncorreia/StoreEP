@@ -213,7 +213,14 @@ namespace StoreEP.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Name, Email = model.Email, PhoneNumber = model.PhoneNumber };
+                var user = new ApplicationUser {
+                    UserName = model.NomeUsuario,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    Apelido = model.Apelido,
+                    NomeSocial = model.NomeSocial,
+                    Nome = model.Nome
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -446,7 +453,7 @@ namespace StoreEP.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(ProdutosController.Listar), "Produtos");
             }
         }
 
