@@ -50,7 +50,6 @@
             <div class="mdl-layout-spacer"></div>
             <div class="mdl-card__actions mdl-card--border" id="@p.ProdutoId-bottom-card">
                 <input type="hidden" asp-for="@p.ProdutoId" />
-                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                 <span class="lead">
                     <a class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-produtoid="@p.ProdutoId">
                         <i class="material-icons">add_shopping_cart</i>
