@@ -5,11 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\StoreEP20171013024017 - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>

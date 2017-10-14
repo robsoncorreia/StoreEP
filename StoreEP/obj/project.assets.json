@@ -12538,12 +12538,15 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP.csproj",
+      "projectUniqueName": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
       "projectName": "StoreEP",
-      "projectPath": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP.csproj",
+      "projectPath": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
       "packagesPath": "C:\\Users\\robso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\robso\\Desktop\\StoreEP\\obj\\",
+      "outputPath": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
