@@ -80,6 +80,7 @@ namespace StoreEP.Migrations
                     ComentarioId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Aprovado = table.Column<bool>(type: "bit", nullable: false),
+                    Assunto = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ComentarioId1 = table.Column<int>(type: "int", nullable: true),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Estrela = table.Column<byte>(type: "tinyint", nullable: false),

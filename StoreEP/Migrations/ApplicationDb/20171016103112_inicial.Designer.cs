@@ -11,8 +11,8 @@ using System;
 namespace StoreEP.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171014213515_nomes")]
-    partial class nomes
+    [Migration("20171016103112_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -150,7 +150,8 @@ namespace StoreEP.Migrations.ApplicationDb
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired();
 
                     b.Property<string>("NomeSocial");
 

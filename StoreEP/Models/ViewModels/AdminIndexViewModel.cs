@@ -8,5 +8,6 @@ namespace StoreEP.Models.ViewModels
     public class AdminIndexViewModel
     {
         public int ComentariosNaoAprovados { get; set; }
+        public int NumeroProdutosRegistrados { get; set; }
     }
 }

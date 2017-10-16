@@ -28,9 +28,10 @@ namespace StoreEP.Controllers
         }
         public ViewResult Index() => View(new AdminIndexViewModel
         {
+            NumeroProdutosRegistrados = _produtoRepositorio.Produtos.Count(),
             ComentariosNaoAprovados = _comentariosRepositorio.Comentarios
-            .Where(c => c.Aprovado == false)
-            .Count()
+                .Where(c => c.Aprovado == false)
+                .Count()
         });
 
         [HttpGet("[controller]/[action]/")]

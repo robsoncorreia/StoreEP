@@ -82,7 +82,6 @@ namespace StoreEP.Controllers
             });
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Editar(RoleModificationModel model)
         {

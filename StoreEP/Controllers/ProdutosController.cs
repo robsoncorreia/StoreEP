@@ -201,9 +201,9 @@ namespace StoreEP.Controllers
         }
 
         [HttpGet("[controller]/[action]/{produtoid}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
-        public IActionResult Detalhes(int? produtoid)
+        public IActionResult Detalhes(int produtoid)
         {
-            if (produtoid == null)
+            if (produtoid == 0)
             {
                 return NotFound();
             }

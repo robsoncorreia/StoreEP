@@ -11,8 +11,8 @@ using System;
 namespace StoreEP.Migrations
 {
     [DbContext(typeof(StoreEPDbContext))]
-    [Migration("20171014004516_azure")]
-    partial class azure
+    [Migration("20171016103047_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,8 @@ namespace StoreEP.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Aprovado");
+
+                    b.Property<string>("Assunto");
 
                     b.Property<int?>("ComentarioId1");
 
