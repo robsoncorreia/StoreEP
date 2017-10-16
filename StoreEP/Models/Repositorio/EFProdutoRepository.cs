@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
-    public class EFProdutoRepositorio: IProdutoRepositorio
+    public class EFProdutoRepositorio : IProdutoRepositorio
     {
         private StoreEPDbContext _bancoContexto;
         private int produtoid = 0;
@@ -16,14 +16,15 @@ namespace StoreEP.Models
         public IEnumerable<Produto> Produtos => _bancoContexto.Produtos;
         public int RegistrarProduto(Produto produto)
         {
-            if (produto.ProdutoId == 0) {
+            if (produto.ProdutoId == 0)
+            {
                 _bancoContexto.Produtos.Add(produto);
                 produtoid = produto.ProdutoId;
             }
             else
             {
                 Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ProdutoId == produto.ProdutoId);
-                if(dbEntry != null)
+                if (dbEntry != null)
                 {
                     produtoid = produto.ProdutoId;
                     dbEntry.Categoria = produto.Categoria;

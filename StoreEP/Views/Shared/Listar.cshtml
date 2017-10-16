@@ -60,7 +60,7 @@
     @foreach (var p in Model.Produtos)
     {
         <div class="card col-3 col-md-3">
-            <div class="col-12 cartao-produto">
+            <div class="col-12 cartao-produto border border-primary" >
                 <img class="card-img-top" src="@p.Imagens.Select(i => i.Link).FirstOrDefault()" alt="@p.Imagens.Select(i => i.Nome).FirstOrDefault()" />
                 <div class="card-block">
                     <h4 class="card-title">@p.Nome</h4>

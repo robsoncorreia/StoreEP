@@ -140,9 +140,14 @@ namespace StoreEP.Controllers
 
         public IActionResult Buscar(Filtro filtro, int pagina = 1)
         {
+            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true && p.Nome.ToUpper().Contains(filtro.Nome.ToUpper())).OrderBy(p => p.ProdutoId).Skip((0) * PageSize).Take(PageSize).ToList();
+            if (produtos.Count() == 1)
+            {
+                Produto produto = produtos.SingleOrDefault();
+            }
             ProductsListViewModel model = new ProductsListViewModel
             {
-                Produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true && p.Nome.ToUpper().Contains(filtro.Nome.ToUpper())).OrderBy(p => p.ProdutoId).Skip((0) * PageSize).Take(PageSize).ToList(),
+                Produtos = produtos,
                 Imagens = _imagensRepositorio.Imagens.ToList(),
                 PagingInfo = new PagingInfo
                 {

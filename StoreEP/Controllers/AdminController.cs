@@ -26,7 +26,12 @@ namespace StoreEP.Controllers
             _imagensRepositorio = imagens;
             _comentariosRepositorio = comentariosRepositorio;
         }
-        public ViewResult Index() => View();
+        public ViewResult Index() => View(new AdminIndexViewModel
+        {
+            ComentariosNaoAprovados = _comentariosRepositorio.Comentarios
+            .Where(c => c.Aprovado == false)
+            .Count()
+        });
 
         [HttpGet("[controller]/[action]/")]
         public ViewResult Listar() => View(_produtoRepositorio.Produtos);

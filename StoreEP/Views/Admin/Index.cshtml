@@ -1,3 +1,4 @@
+@model AdminIndexViewModel
 @{ 
     Layout = "_AdminLayout";
 }
@@ -8,7 +9,9 @@
     <a asp-action="Listar" asp-controller="Admin">Lista todos os produtos</a>
 </div>
 <div>
-    <a asp-action="ValidarComentarios">Validar Comentários</a>
+    <a asp-action="ValidarComentarios" class="btn btn-primary">
+        Validar comentários <span class="badge">@Model.ComentariosNaoAprovados</span>
+    </a>
 </div>
 <div>
     <a asp-action="Criar" asp-controller="Identidade">Criar novos perfis</a>

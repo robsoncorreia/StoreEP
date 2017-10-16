@@ -26,6 +26,10 @@ namespace StoreEP.Infrastructure
         public IEnumerable<string> ComboboxCategoriasModel { get; set; }
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
+            if (ComboboxCategoriasModel == null)
+            {
+                return;
+            }
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             TagBuilder div = new TagBuilder("div");
             foreach (var item in ComboboxCategoriasModel)
