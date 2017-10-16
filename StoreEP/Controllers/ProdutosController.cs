@@ -30,7 +30,7 @@ namespace StoreEP.Controllers
         public IActionResult Index(string busca) => View(new ProductsListViewModel
         {
             Produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true).ToList(),
-            Imagens =  _imagensRepositorio.Imagens.ToList()
+            Imagens = _imagensRepositorio.Imagens.ToList()
         });
         //GET: Produtos
         public IActionResult Index() => View(new ProductsListViewModel
@@ -137,29 +137,53 @@ namespace StoreEP.Controllers
         //{
         //    return _lojaContexto.Produtos.Any(p => p.ProdutoId == id);
         //}
-        public IActionResult Buscar(Filtro filtro)
+
+        public IActionResult Buscar(Filtro filtro, int pagina = 1)
         {
-            ProductsListViewModel productsListViewModel = new ProductsListViewModel
+            ProductsListViewModel model = new ProductsListViewModel
             {
-                Produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true && p.Nome.Contains(filtro.Nome)).OrderBy(p => p.ProdutoId).Skip((0) * PageSize).Take(PageSize).ToList(),
+                Produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true && p.Nome.ToUpper().Contains(filtro.Nome.ToUpper())).OrderBy(p => p.ProdutoId).Skip((0) * PageSize).Take(PageSize).ToList(),
                 Imagens = _imagensRepositorio.Imagens.ToList(),
                 PagingInfo = new PagingInfo
                 {
+                    CurrentPage = pagina,
                     ItensPerPage = PageSize,
                     TotalItems = _produtoRepositorio.Produtos.Count()
                 }
             };
-            char s = productsListViewModel.Produtos.Count() < 2 ? ' ' : 's';
-            ViewData["filtro.Nome"] = $"{productsListViewModel.Produtos.Count()} resultado{s} para a busca {filtro.Nome}.";
-            return View("Listar",productsListViewModel);
+            char s = model.Produtos.Count() < 2 ? ' ' : 's';
+            ViewData["filtro.Nome"] = $"{model.Produtos.Count()} resultado{s} para a busca {filtro.Nome}.";
+            return View("Listar", model);
+        }
+
+        public IActionResult BuscarFabricante(string fabricante, int pagina = 1)
+        {
+            ProductsListViewModel model = new ProductsListViewModel
+            {
+                Produtos = _produtoRepositorio.Produtos.Where(p => (fabricante == null || p.Fabricante == fabricante) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((pagina - 1) * PageSize).Take(PageSize).ToList(),
+                Imagens = _imagensRepositorio.Imagens.ToList(),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = pagina,
+                    ItensPerPage = PageSize,
+                    TotalItems = _produtoRepositorio.Produtos.Count()
+                },
+                CurrentCategory = fabricante
+            };
+            return View("Listar", model);
         }
 
         public IActionResult Listar(string category, int page = 1)
         {
             ProductsListViewModel productsListViewModel = new ProductsListViewModel
             {
+                Categorias = _produtoRepositorio.Produtos
+                    .Where(p => p.Categoria != null)
+                    .Select(p => p.Categoria)
+                    .Distinct()
+                    .ToList(),
                 Produtos = _produtoRepositorio.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToList(),
-                Imagens =  _imagensRepositorio.Imagens.ToList(),
+                Imagens = _imagensRepositorio.Imagens.ToList(),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,

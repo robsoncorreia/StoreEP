@@ -21,7 +21,6 @@
     <script type="text/javascript" src="~/lib/greensock/src/minified/TweenMax.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="~/js/produto/listar.js"></script>
-    <script type="text/javascript" src="~/js/admin/editar.js"></script>
     <style>
         .mdl-badge.mdl-badge--overlap::after {
             right: -7px;
@@ -64,7 +63,7 @@
         <div id="categories" class="d-inline">
             @await Component.InvokeAsync("NavigationMenu")
         </div>
-        <div class="col-xs-9">
+        <div class="">
             @RenderBody()
             @RenderSection("scripts", required: false)
         </div>

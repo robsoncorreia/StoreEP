@@ -1,43 +1,6 @@
 @model DetalheProdutoViewModels
 <div class="row">
-    <div id="produtos_carousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            @{
-                int cont = 0;
-                @foreach (var imagem in Model.Imagens)
-                {
-                    if (cont == 0)
-                    {
-                        <li data-target="#produtos_carousel" data-slide-to="@cont" class="active"></li>
-                    }
-                    else
-                    {
-                        <li data-target="#produtos_carousel" data-slide-to="@cont"></li>
-                    }
-                    cont++;
-                }
-            }
-        </ol>
-        <div class="carousel-inner">
-            @{
-                int cont2 = 0;
-                @foreach (var imagem in Model.Imagens)
-                {
-                    if (cont2 == 0)
-                    {
-                        <div class="item active"><img src="@imagem.Link" alt="@imagem.Nome" /></div>
-                    }
-                    else
-                    {
-                        <div class="item"><img src="@imagem.Link" alt="@imagem.Nome" /></div>
-                    }
-                    cont2++;
-                }
-            }
-        </div>
-        <a class="left carousel-control" href="#produtos_carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-        <a class="right carousel-control" href="#produtos_carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div>
+   @Html.Partial("_SliderImagensPartial", Model.Imagens);
 </div>
 <div class="row">
     @foreach (var comentario in Model.Comentarios)
@@ -45,8 +8,8 @@
         <div>@comentario.NomeUsuario</div>
         <div>@comentario.Texto</div>
         <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-comentarioid="@comentario.ComentarioId">
-            <label>Nome</label>
-            <input asp-for="@Model.Resposta.NomeUsuario" />
+            <label asp-for="@Model.Resposta.Assunto"></label>
+            <input asp-for="@Model.Resposta.Assunto" />
             <label>Texto</label>
             <input asp-for="@Model.Resposta.Texto" />
             <button type="submit" class="btn btn-success">Responder</button>
@@ -63,45 +26,35 @@
 
     }
 </div>
-@*<div class="row">
-        <form asp-action="Comentar" asp-controller="Comentarios" method="post">
-            <div class="form-group">
-                <label asp-for="Comentario.NomeUsuario">Nome</label>
-                <input type="text" class="form-control" asp-for="Comentario.NomeUsuario" />
-            </div>
-            <div>
-                <button type="submit" class="btn btn-default">Comentar</button>
-                <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId" />
-            </div>
-        </form>
-    </div>*@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@@mdo">Comentar</button>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document">
-        <form asp-action="Comentar" asp-controller="Comentarios">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">Novo comentário</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label asp-for="Comentario.Assunto" class="control-label">Assunto:</label>
-                        <input asp-for="Comentario.Assunto" type="text" class="form-control" />
+<div class="row">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@@mdo">Comentar</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <form asp-action="Comentar" asp-controller="Comentarios">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Novo comentário</h4>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Comentario.Texto" class="control-label">Mensagem:</label>
-                        <textarea class="form-control" asp-for="Comentario.Texto"></textarea>
-                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label asp-for="Comentario.Assunto" class="control-label">Assunto:</label>
+                            <input asp-for="Comentario.Assunto" type="text" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Comentario.Texto" class="control-label">Mensagem:</label>
+                            <textarea class="form-control" asp-for="Comentario.Texto"></textarea>
+                        </div>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-default">Enviar comentário</button>
+                        <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId" />
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-default">Enviar comentário</button>
-                    <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId" />
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 

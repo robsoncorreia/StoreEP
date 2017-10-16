@@ -11,5 +11,6 @@ namespace StoreEP.Models.ViewModels
         public IEnumerable<Imagem> Imagens { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public string CurrentCategory { get; set; }
+        public IEnumerable<string> Categorias { get; set; }
     }
 }
