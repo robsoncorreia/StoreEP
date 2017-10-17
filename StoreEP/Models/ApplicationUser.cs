@@ -14,5 +14,6 @@ namespace StoreEP.Models
         [Required]
         public string Nome { get; set; }
         public string NomeSocial { get; set; }
+        public string SobreNome { get; set; }
     }
 }

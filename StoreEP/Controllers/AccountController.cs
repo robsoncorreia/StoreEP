@@ -223,7 +223,7 @@ namespace StoreEP.Controllers
                     SobreNome = model.SobreNome
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (result.Succeeded) 
                 {
                     _logger.LogInformation("User created a new account with password.");
 

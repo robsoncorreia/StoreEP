@@ -18,7 +18,9 @@ namespace StoreEP.Models.AccountViewModels
         public string Apelido { get; set; }
         [Display(Name = "Nome socials")]
         public string NomeSocial { get; set; }
+
         [Required]
+        public string SobreNome { get; set; }
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
