@@ -9,74 +9,83 @@
     </div>
 }
 <form asp-action="CriarProduto" method="post">
-    <input type="hidden" asp-for="Produto.ProdutoId" />
-    <div class="form-group">
-        <label>Nome</label>
-        <div><span asp-validation-for="Produto.Nome" class="text-danger"></span></div>
-        <input asp-for="Produto.Nome" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Descrição</label>
-        <div><span asp-validation-for="Produto.Descricao" class="text-danger"></span></div>
-        <textarea asp-for="Produto.Descricao" class="form-control"></textarea>
-    </div>
-    <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="form-group col-6 col-sm-3">
-                <label asp-for="Produto.Categoria">Categoria</label>
-                <div><span asp-validation-for="Produto.Categoria" class="text-danger"></span></div>
-                <div>
-                    <select asp-for="Produto.Categoria" asp-items="@(new SelectList(Model.Categorias))" class="combobox input-large form-control categoria"></select>
-                </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input type="hidden" asp-for="Produto.ProdutoId" />
+            <div class="form-group">
+                <label>Nome</label>
+                <div><span asp-validation-for="Produto.Nome" class="text-danger"></span></div>
+                <input asp-for="Produto.Nome" class="form-control" />
             </div>
-            <div class="form-group col-6 col-sm-3">
-                <div class="input-group">
-                    <input id="txt_nova_categoria" type="text" class="form-control" placeholder="Criar nova categoria" aria-label="Criar nova categoria">
-                    <span class="input-group-btn">
-                        <button id="btn_criar_nova_categoria" class="btn btn-secondary" type="button">Criar</button>
-                    </span>
-                </div>
-            </div>
-            <div class="form-group col-6 col-sm-3">
-                <label asp-for="Produto.Fabricante">Fabricante</label>
-                <div><span asp-validation-for="Produto.Fabricante" class="text-danger"></span></div>
-                <div>
-                    <select asp-for="Produto.Fabricante" asp-items="@(new SelectList(Model.Fabricantes))" class="combobox input-large form-control fabricante"></select>
-                </div>
-            </div>
-            <div class="form-group col-6 col-sm-3">
-                <div class="input-group">
-                    <input id="txt_novo_fabricante" type="text" class="form-control" placeholder="Criar novo fabricante" aria-label="Criar novo fabricante">
-                    <span class="input-group-btn">
-                        <button id="btn_criar_novo_fabricante" class="btn btn-secondary" type="button">Criar</button>
-                    </span>
-                </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Descrição</label>
+                <div><span asp-validation-for="Produto.Descricao" class="text-danger"></span></div>
+                <textarea asp-for="Produto.Descricao" class="form-control"></textarea>
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Imagem.Nome">Nome da Imagem</label>
-        <div><span asp-validation-for="Imagem.Nome" class="text-danger"></span></div>
-        <input asp-for="Imagem.Nome" class="form-control" />
+    <div class="row ">
+        <div class="form-group col-md-3">
+            <label asp-for="Produto.Categoria">Categoria</label>
+            <div><span asp-validation-for="Produto.Categoria" class="text-danger"></span></div>
+            <div>
+                <select asp-for="Produto.Categoria" asp-items="@(new SelectList(Model.Categorias))" class="combobox input-large form-control categoria"></select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <div class="input-group">
+                <input id="txt_nova_categoria" type="text" class="form-control" placeholder="Criar nova categoria" aria-label="Criar nova categoria">
+                <span class="input-group-btn">
+                    <button id="btn_criar_nova_categoria" class="btn btn-secondary" type="button">Criar</button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <label asp-for="Produto.Fabricante">Fabricante</label>
+            <div><span asp-validation-for="Produto.Fabricante" class="text-danger"></span></div>
+            <div>
+                <select asp-for="Produto.Fabricante" asp-items="@(new SelectList(Model.Fabricantes))" class="combobox input-large form-control fabricante"></select>
+            </div>
+        </div>
+        <div class="form-group col-sm-3">
+            <div class="input-group">
+                <input id="txt_novo_fabricante" type="text" class="form-control" placeholder="Criar novo fabricante" aria-label="Criar novo fabricante">
+                <span class="input-group-btn">
+                    <button id="btn_criar_novo_fabricante" class="btn btn-secondary" type="button">Criar</button>
+                </span>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Imagem.Link">Link da imagem</label>
-        <div><span asp-validation-for="Imagem.Link" class="text-danger"></span></div>
-        <input asp-for="Imagem.Link" class="form-control" />
-        <input type="hidden" asp-for="Imagem.ProdutoId" value="@Model?.Produto?.ProdutoId" />
+    <div class="row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Imagem.Nome">Nome da Imagem</label>
+            <div><span asp-validation-for="Imagem.Nome" class="text-danger"></span></div>
+            <input asp-for="Imagem.Nome" class="form-control" />
+        </div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Imagem.Link">Link da imagem</label>
+            <div><span asp-validation-for="Imagem.Link" class="text-danger"></span></div>
+            <input asp-for="Imagem.Link" class="form-control" />
+            <input type="hidden" asp-for="Imagem.ProdutoId" value="@Model?.Produto?.ProdutoId" />
+        </div>
     </div>
-    <div class="form-group">
-        <label>Preço</label>
-        <div><span asp-validation-for="Produto.Preco" class="text-danger"></span></div>
-        <input asp-for="Produto.Preco" class="form-control" />
-    </div>
+    <div class="row">
+        <div class="form-group  col-md-2">
+            <label>Preço</label>
+            <div><span asp-validation-for="Produto.Preco" class="text-danger"></span></div>
+            <input asp-for="Produto.Preco" class="form-control" />
+        </div>
+    </div>  
     <div class="checkbox">
-      <label><input asp-for="Produto.Publicado" type="checkbox">Publicado</label>
+        <label><input asp-for="Produto.Publicado" type="checkbox">Publicado</label>
     </div>
     <div class="text-center">
         <button class="btn btn-primary" type="submit">Salvar</button>
         <a asp-action="Listar" class="btn btn-default">Cancelar</a>
     </div>
+
 </form>
 
 @if (Model?.Imagens?.Count() != null)
