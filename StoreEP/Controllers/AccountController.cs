@@ -219,7 +219,8 @@ namespace StoreEP.Controllers
                     PhoneNumber = model.PhoneNumber,
                     Apelido = model.Apelido,
                     NomeSocial = model.NomeSocial,
-                    Nome = model.Nome
+                    Nome = model.Nome,
+                    SobreNome = model.SobreNome
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

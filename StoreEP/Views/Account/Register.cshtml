@@ -30,6 +30,13 @@
         </div>
         <div class="form-group col-md-6">
             <div class="form-group">
+                <label asp-for="SobreNome" class="col-form-label"></label>
+                <input asp-for="SobreNome" type="text" class="form-control" placeholder="Nome">
+                <div><span asp-validation-for="SobreNome" class="text-danger"></span></div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="form-group">
                 <label asp-for="PhoneNumber" class="col-form-label"></label>
                 <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Telefone">
                 <div><span asp-validation-for="PhoneNumber" class="text-danger"></span></div>
