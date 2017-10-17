@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using StoreEP.Data;
 using System;
 
-namespace StoreEP.Migrations.ApplicationDb
+namespace StoreEP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -167,6 +167,8 @@ namespace StoreEP.Migrations.ApplicationDb
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<string>("SobreNome");
 
                     b.Property<bool>("TwoFactorEnabled");
 

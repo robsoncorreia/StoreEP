@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using StoreEP.Data;
 using System;
 
-namespace StoreEP.Migrations.ApplicationDb
+namespace StoreEP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171016103112_inicial")]
-    partial class inicial
+    [Migration("20171017002255_sobrenome")]
+    partial class sobrenome
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -168,6 +168,8 @@ namespace StoreEP.Migrations.ApplicationDb
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<string>("SobreNome");
 
                     b.Property<bool>("TwoFactorEnabled");
 
