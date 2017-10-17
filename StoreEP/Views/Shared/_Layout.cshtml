@@ -5,15 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StoreEP</title>
     <base href="~/" />
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" />
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="~/css/index.css" />
     <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" asp-href-include="/lib/material-design-lite/material.css" />
     <link rel="stylesheet" asp-href-include="/css/index.css" />
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="~/lib/material-design-lite/material.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap-combobox/js/bootstrap-combobox.js"></script>
     <script type="text/javascript" src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="~/lib/greensock/src/minified/jquery.gsap.min.js"></script>
@@ -21,6 +16,7 @@
     <script type="text/javascript" src="~/lib/greensock/src/minified/TweenMax.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="~/js/produto/listar.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
     <style>
         .mdl-badge.mdl-badge--overlap::after {
             right: -7px;
@@ -30,6 +26,7 @@
             top: -10px;
             background: black;
         }
+
         body {
             background-color: #e8e8e8;
         }
@@ -47,7 +44,7 @@
                 </button>
                 <a asp-controller="Produtos" asp-action="Listar" asp-route-category="" class="navbar-brand">Loja</a>
                 @await Component.InvokeAsync("CartSummary")
-                @await Component.InvokeAsync("ComboboxCategorias")
+                @*@await Component.InvokeAsync("ComboboxCategorias")*@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -55,7 +52,6 @@
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
                     <li>@await Html.PartialAsync("_BuscaPartial", new Filtro())</li>
                 </ul>
-                       
             </div>
         </div>
     </nav>

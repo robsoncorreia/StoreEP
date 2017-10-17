@@ -80,14 +80,15 @@
                             @p.Fabricante
                         </a>
                     </li>
-                    <li class="list-group-item">@p.Preco.ToString("c")</li>
+                    <li class="list-group-item">@p.Preco.ToString("c") 
+                        <a asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-produtoid="@p.ProdutoId" class="card-link">
+                            <span class="glyphicon glyphicon-shopping-cart" style="float:right;"></span>
+                        </a>
+                    </li>
                 </ul>
-                <div class="card-block">
-                    <a asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-produtoid="@p.ProdutoId" class="card-link">Adicionar ao carrinho</a>
-                </div>
             </div>
         </div>
     }
 </div>
-<select combobox-categorias-model="@Model.Categorias"></select>
+@*<select combobox-categorias-model="@Model.Categorias"></select>*@
 <div class="row text-center" page-model="@Model.PagingInfo" page-action="Listar" page-classes-enabled="true" page-class="btn" page-class-normal="btn-default" page-class-selected="btn-primary" page-url-cartegory="@Model.CurrentCategory"></div>

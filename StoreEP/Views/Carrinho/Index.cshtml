@@ -1,10 +1,10 @@
 @using StoreEP.Models.ViewModels
 @model CartIndexViewModel
 <h2>Seu carrinho</h2>
-<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+<table class="table">
     <thead>
         <tr>
-            <th class="mdl-data-table__cell--non-numeric">Quantidade</th>
+            <th>Quantidade</th>
             <th>Item</th>
             <th class="text-right">Preço</th>
             <th class="text-right">Subtotal</th>
@@ -22,9 +22,7 @@
                 <form asp-action="RemoverCarrinho" method="post">
                     <input type="hidden" name="ID" value="@line.Produto.ProdutoId" />
                     <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
-                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon">
-                        <i class="material-icons">remove_shopping_cart</i>
-                    </button>
+                    <button type="submit" class="btn btn-danger btn-sm">Remover</button>
                 </form>
             </td>
         </tr>
@@ -40,6 +38,6 @@
     </tfoot>
 </table>
 <div class="text-center">
-    <a class="mdl-button mdl-js-button mdl-button--primary" href="@Model.ReturnUrl">Continue comprando</a>
-    <a class="mdl-button mdl-js-button mdl-button--accent" asp-action="Finalizar" asp-controller="Pedido">Finalizar</a>
+    <a class="btn btn-primary btn-sm" href="@Model.ReturnUrl">Continue comprando</a>
+    <a class="btn btn-success btn-sm" asp-action="Finalizar" asp-controller="Pedido">Finalizar</a>
 </div>

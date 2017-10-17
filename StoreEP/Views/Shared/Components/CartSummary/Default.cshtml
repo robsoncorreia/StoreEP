@@ -1,14 +1,14 @@
 @using StoreEP.Models
 @model Carrinho
-<div >
+<div class="navbar-brand">
     @if (Model.Lines.Count() > 0)
     {
-        <small class="navbar-text">
+        <small class="navbar-text" style="bottom: 14px; position: relative;">
             <b>Seu carrinho:</b>
             @Model.ValorTotal().ToString("c")
         </small>
     }
-    <a style="top: 14px; position: relative;" asp-controller="Carrinho" asp-action="Index" asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
-        <div class="material-icons mdl-badge mdl-badge--overlap" data-badge="@(Model.Lines.Sum(x => x.Quantidade) > 99 ?  99 : Model.Lines.Sum(x => x.Quantidade))">shopping_cart</div>
+    <a asp-controller="Carrinho" asp-action="Index" asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()" class="btn btn-primary btn-sm" style="position: relative; bottom: 6px;">
+        Carrinho <span class="badge">@Model.Lines.Count()</span>
     </a>
 </div>

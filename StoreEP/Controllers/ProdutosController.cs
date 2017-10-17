@@ -144,6 +144,7 @@ namespace StoreEP.Controllers
             if (produtos.Count() == 1)
             {
                 Produto produto = produtos.SingleOrDefault();
+                //return RedirectToAction("Detalhes", produto.ProdutoId);
             }
             ProductsListViewModel model = new ProductsListViewModel
             {
