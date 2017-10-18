@@ -11,8 +11,8 @@ using System;
 namespace StoreEP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171017002255_sobrenome")]
-    partial class sobrenome
+    [Migration("20171017235058_nomesobrenome")]
+    partial class nomesobrenome
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

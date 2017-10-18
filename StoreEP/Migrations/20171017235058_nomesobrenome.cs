@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace StoreEP.Migrations
 {
-    public partial class sobrenome : Migration
+    public partial class nomesobrenome : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
