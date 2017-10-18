@@ -59,7 +59,7 @@ namespace StoreEP.Controllers
             if (pedido != null)
             {
                 pedido.Shipped = true;
-                _pedidoRepositorio.SaveOrder(pedido);
+                _pedidoRepositorio.Registrar(pedido);
             }
             return RedirectToAction(nameof(Lista));
         }
@@ -89,7 +89,7 @@ namespace StoreEP.Controllers
             {
                 pedido.UserId = user.Id;
                 pedido.Lines = _carrinho.Lines.ToArray();
-                _pedidoRepositorio.SaveOrder(pedido);
+                _pedidoRepositorio.Registrar(pedido);
                 return RedirectToAction(nameof(Completed));
             }
             else

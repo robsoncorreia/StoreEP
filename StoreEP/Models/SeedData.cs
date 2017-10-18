@@ -23,9 +23,9 @@ namespace StoreEP.Models
                     new Produto
                     {
                         Nome = "Aparador de Pelos",
-                        Descricao = "Kit Aparador de Pelos Philips Multigroom QG3339/15 Bateria Recarregável 12W",
+                        Descricao = "Kit Aparador de Pelos Philips Multigroom QG3339/15 Bateria RecarregÃ¡vel 12W",
                         Categoria = "Beleza & Perfumaria",
-                        Preco = 275m,
+                        Preco = 275m  ,
                         Fabricante ="Philips",
                         Imagens =  new List<Imagem>{
                             new Imagem {
@@ -45,9 +45,9 @@ namespace StoreEP.Models
                     },
                     new Produto
                     {
-                        Nome = "HD Externo Portátil WD Elements 1TB USB 3.0",
-                        Descricao = "O HD Externo Portátil WD faz transferências de dados ultrarrápidas e possui 1TB de capacidade.",
-                        Categoria = "Acessórios de Informática",
+                        Nome = "HD Externo PortÃ¡til WD Elements 1TB USB 3.0",
+                        Descricao = "O HD Externo PortÃ¡til WD faz transferÃªncias de dados ultrarrÃ¡pidas e possui 1TB de capacidade.",
+                        Categoria = "AcessÃ³rios de InformÃ¡tica",
                         Preco = 254.9m,
                         Fabricante = "Wester Digital",
                         Imagens =  new List<Imagem>{
@@ -70,7 +70,7 @@ namespace StoreEP.Models
                     {
                         Nome = "Notebook Dell Inspiron i15-7560-A30S Intel Core i7 16GB",
                         Descricao = "Notebook Dell Inspiron i15-7560-A30S Intel Core i7 16GB ((GeForce 940MX de 4GB)) 1TB 128GB SSD Tela Full HD 15,6 Windows 10",
-                        Categoria = "Informática",
+                        Categoria = "InformÃ¡tica",
                         Preco = 4519m,
                         Fabricante = "Dell",
                         Imagens =  new List<Imagem>{
@@ -93,8 +93,8 @@ namespace StoreEP.Models
                     {
                         Nome = "Notebook Gamer Acer VX5-591G-54PG Intel Core i5 8GB",
                         Descricao = "Notebook Gamer Acer VX5-591G-54PG Intel Core i5 8GB (GeForce GTX 1050 com 4GB) 1TB Tela LED 15,6 Windows 10 - Preto",
-                        Categoria = "Informática",
-                        Preco = 3329.99m,
+                        Categoria = "InformÃ¡tica",
+                        Preco= 3329.99m,
                         Fabricante = "Acer",
                         Imagens =  new List<Imagem>{
                             new Imagem {
@@ -121,7 +121,7 @@ namespace StoreEP.Models
                     {
                         Nome = "Notebook Acer A515-51-56K6",
                         Descricao = "Notebook Acer A515-51-56K6 Intel Core I5 8GB 1TB Tela LED 15.6 Windows 10 - Preto",
-                        Categoria = "Informática",
+                        Categoria = "InformÃ¡tica",
                         Preco = 2222.21m,
                         Fabricante = "Acer",
                         Imagens =  new List<Imagem>{
@@ -150,28 +150,28 @@ namespace StoreEP.Models
                         Nome = "Thinking Cap",
                         Descricao = "Improve brain efficiency by 75%",
                         Categoria = "Chess",
-                        Preco = 16
+                        Preco = 16m       
                     },
                     new Produto
                     {
                         Nome = "Unsteady Chair",
                         Descricao = "Secretly give your opponent a disadvantage",
                         Categoria = "Chess",
-                        Preco = 29.95m
+                        Preco = 29.95m       
                     },
                     new Produto
                     {
                         Nome = "Human Chess Board",
                         Descricao = "A fun game for the family",
                         Categoria = "Chess",
-                        Preco = 75
+                        Preco = 75m            
                     },
                     new Produto
                     {
                         Nome = "Bling-Bling King",
                         Descricao = "Gold-plated, diamond-studded King",
                         Categoria = "Chess",
-                        Preco = 1200
+                        Preco = 1200m
                     }
                 };
             foreach (Produto p in produtos)

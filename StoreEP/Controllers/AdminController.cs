@@ -50,20 +50,27 @@ namespace StoreEP.Controllers
             });
         }
         [HttpPost]
-        public IActionResult EditarProduto(EditarProdutoViewModel editarProdutoViewModel)
+        public IActionResult EditarProduto(EditarProdutoViewModel model)
         {
-            int produtoid = editarProdutoViewModel.Produto.ProdutoId;
+            int produtoid = model.Produto.ProdutoId;
             if (ModelState.IsValid)
             {
-
-                if (editarProdutoViewModel.Imagem != null)
+                if (model.Imagem != null)
                 {
-                    _imagensRepositorio.RegistrarImagem(editarProdutoViewModel.Imagem);
+                    _imagensRepositorio.RegistrarImagem(model.Imagem);
                 }
-                TempData["massage"] = $"{editarProdutoViewModel.Produto.Nome} foi salvo com sucesso.";
-                editarProdutoViewModel.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == editarProdutoViewModel.Produto.ProdutoId).ToList();
-                editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).Distinct().OrderBy(f => f).ToList();
-                editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null).Select(x => x.Categoria).Distinct().OrderBy(x => x).ToList();
+                TempData["massage"] = $"{model.Produto.Nome} foi salvo com sucesso.";
+                model.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == model.Produto.ProdutoId).ToList();
+                model.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null)
+                                                                .Select(f => f.Fabricante)
+                                                                .Distinct()
+                                                                .OrderBy(f => f)
+                                                                .ToList();
+                model.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null)
+                                                               .Select(x => x.Categoria)
+                                                               .Distinct()
+                                                               .OrderBy(x => x)
+                                                               .ToList();
                 return RedirectToAction("EditarProduto",produtoid);
             }
             else
@@ -73,12 +80,21 @@ namespace StoreEP.Controllers
                 ModelState.Remove("Imagem.Nome");
                 if (ModelState.IsValid)
                 {
-                    TempData["massage"] = $"{editarProdutoViewModel.Produto.Nome} foi salvo com sucesso.";
-                    _produtoRepositorio.RegistrarProduto(editarProdutoViewModel.Produto);
+                    TempData["massage"] = $"{model.Produto.Nome} foi salvo com sucesso.";
+                    _produtoRepositorio.RegistrarProduto(model.Produto);
                 }
-                editarProdutoViewModel.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == editarProdutoViewModel.Produto.ProdutoId).ToList();
-                editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).Distinct().OrderBy(f => f).ToList();
-                editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null).Select(c => c.Categoria).Distinct().OrderBy(c => c);
+                model.Imagens = _imagensRepositorio.Imagens
+                                                   .Where(i => i.ProdutoId == model.Produto.ProdutoId)
+                                                   .ToList();
+                model.Fabricantes = _produtoRepositorio.Produtos
+                                                       .Where(p => p.Fabricante != null)
+                                                       .Select(f => f.Fabricante)
+                                                       .Distinct().OrderBy(f => f)
+                                                       .ToList();
+                model.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null)
+                                                               .Select(c => c.Categoria)
+                                                               .Distinct()
+                                                               .OrderBy(c => c);
                 return RedirectToAction("EditarProduto", produtoid);
             }
         }

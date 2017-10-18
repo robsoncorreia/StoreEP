@@ -12,8 +12,7 @@ namespace StoreEP.Models
         [Key]
         public int PedidoId { get; set; }
         public string UserId { get; set; }
-        public bool Shipped { get; set; } = false;
-       
+        public bool Shipped { get; set; } = false;    
         public ICollection<CartLine> Lines { get; set; }
         public Endereco Endereco { get; set; }
         public Pagamento Pagamento { get; set; }
