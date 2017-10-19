@@ -9,7 +9,7 @@ namespace StoreEP.Models
     public class Pagamento
     {
         [Key]
-        public int PagamentoId { get; set; }
+        public int ID { get; set; }
         public string UserId { get; set; }
         public int PedidoId { get; set; }
         [Required]

@@ -19,7 +19,11 @@ namespace StoreEP.Controllers
 
         public int PageSize = 4;
 
-        public ProdutosController(IProdutoRepositorio produtoRepositorio, IImagensRepositorio imagensRepositorio, IComentariosRepositorio comentariosRepositorio)
+        public ProdutosController(
+            IProdutoRepositorio produtoRepositorio, 
+            IImagensRepositorio imagensRepositorio, 
+            IComentariosRepositorio comentariosRepositorio
+            )
         {
             _produtoRepositorio = produtoRepositorio;
             _imagensRepositorio = imagensRepositorio;
@@ -70,7 +74,7 @@ namespace StoreEP.Controllers
         //        return NotFound();
         //    }
 
-        //    var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ProdutoId == id);
+        //    var produto = await _lojaContexto.Produtos.SingleOrDefaultAsync(p => p.ID == id);
         //    if (produto == null)
         //    {
         //        return NotFound();
@@ -85,7 +89,7 @@ namespace StoreEP.Controllers
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> Edit(int id, [Bind("ID,Nome,Categoria,Preco,Descricao,LinkImagemPD,Fabricante")] Produto produto)
         //{
-        //    if (id != produto.ProdutoId)
+        //    if (id != produto.ID)
         //    {
         //        return NotFound();
         //    }
@@ -99,7 +103,7 @@ namespace StoreEP.Controllers
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!ProdutoExists(produto.ProdutoId))
+        //            if (!ProdutoExists(produto.ID))
         //            {
         //                return NotFound();
         //            }
@@ -122,7 +126,7 @@ namespace StoreEP.Controllers
         //    }
 
         //    var produto = await _lojaContexto.Produtos
-        //        .SingleOrDefaultAsync(p => p.ProdutoId == id);
+        //        .SingleOrDefaultAsync(p => p.ID == id);
         //    if (produto == null)
         //    {
         //        return NotFound();
@@ -135,12 +139,12 @@ namespace StoreEP.Controllers
 
         //private bool ProdutoExists(int id)
         //{
-        //    return _lojaContexto.Produtos.Any(p => p.ProdutoId == id);
+        //    return _lojaContexto.Produtos.Any(p => p.ID == id);
         //}
 
         public IActionResult Buscar(Filtro filtro, int pagina = 1)
         {
-            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true && p.Nome.ToUpper().Contains(filtro.Nome.ToUpper())).OrderBy(p => p.ProdutoId).Skip((0) * PageSize).Take(PageSize).ToList();
+            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true && p.Nome.ToUpper().Contains(filtro.Nome.ToUpper())).OrderBy(p => p.ID).Skip((0) * PageSize).Take(PageSize).ToList();
             if (produtos.Count() == 1)
             {
                 Produto produto = produtos.SingleOrDefault();
@@ -165,7 +169,7 @@ namespace StoreEP.Controllers
         {
             ProductsListViewModel model = new ProductsListViewModel
             {
-                Produtos = _produtoRepositorio.Produtos.Where(p => (fabricante == null || p.Fabricante == fabricante) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((pagina - 1) * PageSize).Take(PageSize).ToList(),
+                Produtos = _produtoRepositorio.Produtos.Where(p => (fabricante == null || p.Fabricante == fabricante) && p.Publicado == true).OrderBy(p => p.ID).Skip((pagina - 1) * PageSize).Take(PageSize).ToList(),
                 Imagens = _imagensRepositorio.Imagens.ToList(),
                 PagingInfo = new PagingInfo
                 {
@@ -180,43 +184,50 @@ namespace StoreEP.Controllers
 
         public IActionResult Listar(string category, int page = 1)
         {
+            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
+                                                          .Where(p => (category == null || p.Categoria == category) && p.Publicado == true)
+                                                          .OrderBy(p => p.ID)
+                                                          .Skip((page - 1) * PageSize)
+                                                          .Take(PageSize)
+                                                          .ToList();
+            IEnumerable<string> categorias = _produtoRepositorio.Produtos
+                                                                 .Where(p => p.Categoria != null)
+                                                                 .Select(p => p.Categoria)
+                                                                 .Distinct()
+                                                                 .ToList();
+
             ProductsListViewModel productsListViewModel = new ProductsListViewModel
             {
-                Categorias = _produtoRepositorio.Produtos
-                    .Where(p => p.Categoria != null)
-                    .Select(p => p.Categoria)
-                    .Distinct()
-                    .ToList(),
-                Produtos = _produtoRepositorio.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).OrderBy(p => p.ProdutoId).Skip((page - 1) * PageSize).Take(PageSize).ToList(),
-                Imagens = _imagensRepositorio.Imagens.ToList(),
+                Categorias = categorias,
+                Produtos = produtos,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItensPerPage = PageSize,
-                    TotalItems = _produtoRepositorio.Produtos.Count()
+                    TotalItems = category == null ? _produtoRepositorio.Produtos.Count() : _produtoRepositorio.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).Count()
                 },
                 CurrentCategory = category
             };
             return View(productsListViewModel);
         }
 
-        [HttpGet("[controller]/[action]/{produtoid}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
-        public IActionResult Detalhes(int produtoid)
+        [HttpGet("[controller]/[action]/{ID}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
+        public IActionResult Detalhes(int ID)
         {
-            if (produtoid == 0)
+            if (ID == 0)
             {
                 return NotFound();
             }
-            Produto produto = _produtoRepositorio.Produtos.SingleOrDefault(p => p.ProdutoId == produtoid);
+            Produto produto = _produtoRepositorio.Produtos.SingleOrDefault(p => p.ID == ID);
             if (produto == null)
             {
                 return NotFound();
             }
             return View(new DetalheProdutoViewModels
             {
-                Produto = _produtoRepositorio.Produtos.SingleOrDefault(p => p.ProdutoId == produtoid),
-                Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == produtoid).ToList(),
-                Comentarios = _comentariosRepositorio.Comentarios.Where(c => c.ProdutoId == produtoid && c.Aprovado == true).ToList()
+                Produto = _produtoRepositorio.Produtos.SingleOrDefault(p => p.ID == ID),
+                Imagens = _imagensRepositorio.Imagens.Where(i => i.ID == ID).ToList(),
+                Comentarios = _comentariosRepositorio.Comentarios.Where(c => c.ID == ID && c.Aprovado == true).ToList()
             });
         }
     }

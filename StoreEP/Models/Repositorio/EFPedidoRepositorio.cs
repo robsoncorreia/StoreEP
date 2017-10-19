@@ -18,20 +18,13 @@ namespace StoreEP.Models
                                                      .ThenInclude(l => l.Produto);
         public void Registrar(Pedido pedido)
         {
-            foreach (CartLine item in pedido.Lines)
-            {
-                DarBaixa(item);
-            }
+
             context.AttachRange(pedido.Lines.Select(i => i.Produto));
-            if (pedido.PedidoId == 0)
+            if (pedido.ID == 0)
             {
                 context.Pedidos.Add(pedido);
             }
             var mensagem = context.SaveChanges();
-        }
-        public void DarBaixa(CartLine cartLine)
-        {
-            cartLine.Produto.Quantidade -= 1;
         }
     }
 }

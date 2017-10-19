@@ -58,18 +58,18 @@ namespace StoreEP.Controllers
         public IActionResult Criar() => View();
 
 
-        public IActionResult Apagar(string EnderecoId)
+        public IActionResult Apagar(string ID)
         {
-            Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoId == int.Parse(EnderecoId));
+            Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.ID == int.Parse(ID));
             if (apagarEndereco != null)
             {
-                _addressRepositoty.ApagarEndereco(int.Parse(EnderecoId));
+                _addressRepositoty.ApagarEndereco(int.Parse(ID));
             }
             return RedirectToAction("Finalizar", "Pedido");
         }
-        public IActionResult Utilizar(int enderecoId)
+        public IActionResult Utilizar(int ID)
         {
-            Endereco endereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoId == enderecoId);
+            Endereco endereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.ID == ID);
             if (endereco != null)
             {
                 endereco.Utilizado = DateTime.Now;

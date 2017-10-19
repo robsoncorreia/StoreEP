@@ -38,21 +38,21 @@ namespace StoreEP.Controllers
         public ViewResult Listar() => View(_produtoRepositorio.Produtos);
 
         [AutoValidateAntiforgeryToken]
-        [HttpGet("[controller]/[action]/Produto{produtoid}")]
-        public ViewResult EditarProduto(int produtoid)
+        [HttpGet("[controller]/[action]/Produto{ID}")]
+        public ViewResult EditarProduto(int ID)
         {
             return View(new EditarProdutoViewModel
             {
-                Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == produtoid).ToList(),
+                Imagens = _imagensRepositorio.Imagens.Where(i => i.ID == ID).ToList(),
                 Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).OrderBy(f => f).ToList(),
-                Produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoId == produtoid),
+                Produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ID == ID),
                 Categorias = _produtoRepositorio.Produtos.Where(c => c.Categoria != null).Select(x => x.Categoria).Distinct().OrderBy(x => x)
             });
         }
         [HttpPost]
         public IActionResult EditarProduto(EditarProdutoViewModel model)
         {
-            int produtoid = model.Produto.ProdutoId;
+            int ID = model.Produto.ID;
             if (ModelState.IsValid)
             {
                 if (model.Imagem != null)
@@ -60,7 +60,7 @@ namespace StoreEP.Controllers
                     _imagensRepositorio.RegistrarImagem(model.Imagem);
                 }
                 TempData["massage"] = $"{model.Produto.Nome} foi salvo com sucesso.";
-                model.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoId == model.Produto.ProdutoId).ToList();
+                model.Imagens = _imagensRepositorio.Imagens.Where(i => i.ID == model.Produto.ID).ToList();
                 model.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null)
                                                                 .Select(f => f.Fabricante)
                                                                 .Distinct()
@@ -71,11 +71,11 @@ namespace StoreEP.Controllers
                                                                .Distinct()
                                                                .OrderBy(x => x)
                                                                .ToList();
-                return RedirectToAction("EditarProduto",produtoid);
+                return RedirectToAction("EditarProduto",ID);
             }
             else
             {
-                ModelState.Remove("Imagem.ProdutoId");
+                ModelState.Remove("Imagem.ID");
                 ModelState.Remove("Imagem.Link");
                 ModelState.Remove("Imagem.Nome");
                 if (ModelState.IsValid)
@@ -84,7 +84,7 @@ namespace StoreEP.Controllers
                     _produtoRepositorio.RegistrarProduto(model.Produto);
                 }
                 model.Imagens = _imagensRepositorio.Imagens
-                                                   .Where(i => i.ProdutoId == model.Produto.ProdutoId)
+                                                   .Where(i => i.ID == model.Produto.ID)
                                                    .ToList();
                 model.Fabricantes = _produtoRepositorio.Produtos
                                                        .Where(p => p.Fabricante != null)
@@ -95,7 +95,7 @@ namespace StoreEP.Controllers
                                                                .Select(c => c.Categoria)
                                                                .Distinct()
                                                                .OrderBy(c => c);
-                return RedirectToAction("EditarProduto", produtoid);
+                return RedirectToAction("EditarProduto", ID);
             }
         }
         public LocalRedirectResult ApagarImagem(int id, string url = null)
@@ -115,7 +115,7 @@ namespace StoreEP.Controllers
         {
             editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null).Select(c => c.Categoria).Distinct().OrderBy(c => c);
             editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).Distinct().OrderBy(f => f);
-            ModelState.Remove("Produto.ProdutoId");
+            ModelState.Remove("Produto.ID");
             if (ModelState.IsValid)
             {
                 editarProdutoViewModel.Produto.Imagens = new List<Imagem> { editarProdutoViewModel.Imagem };
@@ -123,7 +123,6 @@ namespace StoreEP.Controllers
                 TempData["massage"] = $"{editarProdutoViewModel.Produto.Nome} foi salvo com sucesso.";
                 return RedirectToAction(nameof(Listar));
             }
-
             return View(editarProdutoViewModel);
         }
 
@@ -143,23 +142,23 @@ namespace StoreEP.Controllers
             return View(comentarios);
         }
 
-        public IActionResult AprovarComentario(int comentarioId)
+        public IActionResult AprovarComentario(int ID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ComentarioId == comentarioId);
+            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ID == ID);
             comentario.Aprovado = true;
             _comentariosRepositorio.RegistrarComentario(comentario);
             return RedirectToAction(nameof(ValidarComentarios));
         }
-        [HttpGet("[controller]/[action]/{comentarioId}")]
-        public IActionResult DetalhesComentario(int comentarioId)
+        [HttpGet("[controller]/[action]/{ID}")]
+        public IActionResult DetalhesComentario(int ID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ComentarioId == comentarioId);
+            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ID == ID);
             return View(comentario);
         }
-        [HttpGet("[controller]/[action]/{comentarioId}")]
-        public IActionResult RemoverComentario(int comentarioId)
+        [HttpGet("[controller]/[action]/{ID}")]
+        public IActionResult RemoverComentario(int ID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ComentarioId == comentarioId);
+            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ID == ID);
             _comentariosRepositorio.ApagarComentario(comentario);
             TempData["massage"] = $"{comentario.NomeUsuario} apagado com sucesso.";
             return RedirectToAction(nameof(ValidarComentarios));

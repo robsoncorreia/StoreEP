@@ -21,8 +21,8 @@
             @foreach (var line in Model.Carrinho.Lines)
             {
                 <li class="list-group-item">
-                    <img src="@Model.Imagens.Where(i => i.ProdutoId == line.Produto.ProdutoId).Select(i => i.Link).FirstOrDefault()" height="50" alt="@Model.Imagens.Where(i => i.ProdutoId == line.Produto.ProdutoId).Select(i => i.Nome).FirstOrDefault()" />
-                    <span><a asp-action="Detalhes" asp-controller="Produtos" asp-route-produtoid="@line.Produto.ProdutoId">@line.Produto.Nome</a></span>
+                    <img src="@Model.Imagens.Where(i => i.ID == line.Produto.ID).Select(i => i.Link).FirstOrDefault()" height="50" alt="@Model.Imagens.Where(i => i.ID == line.Produto.ID).Select(i => i.Nome).FirstOrDefault()" />
+                    <span><a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@line.Produto.ID">@line.Produto.Nome</a></span>
                     <span>
                         Preço: @line.Produto.Preco.ToString("c")
                         Quantidade: @line.Quantidade

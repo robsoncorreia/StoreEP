@@ -40,9 +40,9 @@ namespace StoreEP.Controllers
             }
             return RedirectToAction(actionName: "Finalizar", controllerName: "Pedido");
         }
-        public IActionResult Responder(DetalheProdutoViewModels detalheProdutoViewModels, int comentarioid)
+        public IActionResult Responder(DetalheProdutoViewModels detalheProdutoViewModels, int ID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ComentarioId == comentarioid);
+            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ID == ID);
             if (comentario == null)
             {
                 return RedirectToAction(actionName: "Finalizar", controllerName: "Pedido");

@@ -8,7 +8,7 @@ namespace StoreEP.Models
     public class EFProdutoRepositorio : IProdutoRepositorio
     {
         private StoreEPDbContext _bancoContexto;
-        private int produtoid = 0;
+        private int ID = 0;
         public EFProdutoRepositorio(StoreEPDbContext ctx)
         {
             _bancoContexto = ctx;
@@ -16,17 +16,17 @@ namespace StoreEP.Models
         public IEnumerable<Produto> Produtos => _bancoContexto.Produtos;
         public int RegistrarProduto(Produto produto)
         {
-            if (produto.ProdutoId == 0)
+            if (produto.ID == 0)
             {
                 _bancoContexto.Produtos.Add(produto);
-                produtoid = produto.ProdutoId;
+                ID = produto.ID;
             }
             else
             {
-                Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ProdutoId == produto.ProdutoId);
+                Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ID == produto.ID);
                 if (dbEntry != null)
                 {
-                    produtoid = produto.ProdutoId;
+                    ID = produto.ID;
                     dbEntry.Categoria = produto.Categoria;
                     dbEntry.Descricao = produto.Descricao;
                     dbEntry.Fabricante = produto.Fabricante;
@@ -37,11 +37,11 @@ namespace StoreEP.Models
                 }
             }
             _bancoContexto.SaveChanges();
-            return produtoid;
+            return ID;
         }
         public Produto ApagarProduto(int ID)
         {
-            Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ProdutoId == ID);
+            Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ID == ID);
             if (dbEntry != null)
             {
                 _bancoContexto.Produtos.Remove(dbEntry);

@@ -1,4 +1,4 @@
-﻿using StoreEP.Models.Interface;
+using StoreEP.Models.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,25 +16,25 @@ namespace StoreEP.Models.Repositorio
         public IEnumerable<Imagem> Imagens => _bancoContexto.Imagens;
         public void RegistrarImagem(Imagem imagem)
         {
-            if (imagem.ImagemId == 0)
+            if (imagem.ID == 0)
             {
                 _bancoContexto.Imagens.Add(imagem);
             }
             else
             {
-                Imagem dbEntry = _bancoContexto.Imagens.FirstOrDefault(i => i.ImagemId == imagem.ImagemId);
+                Imagem dbEntry = _bancoContexto.Imagens.FirstOrDefault(i => i.ID == imagem.ID);
                 if (dbEntry != null)
                 {
                     dbEntry.Nome = imagem.Nome;
                     dbEntry.Link = imagem.Link;
-                    dbEntry.ProdutoId = imagem.ProdutoId;
+                    dbEntry.ID = imagem.ID;
                 }
             }
             _bancoContexto.SaveChanges();
         }
         public Imagem ApagarImagem(int id)
         {
-            Imagem dbEntry = _bancoContexto.Imagens.FirstOrDefault(i => i.ImagemId == id);
+            Imagem dbEntry = _bancoContexto.Imagens.FirstOrDefault(i => i.ID == id);
             if (dbEntry != null)
             {
                 _bancoContexto.Imagens.Remove(dbEntry);

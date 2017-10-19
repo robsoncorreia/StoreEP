@@ -13,7 +13,7 @@
             <label>Texto</label>
             <input asp-for="@Model.Resposta.Texto" />
             <button type="submit" class="btn btn-success btn-sm">Responder</button>
-            <input type="hidden" asp-for="@Model.Resposta.ProdutoId" value="@Model.Produto.ProdutoId" />
+            <input type="hidden" asp-for="@Model.Resposta.ID" value="@Model.Produto.ID" />
         </form>
         if (comentario.Respostas != null)
         {
@@ -50,7 +50,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-default btn-sm">Enviar comentário</button>
-                        <input type="hidden" value="@Model.Produto.ProdutoId" asp-for="Comentario.ProdutoId" />
+                        <input type="hidden" value="@Model.Produto.ID" asp-for="Comentario.ID" />
                     </div>
                 </div>
             </form>

@@ -17,13 +17,13 @@ namespace StoreEP.Models.Repositorio
         public IEnumerable<Comentario> Comentarios => _context.Comentarios;
         public void RegistrarComentario(Comentario comentario)
         {
-            if (comentario.ComentarioId == 0)
+            if (comentario.ID == 0)
             {
                 _context.Comentarios.Add(comentario);
             }
             else
             {
-                Comentario dbEntry = _context.Comentarios.FirstOrDefault(c => c.ComentarioId == comentario.ComentarioId);
+                Comentario dbEntry = _context.Comentarios.FirstOrDefault(c => c.ID == comentario.ID);
                 if (dbEntry != null)
                 {
                     _context.Comentarios.Update(comentario);

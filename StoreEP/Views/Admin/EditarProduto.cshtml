@@ -8,10 +8,10 @@
         <strong>@TempData["massage"]</strong>
     </div>
 }
-<form asp-action="CriarProduto" method="post">
+<form asp-action="EditarProduto" method="post">
     <div class="row">
         <div class="col-md-6">
-            <input type="hidden" asp-for="Produto.ProdutoId" />
+            <input type="hidden" asp-for="Produto.ID" />
             <div class="form-group">
                 <label>Nome</label>
                 <div><span asp-validation-for="Produto.Nome" class="text-danger"></span></div>
@@ -68,7 +68,7 @@
             <label asp-for="Imagem.Link">Link da imagem</label>
             <div><span asp-validation-for="Imagem.Link" class="text-danger"></span></div>
             <input asp-for="Imagem.Link" class="form-control" />
-            <input type="hidden" asp-for="Imagem.ProdutoId" value="@Model?.Produto?.ProdutoId" />
+            <input type="hidden" asp-for="Imagem.ID" value="@Model?.Produto?.ID" />
         </div>
     </div>
     <div class="row">
@@ -94,9 +94,9 @@
         @foreach (Imagem imagem in Model.Imagens)
                 {
             <div style="display:inline-block; ">
-                <img src="@imagem.Link" alt="@imagem.Nome" id="@imagem.ImagemId" width="80" style="float:left; margin: 4px;" />
+                <img src="@imagem.Link" alt="@imagem.Nome" id="@imagem.ID" width="80" style="float:left; margin: 4px;" />
                 <span>
-                    <a style="left: -50px;bottom: -50px;background: aliceblue;box-shadow: 0px 0px 10px black;" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" asp-action="ApagarImagem" asp-controller="Admin" asp-route-id="@imagem.ImagemId" asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()"><i style="color: red;" class="material-icons">delete</i></a>
+                    <a style="left: -50px;bottom: -50px;background: aliceblue;box-shadow: 0px 0px 10px black;" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" asp-action="ApagarImagem" asp-controller="Admin" asp-route-id="@imagem.ID" asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()"><i style="color: red;" class="material-icons">delete</i></a>
                 </span>
             </div>
         }

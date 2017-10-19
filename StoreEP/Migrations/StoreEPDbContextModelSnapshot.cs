@@ -25,31 +25,31 @@ namespace StoreEP.Migrations
                     b.Property<int>("CartLineID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("PedidoId");
+                    b.Property<int?>("PedidoID");
 
-                    b.Property<int?>("ProdutoId");
+                    b.Property<int?>("ProdutoID");
 
                     b.Property<int>("Quantidade");
 
                     b.HasKey("CartLineID");
 
-                    b.HasIndex("PedidoId");
+                    b.HasIndex("PedidoID");
 
-                    b.HasIndex("ProdutoId");
+                    b.HasIndex("ProdutoID");
 
                     b.ToTable("CartLine");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Comentario", b =>
                 {
-                    b.Property<int>("ComentarioId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Aprovado");
 
                     b.Property<string>("Assunto");
 
-                    b.Property<int?>("ComentarioId1");
+                    b.Property<int?>("ComentarioID");
 
                     b.Property<DateTime>("Data");
 
@@ -57,24 +57,24 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("NomeUsuario");
 
-                    b.Property<int>("ProdutoId");
+                    b.Property<int?>("ProdutoID");
 
                     b.Property<string>("Texto");
 
                     b.Property<string>("UsuarioID");
 
-                    b.HasKey("ComentarioId");
+                    b.HasKey("ID");
 
-                    b.HasIndex("ComentarioId1");
+                    b.HasIndex("ComentarioID");
 
-                    b.HasIndex("ProdutoId");
+                    b.HasIndex("ProdutoID");
 
                     b.ToTable("Comentario");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Endereco", b =>
                 {
-                    b.Property<int>("EnderecoId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Bairro")
@@ -106,7 +106,7 @@ namespace StoreEP.Migrations
 
                     b.Property<DateTime>("Utilizado");
 
-                    b.HasKey("EnderecoId");
+                    b.HasKey("ID");
 
                     b.ToTable("Endereco");
                 });
@@ -118,11 +118,11 @@ namespace StoreEP.Migrations
 
                     b.Property<DateTime>("DataAltarecao");
 
+                    b.Property<int>("ID");
+
                     b.Property<decimal>("PrecoAntigo");
 
                     b.Property<decimal>("PrecoNovo");
-
-                    b.Property<int>("ProdutoId");
 
                     b.HasKey("PrecoId");
 
@@ -131,7 +131,7 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.Imagem", b =>
                 {
-                    b.Property<int>("ImagemId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Link")
@@ -140,18 +140,18 @@ namespace StoreEP.Migrations
                     b.Property<string>("Nome")
                         .IsRequired();
 
-                    b.Property<int>("ProdutoId");
+                    b.Property<int?>("ProdutoID");
 
-                    b.HasKey("ImagemId");
+                    b.HasKey("ID");
 
-                    b.HasIndex("ProdutoId");
+                    b.HasIndex("ProdutoID");
 
                     b.ToTable("Imagem");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Pagamento", b =>
                 {
-                    b.Property<int>("PagamentoId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CompraDT");
@@ -164,7 +164,7 @@ namespace StoreEP.Migrations
 
                     b.Property<decimal>("Valor");
 
-                    b.HasKey("PagamentoId");
+                    b.HasKey("ID");
 
                     b.HasIndex("PedidoId")
                         .IsUnique();
@@ -174,27 +174,27 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.Pedido", b =>
                 {
-                    b.Property<int>("PedidoId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DataCompra");
 
-                    b.Property<int?>("EnderecoId");
+                    b.Property<int?>("EnderecoID");
 
                     b.Property<bool>("Shipped");
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("PedidoId");
+                    b.HasKey("ID");
 
-                    b.HasIndex("EnderecoId");
+                    b.HasIndex("EnderecoID");
 
                     b.ToTable("Pedido");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Produto", b =>
                 {
-                    b.Property<int>("ProdutoId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Categoria")
@@ -214,7 +214,7 @@ namespace StoreEP.Migrations
 
                     b.Property<int>("Quantidade");
 
-                    b.HasKey("ProdutoId");
+                    b.HasKey("ID");
 
                     b.ToTable("Produto");
                 });
@@ -223,31 +223,29 @@ namespace StoreEP.Migrations
                 {
                     b.HasOne("StoreEP.Models.Pedido")
                         .WithMany("Lines")
-                        .HasForeignKey("PedidoId");
+                        .HasForeignKey("PedidoID");
 
                     b.HasOne("StoreEP.Models.Produto", "Produto")
                         .WithMany()
-                        .HasForeignKey("ProdutoId");
+                        .HasForeignKey("ProdutoID");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Comentario", b =>
                 {
                     b.HasOne("StoreEP.Models.Comentario")
                         .WithMany("Respostas")
-                        .HasForeignKey("ComentarioId1");
+                        .HasForeignKey("ComentarioID");
 
                     b.HasOne("StoreEP.Models.Produto")
                         .WithMany("Comentarios")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProdutoID");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Imagem", b =>
                 {
                     b.HasOne("StoreEP.Models.Produto")
                         .WithMany("Imagens")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProdutoID");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Pagamento", b =>
@@ -262,7 +260,7 @@ namespace StoreEP.Migrations
                 {
                     b.HasOne("StoreEP.Models.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("EnderecoId");
+                        .HasForeignKey("EnderecoID");
                 });
 #pragma warning restore 612, 618
         }

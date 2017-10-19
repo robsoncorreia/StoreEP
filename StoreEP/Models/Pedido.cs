@@ -9,8 +9,8 @@ namespace StoreEP.Models
 {
     public class Pedido
     {
-        [Key]
-        public int PedidoId { get; set; }
+ 
+        public int ID { get; set; }
         public string UserId { get; set; }
         public bool Shipped { get; set; } = false;    
         public ICollection<CartLine> Lines { get; set; }

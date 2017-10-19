@@ -26,9 +26,9 @@ namespace StoreEP.Controllers
                 ReturnUrl = returnUrl
             });
         }
-        public RedirectToActionResult AdicionarCarrinho(int produtoid, string returnUrl)
+        public RedirectToActionResult AdicionarCarrinho(int ID, string returnUrl)
         {
-            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoId == produtoid);
+            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ID == ID);
             if(produto != null)
             {
                 Carrinho.AddItem(produto, 1);
@@ -37,7 +37,7 @@ namespace StoreEP.Controllers
         }
         public RedirectToActionResult RemoverCarrinho(int ID, string returnUrl)
         {
-            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoId == ID);
+            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ID == ID);
             if (produto != null)
             {
                 Carrinho.RemoveLine(produto);

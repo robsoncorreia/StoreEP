@@ -24,7 +24,7 @@ namespace StoreEP
                 try
                 {
                     var context = services.GetRequiredService<StoreEPDbContext>();
-                    SeedData.EnsurePopulated(context);
+                    DadosInicializacaoDb.PopularDb(context);
                 }
                 catch (Exception ex)
                 {

@@ -8,9 +8,8 @@ namespace StoreEP.Models
 {
     public class Imagem
     {
-        [Key]
-        public int ImagemId { get; set; }
-        public int ProdutoId { get; set; }
+ 
+        public int ID { get; set; }
         [Url]
         [Required]
         public string Link { get; set; }
