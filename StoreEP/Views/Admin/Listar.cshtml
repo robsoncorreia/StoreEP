@@ -19,15 +19,15 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td class="text-right">@item?.ID</td>
-            <td><a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@item.ID">@item?.Nome</a></td>
+            <td class="text-right">@item?.ProdutoID</td>
+            <td><a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@item.ProdutoID">@item?.Nome</a></td>
             <td class="text-right">@item?.Preco.ToString("c")</td>
             <td class="text-right">@item?.Categoria</td>
             <td class="text-right">@item?.Descricao</td>
             <td class="text-center">
                 <form asp-action="Apagar" method="post">
-                    <a asp-action="EditarProduto" class="btn btn-sm btn btn-warning" asp-route-ID="@item.ID">Editar</a>
-                    <input type="hidden" name="ID" value="@item.ID" />
+                    <a asp-action="EditarProduto" class="btn btn-sm btn btn-warning" asp-route-ID="@item.ProdutoID">Editar</a>
+                    <input type="hidden" name="ID" value="@item.ProdutoID" />
                     <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Produto será excluido da base de dados">Apagar</button>
                 </form>
             </td>
