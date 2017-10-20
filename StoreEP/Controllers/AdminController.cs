@@ -41,7 +41,6 @@ namespace StoreEP.Controllers
         public ViewResult Listar() => View(_produtoRepositorio.Produtos);
 
         [AutoValidateAntiforgeryToken]
-        [HttpGet("[controller]/[action]/Produto/{ID}")]
         public ViewResult EditarProduto(int ID)
         {
             IEnumerable<Imagem> imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoID == ID).ToList();
