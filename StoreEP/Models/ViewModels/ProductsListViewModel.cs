@@ -12,5 +12,6 @@ namespace StoreEP.Models.ViewModels
         public PagingInfo PagingInfo { get; set; }
         public string CurrentCategory { get; set; }
         public IEnumerable<string> Categorias { get; set; }
+        public string Filtro { get; set; }
     }
 }

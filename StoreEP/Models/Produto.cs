@@ -8,7 +8,6 @@ namespace StoreEP.Models
 {
     public class Produto
     {
-        [Key]
         public int ProdutoID { get; set; }
         [Required(ErrorMessage = "Escreva um nome válido.")]
         public string Nome { get; set; }

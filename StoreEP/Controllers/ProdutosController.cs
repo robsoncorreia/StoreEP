@@ -16,15 +16,18 @@ namespace StoreEP.Controllers
         private readonly IProdutoRepositorio _produtoRepositorio;
         private readonly IImagensRepositorio _imagensRepositorio;
         private readonly IComentariosRepositorio _comentariosRepositorio;
+        private StoreEPDbContext _dbContext;
 
         public int PageSize = 4;
 
         public ProdutosController(
-            IProdutoRepositorio produtoRepositorio, 
-            IImagensRepositorio imagensRepositorio, 
-            IComentariosRepositorio comentariosRepositorio
+            IProdutoRepositorio produtoRepositorio,
+            IImagensRepositorio imagensRepositorio,
+            IComentariosRepositorio comentariosRepositorio,
+            StoreEPDbContext dbContext
             )
         {
+            _dbContext = dbContext;
             _produtoRepositorio = produtoRepositorio;
             _imagensRepositorio = imagensRepositorio;
             _comentariosRepositorio = comentariosRepositorio;
@@ -142,9 +145,16 @@ namespace StoreEP.Controllers
         //    return _lojaContexto.Produtos.Any(p => p.ID == id);
         //}
 
-        public IActionResult Buscar(Filtro filtro, int pagina = 1)
+        public IActionResult Buscar(FiltroViewModel filtro, int pagina = 1)
         {
-            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true && p.Nome.ToUpper().Contains(filtro.Nome.ToUpper())).OrderBy(p => p.ProdutoID).Skip((0) * PageSize).Take(PageSize).ToList();
+            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
+                                                               .Where(p => p.Publicado == true && p.Nome.ToUpper()
+                                                               .Contains(filtro.Texto.ToUpper()))
+                                                               .OrderBy(p => p.ProdutoID)
+                                                               .Skip((pagina - 1) * PageSize)
+                                                               .Take(PageSize)
+                                                               .ToList();
+
             if (produtos.Count() == 1)
             {
                 Produto produto = produtos.SingleOrDefault();
@@ -161,43 +171,28 @@ namespace StoreEP.Controllers
                 }
             };
             char s = model.Produtos.Count() < 2 ? ' ' : 's';
-            ViewData["filtro.Nome"] = $"{model.Produtos.Count()} resultado{s} para a busca {filtro.Nome}.";
+            ViewData["filtro.Nome"] = $"{model.Produtos.Count()} resultado{s} para a busca {filtro.Texto}.";
             return View("Listar", model);
         }
 
-        public IActionResult BuscarFabricante(string fabricante, int pagina = 1)
+        public async Task<IActionResult> Listar(string category, int page = 1)
         {
-            ProductsListViewModel model = new ProductsListViewModel
-            {
-                Produtos = _produtoRepositorio.Produtos.Where(p => (fabricante == null || p.Fabricante == fabricante) && p.Publicado == true).OrderBy(p => p.ProdutoID).Skip((pagina - 1) * PageSize).Take(PageSize).ToList(),
-                Imagens = _imagensRepositorio.Imagens.ToList(),
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = pagina,
-                    ItensPerPage = PageSize,
-                    TotalItems = _produtoRepositorio.Produtos.Count()
-                },
-                CurrentCategory = fabricante
-            };
-            return View("Listar", model);
-        }
-
-        public IActionResult Listar(string category, int page = 1)
-        {
-            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
+            IEnumerable<Produto> produtos = await _dbContext.Produtos
                                                           .Where(p => (category == null || p.Categoria == category) && p.Publicado == true)
                                                           .OrderBy(p => p.ProdutoID)
                                                           .Skip((page - 1) * PageSize)
                                                           .Take(PageSize)
-                                                          .ToList();
-            IEnumerable<string> categorias = _produtoRepositorio.Produtos
+                                                          .ToListAsync();
+            IEnumerable<string> categorias = await _dbContext.Produtos
                                                                  .Where(p => p.Categoria != null)
                                                                  .Select(p => p.Categoria)
                                                                  .Distinct()
-                                                                 .ToList();
+                                                                 .ToListAsync();
+            IEnumerable<Imagem> imagens = await _dbContext.Imagens.ToListAsync();
 
-            ProductsListViewModel productsListViewModel = new ProductsListViewModel
+            ProductsListViewModel model = new ProductsListViewModel
             {
+                Imagens = imagens,
                 Categorias = categorias,
                 Produtos = produtos,
                 PagingInfo = new PagingInfo
@@ -208,7 +203,7 @@ namespace StoreEP.Controllers
                 },
                 CurrentCategory = category
             };
-            return View(productsListViewModel);
+            return View(model);
         }
 
         [HttpGet("[controller]/[action]/{ID}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing

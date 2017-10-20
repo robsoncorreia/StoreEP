@@ -80,7 +80,8 @@
                             @p.Fabricante
                         </a>
                     </li>
-                    <li class="list-group-item">@p.Preco.ToString("c") 
+                    <li class="list-group-item">
+                        @p.Preco.ToString("c")
                         <a asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-ID="@p.ProdutoID" class="card-link">
                             <span class="glyphicon glyphicon-shopping-cart" style="float:right;"></span>
                         </a>
@@ -90,5 +91,22 @@
         </div>
     }
 </div>
-@*<select combobox-categorias-model="@Model.Categorias"></select>*@
 <div class="row text-center" page-model="@Model.PagingInfo" page-action="Listar" page-classes-enabled="true" page-class="btn" page-class-normal="btn-default" page-class-selected="btn-primary" page-url-cartegory="@Model.CurrentCategory"></div>
+@*<script>
+
+        $("#cm_filtro > option").click(function () {
+            var w = $(this).prop("value");
+            var y = { Data1: w };
+            console.log(y);
+            $.ajax({
+                type: 'POST',
+                url: '/Produtos/Buscar',
+                data: y,
+                cache: false,
+                success: function (result) {
+                    alert(result)
+                }
+            });
+        });
+    </script>*@
+}

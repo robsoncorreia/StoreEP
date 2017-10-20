@@ -7,13 +7,13 @@
     {
         <div>@comentario.NomeUsuario</div>
         <div>@comentario.Texto</div>
-        <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-comentarioid="@comentario.ComentarioId">
+        <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-comentarioid="@comentario.ComentarioID">
             <label asp-for="@Model.Resposta.Assunto"></label>
             <input asp-for="@Model.Resposta.Assunto" />
             <label>Texto</label>
             <input asp-for="@Model.Resposta.Texto" />
             <button type="submit" class="btn btn-success btn-sm">Responder</button>
-            <input type="hidden" asp-for="@Model.Resposta.ID" value="@Model.Produto.ID" />
+            <input type="hidden" asp-for="@Model.Resposta.ProdutoID" value="@Model.Produto.ProdutoID" />
         </form>
         if (comentario.Respostas != null)
         {
@@ -50,7 +50,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-default btn-sm">Enviar comentário</button>
-                        <input type="hidden" value="@Model.Produto.ID" asp-for="Comentario.ID" />
+                        <input type="hidden" value="@Model.Produto.ProdutoID" asp-for="Resposta" />
                     </div>
                 </div>
             </form>
