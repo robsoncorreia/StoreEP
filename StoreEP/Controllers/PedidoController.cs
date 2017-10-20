@@ -132,7 +132,7 @@ namespace StoreEP.Controllers
         }
         public RedirectToActionResult RemoverCarrinho(int ID)
         {
-            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ID == ID);
+            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == ID);
             if (produto != null)
             {
                 _carrinho.RemoveLine(produto);

@@ -144,7 +144,7 @@ namespace StoreEP.Controllers
 
         public IActionResult Buscar(Filtro filtro, int pagina = 1)
         {
-            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true && p.Nome.ToUpper().Contains(filtro.Nome.ToUpper())).OrderBy(p => p.ID).Skip((0) * PageSize).Take(PageSize).ToList();
+            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true && p.Nome.ToUpper().Contains(filtro.Nome.ToUpper())).OrderBy(p => p.ProdutoID).Skip((0) * PageSize).Take(PageSize).ToList();
             if (produtos.Count() == 1)
             {
                 Produto produto = produtos.SingleOrDefault();
@@ -169,7 +169,7 @@ namespace StoreEP.Controllers
         {
             ProductsListViewModel model = new ProductsListViewModel
             {
-                Produtos = _produtoRepositorio.Produtos.Where(p => (fabricante == null || p.Fabricante == fabricante) && p.Publicado == true).OrderBy(p => p.ID).Skip((pagina - 1) * PageSize).Take(PageSize).ToList(),
+                Produtos = _produtoRepositorio.Produtos.Where(p => (fabricante == null || p.Fabricante == fabricante) && p.Publicado == true).OrderBy(p => p.ProdutoID).Skip((pagina - 1) * PageSize).Take(PageSize).ToList(),
                 Imagens = _imagensRepositorio.Imagens.ToList(),
                 PagingInfo = new PagingInfo
                 {
@@ -186,7 +186,7 @@ namespace StoreEP.Controllers
         {
             IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
                                                           .Where(p => (category == null || p.Categoria == category) && p.Publicado == true)
-                                                          .OrderBy(p => p.ID)
+                                                          .OrderBy(p => p.ProdutoID)
                                                           .Skip((page - 1) * PageSize)
                                                           .Take(PageSize)
                                                           .ToList();
@@ -218,16 +218,16 @@ namespace StoreEP.Controllers
             {
                 return NotFound();
             }
-            Produto produto = _produtoRepositorio.Produtos.SingleOrDefault(p => p.ID == ID);
+            Produto produto = _produtoRepositorio.Produtos.SingleOrDefault(p => p.ProdutoID == ID);
             if (produto == null)
             {
                 return NotFound();
             }
             return View(new DetalheProdutoViewModels
             {
-                Produto = _produtoRepositorio.Produtos.SingleOrDefault(p => p.ID == ID),
-                Imagens = _imagensRepositorio.Imagens.Where(i => i.ID == ID).ToList(),
-                Comentarios = _comentariosRepositorio.Comentarios.Where(c => c.ID == ID && c.Aprovado == true).ToList()
+                Produto = _produtoRepositorio.Produtos.SingleOrDefault(p => p.ProdutoID == ID),
+                Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoID == ID).ToList(),
+                Comentarios = _comentariosRepositorio.Comentarios.Where(c => c.ProdutoID == ID && c.Aprovado == true).ToList()
             });
         }
     }

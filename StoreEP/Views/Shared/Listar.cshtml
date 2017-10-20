@@ -62,7 +62,7 @@
     {
         <div class="card col-3 col-md-3">
             <div class="col-12 cartao-produto border border-primary">
-                <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@p.ID" class="btn-toolbar">
+                <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@p.ProdutoID" class="btn-toolbar">
                     <img class="card-img-top" src="@p.Imagens.Select(i => i.Link).FirstOrDefault()" alt="@p.Imagens.Select(i => i.Nome).FirstOrDefault()" />
                 </a>
                 <div class="card-block">
@@ -81,7 +81,7 @@
                         </a>
                     </li>
                     <li class="list-group-item">@p.Preco.ToString("c") 
-                        <a asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-ID="@p.ID" class="card-link">
+                        <a asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-ID="@p.ProdutoID" class="card-link">
                             <span class="glyphicon glyphicon-shopping-cart" style="float:right;"></span>
                         </a>
                     </li>

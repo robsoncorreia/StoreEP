@@ -43,16 +43,16 @@ namespace StoreEP.Controllers
         {
             return View(new EditarProdutoViewModel
             {
-                Imagens = _imagensRepositorio.Imagens.Where(i => i.ID == ID).ToList(),
+                Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoID == ID).ToList(),
                 Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).OrderBy(f => f).ToList(),
-                Produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ID == ID),
+                Produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == ID),
                 Categorias = _produtoRepositorio.Produtos.Where(c => c.Categoria != null).Select(x => x.Categoria).Distinct().OrderBy(x => x)
             });
         }
         [HttpPost]
         public IActionResult EditarProduto(EditarProdutoViewModel model)
         {
-            int ID = model.Produto.ID;
+            int ID = model.Produto.ProdutoID;
             if (ModelState.IsValid)
             {
                 if (model.Imagem != null)
@@ -60,7 +60,7 @@ namespace StoreEP.Controllers
                     _imagensRepositorio.RegistrarImagem(model.Imagem);
                 }
                 TempData["massage"] = $"{model.Produto.Nome} foi salvo com sucesso.";
-                model.Imagens = _imagensRepositorio.Imagens.Where(i => i.ID == model.Produto.ID).ToList();
+                model.Imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoID == model.Produto.ProdutoID).ToList();
                 model.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null)
                                                                 .Select(f => f.Fabricante)
                                                                 .Distinct()
@@ -84,7 +84,7 @@ namespace StoreEP.Controllers
                     _produtoRepositorio.RegistrarProduto(model.Produto);
                 }
                 model.Imagens = _imagensRepositorio.Imagens
-                                                   .Where(i => i.ID == model.Produto.ID)
+                                                   .Where(i => i.ProdutoID == model.Produto.ProdutoID)
                                                    .ToList();
                 model.Fabricantes = _produtoRepositorio.Produtos
                                                        .Where(p => p.Fabricante != null)
@@ -144,7 +144,7 @@ namespace StoreEP.Controllers
 
         public IActionResult AprovarComentario(int ID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ID == ID);
+            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ProdutoID == ID);
             comentario.Aprovado = true;
             _comentariosRepositorio.RegistrarComentario(comentario);
             return RedirectToAction(nameof(ValidarComentarios));
@@ -152,13 +152,13 @@ namespace StoreEP.Controllers
         [HttpGet("[controller]/[action]/{ID}")]
         public IActionResult DetalhesComentario(int ID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ID == ID);
+            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ProdutoID == ID);
             return View(comentario);
         }
         [HttpGet("[controller]/[action]/{ID}")]
         public IActionResult RemoverComentario(int ID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ID == ID);
+            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ProdutoID == ID);
             _comentariosRepositorio.ApagarComentario(comentario);
             TempData["massage"] = $"{comentario.NomeUsuario} apagado com sucesso.";
             return RedirectToAction(nameof(ValidarComentarios));

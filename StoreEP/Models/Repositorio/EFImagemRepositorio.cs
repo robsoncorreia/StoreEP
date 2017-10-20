@@ -16,25 +16,25 @@ namespace StoreEP.Models.Repositorio
         public IEnumerable<Imagem> Imagens => _bancoContexto.Imagens;
         public void RegistrarImagem(Imagem imagem)
         {
-            if (imagem.ID == 0)
+            if (imagem.ImagemID == 0)
             {
                 _bancoContexto.Imagens.Add(imagem);
             }
             else
             {
-                Imagem dbEntry = _bancoContexto.Imagens.FirstOrDefault(i => i.ID == imagem.ID);
+                Imagem dbEntry = _bancoContexto.Imagens.FirstOrDefault(i => i.ImagemID == imagem.ImagemID);
                 if (dbEntry != null)
                 {
                     dbEntry.Nome = imagem.Nome;
                     dbEntry.Link = imagem.Link;
-                    dbEntry.ID = imagem.ID;
+                    dbEntry.ProdutoID = imagem.ProdutoID;
                 }
             }
             _bancoContexto.SaveChanges();
         }
         public Imagem ApagarImagem(int id)
         {
-            Imagem dbEntry = _bancoContexto.Imagens.FirstOrDefault(i => i.ID == id);
+            Imagem dbEntry = _bancoContexto.Imagens.FirstOrDefault(i => i.ImagemID == id);
             if (dbEntry != null)
             {
                 _bancoContexto.Imagens.Remove(dbEntry);

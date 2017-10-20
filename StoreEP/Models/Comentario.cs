@@ -8,7 +8,9 @@ namespace StoreEP.Models
 {
     public class Comentario
     {
-        public int ID { get; set; }
+        [Key]
+        public int ComentarioID { get; set; }
+        public int ProdutoID { get; set; }
         public string Assunto { get; set; }
         public byte Estrela { get; set; }
         public string Texto { get; set; }

@@ -16,17 +16,17 @@ namespace StoreEP.Models
         public IEnumerable<Produto> Produtos => _bancoContexto.Produtos;
         public int RegistrarProduto(Produto produto)
         {
-            if (produto.ID == 0)
+            if (produto.ProdutoID == 0)
             {
                 _bancoContexto.Produtos.Add(produto);
-                ID = produto.ID;
+                ID = produto.ProdutoID;
             }
             else
             {
-                Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ID == produto.ID);
+                Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ProdutoID == produto.ProdutoID);
                 if (dbEntry != null)
                 {
-                    ID = produto.ID;
+                    dbEntry.ProdutoID = produto.ProdutoID;
                     dbEntry.Categoria = produto.Categoria;
                     dbEntry.Descricao = produto.Descricao;
                     dbEntry.Fabricante = produto.Fabricante;
@@ -41,7 +41,7 @@ namespace StoreEP.Models
         }
         public Produto ApagarProduto(int ID)
         {
-            Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ID == ID);
+            Produto dbEntry = _bancoContexto.Produtos.FirstOrDefault(p => p.ProdutoID == ID);
             if (dbEntry != null)
             {
                 _bancoContexto.Produtos.Remove(dbEntry);

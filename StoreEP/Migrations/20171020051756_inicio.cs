@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace StoreEP.Migrations
 {
-    public partial class inicial : Migration
+    public partial class inicio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,7 @@ namespace StoreEP.Migrations
                 name: "Produto",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    ProdutoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Categoria = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -64,7 +64,7 @@ namespace StoreEP.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produto", x => x.ID);
+                    table.PrimaryKey("PK_Produto", x => x.ProdutoID);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,54 +93,54 @@ namespace StoreEP.Migrations
                 name: "Comentario",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    ComentarioID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Aprovado = table.Column<bool>(type: "bit", nullable: false),
                     Assunto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ComentarioID = table.Column<int>(type: "int", nullable: true),
+                    ComentarioID1 = table.Column<int>(type: "int", nullable: true),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Estrela = table.Column<byte>(type: "tinyint", nullable: false),
                     NomeUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProdutoID = table.Column<int>(type: "int", nullable: true),
+                    ProdutoID = table.Column<int>(type: "int", nullable: false),
                     Texto = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UsuarioID = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comentario", x => x.ID);
+                    table.PrimaryKey("PK_Comentario", x => x.ComentarioID);
                     table.ForeignKey(
-                        name: "FK_Comentario_Comentario_ComentarioID",
-                        column: x => x.ComentarioID,
+                        name: "FK_Comentario_Comentario_ComentarioID1",
+                        column: x => x.ComentarioID1,
                         principalTable: "Comentario",
-                        principalColumn: "ID",
+                        principalColumn: "ComentarioID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comentario_Produto_ProdutoID",
                         column: x => x.ProdutoID,
                         principalTable: "Produto",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ProdutoID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Imagem",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    ImagemID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Link = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProdutoID = table.Column<int>(type: "int", nullable: true)
+                    ProdutoID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Imagem", x => x.ID);
+                    table.PrimaryKey("PK_Imagem", x => x.ImagemID);
                     table.ForeignKey(
                         name: "FK_Imagem_Produto_ProdutoID",
                         column: x => x.ProdutoID,
                         principalTable: "Produto",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ProdutoID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,7 +166,7 @@ namespace StoreEP.Migrations
                         name: "FK_CartLine_Produto_ProdutoID",
                         column: x => x.ProdutoID,
                         principalTable: "Produto",
-                        principalColumn: "ID",
+                        principalColumn: "ProdutoID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -204,9 +204,9 @@ namespace StoreEP.Migrations
                 column: "ProdutoID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comentario_ComentarioID",
+                name: "IX_Comentario_ComentarioID1",
                 table: "Comentario",
-                column: "ComentarioID");
+                column: "ComentarioID1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comentario_ProdutoID",

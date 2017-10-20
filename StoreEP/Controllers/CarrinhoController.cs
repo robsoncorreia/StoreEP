@@ -28,7 +28,7 @@ namespace StoreEP.Controllers
         }
         public RedirectToActionResult AdicionarCarrinho(int ID, string returnUrl)
         {
-            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ID == ID);
+            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoID == ID);
             if(produto != null)
             {
                 Carrinho.AddItem(produto, 1);
@@ -37,7 +37,7 @@ namespace StoreEP.Controllers
         }
         public RedirectToActionResult RemoverCarrinho(int ID, string returnUrl)
         {
-            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ID == ID);
+            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoID == ID);
             if (produto != null)
             {
                 Carrinho.RemoveLine(produto);

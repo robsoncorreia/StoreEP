@@ -42,14 +42,14 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.Comentario", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ComentarioID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Aprovado");
 
                     b.Property<string>("Assunto");
 
-                    b.Property<int?>("ComentarioID");
+                    b.Property<int?>("ComentarioID1");
 
                     b.Property<DateTime>("Data");
 
@@ -57,15 +57,15 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("NomeUsuario");
 
-                    b.Property<int?>("ProdutoID");
+                    b.Property<int>("ProdutoID");
 
                     b.Property<string>("Texto");
 
                     b.Property<string>("UsuarioID");
 
-                    b.HasKey("ID");
+                    b.HasKey("ComentarioID");
 
-                    b.HasIndex("ComentarioID");
+                    b.HasIndex("ComentarioID1");
 
                     b.HasIndex("ProdutoID");
 
@@ -131,7 +131,7 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.Imagem", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ImagemID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Link")
@@ -140,9 +140,9 @@ namespace StoreEP.Migrations
                     b.Property<string>("Nome")
                         .IsRequired();
 
-                    b.Property<int?>("ProdutoID");
+                    b.Property<int>("ProdutoID");
 
-                    b.HasKey("ID");
+                    b.HasKey("ImagemID");
 
                     b.HasIndex("ProdutoID");
 
@@ -194,7 +194,7 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.Produto", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ProdutoID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Categoria")
@@ -214,7 +214,7 @@ namespace StoreEP.Migrations
 
                     b.Property<int>("Quantidade");
 
-                    b.HasKey("ID");
+                    b.HasKey("ProdutoID");
 
                     b.ToTable("Produto");
                 });
@@ -234,18 +234,20 @@ namespace StoreEP.Migrations
                 {
                     b.HasOne("StoreEP.Models.Comentario")
                         .WithMany("Respostas")
-                        .HasForeignKey("ComentarioID");
+                        .HasForeignKey("ComentarioID1");
 
                     b.HasOne("StoreEP.Models.Produto")
                         .WithMany("Comentarios")
-                        .HasForeignKey("ProdutoID");
+                        .HasForeignKey("ProdutoID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("StoreEP.Models.Imagem", b =>
                 {
                     b.HasOne("StoreEP.Models.Produto")
                         .WithMany("Imagens")
-                        .HasForeignKey("ProdutoID");
+                        .HasForeignKey("ProdutoID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("StoreEP.Models.Pagamento", b =>
