@@ -20,7 +20,10 @@ namespace StoreEP.Controllers
         private IImagensRepositorio _imagensRepositorio;
         private IComentariosRepositorio _comentariosRepositorio;
 
-        public AdminController(IProdutoRepositorio repo, IImagensRepositorio imagens, IComentariosRepositorio comentariosRepositorio)
+        public AdminController(
+            IProdutoRepositorio repo, 
+            IImagensRepositorio imagens, 
+            IComentariosRepositorio comentariosRepositorio)
         {
             _produtoRepositorio = repo;
             _imagensRepositorio = imagens;
@@ -57,7 +60,10 @@ namespace StoreEP.Controllers
             return View(new EditarProdutoViewModel
             {
                 Imagens = imagens,
-                Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).OrderBy(f => f).ToList(),
+                Fabricantes = _produtoRepositorio.Produtos
+                                                 .Where(p => p.Fabricante != null)
+                                                 .Select(f => f.Fabricante)
+                                                 .OrderBy(f => f).ToList(),
                 Produto = produto,
                 Categorias = categorias
             });
@@ -119,15 +125,31 @@ namespace StoreEP.Controllers
 
         public ActionResult CriarProduto()
         {
-            IEnumerable<string> categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null).Select(c => c.Categoria).Distinct().OrderBy(c => c);
-            IEnumerable<string> fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).Distinct().OrderBy(f => f);
+            IEnumerable<string> categorias = _produtoRepositorio.Produtos   
+                                                                .Where(p => p.Categoria != null)
+                                                                .Select(c => c.Categoria)
+                                                                .Distinct()
+                                                                .OrderBy(c => c);
+            IEnumerable<string> fabricantes = _produtoRepositorio.Produtos
+                                                                 .Where(p => p.Fabricante != null)
+                                                                 .Select(f => f.Fabricante)
+                                                                 .Distinct()
+                                                                 .OrderBy(f => f);
             return View(new EditarProdutoViewModel { Categorias = categorias, Fabricantes = fabricantes });
         }
         [HttpPost]
         public ActionResult CriarProduto(EditarProdutoViewModel editarProdutoViewModel)
         {
-            editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null).Select(c => c.Categoria).Distinct().OrderBy(c => c);
-            editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null).Select(f => f.Fabricante).Distinct().OrderBy(f => f);
+            editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos
+                                                                   .Where(p => p.Categoria != null)
+                                                                   .Select(c => c.Categoria)
+                                                                   .Distinct()
+                                                                   .OrderBy(c => c);
+            editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos
+                                                                    .Where(p => p.Fabricante != null)
+                                                                    .Select(f => f.Fabricante)
+                                                                    .Distinct()
+                                                                    .OrderBy(f => f);
             ModelState.Remove("Produto.ID");
             if (ModelState.IsValid)
             {
@@ -151,7 +173,8 @@ namespace StoreEP.Controllers
         }
         public IActionResult ValidarComentarios(bool aprovado = false)
         {
-            IEnumerable<Comentario> comentarios = _comentariosRepositorio.Comentarios.Where(c => c.Aprovado == aprovado);
+            IEnumerable<Comentario> comentarios = _comentariosRepositorio.Comentarios
+                                                                         .Where(c => c.Aprovado == aprovado);
             return View(comentarios);
         }
 
