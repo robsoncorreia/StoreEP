@@ -12,5 +12,8 @@ namespace StoreEP.Models.ViewModels
         public Comentario Comentario { get; set; }
         public Comentario Resposta { get; set; }
         public IEnumerable<Comentario> Comentarios { get; set; }
+        public IEnumerable<HistoricoPreco> HistoricosPreco { get; set; }
+
+        
     }
 }

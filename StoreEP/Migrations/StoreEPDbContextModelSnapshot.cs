@@ -113,18 +113,18 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.HistoricoPreco", b =>
                 {
-                    b.Property<int>("PrecoId")
+                    b.Property<int>("HistoricoPrecoID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DataAltarecao");
-
-                    b.Property<int>("ID");
 
                     b.Property<decimal>("PrecoAntigo");
 
                     b.Property<decimal>("PrecoNovo");
 
-                    b.HasKey("PrecoId");
+                    b.Property<int>("ProdutoID");
+
+                    b.HasKey("HistoricoPrecoID");
 
                     b.ToTable("HistoricoPreco");
                 });
@@ -200,6 +200,8 @@ namespace StoreEP.Migrations
                     b.Property<string>("Categoria")
                         .IsRequired();
 
+                    b.Property<DateTime>("DataCadastro");
+
                     b.Property<string>("Descricao")
                         .IsRequired();
 
@@ -217,6 +219,26 @@ namespace StoreEP.Migrations
                     b.HasKey("ProdutoID");
 
                     b.ToTable("Produto");
+                });
+
+            modelBuilder.Entity("StoreEP.Models.ProdutoVisitado", b =>
+                {
+                    b.Property<int>("ProdutoVisitadoID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataHoraVisita");
+
+                    b.Property<int?>("ProdutoID");
+
+                    b.Property<int>("QuantidadeVisita");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("ProdutoVisitadoID");
+
+                    b.HasIndex("ProdutoID");
+
+                    b.ToTable("ProdutosVisitados");
                 });
 
             modelBuilder.Entity("StoreEP.Models.CartLine", b =>
@@ -263,6 +285,13 @@ namespace StoreEP.Migrations
                     b.HasOne("StoreEP.Models.Endereco", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoID");
+                });
+
+            modelBuilder.Entity("StoreEP.Models.ProdutoVisitado", b =>
+                {
+                    b.HasOne("StoreEP.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoID");
                 });
 #pragma warning restore 612, 618
         }

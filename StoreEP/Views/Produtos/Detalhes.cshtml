@@ -1,13 +1,23 @@
 @model DetalheProdutoViewModels
 <div class="row">
-   @Html.Partial("_SliderImagensPartial", Model.Imagens)
+    <div class="col-xs-8 col-sm-12 col-md-12">
+        @Html.Partial("_SliderImagensPartial", Model.Imagens)
+    </div>
+    <div class="col-xs-4 col-sm-12 col-md-12">
+        <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.Produto.ProdutoID" class="btn btn-lg btn-success btn-comprar">Comprar</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <canvas id="canvas" width="400" height="100" class="col-sm-10"></canvas>
+    </div>
 </div>
 <div class="row">
     @foreach (var comentario in Model.Comentarios)
     {
         <div>@comentario.NomeUsuario</div>
         <div>@comentario.Texto</div>
-        <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-comentarioid="@comentario.ComentarioID">
+        <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-ComentarioID="@comentario.ComentarioID">
             <label asp-for="@Model.Resposta.Assunto"></label>
             <input asp-for="@Model.Resposta.Assunto" />
             <label>Texto</label>
@@ -18,12 +28,11 @@
         if (comentario.Respostas != null)
         {
             @foreach (var resposta in comentario.Respostas)
-            {
+                    {
                 <div>@resposta.NomeUsuario</div>
                 <div>@resposta.Texto</div>
             }
         }
-
     }
 </div>
 <div class="row">
@@ -45,7 +54,6 @@
                             <label asp-for="Comentario.Texto" class="control-label">Mensagem:</label>
                             <textarea class="form-control" asp-for="Comentario.Texto"></textarea>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
@@ -58,3 +66,69 @@
     </div>
 </div>
 
+@section Scripts {
+    <script>
+    var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
+    var datasAltarecao = [], preco = [];
+    for (var i = 0; i < x.length; i++) {
+        datasAltarecao.push(new Date(x[i].dataAltarecao).toLocaleDateString());
+        preco.push(parseFloat(x[i].precoNovo));
+    }
+    console.log(Math.min.apply(null, preco));
+    var ctx = document.getElementById("canvas").getContext('2d');
+    ctx.canvas.width = 1000;
+    ctx.canvas.height = 300;
+    var config = {
+        type: 'line',
+        data: {
+            labels: datasAltarecao,
+            datasets: [{
+                label: "Preço",
+                backgroundColor: "red",
+                borderColor: "black",
+                data: preco,
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Histórico de preço'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Periodo'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Valor(R$)'
+                    },
+                    ticks: {
+
+                        max: Math.max.apply(null, preco) + 200
+                    }
+                }]
+            }
+        }
+    };
+    window.onload = function () {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myLine = new Chart(ctx, config);
+    };
+    </script>
+}

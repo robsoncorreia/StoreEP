@@ -11,7 +11,7 @@
 <form asp-action="CriarProduto" method="post">
     <div class="row">
         <div class="col-md-6">
-            <input type="hidden" asp-for="Produto.ID" />
+            <input type="hidden" asp-for="Produto.ProdutoID" />
             <div class="form-group">
                 <label>Nome</label>
                 <div><span asp-validation-for="Produto.Nome" class="text-danger"></span></div>
@@ -68,7 +68,7 @@
             <label asp-for="Imagem.Link">Link da imagem</label>
             <div><span asp-validation-for="Imagem.Link" class="text-danger"></span></div>
             <input asp-for="Imagem.Link" class="form-control" />
-            <input type="hidden" asp-for="Imagem.ID" value="@Model?.Produto?.ID" />
+            <input type="hidden" asp-for="Imagem.ImagemID" value="@Model?.Produto?.ProdutoID" />
         </div>
     </div>
     <div class="row">

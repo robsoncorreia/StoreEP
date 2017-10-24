@@ -57,56 +57,31 @@
         </div>
     }
 }
+<div class="row text-center" page-model="@Model.PagingInfo" page-action="Listar" page-classes-enabled="true" page-class="btn" page-class-normal="btn-default" page-class-selected="btn-primary" page-url-cartegory="@Model.CurrentCategory"></div>
+<hr />
 <div class="row">
     @foreach (var p in Model.Produtos)
     {
-        <div class="card col-3 col-md-3">
-            <div class="col-12 cartao-produto border border-primary">
-                <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@p.ProdutoID" class="btn-toolbar">
-                    <img class="card-img-top" src="@p.Imagens.Select(i => i.Link).FirstOrDefault()" alt="@p.Imagens.Select(i => i.Nome).FirstOrDefault()" />
-                </a>
-                <div class="card-block">
-                    <h4 class="card-title">@p.Nome</h4>
-                    <p class="card-text">@p.Descricao</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <a asp-action="Listar" asp-controller="Produtos" asp-route-category="@p.Categoria">
-                            @p.Categoria
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a asp-action="BuscarFabricante" asp-controller="Produtos" asp-route-fabricante="@p.Fabricante">
-                            @p.Fabricante
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        @p.Preco.ToString("c")
-                        <a asp-action="AdicionarCarrinho" asp-controller="Carrinho" asp-route-ID="@p.ProdutoID" class="card-link">
-                            <span class="glyphicon glyphicon-shopping-cart" style="float:right;"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        @Html.Partial("_CartaoExibicaoProdutoPartial", new CartaoProdutoViewModel
+  {
+      Produto = p,
+      Imagens = Model.Imagens.Where(x => x.ProdutoID == p.ProdutoID)
+  })
     }
 </div>
-<div class="row text-center" page-model="@Model.PagingInfo" page-action="Listar" page-classes-enabled="true" page-class="btn" page-class-normal="btn-default" page-class-selected="btn-primary" page-url-cartegory="@Model.CurrentCategory"></div>
-@*<script>
-
-        $("#cm_filtro > option").click(function () {
-            var w = $(this).prop("value");
-            var y = { Data1: w };
-            console.log(y);
-            $.ajax({
-                type: 'POST',
-                url: '/Produtos/Buscar',
-                data: y,
-                cache: false,
-                success: function (result) {
-                    alert(result)
-                }
-            });
-        });
-    </script>*@
-}
+<hr />
+<div class="row">
+    @if (Model.ProdutosMaisVisitados != null)
+    {
+        <h3>Produtos Visitados</h3>
+        foreach (var p in Model.ProdutosMaisVisitados)
+        {
+           @Html.Partial("_CartaoExibicaoProdutoMaisVisitadosPartial", new CartaoProdutoViewModel
+           {
+               Produto = p,
+               Imagens = Model.Imagens.Where(x => x.ProdutoID == p.ProdutoID)
+           })
+        }
+    }
+</div>
+<hr />

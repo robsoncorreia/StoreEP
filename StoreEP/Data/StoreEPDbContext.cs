@@ -19,6 +19,7 @@ namespace StoreEP.Models
         public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<Imagem> Imagens { get; set; }
         public DbSet<HistoricoPreco> HistoricoPrecos { get; set; }
+        public DbSet<ProdutoVisitado> ProdutosVisitados { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +30,7 @@ namespace StoreEP.Models
             modelBuilder.Entity<Pagamento>().ToTable("Pagamento");
             modelBuilder.Entity<Imagem>().ToTable("Imagem");
             modelBuilder.Entity<HistoricoPreco>().ToTable("HistoricoPreco");
+            modelBuilder.Entity<ProdutoVisitado>().ToTable("ProdutosVisitados");
         }
     }
 }

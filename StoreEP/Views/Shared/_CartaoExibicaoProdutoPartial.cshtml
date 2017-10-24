@@ -1,0 +1,30 @@
+@model CartaoProdutoViewModel
+<div class="card col-3 col-md-3">
+    <div class="col-12 cartao-produto border border-primary">
+        <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@Model.Produto.ProdutoID" class="btn-toolbar">
+            <img class="card-img-top" src="@Model.Imagens.Where(i => i.ProdutoID == Model.Produto.ProdutoID).Select(i => i.Link).FirstOrDefault()" alt="@Model.Imagens.Where(i => i.ProdutoID == Model.Produto.ProdutoID).Select(i => i.Nome).FirstOrDefault()" />
+        </a>
+        <div class="card-block">
+            <h4 class="card-title">@Model.Produto.Nome</h4>
+            <p class="card-text">@Model.Produto.Descricao</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a asp-action="Listar" asp-controller="Produtos" asp-route-category="@Model.Produto.Categoria">
+                    @Model.Produto.Categoria
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a asp-action="BuscarFabricante" asp-controller="Produtos" asp-route-fabricante="@Model.Produto.Fabricante">
+                    @Model.Produto.Fabricante
+                </a>
+            </li>
+            <li class="list-group-item">
+                @Model.Produto.Preco.ToString("c")
+                <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-ID="@Model.Produto.ProdutoID" class="card-link">
+                    <span class="glyphicon glyphicon-shopping-cart" style="float:right;"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

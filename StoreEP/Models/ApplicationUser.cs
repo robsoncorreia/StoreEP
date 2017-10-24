@@ -15,6 +15,5 @@ namespace StoreEP.Models
         public string Nome { get; set; }
         public string NomeSocial { get; set; }
         public string SobreNome { get; set; }
-        public List<Endereco> Enderecos { get; set; }
     }
 }

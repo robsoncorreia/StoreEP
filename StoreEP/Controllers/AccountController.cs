@@ -334,7 +334,7 @@ namespace StoreEP.Controllers
         {
             if (UserId == null || code == null)
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                
             }
             var user = await _userManager.FindByIdAsync(UserId);
             if (user == null)

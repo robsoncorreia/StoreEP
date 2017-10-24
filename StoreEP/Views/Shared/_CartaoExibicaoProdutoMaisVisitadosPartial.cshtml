@@ -1,0 +1,11 @@
+@model CartaoProdutoViewModel
+<div class="card col-3 col-md-3">
+    <div class="thumbnail">
+        <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@Model.Produto.ProdutoID">
+            <img class="card-img-top" src="@Model.Imagens.Where(i => i.ProdutoID == Model.Produto.ProdutoID).Select(i => i.Link).FirstOrDefault()" alt="@Model.Imagens.Where(i => i.ProdutoID == Model.Produto.ProdutoID).Select(i => i.Nome).FirstOrDefault()" heigsht="40"/>
+            <span class="caption">
+                @Model.Produto.Nome
+            </span>
+        </a>
+    </div>
+</div>

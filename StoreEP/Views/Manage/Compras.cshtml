@@ -16,14 +16,14 @@
         @foreach (Pedido o in Model)
         {
             <tr>
-                <td>@o?.PedidoId</td>
+                <td>@o?.ID</td>
                 @*<td>@o?.Nome</td>
                 <td>@o?.CEP</td>*@
                 <td>Produto</td>
                 <td>Quantidade</td>
                 <td>
                     <form asp-action="MarkShipped" method="post">
-                        <input type="hidden" name="ID" value="@o.PedidoId" />
+                        <input type="hidden" name="ID" value="@o.ID" />
                         <button  type="submit" class="btn btn-sm btn-danger">Enviar</button>
                     </form>
                 </td>

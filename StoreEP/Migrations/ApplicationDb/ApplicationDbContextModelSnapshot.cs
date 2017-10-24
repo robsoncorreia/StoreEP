@@ -188,49 +188,6 @@ namespace StoreEP.Migrations.ApplicationDb
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("StoreEP.Models.Endereco", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ApplicationUserId");
-
-                    b.Property<string>("Bairro")
-                        .IsRequired();
-
-                    b.Property<string>("CEP")
-                        .IsRequired();
-
-                    b.Property<string>("Cidade")
-                        .IsRequired();
-
-                    b.Property<string>("Complemento");
-
-                    b.Property<string>("Estado")
-                        .IsRequired();
-
-                    b.Property<bool>("GifWrap");
-
-                    b.Property<string>("Numero")
-                        .IsRequired();
-
-                    b.Property<string>("Pais")
-                        .IsRequired();
-
-                    b.Property<string>("Rua")
-                        .IsRequired();
-
-                    b.Property<string>("UserId");
-
-                    b.Property<DateTime>("Utilizado");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("Endereco");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -274,13 +231,6 @@ namespace StoreEP.Migrations.ApplicationDb
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StoreEP.Models.Endereco", b =>
-                {
-                    b.HasOne("StoreEP.Models.ApplicationUser")
-                        .WithMany("Enderecos")
-                        .HasForeignKey("ApplicationUserId");
                 });
 #pragma warning restore 612, 618
         }

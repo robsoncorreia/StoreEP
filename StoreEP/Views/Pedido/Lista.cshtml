@@ -18,8 +18,8 @@
             <th>Data da compra</th>
         </tr>
         <tr>
-            <td>@pedido.PedidoId</td>
-            <td>@pedido?.Endereco.EnderecoId</td>
+            <td>@pedido.ID</td>
+            <td>@pedido?.Endereco.ID</td>
             @*<td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Rua).FirstOrDefault()</td>
             <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Numero).FirstOrDefault()</td>
             <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Bairro).FirstOrDefault()</td>
@@ -45,7 +45,7 @@
                 {
             <tr>
                 <td></td>
-                <td><a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@produto.Produto.ID">@produto?.Produto?.Nome</a></td>
+                <td><a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@produto.Produto.ProdutoID">@produto?.Produto?.Nome</a></td>
                 <td>@produto?.Produto?.Preco.ToString("c")</td>
                 <td>@produto?.Produto?.Categoria</td>
             </tr>

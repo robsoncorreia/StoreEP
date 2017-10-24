@@ -17,6 +17,8 @@
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="~/js/produto/listar.js"></script>
     <script type="text/javascript" src="~/js/site.js"></script>
+    <script type="text/javascript" src="~/lib/chart.js/dist/Chart.min.js"></script>
+    <script type="text/javascript" src="~/lib/chart.js/dist/Chart.bundle.min.js"></script>
     <style>
         .mdl-badge.mdl-badge--overlap::after {
             right: -7px;
@@ -51,6 +53,7 @@
                     <li><a asp-controller="Admin" asp-action="Index">Gerenciar</a></li>
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
                     <li>@await Html.PartialAsync("_BuscaPartial", new FiltroViewModel())</li>
+                    <li>@await Html.PartialAsync("_FiltroPartial", new FiltroViewModel())</li>
                 </ul>
             </div>
         </div>

@@ -27,6 +27,7 @@ namespace StoreEP.Models
                         Categoria = "Beleza & Perfumaria",
                         Preco = 275m  ,
                         Fabricante ="Philips",
+                        Quantidade =10,
                         Imagens = new List<Imagem>{
                             new Imagem {
                                 Link = "https://images-submarino.b2w.io/produtos/01/00/item/119371/0/119371001_1GG.png",
@@ -45,6 +46,7 @@ namespace StoreEP.Models
                     },
                     new Produto
                     {
+                        Quantidade =10,
                         Nome = "HD Externo Portátil WD Elements 1TB USB 3.0",
                         Descricao = "O HD Externo Portátil WD faz transferências de dados ultrarrápidas e possui 1TB de capacidade.",
                         Categoria = "Acessórios de Informática",
@@ -68,6 +70,7 @@ namespace StoreEP.Models
                     },
                     new Produto
                     {
+                        Quantidade =10,
                         Nome = "Notebook Dell Inspiron i15-7560-A30S Intel Core i7 16GB",
                         Descricao = "Notebook Dell Inspiron i15-7560-A30S Intel Core i7 16GB ((GeForce 940MX de 4GB)) 1TB 128GB SSD Tela Full HD 15,6 Windows 10",
                         Categoria = "Informática",
@@ -91,6 +94,7 @@ namespace StoreEP.Models
                     },
                     new Produto
                     {
+                        Quantidade =10,
                         Nome = "Notebook Gamer Acer VX5-591G-54PG Intel Core i5 8GB",
                         Descricao = "Notebook Gamer Acer VX5-591G-54PG Intel Core i5 8GB (GeForce GTX 1050 com 4GB) 1TB Tela LED 15,6 Windows 10 - Preto",
                         Categoria = "Informática",
@@ -119,6 +123,7 @@ namespace StoreEP.Models
                     },
                     new Produto
                     {
+                        Quantidade =10,
                         Nome = "Notebook Acer A515-51-56K6",
                         Descricao = "Notebook Acer A515-51-56K6 Intel Core I5 8GB 1TB Tela LED 15.6 Windows 10 - Preto",
                         Categoria = "Informática",
@@ -147,27 +152,31 @@ namespace StoreEP.Models
                     },
                     new Produto
                     {
+                        Quantidade =10,
                         Nome = "Thinking Cap",
                         Descricao = "Improve brain efficiency by 75%",
                         Categoria = "Chess",
-                        Preco = 16m       
+                        Preco = 16m
                     },
                     new Produto
                     {
+                        Quantidade =10,
                         Nome = "Unsteady Chair",
                         Descricao = "Secretly give your opponent a disadvantage",
                         Categoria = "Chess",
-                        Preco = 29.95m       
+                        Preco = 29.95m
                     },
                     new Produto
                     {
+                        Quantidade =10,
                         Nome = "Human Chess Board",
                         Descricao = "A fun game for the family",
                         Categoria = "Chess",
-                        Preco = 75m            
+                        Preco = 75m
                     },
                     new Produto
                     {
+                        Quantidade =10,
                         Nome = "Bling-Bling King",
                         Descricao = "Gold-plated, diamond-studded King",
                         Categoria = "Chess",

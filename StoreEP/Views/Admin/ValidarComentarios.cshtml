@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Comentario>
+@model IEnumerable<Comentario>
 @if (TempData["massage"] != null)
 {
     <div class="alert alert-success">@TempData["massage"]</div>
@@ -19,13 +19,13 @@ else
             <i class="material-icons data-comentario">today</i>@String.Format("{0:MM/dd/yyyy}", c.Data)
         </div>
         <div>
-            @c.ComentarioId
+            @c.ComentarioID
         </div>
         <div>
             <i class="material-icons data-comentario">account_box</i>@c.NomeUsuario
         </div>
         <div>
-            @c.ID
+            @c.ComentarioID
         </div>
         <div>
             <i class="material-icons data-comentario">message</i>@c.Texto
@@ -33,8 +33,8 @@ else
         <div>
             @c.UsuarioID
         </div>
-        <a class="btn btn-primary" asp-action="DetalhesComentario" asp-route-comentarioId="@c.ComentarioId">Detalhes</a>
-        <a class="btn btn-danger" asp-action="RemoverComentario" asp-route-comentarioId="@c.ComentarioId">Remover comentário</a>
-        <a class="btn btn-success" asp-action="AprovarComentario" asp-route-comentarioId="@c.ComentarioId">Aprovar comentário</a>
+        <a class="btn btn-primary" asp-action="DetalhesComentario" asp-route-ComentarioID="@c.ComentarioID">Detalhes</a>
+        <a class="btn btn-danger" asp-action="RemoverComentario" asp-route-ComentarioID="@c.ComentarioID">Remover comentário</a>
+        <a class="btn btn-success" asp-action="AprovarComentario" asp-route-ComentarioID="@c.ComentarioID">Aprovar comentário</a>
     }
 }

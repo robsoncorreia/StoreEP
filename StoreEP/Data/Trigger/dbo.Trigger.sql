@@ -9,8 +9,8 @@ CREATE TRIGGER tr_Produto_Update
 		SELECT @precoAntigo = Preco 
 		FROM DELETED
 
-		SELECT @precoNovo = Preco, @data = GETDATE(), @ID = ID 
+		SELECT @precoNovo = Preco, @data = GETDATE(), @ID = ProdutoID 
 		FROM INSERTED
-		IF @precoAntigo = @precoNovo
+		IF @precoAntigo != @precoNovo
 		INSERT INTO HistoricoPreco VALUES (@data, @precoAntigo, @precoNovo, @ID)
 	END
