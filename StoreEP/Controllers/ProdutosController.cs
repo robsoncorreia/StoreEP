@@ -95,27 +95,51 @@ namespace StoreEP.Controllers
                            select p;
             var imagens = from i in _dbContext.Imagens
                           select i;
+            var produtosVisitados = _dbContext.ProdutosVisitados;
+
             switch (model.Filtro)
             {
                 case "menor_preco":
-                    produtos = produtos.OrderBy(p => p.Preco)
-                                       .Where(p => p.Publicado == true && p.Quantidade > 0);
-                    imagens = imagens.OrderBy(i => i.ProdutoID);
+                    produtos = from p in produtos
+                               where p.Publicado == true && p.Quantidade > 0
+                               orderby p.Preco
+                               select p;
+                    imagens = from i in imagens
+                              join p in produtos
+                              on i.ProdutoID equals p.ProdutoID
+                              orderby p.Preco
+                              select i;
                     break;
                 case "maior_preco":
-                    produtos = produtos.OrderByDescending(p => p.Preco)
-                                       .Where(p => p.Publicado == true && p.Quantidade > 0);
-                    imagens = imagens.OrderByDescending(i => i.ProdutoID);
+                    produtos = from p in produtos
+                               where p.Publicado == true && p.Quantidade > 0
+                               orderby p.Preco descending
+                               select p;
+                    imagens = from p in produtos
+                              join i in imagens
+                              on p.ProdutoID equals i.ProdutoID
+                              orderby p.Preco descending
+                              select i;
                     break;
                 case "novos":
-                    produtos = produtos.OrderByDescending(p => p.DataCadastro)
-                                       .Where(p => p.Publicado == true && p.Quantidade > 0);
-                    imagens = imagens.OrderByDescending(i => i.ProdutoID);
+                    produtos = from p in produtos
+                               where p.Publicado && p.Quantidade > 0
+                               orderby p.DataCadastro descending
+                               select p;
+                    imagens = from i in imagens
+                              join p in produtos
+                              on i.ProdutoID equals p.ProdutoID
+                              where p.Publicado == true && p.Quantidade > 0
+                              select i;
                     break;
                 case "recomendados":
-                    produtos = produtos.OrderByDescending(p => p.Preco)
-                                       .Where(p => p.Publicado == true && p.Quantidade > 0);
-                    imagens = imagens.OrderByDescending(i => i.ProdutoID);
+                    var user = await _userManager.GetUserAsync(User);
+                    if (user != null)
+                    {
+                    }
+                    else
+                    {
+                    }
                     break;
             }
             IEnumerable<Produto> modelProdutos = await produtos.AsNoTracking().ToListAsync();
