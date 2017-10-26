@@ -25,8 +25,8 @@
             <td class="text-right">@item?.Categoria</td>
             <td class="text-right">@item?.Descricao</td>
             <td class="text-center">
-                <form asp-action="Apagar" method="post">
-                    <a asp-action="EditarProduto" class="btn btn-sm btn btn-warning" asp-route-ID="@item.ProdutoID">Editar</a>
+                <form asp-action="ConfirmaExclusaoProduto" method="post">
+                    <a asp-action="EditarProduto" class="btn btn-sm btn btn-warning" asp-route-produtoID="@item.ProdutoID">Editar</a>
                     <input type="hidden" name="ID" value="@item.ProdutoID" />
                     <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Produto será excluido da base de dados">Apagar</button>
                 </form>
