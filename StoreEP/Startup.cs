@@ -101,13 +101,13 @@ namespace StoreEP
                 app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
                 app.UseDeveloperExceptionPage();
-     
+
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-        
+
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
@@ -140,8 +140,8 @@ namespace StoreEP
                 routes.MapRoute(
                     name: null,
                     template: "{controller=Endereco}/Index/{ID}");
-        });
-            //IdentityDbContext.CriarContaAdministrador(app.ApplicationServices, Configuration).Wait();
+            });
+            //IdentityDbContext.Initialize(app.ApplicationServices);
         }
     }
 }

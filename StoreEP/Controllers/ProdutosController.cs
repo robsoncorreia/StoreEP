@@ -46,13 +46,6 @@ namespace StoreEP.Controllers
             _comentariosRepositorio = comentariosRepositorio;
         }
 
-        [HttpPost]
-        public IActionResult Index(string busca) => View(new ProductsListViewModel
-        {
-            Produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true).ToList(),
-            Imagens = _imagensRepositorio.Imagens.ToList()
-        });
-
         public IActionResult Index() => View(new ProductsListViewModel
         {
             Produtos = _produtoRepositorio.Produtos.Where(p => p.Publicado == true).ToList(),
@@ -159,12 +152,17 @@ namespace StoreEP.Controllers
             return View("Listar", viewModel);
         }
 
-        public IActionResult Buscar(FiltroViewModel filtro, int pagina = 1)
+        [HttpPost("[controller]/[action]/")]
+        public IActionResult Buscar(BuscaViewModel modelBusca, int pagina = 1)
         {
-
+            if (!ModelState.IsValid)
+            {
+                TempData["busca_nula"] = "Digite algo na campo busca.";
+                return RedirectToAction(nameof(Listar));
+            }
             IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
                                                                .Where(p => p.Publicado == true && p.Nome.ToUpper()
-                                                               .Contains(filtro.Filtro.ToUpper()))
+                                                               .Contains(modelBusca.Texto.ToUpper()))
                                                                .OrderBy(p => p.ProdutoID)
                                                                .ToList();
             PagingInfo pagingInfo = new PagingInfo
@@ -185,7 +183,7 @@ namespace StoreEP.Controllers
                 PagingInfo = pagingInfo
             };
             char s = model.Produtos.Count() < 2 ? ' ' : 's';
-            ViewData["filtro.Nome"] = $"{model.Produtos.Count()} resultado{s} para a busca {filtro.Filtro}.";
+            ViewData["filtro.Nome"] = $"{model.Produtos.Count()} resultado{s} para a busca {modelBusca.Texto}.";
             return View("Listar", model);
         }
 

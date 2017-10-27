@@ -70,7 +70,7 @@
     <script>
     var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
     var datasAltarecao = [], preco = [];
-    for (var i = 0; i < x.length; i++) {
+    for (var i = 0; i < x.length ; i++) {
         datasAltarecao.push(new Date(x[i].dataAltarecao).toLocaleDateString());
         preco.push(parseFloat(x[i].precoNovo));
     }
@@ -120,7 +120,7 @@
                     },
                     ticks: {
 
-                        max: Math.max.apply(null, preco) + 200
+                        max: Math.max.apply(null, preco) + 250
                     }
                 }]
             }

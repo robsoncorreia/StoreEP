@@ -1,8 +1,8 @@
-@model FiltroViewModel
+@model BuscaViewModel
 <form class="navbar-form navbar-left" asp-controller="Produtos" asp-action="Buscar" >
     <div>
         <div class="input-group">
-            <input input asp-for="@Model.Filtro" type="text" class="form-control" placeholder="Buscar por...">
+            <input input asp-for="@Model.Texto" type="text" class="form-control" placeholder="Buscar por...">
             <span class="input-group-btn">
                 <button class="btn btn-secondary" type="submit" >Buscar</button>
             </span>

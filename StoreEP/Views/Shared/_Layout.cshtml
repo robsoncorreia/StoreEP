@@ -52,7 +52,7 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Admin" asp-action="Index">Gerenciar</a></li>
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
-                    <li>@await Html.PartialAsync("_BuscaPartial", new FiltroViewModel())</li>
+                    <li>@await Html.PartialAsync("_BuscaPartial", new BuscaViewModel())</li>
                     <li>@await Html.PartialAsync("_FiltroPartial", new FiltroViewModel())</li>
                 </ul>
             </div>
@@ -63,6 +63,12 @@
             @await Component.InvokeAsync("NavigationMenu")
         </div>
         <div class="">
+            @if (TempData["busca_nula"] != null)
+            {
+                <div class="alert alert-success">
+                    <strong>@TempData["busca_nula"]</strong>
+                </div>
+            }
             @RenderBody()
             @RenderSection("scripts", required: false)
         </div>
