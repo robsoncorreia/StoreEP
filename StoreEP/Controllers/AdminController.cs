@@ -29,6 +29,18 @@ namespace StoreEP.Controllers
             _imagensRepositorio = imagens;
             _comentariosRepositorio = comentariosRepositorio;
         }
+        [HttpPost("[controller]/[action]/{produtoID}")]
+        public ActionResult ConfirmaExclusaoProduto(int produtoID)
+        {
+            Produto produto = _produtoRepositorio.Produtos.SingleOrDefault(p => p.ProdutoID == produtoID);
+            if (produto != null)
+            {
+                return View(produto);
+            }
+            return RedirectToAction(nameof(EditarProduto));
+            
+        }
+
         public ViewResult Index() => View(new AdminIndexViewModel
         {
             NumeroProdutosRegistrados = _produtoRepositorio.Produtos.Count(),
