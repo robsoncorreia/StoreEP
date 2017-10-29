@@ -18,10 +18,10 @@ namespace StoreEP.Models
         [Required(ErrorMessage = "Escreva um descrição sobre o produto.")]
         public string Descricao { get; set; }
         //[Required(ErrorMessage = "Digite o link da imagem.")]
-        public List<Imagem> Imagens { get; set; }
+        public virtual ICollection<Imagem> Imagens { get; set; }
         //[Required(ErrorMessage = "Quem é o fabricante.")]
         public string Fabricante { get; set; }
-        public List<Comentario> Comentarios { get; set; }
+        public virtual ICollection<Comentario> Comentarios { get; set; }
         public int Quantidade { get; set; } 
         public bool Publicado { get; set; } = false;
         public DateTime DataCadastro { get; set; } = DateTime.Now;

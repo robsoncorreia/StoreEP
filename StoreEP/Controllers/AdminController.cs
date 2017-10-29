@@ -37,7 +37,7 @@ namespace StoreEP.Controllers
             {
                 return View(produto);
             }
-            return RedirectToAction(nameof(EditarProduto));
+            return RedirectToAction(nameof(Listar));
             
         }
 
@@ -49,14 +49,15 @@ namespace StoreEP.Controllers
                                                              .Count()
         });
 
-        [HttpGet("[controller]/[action]/")]
+        
         public ViewResult Listar() => View(_produtoRepositorio.Produtos);
 
         [AutoValidateAntiforgeryToken]
-        public ViewResult EditarProduto(int ID)
+        [HttpGet("[controller]/[action]/{produtoID}")]
+        public ViewResult EditarProduto(int produtoID)
         {
-            IEnumerable<Imagem> imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoID == ID).ToList();
-            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == ID);
+            IEnumerable<Imagem> imagens = _imagensRepositorio.Imagens.Where(i => i.ProdutoID == produtoID).ToList();
+            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
             IEnumerable<string> fabricantes = _produtoRepositorio.Produtos
                                                                  .Where(p => p.Fabricante != null)
                                                                  .Select(f => f.Fabricante)

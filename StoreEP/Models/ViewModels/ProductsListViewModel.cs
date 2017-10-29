@@ -9,7 +9,6 @@ namespace StoreEP.Models.ViewModels
     {
         public IEnumerable<Produto> Produtos { get; set; }
         public IEnumerable<Produto> ProdutosMaisVisitados { get; set; }
-        public IEnumerable<Imagem> Imagens { get; set; }
         public IEnumerable<string> Categorias { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public string CurrentCategory { get; set; }

@@ -1,7 +1,7 @@
 @model DetalheProdutoViewModels
 <div class="row">
     <div class="col-xs-8 col-sm-12 col-md-12">
-        @Html.Partial("_SliderImagensPartial", Model.Imagens)
+        @Html.Partial("_SliderImagensPartial", Model.Produto.Imagens)
     </div>
     <div class="col-xs-4 col-sm-12 col-md-12">
         <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.Produto.ProdutoID" class="btn btn-lg btn-success btn-comprar">Comprar</a>
@@ -13,12 +13,12 @@
     </div>
 </div>
 <div class="row">
-    @foreach (var comentario in Model.Comentarios)
+    @foreach (var comentario in Model.Produto.Comentarios)
     {
         <div>@comentario.NomeUsuario</div>
         <div>@comentario.Texto</div>
         <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-ComentarioID="@comentario.ComentarioID">
-            <label asp-for="@Model.Resposta.Assunto"></label>
+            <label asp-for="@Model.Comentario.Assunto"></label>
             <input asp-for="@Model.Resposta.Assunto" />
             <label>Texto</label>
             <input asp-for="@Model.Resposta.Texto" />
@@ -58,7 +58,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-default btn-sm">Enviar comentário</button>
-                        <input type="hidden" value="@Model.Produto.ProdutoID" asp-for="Resposta" />
+                        <input type="hidden" value="@Model.Produto.ProdutoID" asp-for="@Model.Resposta" />
                     </div>
                 </div>
             </form>
@@ -66,7 +66,7 @@
     </div>
 </div>
 
-@section Scripts {
+@section scripts {
     <script>
     var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
     var datasAltarecao = [], preco = [];

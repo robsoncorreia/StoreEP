@@ -1,27 +1,27 @@
-@model CartaoProdutoViewModel
+@model Produto
 <div class="card col-3 col-md-3">
     <div class="col-12 cartao-produto border border-primary">
-        <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@Model.Produto.ProdutoID" class="btn-toolbar">
-            <img class="card-img-top" src="@Model.Imagens.Where(i => i.ProdutoID == Model.Produto.ProdutoID).Select(i => i.Link).FirstOrDefault()" alt="@Model.Imagens.Where(i => i.ProdutoID == Model.Produto.ProdutoID).Select(i => i.Nome).FirstOrDefault()" />
+        <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@Model.ProdutoID" class="btn-toolbar">
+            <img class="card-img-top" src="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Link).FirstOrDefault()" alt="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Nome).FirstOrDefault()" />
         </a>
         <div class="card-block">
-            <h4 class="card-title">@Model.Produto.Nome</h4>
-            <p class="card-text">@Model.Produto.Descricao</p>
+            <h4 class="card-title">@Model.Nome</h4>
+            <p class="card-text">@Model.Descricao</p>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <a asp-action="Listar" asp-controller="Produtos" asp-route-category="@Model.Produto.Categoria">
-                    @Model.Produto.Categoria
+                <a asp-action="Listar" asp-controller="Produtos" asp-route-category="@Model.Categoria">
+                    @Model.Categoria
                 </a>
             </li>
             <li class="list-group-item">
-                <a asp-action="BuscarFabricante" asp-controller="Produtos" asp-route-fabricante="@Model.Produto.Fabricante">
-                    @Model.Produto.Fabricante
+                <a asp-action="BuscarFabricante" asp-controller="Produtos" asp-route-fabricante="@Model.Fabricante">
+                    @Model.Fabricante
                 </a>
             </li>
             <li class="list-group-item">
-                @Model.Produto.Preco.ToString("c")
-                <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-ID="@Model.Produto.ProdutoID" class="card-link">
+                @Model.Preco.ToString("c")
+                <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-ID="@Model.ProdutoID" class="card-link">
                     <span class="glyphicon glyphicon-shopping-cart" style="float:right;"></span>
                 </a>
             </li>

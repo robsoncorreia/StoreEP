@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,18 @@ namespace StoreEP.Models
     public class EFProdutoRepositorio : IProdutoRepositorio
     {
         private StoreEPDbContext _bancoContexto;
-        private int ID = 0;
+        private int id = 0;
         public EFProdutoRepositorio(StoreEPDbContext ctx)
         {
             _bancoContexto = ctx;
         }
-        public IEnumerable<Produto> Produtos => _bancoContexto.Produtos;
+        public IEnumerable<Produto> Produtos => _bancoContexto.Produtos.Include(i => i.Imagens).Include(c => c.Comentarios);
         public int RegistrarProduto(Produto produto)
         {
             if (produto.ProdutoID == 0)
             {
                 _bancoContexto.Produtos.Add(produto);
-                ID = produto.ProdutoID;
+                id = produto.ProdutoID;
             }
             else
             {
@@ -37,7 +38,7 @@ namespace StoreEP.Models
                 }
             }
             _bancoContexto.SaveChanges();
-            return ID;
+            return id;
         }
         public Produto ApagarProduto(int ID)
         {

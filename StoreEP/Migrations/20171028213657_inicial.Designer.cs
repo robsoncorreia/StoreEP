@@ -11,8 +11,8 @@ using System;
 namespace StoreEP.Migrations
 {
     [DbContext(typeof(StoreEPDbContext))]
-    [Migration("20171023102902_Inicio")]
-    partial class Inicio
+    [Migration("20171028213657_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

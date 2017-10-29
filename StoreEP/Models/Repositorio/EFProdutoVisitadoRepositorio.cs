@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using StoreEP.Models.Interface;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,9 @@ namespace StoreEP.Models.Repositorio
         {
             _context = ctx;
         }
-        public IEnumerable<ProdutoVisitado> ProdutosVisitados => _context.ProdutosVisitados;
+        public IEnumerable<ProdutoVisitado> ProdutosVisitados => _context.ProdutosVisitados
+                                                                            .Include(p => p.Produto)   
+                                                                            .Include(i => i.Produto.Imagens);
         public int AdicionarProdutoVisitado(string userID, Produto produto)
         {
             ProdutoVisitado produtoVisitado = _context.ProdutosVisitados

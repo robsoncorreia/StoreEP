@@ -4,6 +4,18 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("img").hover(function () {
+                TweenMax.to($(this), 1, { scale: 1.1 })
+            });
+            $("img").mouseleave(function () {
+                TweenMax.to($(this), 1, { scale: 1 })
+            });
+        });
+    </script>
+}
 <style>
     .cartao-produto {
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.48);
@@ -62,25 +74,17 @@
 <div class="row">
     @foreach (var p in Model.Produtos)
     {
-        @Html.Partial("_CartaoExibicaoProdutoPartial", new CartaoProdutoViewModel
-  {
-      Produto = p,
-      Imagens = Model.Imagens.Where(x => x.ProdutoID == p.ProdutoID)
-  })
+        @Html.Partial("_CartaoExibicaoProdutoPartial", p)
     }
 </div>
 <hr />
 <div class="row">
-    @if (Model.ProdutosMaisVisitados != null)
+    @if (Model.ProdutosMaisVisitados.Count() != 0)
     {
         <h3>Produtos Visitados</h3>
         foreach (var p in Model.ProdutosMaisVisitados)
         {
-           @Html.Partial("_CartaoExibicaoProdutoMaisVisitadosPartial", new CartaoProdutoViewModel
-           {
-               Produto = p,
-               Imagens = Model.Imagens.Where(x => x.ProdutoID == p.ProdutoID)
-           })
+            @Html.Partial("_CartaoExibicaoProdutoMaisVisitadosPartial", p)
         }
     }
 </div>

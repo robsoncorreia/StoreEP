@@ -8,5 +8,6 @@ namespace StoreEP.Models.Interface
     public interface IProdutoVisitadoRepositorio
     {
         int AdicionarProdutoVisitado(string userID, Produto produto);
+        IEnumerable<ProdutoVisitado> ProdutosVisitados { get; }
     }
 }
