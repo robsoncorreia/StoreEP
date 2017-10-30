@@ -10,7 +10,8 @@ namespace StoreEP.Models
         private List<CartLine> lineCollection = new List<CartLine>();
         public virtual void AddItem(Produto produto, int quantidade)
         {
-            CartLine line = lineCollection.Where(p => p.Produto.ProdutoID == produto.ProdutoID).FirstOrDefault();
+            CartLine line = lineCollection.Where(p => p.Produto.ProdutoID == produto.ProdutoID)
+                                            .FirstOrDefault();
             if (line == null)
             {
                 lineCollection.Add(new CartLine
@@ -32,7 +33,7 @@ namespace StoreEP.Models
     public class CartLine
     {
         public int CartLineID { get; set; }
-        public Produto Produto { get; set; }
+        public virtual Produto Produto { get; set; }
         public int Quantidade { get; set; }
     }
 }

@@ -9,13 +9,13 @@ namespace StoreEP.Models
     public class Pagamento
     {
         [Key]
-        public int ID { get; set; }
+        public int PagamentoID { get; set; }
         public string UserId { get; set; }
         public int PedidoId { get; set; }
         [Required]
         public decimal Valor { get; set; }
         [Required]
-        public DateTime CompraDT { get; set; }
-        public DateTime? PagamentoDT { get; set; } = null;
+        public DateTime DataCompra { get; set; } = DateTime.Now;
+        public DateTime DataPagamento { get; set; }
     }
 }

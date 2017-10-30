@@ -8,7 +8,7 @@ namespace StoreEP.Models
 {
     public class Endereco
     {
-        public int ID { get; set; }
+        public int EnderecoID { get; set; }
         public string UserId { get; set; }
         [Required(ErrorMessage = "Entre com o endereço.")]
         [Display(Name = "Rua")]
@@ -29,8 +29,7 @@ namespace StoreEP.Models
         [Required(ErrorMessage = "Digite o nome do pais.")]
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,100}$", ErrorMessage = "Apenas caractéres.")]
         public string Pais { get; set; }
-        public bool GifWrap { get; set; }
         public string Complemento { get; set; }
-        public DateTime Utilizado { get; set; } = DateTime.Now;
+        public DateTime DataUtilizacao { get; set; } = DateTime.Now;
     }
 }

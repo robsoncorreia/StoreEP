@@ -41,7 +41,8 @@ namespace StoreEP.Controllers
         [HttpGet("[controller]/[action]/{fabricante}")]
         public async Task<ViewResult> BuscarFabricante(string fabricante, int pagina = 1)
         {
-            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos.Where(p => p.Fabricante == fabricante);
+            IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
+                                                                .Where(p => p.Fabricante == fabricante);
             IEnumerable<Produto> produtosVisitados = await GetProdutosVisitados();
             return View("Listar", new ProductsListViewModel
             {
@@ -59,7 +60,10 @@ namespace StoreEP.Controllers
         public async Task<IActionResult> Ordenar(FiltroViewModel model, int page = 1)
         {
             IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
+                                                                .Where(p => p.Quantidade > 0 &&
+                                                                       p.Publicado == true)
                                                                 .ToList();
+            int numeroProdutos = produtos.Count();
 
             IEnumerable<Produto> produtosVisitados = await GetProdutosVisitados();
 
@@ -90,7 +94,7 @@ namespace StoreEP.Controllers
                 Produtos = produtos,
                 PagingInfo = new PagingInfo
                 {
-                    TotalItems = produtos.Count(),
+                    TotalItems = numeroProdutos,
                     ItensPerPage = itensPorPagina,
                     CurrentPage = page
                 }
@@ -137,12 +141,14 @@ namespace StoreEP.Controllers
         public async Task<IActionResult> Listar(string category, int page = 1)
         {
             IEnumerable<Produto> produtosMaisVisitados = await GetProdutosVisitados();
+
             IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
-                                                          .Where(p => (category == null || p.Categoria == category) && p.Publicado == true)
-                                                          .OrderBy(p => p.ProdutoID)
-                                                          .Skip((page - 1) * itensPorPagina)
-                                                          .Take(itensPorPagina)
-                                                          .ToList();
+                                                          .Where(p => (category == null || p.Categoria == category) && p.Publicado == true && p.Quantidade > 0)
+                                                          .OrderBy(p => p.ProdutoID);
+            int numeroProdutos = produtos.Count();
+            produtos = produtos.Skip((page - 1) * itensPorPagina)
+                                .Take(itensPorPagina)
+                                .ToList();
             IEnumerable<string> categorias = _produtoRepositorio.Produtos
                                                                  .Where(p => p.Categoria != null)
                                                                  .Select(p => p.Categoria)
@@ -158,7 +164,7 @@ namespace StoreEP.Controllers
                 {
                     CurrentPage = page,
                     ItensPerPage = itensPorPagina,
-                    TotalItems = category == null ? _produtoRepositorio.Produtos.Count() : _produtoRepositorio.Produtos.Where(p => (category == null || p.Categoria == category) && p.Publicado == true).Count()
+                    TotalItems = numeroProdutos
                 },
                 CurrentCategory = category
             };

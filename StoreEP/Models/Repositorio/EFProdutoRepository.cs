@@ -15,7 +15,10 @@ namespace StoreEP.Models
             _bancoContexto = ctx;
         }
 
-        public IEnumerable<Produto> Produtos => _bancoContexto.Produtos.Include(i => i.Imagens).Include(c => c.Comentarios).ToList();
+        public IEnumerable<Produto> Produtos => _bancoContexto.Produtos
+                                                                .Include(i => i.Imagens)
+                                                                .Include(c => c.Comentarios)
+                                                                .ToList();
 
 
         public int RegistrarProduto(Produto produto)

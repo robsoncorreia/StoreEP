@@ -16,19 +16,23 @@ namespace StoreEP.Controllers
     [Authorize(Roles = "Administrador")]
     public class AdminController : Controller
     {
-        private IProdutoRepositorio _produtoRepositorio;
-        private IImagensRepositorio _imagensRepositorio;
-        private IComentariosRepositorio _comentariosRepositorio;
+        private readonly IProdutoRepositorio _produtoRepositorio;
+        private readonly IImagensRepositorio _imagensRepositorio;
+        private readonly IComentariosRepositorio _comentariosRepositorio;
+        private readonly IPedidoRepositorio _pedidoRepositorio;
 
         public AdminController(
-            IProdutoRepositorio repo,
-            IImagensRepositorio imagens,
-            IComentariosRepositorio comentariosRepositorio)
+            IProdutoRepositorio produtoRepositorio,
+            IImagensRepositorio imagensRepositorio,
+            IComentariosRepositorio comentariosRepositorio,
+            IPedidoRepositorio pedidoRepositorio)
         {
-            _produtoRepositorio = repo;
-            _imagensRepositorio = imagens;
+            _pedidoRepositorio = pedidoRepositorio;
+            _produtoRepositorio = produtoRepositorio;
+            _imagensRepositorio = imagensRepositorio;
             _comentariosRepositorio = comentariosRepositorio;
         }
+
         [HttpGet("[controller]/[action]/{produtoID}")]
         public ActionResult ConfirmaExclusaoProduto(int produtoID)
         {
@@ -43,6 +47,9 @@ namespace StoreEP.Controllers
 
         public ViewResult Index() => View(new AdminIndexViewModel
         {
+            ProdutosNãoEnviados = _pedidoRepositorio.Pedidos
+                                                        .Where(p => p.Enviado == false)
+                                                        .Count(),
             NumeroProdutosRegistrados = _produtoRepositorio.Produtos.Count(),
             ComentariosNaoAprovados = _comentariosRepositorio.Comentarios
                                                              .Where(c => c.Aprovado == false)
@@ -52,7 +59,7 @@ namespace StoreEP.Controllers
         [HttpGet]
         public ViewResult ListarTodosProdutos(int page = 1)
         {
-            int itensPorPagina = 5; 
+            int itensPorPagina = 5;
             IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
                                                                   .OrderBy(p => p.ProdutoID)
                                                                   .Skip((page - 1) * itensPorPagina)
@@ -96,6 +103,7 @@ namespace StoreEP.Controllers
                 Categorias = categorias
             });
         }
+
         [HttpPost]
         public IActionResult EditarProduto(EditarProdutoViewModel model)
         {
@@ -161,6 +169,7 @@ namespace StoreEP.Controllers
                                                                  .OrderBy(f => f);
             return View(new EditarProdutoViewModel { Categorias = categorias, Fabricantes = fabricantes });
         }
+
         [HttpPost]
         public ActionResult CriarProduto(EditarProdutoViewModel editarProdutoViewModel)
         {
@@ -210,12 +219,14 @@ namespace StoreEP.Controllers
             _comentariosRepositorio.RegistrarComentario(comentario);
             return RedirectToAction(nameof(ValidarComentarios));
         }
+
         [HttpGet("[controller]/[action]/{ID}")]
         public IActionResult DetalhesComentario(int ID)
         {
             Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ProdutoID == ID);
             return View(comentario);
         }
+
         [HttpGet("[controller]/[action]/{ID}")]
         public IActionResult RemoverComentario(int ID)
         {

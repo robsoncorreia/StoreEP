@@ -16,21 +16,21 @@ namespace StoreEP.Models.Repository
         public IEnumerable<Pedido> Pedidos { get; set; }
         public void SalvarPagamento(Pagamento pagamento)
         {
-            if (pagamento.ID == 0)
+            if (pagamento.PagamentoID == 0)
             {
                 _banco.Pagamentos.Add(pagamento);
             }
             else
             {
-                Pagamento dbEntry = _banco.Pagamentos.FirstOrDefault(p => p.ID == pagamento.ID);
+                Pagamento dbEntry = _banco.Pagamentos.FirstOrDefault(p => p.PagamentoID == pagamento.PagamentoID);
                 if (dbEntry != null)
                 {
-                    dbEntry.ID = pagamento.ID;
+                    dbEntry.PagamentoID = pagamento.PagamentoID;
                     dbEntry.UserId = pagamento.UserId;
                     dbEntry.UserId = pagamento.UserId;
                     dbEntry.Valor = pagamento.Valor;
-                    dbEntry.CompraDT = pagamento.CompraDT;
-                    dbEntry.PagamentoDT = pagamento.PagamentoDT;
+                    dbEntry.DataCompra = pagamento.DataCompra;
+                    dbEntry.DataPagamento = pagamento.DataPagamento;
                 }
             }
             _banco.SaveChanges();

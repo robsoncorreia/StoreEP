@@ -7,10 +7,9 @@ namespace StoreEP.Models.ViewModels
 {
     public class FinalizarPedidoViewModel
     {
-        public IEnumerable<Endereco> Enderecos { get; set; }
+        public Endereco Endereco { get; set; }
         public Carrinho Carrinho { get; set; }
         public Pagamento Pagamento { get; set; }
         public int EnderecoId { get; set; }
-        public IEnumerable<Imagem> Imagens { get; set; }
     }
 }

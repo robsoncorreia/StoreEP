@@ -74,7 +74,7 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.Endereco", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("EnderecoID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Bairro")
@@ -88,10 +88,10 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("Complemento");
 
+                    b.Property<DateTime>("DataUtilizacao");
+
                     b.Property<string>("Estado")
                         .IsRequired();
-
-                    b.Property<bool>("GifWrap");
 
                     b.Property<string>("Numero")
                         .IsRequired();
@@ -104,9 +104,7 @@ namespace StoreEP.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Property<DateTime>("Utilizado");
-
-                    b.HasKey("ID");
+                    b.HasKey("EnderecoID");
 
                     b.ToTable("Endereco");
                 });
@@ -151,12 +149,12 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.Pagamento", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("PagamentoID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("CompraDT");
+                    b.Property<DateTime>("DataCompra");
 
-                    b.Property<DateTime?>("PagamentoDT");
+                    b.Property<DateTime>("DataPagamento");
 
                     b.Property<int>("PedidoId");
 
@@ -164,7 +162,7 @@ namespace StoreEP.Migrations
 
                     b.Property<decimal>("Valor");
 
-                    b.HasKey("ID");
+                    b.HasKey("PagamentoID");
 
                     b.HasIndex("PedidoId")
                         .IsUnique();
@@ -174,18 +172,18 @@ namespace StoreEP.Migrations
 
             modelBuilder.Entity("StoreEP.Models.Pedido", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("PedidoID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DataCompra");
 
                     b.Property<int?>("EnderecoID");
 
-                    b.Property<bool>("Shipped");
+                    b.Property<bool>("Enviado");
 
                     b.Property<string>("UserId");
 
-                    b.HasKey("ID");
+                    b.HasKey("PedidoID");
 
                     b.HasIndex("EnderecoID");
 

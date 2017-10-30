@@ -9,13 +9,12 @@ namespace StoreEP.Models
 {
     public class Pedido
     {
- 
-        public int ID { get; set; }
+        public int PedidoID { get; set; }
         public string UserId { get; set; }
-        public bool Shipped { get; set; } = false;    
-        public ICollection<CartLine> Lines { get; set; }
-        public Endereco Endereco { get; set; }
-        public Pagamento Pagamento { get; set; }
-        public DateTime DataCompra { get; set; }
+        public bool Enviado { get; set; } = false;    
+        public virtual ICollection<CartLine> Lines { get; set; }
+        public  Endereco Endereco { get; set; }
+        public  Pagamento Pagamento { get; set; }
+        public DateTime DataCompra { get; set; } = DateTime.Now;
     }
 }

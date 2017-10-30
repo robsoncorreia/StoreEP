@@ -2,14 +2,6 @@
 @{
     Layout = "_AdminLayout";
 }
-<style>
-    tr {
-        background-color: black;
-        box-shadow: 0px 0px 6px black;
-        color: #ffd600;
-    }
-</style>
-
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#carrinho">Carrinho</a></li>
     <li><a data-toggle="tab" href="#endereco">Endereço</a></li>
@@ -17,28 +9,91 @@
 </ul>
 <div class="tab-content">
     <div id="carrinho" class="tab-pane fade in active text-center">
-        <ul class="list-group">
-            @foreach (var line in Model.Carrinho.Lines)
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th class="text-center">Imagem</th>
+                <th class="text-center">Nome</th>
+                <th class="text-center">Descrição</th>
+                <th class="text-center">Preço</th>
+                <th class="text-center">Categoria</th>
+                <th class="text-center">Fabricante</th>
+                <th class="text-center">Quantidade</th>
+                <th class="text-center">Quant. em estoque</th>
+                <th>Ações</th>
+            </tr>
+            @foreach (var linha in Model.Carrinho.Lines)
             {
-                <li class="list-group-item">
-                    <img src="@Model.Imagens.Where(i => i.ProdutoID == line.Produto.ProdutoID).Select(i => i.Link).FirstOrDefault()" height="50" alt="@Model.Imagens.Where(i => i.ProdutoID == line.Produto.ProdutoID).Select(i => i.Nome).FirstOrDefault()" />
-                    <span><a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@line.Produto.ProdutoID">@line.Produto.Nome</a></span>
-                    <span>
-                        Preço: @line.Produto.Preco.ToString("c")
-                        Quantidade: @line.Quantidade
-                    </span>
-                </li>
+                <tr>
+                    <td class="text-center">
+                        <img src="@linha.Produto.Imagens.Select(i => i.Link).FirstOrDefault()" alt="@linha.Produto.Imagens.Select(i => i.Nome).FirstOrDefault()" height="60" />
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@linha.Produto.ProdutoID">
+                            @linha.Produto.Nome
+                        </a>
+                    </td>
+                    <td class="text-center">@linha.Produto.Descricao</td>
+                    <td class="text-center">@linha.Produto.Preco.ToString("c")</td>
+                    <td class="text-center">
+                        <a asp-action="Listar" asp-controller="Produtos" asp-route-category="@linha.Produto.Categoria">
+                            @linha.Produto.Categoria
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="BuscarFabricante" asp-controller="Produtos" asp-route-fabricante="@linha.Produto.Fabricante">
+                            @linha.Produto.Fabricante
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        @linha.Quantidade
+                    </td>
+                    <td class="text-center">
+                        @linha.Produto.Quantidade
+                    </td>
+                    <th>
+                        <a asp-action="RemoverCarrinho" asp-controller="Carrinho" asp-route-produtoID="@linha.Produto.ProdutoID" class="btn btn-danger btn-sm">
+                            Remover
+                        </a>
+                    </th>
+                </tr>
             }
-        </ul>
+        </table>
     </div>
     <div id="endereco" class="tab-pane fade">
-        <div class="content-grid mdl-grid">
-           <p>@Model.Enderecos.Where(e => e.Utilizado == Model.Enderecos.Max(en => en.Utilizado)).Select(e => e.Rua).FirstOrDefault()
-            <span><a asp-action="Index" asp-controller="Endereco">escolher outro</a></span></p>
-        </div>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th class="text-center">Rua</th>
+                <th class="text-center">Complemento</th>
+                <th class="text-center">Número</th>
+                <th class="text-center">Bairro</th>
+                <th class="text-center">Ciadade</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Pais</th>
+                <th class="text-center" colspan="2">Ações</th>
+            </tr>
+            <tr>
+                <td class="text-center">@Model.Endereco.Rua</td>
+                <td class="text-center">@Model.Endereco.Complemento</td>
+                <td class="text-center">@Model.Endereco.Numero</td>
+                <td class="text-center">@Model.Endereco.Bairro</td>
+                <td class="text-center">@Model.Endereco.Cidade</td>
+                <td class="text-center">@Model.Endereco.Estado</td>
+                <td class="text-center">@Model.Endereco.Pais</td>
+                <td class="text-center">
+                    <a asp-controller="Endereco" asp-action="Index" class="btn-default btn btn-sm">
+                        Mudar
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a asp-controller="Endereco" asp-action="Criar" class="btn-default btn btn-sm">
+                        Criar novo
+                    </a>
+                </td>
+            </tr>
+        </table>
         @*<a asp-action="Criar" asp-controller="Endereco" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-            <i class="material-icons">add</i>
-        </a>*@
+                <i class="material-icons">add</i>
+            </a>*@
     </div>
     <div id="pagamento" class="tab-pane fade">
         <form asp-action="Finalizar" method="post">
@@ -49,15 +104,12 @@
                 </span>
             </div>
             <div>
-                <span class="mdl-chip mdl-chip--deletable">
-                    <span class="mdl-chip__text">Finalizar</span>
-                    <button type="submit" class="mdl-chip__action">
-                        <i class="material-icons" style="color: navy;">payment</i>
-                    </button>
-                </span>
+                <button type="submit" class="btn btn-default btn-sm">
+                    <i class="material-icons" style="color: navy;">payment</i>
+                </button>
             </div>
-            <input asp-for="Pagamento.Valor" value="@Model.Carrinho.ValorTotal()" type="hidden" id="txt_valor" />
-            <input asp-for="EnderecoId" value="@Model.EnderecoId" type="hidden"/>
+            <input asp-for="EnderecoId" type="hidden" value="@Model.Endereco.EnderecoID" />
+            <input asp-for="Pagamento.Valor" type="hidden" value="@Model.Carrinho.ValorTotal()" />
         </form>
     </div>
 </div>

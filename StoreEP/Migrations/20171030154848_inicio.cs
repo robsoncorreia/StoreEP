@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace StoreEP.Migrations
 {
-    public partial class inicial : Migration
+    public partial class inicio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,23 +13,22 @@ namespace StoreEP.Migrations
                 name: "Endereco",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    EnderecoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Bairro = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CEP = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataUtilizacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GifWrap = table.Column<bool>(type: "bit", nullable: false),
                     Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Pais = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rua = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Utilizado = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Endereco", x => x.ID);
+                    table.PrimaryKey("PK_Endereco", x => x.EnderecoID);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,21 +71,21 @@ namespace StoreEP.Migrations
                 name: "Pedido",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    PedidoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DataCompra = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EnderecoID = table.Column<int>(type: "int", nullable: true),
-                    Shipped = table.Column<bool>(type: "bit", nullable: false),
+                    Enviado = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pedido", x => x.ID);
+                    table.PrimaryKey("PK_Pedido", x => x.PedidoID);
                     table.ForeignKey(
                         name: "FK_Pedido_Endereco_EnderecoID",
                         column: x => x.EnderecoID,
                         principalTable: "Endereco",
-                        principalColumn: "ID",
+                        principalColumn: "EnderecoID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -183,7 +182,7 @@ namespace StoreEP.Migrations
                         name: "FK_CartLine_Pedido_PedidoID",
                         column: x => x.PedidoID,
                         principalTable: "Pedido",
-                        principalColumn: "ID",
+                        principalColumn: "PedidoID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CartLine_Produto_ProdutoID",
@@ -197,22 +196,22 @@ namespace StoreEP.Migrations
                 name: "Pagamento",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    PagamentoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CompraDT = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PagamentoDT = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DataCompra = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataPagamento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PedidoId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Valor = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pagamento", x => x.ID);
+                    table.PrimaryKey("PK_Pagamento", x => x.PagamentoID);
                     table.ForeignKey(
                         name: "FK_Pagamento_Pedido_PedidoId",
                         column: x => x.PedidoId,
                         principalTable: "Pedido",
-                        principalColumn: "ID",
+                        principalColumn: "PedidoID",
                         onDelete: ReferentialAction.Cascade);
                 });
 

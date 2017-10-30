@@ -14,13 +14,17 @@ namespace StoreEP.Models
             context = ctx;
         }
         public IEnumerable<Pedido> Pedidos => context.Pedidos
-                                                     .Include(o => o.Lines)
-                                                     .ThenInclude(l => l.Produto);
+                                                        .Include(o => o.Lines)
+                                                            .ThenInclude(p => p.Produto)
+                                                                .ThenInclude(i => i.Imagens)
+                                                        .Include(e => e.Endereco)
+                                                        .Include(p => p.Pagamento)
+                                                        .ToList();
         public void Registrar(Pedido pedido)
         {
 
             context.AttachRange(pedido.Lines.Select(i => i.Produto));
-            if (pedido.ID == 0)
+            if (pedido.PedidoID == 0)
             {
                 context.Pedidos.Add(pedido);
             }

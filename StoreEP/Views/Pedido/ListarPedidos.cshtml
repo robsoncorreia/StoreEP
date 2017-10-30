@@ -12,21 +12,21 @@
             <th>Rua</th>
             <th>Número</th>
             <th>Bairro</th>
-            <th>Cidede</th>
+            <th>Cidade</th>
             <th>CEP</th>
             <th>Status</th>
             <th>Data da compra</th>
         </tr>
         <tr>
-            <td>@pedido.ID</td>
-            <td>@pedido?.Endereco.ID</td>
-            @*<td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Rua).FirstOrDefault()</td>
-            <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Numero).FirstOrDefault()</td>
-            <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Bairro).FirstOrDefault()</td>
-            <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.Cidade).FirstOrDefault()</td>
-            <td>@Model.Enderecos.Where(e => e.EnderecoId == pedido.Endereco.EnderecoId).Select(e => e.CEP).FirstOrDefault()</td>*@
-            @if (pedido.Shipped)
-                {
+            <td>@pedido.PedidoID</td>
+            <td>@pedido.Endereco.Rua</td>
+            <td>@pedido.Endereco.Numero</td>
+            <td>@pedido.Endereco.Bairro</td>
+            <td>@pedido.Endereco.Cidade</td>
+            <td>@pedido.Endereco.CEP</td>
+
+            @if (pedido.Enviado)
+            {
                 <td>Enviado</td>
             }
             else
@@ -41,11 +41,14 @@
             <th>Preço</th>
             <th>Categoria</th>
         </tr>
+        
         @foreach (var produto in pedido.Lines)
-                {
+        {
             <tr>
                 <td></td>
-                <td><a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@produto.Produto.ProdutoID">@produto?.Produto?.Nome</a></td>
+                <td>
+                    <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@produto.Produto.ProdutoID">@produto?.Produto?.Nome</a>
+                </td>
                 <td>@produto?.Produto?.Preco.ToString("c")</td>
                 <td>@produto?.Produto?.Categoria</td>
             </tr>

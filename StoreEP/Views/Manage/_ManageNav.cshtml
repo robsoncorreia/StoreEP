@@ -1,4 +1,4 @@
-﻿@using StoreEP.Views.Manage
+@using StoreEP.Views.Manage
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
@@ -12,6 +12,6 @@
         @*<li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)"><a asp-action="ExternalLogins">External logins</a></li>*@
     }
     @*<li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"><a asp-action="TwoFactorAuthentication">Two-factor authentication</a></li>*@
-    <li class="@ManageNavPages.ComprasNavClass(ViewContext)"><a asp-action="Lista" asp-controller="Pedido">Pedidos</a></li>
+    <li class="@ManageNavPages.ComprasNavClass(ViewContext)"><a asp-action="ListarPedidos" asp-controller="Pedido">Pedidos</a></li>
 </ul>
 

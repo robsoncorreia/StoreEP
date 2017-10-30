@@ -12,17 +12,20 @@ namespace StoreEP.Controllers
 {
     public class CarrinhoController : Controller
     {
-        private readonly StoreEPDbContext _lojaContexto;
+        private readonly IProdutoRepositorio _produtoRepositorio;
         private Carrinho _carrinho;
-        public CarrinhoController(StoreEPDbContext repo, Carrinho carService)
+        public CarrinhoController(
+            IProdutoRepositorio produtoRepositorio,
+            Carrinho carService)
         {
-            _lojaContexto = repo;
+            _produtoRepositorio = produtoRepositorio;
             _carrinho = carService;
         }
         [HttpGet]
         public ViewResult Index(string returnUrl)
         {
-            return View(new CartIndexViewModel {
+            return View(new CartIndexViewModel
+            {
                 Carrinho = _carrinho,
                 ReturnUrl = returnUrl
             });
@@ -30,17 +33,17 @@ namespace StoreEP.Controllers
         [HttpGet("[controller]/[action]/{produtoID}")]
         public RedirectToActionResult Adicionar(int produtoID, string returnUrl)
         {
-            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
-            if(produto != null)
+            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
+            if (produto != null)
             {
                 int emEstoque = produto.Quantidade;
                 _carrinho.AddItem(produto, 1);
             }
             return RedirectToAction("Finalizar", "Pedido", new { returnUrl });
         }
-        public RedirectToActionResult RemoverCarrinho(int ID, string returnUrl)
+        public RedirectToActionResult RemoverCarrinho(int produtoID, string returnUrl)
         {
-            Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoID == ID);
+            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
             if (produto != null)
             {
                 _carrinho.RemoveLine(produto);

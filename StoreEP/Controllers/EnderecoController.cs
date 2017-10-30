@@ -60,7 +60,7 @@ namespace StoreEP.Controllers
 
         public IActionResult Apagar(string ID)
         {
-            Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.ID == int.Parse(ID));
+            Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoID == int.Parse(ID));
             if (apagarEndereco != null)
             {
                 _addressRepositoty.ApagarEndereco(int.Parse(ID));
@@ -69,10 +69,10 @@ namespace StoreEP.Controllers
         }
         public IActionResult Utilizar(int ID)
         {
-            Endereco endereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.ID == ID);
+            Endereco endereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoID == ID);
             if (endereco != null)
             {
-                endereco.Utilizado = DateTime.Now;
+                endereco.DataUtilizacao = DateTime.Now;
                 _addressRepositoty.SalvarEndereco(endereco);
             }
             return RedirectToAction("Finalizar", "Pedido");

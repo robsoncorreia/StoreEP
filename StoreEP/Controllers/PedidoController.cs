@@ -21,7 +21,6 @@ namespace StoreEP.Controllers
         private IPedidoRepositorio _pedidoRepositorio;
         private IEnderecoRepositorio _enderecoRepositorio;
         private IProdutoRepositorio _produtoRepositorio;
-        private IImagensRepositorio _imagemRepositorio;
         private Carrinho _carrinho;
 
         private StoreEPDbContext _bancoContexto;
@@ -42,17 +41,12 @@ namespace StoreEP.Controllers
             _signInManager = signInManager;
             _enderecoRepositorio = address;
             _produtoRepositorio = produtoRepositorio;
-            _imagemRepositorio = imagemRepositorio;
             _bancoContexto = bancoContexto;
         }
 
-        public async Task<ViewResult> Lista()
+        public async Task<ViewResult> ListarPedidos()
         {
-            ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
-
-            //Task.Run(() => new List<string>() { "a", "b" });
-            //IEnumerable<Pedido> pedidos = await Task.Run(() =>  _bancoContexto.Pedidos.Where(o => o.UserId.Equals(user.Id)).ToList());
             IEnumerable<Pedido> pedidos = _pedidoRepositorio.Pedidos.Where(o => o.UserId.Equals(user.Id)).ToList();
             IEnumerable<Endereco> enderecos = _enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id)).ToList();
 
@@ -67,31 +61,25 @@ namespace StoreEP.Controllers
         [HttpPost]
         public IActionResult MarkShipped(int ID)
         {
-            Pedido pedido = _pedidoRepositorio.Pedidos.FirstOrDefault(p => p.ID == ID);
+            Pedido pedido = _pedidoRepositorio.Pedidos.FirstOrDefault(p => p.PedidoID == ID);
             if (pedido != null)
             {
-                pedido.Shipped = true;
+                pedido.Enviado = true;
                 _pedidoRepositorio.Registrar(pedido);
             }
-            return RedirectToAction(nameof(Lista));
+            return RedirectToAction(nameof(ListarPedidos));
         }
 
         [HttpPost]
         public async Task<IActionResult> Finalizar(FinalizarPedidoViewModel model)
         {
-            ClaimsPrincipal currentUser = this.User;
             Pedido pedido = new Pedido();
-
             var user = await _userManager.GetUserAsync(User);
             Endereco endereco = _enderecoRepositorio.Enderecos
-                                                    .SingleOrDefault(e => e.ID == model.EnderecoId);
-
+                                                    .SingleOrDefault(e => e.EnderecoID == model.EnderecoId);
             pedido.Endereco = endereco;
-            pedido.DataCompra = DateTime.Now;
             pedido.Pagamento = model.Pagamento;
-
             model.Pagamento.UserId = user.Id;
-            model.Pagamento.CompraDT = DateTime.Now;
 
             if (_carrinho.Lines?.Count() == 0)
             {
@@ -123,16 +111,21 @@ namespace StoreEP.Controllers
             {
                 return RedirectToAction(actionName: "Criar", controllerName: "Endereco");
             }
+            var enderecos = _enderecoRepositorio.Enderecos
+                                                .Where(e => e.UserId == user.Id)
+                                                .ToList();
             return View(new FinalizarPedidoViewModel
             {
                 Carrinho = _carrinho,
-                Enderecos = _enderecoRepositorio.Enderecos.Where(a => a.UserId.Equals(user.Id)).ToList(),
-                Imagens = _imagemRepositorio.Imagens.ToList()
+                Endereco = enderecos.Where(e => e.DataUtilizacao == 
+                                          (enderecos.Select(d => d.DataUtilizacao).Max()))
+                                    .SingleOrDefault()
             });
         }
-        public RedirectToActionResult RemoverCarrinho(int ID)
+        public RedirectToActionResult RemoverCarrinho(int produtoID)
         {
-            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == ID);
+            Produto produto = _produtoRepositorio.Produtos
+                                                    .FirstOrDefault(p => p.ProdutoID == produtoID);
             if (produto != null)
             {
                 _carrinho.RemoveLine(produto);

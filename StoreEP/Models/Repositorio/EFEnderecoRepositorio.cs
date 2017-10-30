@@ -16,19 +16,18 @@ namespace StoreEP.Models
 
         public void SalvarEndereco(Endereco endereco)
         {
-            if (endereco.ID == 0)
+            if (endereco.EnderecoID == 0)
             {
                 context.Enderecos.Add(endereco);
             }
             else
             {
-                Endereco dbEntry = context.Enderecos.FirstOrDefault(p => p.ID == endereco.ID);
+                Endereco dbEntry = context.Enderecos.FirstOrDefault(e => e.EnderecoID == endereco.EnderecoID);
                 if (dbEntry != null)
                 {
                     dbEntry.UserId = endereco.UserId;
                     dbEntry.Cidade = endereco.Cidade;
                     dbEntry.Pais = endereco.Pais;
-                    dbEntry.GifWrap = endereco.GifWrap;
                     dbEntry.Rua = endereco.Rua;
                     dbEntry.Bairro = endereco.Bairro;
                     dbEntry.Numero = endereco.Numero;
@@ -40,7 +39,7 @@ namespace StoreEP.Models
         }
         public Endereco ApagarEndereco(int id)
         {
-            Endereco dbEntry = context.Enderecos.FirstOrDefault(a => a.ID == id);
+            Endereco dbEntry = context.Enderecos.FirstOrDefault(e => e.EnderecoID == id);
             if (dbEntry != null)
             {
                 dbEntry.UserId = "apagado";
