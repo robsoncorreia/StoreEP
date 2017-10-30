@@ -17,7 +17,7 @@
     {
         <div>@comentario.NomeUsuario</div>
         <div>@comentario.Texto</div>
-        <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-ComentarioID="@comentario.ComentarioID">
+        <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-comentarioID="@comentario.ComentarioID">
             <label asp-for="@Model.Comentario.Assunto"></label>
             <input asp-for="@Model.Resposta.Assunto" />
             <label>Texto</label>
@@ -58,7 +58,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-default btn-sm">Enviar comentário</button>
-                        <input type="hidden" value="@Model.Produto.ProdutoID" asp-for="@Model.Resposta" />
+                        <input type="hidden" value="@Model.Produto.ProdutoID" asp-for="@Model.Produto.ProdutoID" />
                     </div>
                 </div>
             </form>

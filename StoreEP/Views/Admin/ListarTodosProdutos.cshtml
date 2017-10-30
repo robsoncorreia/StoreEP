@@ -1,4 +1,4 @@
-@model IEnumerable<Produto>
+@model ProductsListViewModel
 @{
     ViewBag.Title = "Todos os produtos";
     Layout = "_AdminLayout";
@@ -14,9 +14,9 @@
         <th class="text-right">Preço</th>
         <th class="text-right">Categoria</th>
         <th class="text-right">Descrição</th>
-        <th class="text-center">Ações</th>
+        <th class="text-center" colspan="2">Ações</th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Produtos)
     {
         <tr>
             <td class="text-right">@item?.ProdutoID</td>
@@ -25,11 +25,10 @@
             <td class="text-right">@item?.Categoria</td>
             <td class="text-right">@item?.Descricao</td>
             <td class="text-center">
-                <form asp-action="ConfirmaExclusaoProduto" method="post">
-                    <a asp-action="EditarProduto" class="btn btn-sm btn btn-warning" asp-route-produtoID="@item.ProdutoID">Editar</a>
-                    <input type="hidden" name="ID" value="@item.ProdutoID" />
-                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Produto será excluido da base de dados">Apagar</button>
-                </form>
+                <a asp-action="ConfirmaExclusaoProduto" asp-controller="Admin" asp-route-produtoID="@item.ProdutoID" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Produto será excluido da base de dados">Apagar</a>
+            </td>
+            <td>
+                <a asp-action="EditarProduto" asp-controller="Admin" asp-route-produtoID="@item.ProdutoID" class="btn btn-default btn-sm">Editar</a>
             </td>
         </tr>
     }
@@ -37,3 +36,4 @@
 <div class="text-center">
     <a asp-action="CriarProduto" class="btn btn-primary">Adicionar produto</a>
 </div>
+<div class="row text-center" page-model="@Model.PagingInfo" page-action="ListarTodosProdutos" page-classes-enabled="true" page-class="btn" page-class-normal="btn-default" page-class-selected="btn-primary" page-url-cartegory="@Model.CurrentCategory"></div>

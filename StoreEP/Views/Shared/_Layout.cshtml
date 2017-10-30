@@ -19,15 +19,6 @@
     <script type="text/javascript" src="~/lib/chart.js/dist/Chart.min.js"></script>
     <script type="text/javascript" src="~/lib/chart.js/dist/Chart.bundle.min.js"></script>
     <style>
-        .mdl-badge.mdl-badge--overlap::after {
-            right: -7px;
-            width: 15px;
-            height: 15px;
-            font-size: 10px;
-            top: -10px;
-            background: black;
-        }
-
         body {
             background-color: #e8e8e8;
         }
@@ -43,13 +34,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/"  class="navbar-brand">Loja</a>
+                <a href="/" class="navbar-brand">Loja</a>
                 @await Component.InvokeAsync("CartSummary")
                 @*@await Component.InvokeAsync("ComboboxCategorias")*@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Admin" asp-action="Index">Gerenciar</a></li>
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <li><a asp-controller="Admin" asp-action="Index">Gerenciar</a></li>
+                    }
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
                     <li>@await Html.PartialAsync("_BuscaPartial", new BuscaViewModel())</li>
                     <li>@await Html.PartialAsync("_FiltroPartial", new FiltroViewModel())</li>
@@ -72,5 +66,10 @@
             @RenderSection("scripts", required: false)
         </div>
     </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">StoreEP @DateTime.Now.Year</p>
+        </div>
+    </footer>
 </body>
 </html>

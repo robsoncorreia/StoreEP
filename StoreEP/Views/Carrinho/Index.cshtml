@@ -1,43 +1,55 @@
 @using StoreEP.Models.ViewModels
 @model CartIndexViewModel
-<h2>Seu carrinho</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Quantidade</th>
-            <th>Item</th>
-            <th class="text-right">Preço</th>
-            <th class="text-right">Subtotal</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var line in Model.Carrinho.Lines)
-        {
-        <tr>
-            <td class="mdl-data-table__cell--non-numeric">@line.Quantidade</td>
-            <td class="text-left">@line.Produto.Nome</td>
-            <td class="text-right">@line.Produto.Preco.ToString("c")</td>
-            <td class="text-right">@((line.Quantidade * line.Produto.Preco).ToString("c"))</td>
-            <td>
-                <form asp-action="RemoverCarrinho" method="post">
-                    <input type="hidden" name="ID" value="@line.Produto.ProdutoID" />
-                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
-                    <button type="submit" class="btn btn-danger btn-sm">Remover</button>
-                </form>
-            </td>
-        </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3" class="text-right">Total:</td>
-            <td class="text-right">
-                @Model.Carrinho.ValorTotal().ToString("c")
-            </td>
-        </tr>
-    </tfoot>
-</table>
-<div class="text-center">
-    <a class="btn btn-primary btn-sm" href="@Model.ReturnUrl">Continue comprando</a>
-    <a class="btn btn-success btn-sm" asp-action="Finalizar" asp-controller="Pedido">Finalizar</a>
-</div>
+@if (Model.Carrinho.Lines.Count() < 1)
+{
+    <div class="alert alert-danger">
+        <strong>Seu carrinho está vazio</strong>
+    </div>
+    <div>
+        <a class="btn-default btn btn-sm" href="@Model.ReturnUrl">Voltar</a>
+    </div>
+}
+else
+{
+    <h2>Seu carrinho</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Quantidade</th>
+                <th>Item</th>
+                <th class="text-right">Preço</th>
+                <th class="text-right">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Carrinho.Lines)
+            {
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">@line.Quantidade</td>
+                    <td class="text-left">@line.Produto.Nome</td>
+                    <td class="text-right">@line.Produto.Preco.ToString("c")</td>
+                    <td class="text-right">@((line.Quantidade * line.Produto.Preco).ToString("c"))</td>
+                    <td>
+                        <form asp-action="RemoverCarrinho" method="post">
+                            <input type="hidden" name="ID" value="@line.Produto.ProdutoID" />
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                            <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">
+                    @Model.Carrinho.ValorTotal().ToString("c")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="text-center">
+        <a class="btn btn-primary btn-sm" href="@Model.ReturnUrl">Continue comprando</a>
+        <a class="btn btn-success btn-sm" asp-action="Finalizar" asp-controller="Pedido">Finalizar</a>
+    </div>
+}

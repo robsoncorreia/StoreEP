@@ -88,20 +88,6 @@
 
 </form>
 
-@if (Model?.Imagens?.Count() != null)
-{
-    <div>
-        @foreach (Imagem imagem in Model.Imagens)
-                {
-            <div style="display:inline-block; ">
-                <img src="@imagem.Link" alt="@imagem.Nome" id="@imagem.ImagemID" width="80" style="float:left; margin: 4px;" />
-                <span>
-                    <a style="left: -50px;bottom: -50px;background: aliceblue;box-shadow: 0px 0px 10px black;" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" asp-action="ApagarImagem" asp-controller="Admin" asp-route-id="@imagem.ImagemID" asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()"><i style="color: red;" class="material-icons">delete</i></a>
-                </span>
-            </div>
-        }
-    </div>
-}
 <script>
     document.getElementById("btn_criar_nova_categoria").addEventListener("click", adicionar);
     var txt_nova_categoria = document.getElementById("txt_nova_categoria");

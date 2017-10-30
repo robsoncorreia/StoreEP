@@ -1,12 +1,12 @@
 @model AdminIndexViewModel
-@{ 
+@{
     Layout = "_AdminLayout";
 }
 <div>
-    <a class="btn btn-info" asp-action="CriarProduto" asp-route-editarProdutoViewModel="null">Criar novo produto</a>
+    <a class="btn btn-info" asp-action="CriarProduto">Criar novo produto</a>
 </div>
 <div>
-    <a asp-action="Listar" class="btn btn-primary">
+    <a asp-controller="Admin" asp-action="ListarTodosProdutos" asp-route-page="1" class="btn btn-primary">
         Lista de produtos <span class="badge">@Model.NumeroProdutosRegistrados</span>
     </a>
 </div>

@@ -8,7 +8,7 @@
             @Model.ValorTotal().ToString("c")
         </small>
     }
-    <a asp-controller="Carrinho" asp-action="Index" asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()" class="btn btn-primary btn-sm" style="position: relative; bottom: 6px;">
+    <a asp-controller="Carrinho" asp-action="Index" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()" class="btn btn-primary btn-sm" style="position: relative; bottom: 6px;">
         Carrinho <span class="badge">@Model.Lines.Count()</span>
     </a>
 </div>

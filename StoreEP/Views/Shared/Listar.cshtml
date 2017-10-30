@@ -78,14 +78,16 @@
     }
 </div>
 <hr />
-<div class="row">
-    @if (Model.ProdutosMaisVisitados.Count() != 0)
-    {
+
+@if (Model.ProdutosMaisVisitados != null && Model.ProdutosMaisVisitados.Count() != 0)
+{
+    <div class="row">
         <h3>Produtos Visitados</h3>
-        foreach (var p in Model.ProdutosMaisVisitados)
+        @foreach (var p in Model.ProdutosMaisVisitados)
         {
             @Html.Partial("_CartaoExibicaoProdutoMaisVisitadosPartial", p)
         }
-    }
-</div>
-<hr />
+    </div>
+    <hr />
+}
+

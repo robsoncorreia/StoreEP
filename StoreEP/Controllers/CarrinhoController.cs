@@ -19,6 +19,7 @@ namespace StoreEP.Controllers
             _lojaContexto = repo;
             _carrinho = carService;
         }
+        [HttpGet]
         public ViewResult Index(string returnUrl)
         {
             return View(new CartIndexViewModel {
@@ -26,6 +27,7 @@ namespace StoreEP.Controllers
                 ReturnUrl = returnUrl
             });
         }
+        [HttpGet("[controller]/[action]/{produtoID}")]
         public RedirectToActionResult Adicionar(int produtoID, string returnUrl)
         {
             Produto produto = _lojaContexto.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);

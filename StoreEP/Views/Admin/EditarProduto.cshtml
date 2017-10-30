@@ -68,7 +68,7 @@
             <label asp-for="Imagem.Link">Link da imagem</label>
             <div><span asp-validation-for="Imagem.Link" class="text-danger"></span></div>
             <input asp-for="Imagem.Link" class="form-control" />
-            <input type="hidden" asp-for="Imagem.ImagemID" value="@Model?.Produto?.ProdutoID" />
+            <input type="hidden" asp-for="Imagem.ProdutoID" value="@Model.Produto.ProdutoID" />
         </div>
     </div>
     <div class="row">
@@ -88,10 +88,10 @@
 
 </form>
 
-@if (Model?.Imagens?.Count() != null)
+@if (Model.Produto.Imagens.Count() != 0)
 {
     <div>
-        @foreach (Imagem imagem in Model.Imagens)
+        @foreach (Imagem imagem in Model.Produto.Imagens)
                 {
             <div style="display:inline-block; ">
                 <img src="@imagem.Link" alt="@imagem.Nome" id="@imagem.ImagemID" width="80" style="float:left; margin: 4px;" />
@@ -132,3 +132,4 @@
         }
     }
 </script>
+

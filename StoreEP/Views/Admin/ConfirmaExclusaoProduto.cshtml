@@ -1,2 +1,8 @@
 @model Produto
-<p>@Model.Nome</p>
+<div class="row">
+    @Html.Partial("_CartaoExibicaoProdutoPartial", Model)
+</div>
+<div class="row">
+    <a asp-controller="Admin" asp-action="ApagarProduto" asp-route-produtoID="@Model.ProdutoID" class="btn btn-danger btn-sm">Apagar</a>
+</div>
+

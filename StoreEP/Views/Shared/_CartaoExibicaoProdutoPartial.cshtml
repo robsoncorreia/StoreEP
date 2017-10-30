@@ -21,7 +21,7 @@
             </li>
             <li class="list-group-item">
                 @Model.Preco.ToString("c")
-                <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-ID="@Model.ProdutoID" class="card-link">
+                <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.ProdutoID" class="card-link">
                     <span class="glyphicon glyphicon-shopping-cart" style="float:right;"></span>
                 </a>
             </li>
