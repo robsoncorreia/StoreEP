@@ -40,7 +40,7 @@ namespace StoreEP.Models
                     dbEntry.Nome = produto.Nome;
                     dbEntry.Preco = produto.Preco;
                     dbEntry.Publicado = produto.Publicado;
-                    dbEntry.Quantidade = dbEntry.Quantidade;
+                    dbEntry.Quantidade = produto.Quantidade;
                 }
             }
             _bancoContexto.SaveChanges();

@@ -7,11 +7,14 @@
         <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.Produto.ProdutoID" class="btn btn-lg btn-success btn-comprar">Comprar</a>
     </div>
 </div>
-<div class="row">
-    <div class="col">
-        <canvas id="canvas" width="400" height="100" class="col-sm-10"></canvas>
+@if (Model.HistoricosPreco.Count() > 0)
+{
+    <div class="row">
+        <div class="col">
+            <canvas id="canvas" width="400" height="400" class="col-sm-10" style="min-height:400px;"></canvas>
+        </div>
     </div>
-</div>
+}
 <div class="row">
     @foreach (var comentario in Model.Produto.Comentarios)
     {
