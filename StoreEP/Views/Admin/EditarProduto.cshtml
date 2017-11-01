@@ -8,6 +8,13 @@
         <strong>@TempData["massage"]</strong>
     </div>
 }
+<style>
+    .ui-menu .ui-menu-item a {
+        color: #96f226;
+        border-radius: 0px;
+        border: 1px solid #454545;
+    }
+</style>
 <form asp-action="EditarProduto" method="post">
     <div class="row">
         <div class="col-md-6">
@@ -27,34 +34,18 @@
         </div>
     </div>
     <div class="row ">
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-6">
             <label asp-for="Produto.Categoria">Categoria</label>
-            <div><span asp-validation-for="Produto.Categoria" class="text-danger"></span></div>
+            <div><span asp-validation-for="Produto.Categoria" class="text-danger" data-provide="typeahead"></span></div>
             <div>
-                <select asp-for="Produto.Categoria" asp-items="@(new SelectList(Model.Categorias))" class="combobox input-large form-control categoria"></select>
+                <input asp-for="Produto.Categoria" class="form-control" />
             </div>
         </div>
-        <div class="form-group col-sm-3">
-            <div class="input-group">
-                <input id="txt_nova_categoria" type="text" class="form-control" placeholder="Criar nova categoria" aria-label="Criar nova categoria">
-                <span class="input-group-btn">
-                    <button id="btn_criar_nova_categoria" class="btn btn-secondary" type="button">Criar</button>
-                </span>
-            </div>
-        </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-6">
             <label asp-for="Produto.Fabricante">Fabricante</label>
             <div><span asp-validation-for="Produto.Fabricante" class="text-danger"></span></div>
             <div>
-                <select asp-for="Produto.Fabricante" asp-items="@(new SelectList(Model.Fabricantes))" class="combobox input-large form-control fabricante"></select>
-            </div>
-        </div>
-        <div class="form-group col-sm-3">
-            <div class="input-group">
-                <input id="txt_novo_fabricante" type="text" class="form-control" placeholder="Criar novo fabricante" aria-label="Criar novo fabricante">
-                <span class="input-group-btn">
-                    <button id="btn_criar_novo_fabricante" class="btn btn-secondary" type="button">Criar</button>
-                </span>
+                <input asp-for="Produto.Fabricante" class="form-control" />
             </div>
         </div>
     </div>
@@ -97,7 +88,7 @@
 {
     <div>
         @foreach (Imagem imagem in Model.Produto.Imagens)
-                {
+        {
             <div style="display:inline-block; ">
                 <img src="@imagem.Link" alt="@imagem.Nome" id="@imagem.ImagemID" width="80" style="float:left; margin: 4px;" />
                 <span>
@@ -107,34 +98,16 @@
         }
     </div>
 }
-<script>
-    document.getElementById("btn_criar_nova_categoria").addEventListener("click", adicionar);
-    var txt_nova_categoria = document.getElementById("txt_nova_categoria");
-    var txt_novo_fabricante = document.getElementById("txt_novo_fabricante");
-    var produto_categoria = document.getElementById("Produto_Categoria");
-    var btn_criar_novo_fabricante = document.getElementById("btn_criar_novo_fabricante").addEventListener("click", adicionar)
-    var produto_fabricante = document.getElementById("Produto_Fabricante");
-
-
-    function adicionar() {
-        var btn = this.id === "btn_criar_nova_categoria";
-        if (btn) {
-            if (txt_nova_categoria.value == "") {
-                return;
-            }
-            var option = document.createElement("option");
-            option.textContent = txt_nova_categoria.value;
-            produto_categoria.appendChild(option);
-            txt_nova_categoria.value = "";
-        } else {
-            if (txt_novo_fabricante.value == "") {
-                return;
-            }
-            var option = document.createElement("option");
-            option.textContent = txt_novo_fabricante.value;
-            produto_fabricante.appendChild(option);
-            txt_novo_fabricante.value = "";
-        }
-    }
-</script>
+@section scripts {
+    <script type="text/javascript">
+    $(document).ready(function (){
+        $("#Produto_Categoria").typeahead({
+            source:@Html.Raw(Json.Serialize(Model.Categorias))
+        });
+        $("#Produto_Fabricante").typeahead({
+            source:@Html.Raw(Json.Serialize(Model.Fabricantes))
+        });
+    });
+    </script>
+}
 

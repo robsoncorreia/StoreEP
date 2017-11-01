@@ -82,25 +82,11 @@ namespace StoreEP.Controllers
         public ViewResult EditarProduto(int produtoID)
         {
             Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
-            IEnumerable<string> fabricantes = _produtoRepositorio.Produtos
-                                                                 .Where(p => p.Fabricante != null)
-                                                                 .Select(f => f.Fabricante)
-                                                                 .OrderBy(f => f)
-                                                                 .ToList();
-
-            IEnumerable<string> categorias = _produtoRepositorio.Produtos
-                                                                .Where(c => c.Categoria != null)
-                                                                .Select(x => x.Categoria)
-                                                                .Distinct()
-                                                                .OrderBy(x => x);
             return View(new EditarProdutoViewModel
             {
-                Fabricantes = _produtoRepositorio.Produtos
-                                                 .Where(p => p.Fabricante != null)
-                                                 .Select(f => f.Fabricante)
-                                                 .OrderBy(f => f).ToList(),
                 Produto = produto,
-                Categorias = categorias
+                Fabricantes = GetFabricantes(),
+                Categorias = GetCategorias()
             });
         }
 
@@ -115,16 +101,8 @@ namespace StoreEP.Controllers
                     _imagensRepositorio.RegistrarImagem(model.Imagem);
                 }
                 TempData["massage"] = $"{model.Produto.Nome} foi salvo com sucesso.";
-                model.Fabricantes = _produtoRepositorio.Produtos.Where(p => p.Fabricante != null)
-                                                                .Select(f => f.Fabricante)
-                                                                .Distinct()
-                                                                .OrderBy(f => f)
-                                                                .ToList();
-                model.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null)
-                                                               .Select(x => x.Categoria)
-                                                               .Distinct()
-                                                               .OrderBy(x => x)
-                                                               .ToList();
+                model.Fabricantes = GetFabricantes();
+                model.Categorias = GetCategorias();
                 return RedirectToAction("EditarProduto", ID);
             }
             else
@@ -137,15 +115,8 @@ namespace StoreEP.Controllers
                     TempData["massage"] = $"{model.Produto.Nome} foi salvo com sucesso.";
                     _produtoRepositorio.RegistrarProduto(model.Produto);
                 }
-                model.Fabricantes = _produtoRepositorio.Produtos
-                                                       .Where(p => p.Fabricante != null)
-                                                       .Select(f => f.Fabricante)
-                                                       .Distinct().OrderBy(f => f)
-                                                       .ToList();
-                model.Categorias = _produtoRepositorio.Produtos.Where(p => p.Categoria != null)
-                                                               .Select(c => c.Categoria)
-                                                               .Distinct()
-                                                               .OrderBy(c => c);
+                model.Fabricantes = GetFabricantes();
+                model.Categorias = GetCategorias();
                 return RedirectToAction("EditarProduto", ID);
             }
         }
@@ -157,32 +128,18 @@ namespace StoreEP.Controllers
 
         public ActionResult CriarProduto()
         {
-            IEnumerable<string> categorias = _produtoRepositorio.Produtos
-                                                                .Where(p => p.Categoria != null)
-                                                                .Select(c => c.Categoria)
-                                                                .Distinct()
-                                                                .OrderBy(c => c);
-            IEnumerable<string> fabricantes = _produtoRepositorio.Produtos
-                                                                 .Where(p => p.Fabricante != null)
-                                                                 .Select(f => f.Fabricante)
-                                                                 .Distinct()
-                                                                 .OrderBy(f => f);
-            return View(new EditarProdutoViewModel { Categorias = categorias, Fabricantes = fabricantes });
+            return View(new EditarProdutoViewModel
+            {
+                Categorias = GetCategorias(),
+                Fabricantes = GetFabricantes()
+            });
         }
 
         [HttpPost]
         public ActionResult CriarProduto(EditarProdutoViewModel editarProdutoViewModel)
         {
-            editarProdutoViewModel.Categorias = _produtoRepositorio.Produtos
-                                                                   .Where(p => p.Categoria != null)
-                                                                   .Select(c => c.Categoria)
-                                                                   .Distinct()
-                                                                   .OrderBy(c => c);
-            editarProdutoViewModel.Fabricantes = _produtoRepositorio.Produtos
-                                                                    .Where(p => p.Fabricante != null)
-                                                                    .Select(f => f.Fabricante)
-                                                                    .Distinct()
-                                                                    .OrderBy(f => f);
+            editarProdutoViewModel.Categorias = GetCategorias();
+            editarProdutoViewModel.Fabricantes = GetFabricantes();
             ModelState.Remove("Produto.ProdutoID");
             ModelState.Remove("Imagem.ImagemID");
             if (ModelState.IsValid)
@@ -234,6 +191,24 @@ namespace StoreEP.Controllers
             _comentariosRepositorio.ApagarComentario(comentario);
             TempData["massage"] = $"{comentario.NomeUsuario} apagado com sucesso.";
             return RedirectToAction(nameof(ValidarComentarios));
+        }
+        public IEnumerable<string> GetCategorias()
+        {
+            return _produtoRepositorio.Produtos
+                                        .Where(c => c.Categoria != null)
+                                        .OrderBy(c => c.Categoria)
+                                        .Select(c => c.Categoria)
+                                        .Distinct()
+                                        .ToList();
+        }
+        public IEnumerable<string> GetFabricantes()
+        {
+            return _produtoRepositorio.Produtos
+                                        .Where(c => c.Fabricante != null)
+                                        .OrderBy(c => c.Fabricante)
+                                        .Select(c => c.Fabricante)
+                                        .Distinct()
+                                        .ToList();
         }
     }
 }
