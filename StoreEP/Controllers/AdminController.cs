@@ -42,7 +42,6 @@ namespace StoreEP.Controllers
                 return View(produto);
             }
             return RedirectToAction(nameof(ListarTodosProdutos));
-
         }
 
         public ViewResult Index() => View(new AdminIndexViewModel
