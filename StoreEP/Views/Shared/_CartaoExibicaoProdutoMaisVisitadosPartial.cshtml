@@ -1,5 +1,5 @@
 @model Produto
-<div class="cardcol-md-3">
+<div class="card col-md-3 col-sm-6 col-xs-12 col-lg-3 ">
     <div class="thumbnail">
         <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@Model.ProdutoID">
             <img class="card-img-top" src="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Link).FirstOrDefault()" alt="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Nome).FirstOrDefault()" heigsht="40"/>

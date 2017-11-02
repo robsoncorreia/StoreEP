@@ -1,13 +1,13 @@
 @using StoreEP.Models
 @model Carrinho
 <div class="navbar-brand">
-    @if (Model.Lines.Count() > 0)
+    @*@if (Model.Lines.Count() > 0)
     {
         <small class="navbar-text" style="bottom: 14px; position: relative;">
             <b>Seu carrinho:</b>
             @Model.ValorTotal().ToString("c")
         </small>
-    }
+    }*@
     <a asp-controller="Carrinho" asp-action="Index" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()" class="btn btn-primary btn-sm" style="position: relative; bottom: 6px;">
         Carrinho <span class="badge">@Model.Lines.Count()</span>
     </a>

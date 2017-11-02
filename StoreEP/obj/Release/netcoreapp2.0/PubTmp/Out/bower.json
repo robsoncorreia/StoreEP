@@ -6,6 +6,7 @@
     "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
+    "bootstrap3-typeahead": "4.0.2",
     "chart.js": "2.7.0"
   }
 }

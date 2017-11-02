@@ -44,7 +44,7 @@ namespace StoreEP.Controllers
             IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
                                                                 .Where(p => p.Fabricante == fabricante);
             IEnumerable<Produto> produtosVisitados = await GetProdutosVisitados();
-            return View("Listar", new ProductsListViewModel
+            return View(nameof(Listar), new ProductsListViewModel
             {
                 ProdutosMaisVisitados = produtosVisitados,
                 Produtos = produtos,
@@ -99,7 +99,7 @@ namespace StoreEP.Controllers
                     CurrentPage = page
                 }
             };
-            return View("Listar", viewModel);
+            return View(nameof(Listar), viewModel);
         }
 
         [HttpPost("[controller]/[action]/")]
@@ -135,7 +135,7 @@ namespace StoreEP.Controllers
             };
             char s = model.Produtos.Count() < 2 ? ' ' : 's';
             ViewData["filtro.Nome"] = $"{model.Produtos.Count()} resultado{s} para a busca {modelBusca.Texto}.";
-            return View("Listar", model);
+            return View(nameof(Listar), model);
         }
 
         public async Task<IActionResult> Listar(string category, int page = 1)

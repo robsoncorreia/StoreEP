@@ -20,7 +20,12 @@
     <script type="text/javascript" src="~/lib/chart.js/dist/Chart.bundle.min.js"></script>
     <style>
         body {
-            background-color: #e8e8e8;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -28,25 +33,26 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">Loja</a>
-                @await Component.InvokeAsync("CartSummary")
-                @*@await Component.InvokeAsync("ComboboxCategorias")*@
+                <a class="navbar-brand" href="#">Loja</a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Administrador"))
                     {
-                        <li><a asp-controller="Admin" asp-action="Index">Gerenciar</a></li>
+                        <li class="active"><a asp-controller="Admin" asp-action="Index">Gerenciar</a></li>
                     }
-                    <li>@await Html.PartialAsync("_LoginPartial")</li>
-                    <li>@await Html.PartialAsync("_BuscaPartial", new BuscaViewModel())</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li>@await Html.PartialAsync("_FiltroPartial", new FiltroViewModel())</li>
+                    <li>@await Html.PartialAsync("_BuscaPartial", new BuscaViewModel())</li>
+                    <li>@await Html.PartialAsync("_LoginPartial")</li>
+                    <li>@await Component.InvokeAsync("CartSummary")</li>
                 </ul>
             </div>
         </div>
