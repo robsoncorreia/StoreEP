@@ -1,0 +1,28 @@
+@model AdminIndexViewModel
+@{
+    int selecionado;
+    if (int.TryParse(ViewBag.OpcaoSelecionada, out selecionado) == false){}
+}
+<ul class="nav nav-pills nav-stacked">
+    <li class="@( selecionado == 1 ? "active" : "")">
+        <a asp-controller="Admin" asp-action="CriarProduto" asp-route-opcaoSelecionada="1">Criar novo produto</a>
+    </li>
+    <li class="@( selecionado == 2 ? "active" : "")">
+        <a  asp-contro asp-controller="Admin" asp-action="ListarTodosProdutos" asp-route-opcaoSelecionada="2">
+            Lista de produtos <span class="badge">@Model.NumeroProdutosRegistrados</span>
+        </a>
+    </li>
+    <li class="@( selecionado == 3 ? "active" : "")">
+        <a asp-controller="Admin" asp-action="ValidarComentarios" asp-route-opcaoSelecionada="3">
+            Validar comentários <span class="badge">@Model.ComentariosNaoAprovados</span>
+        </a>
+    </li>
+    <li class="@( selecionado == 4 ? "active" : "")">
+        <a asp-action="Criar" asp-controller="Identidade" asp-route-opcaoSelecionada="4">Criar novos perfis</a>
+    </li>
+    <li class="@( selecionado == 5 ? "active" : "")">
+        <a asp-controller="Admin" asp-action="ValidarComentarios" asp-route-opcaoSelecionada="5">
+            Pedidos não enviados <span class="badge">@Model.ProdutosNãoEnviados</span>
+        </a>
+    </li>
+</ul>

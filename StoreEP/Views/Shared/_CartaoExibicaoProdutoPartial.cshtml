@@ -5,6 +5,7 @@
             <h5 class="card-title" style="height:10px; word-break: break-all;">@Model.Nome</h5>
             <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@Model.ProdutoID" class="btn-toolbar">
                 <img class="card-img-top" src="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Link).FirstOrDefault()" alt="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Nome).FirstOrDefault()" />
+                @*@Html.Partial("_SliderImagensPartial", Model)*@
             </a>
         </div>
         <ul class="list-group list-group-flush">
@@ -24,7 +25,6 @@
                 </span>
                 <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.ProdutoID" class="btn-success btn btn-sm">
                     Comprar
-                    @*<span class="glyphicon glyphicon-shopping-cart" style="float:right;"></span>*@
                 </a>
             </li>
         </ul>

@@ -10,5 +10,6 @@ namespace StoreEP.Models.ViewModels
         public int ComentariosNaoAprovados { get; set; }
         public int NumeroProdutosRegistrados { get; set; }
         public int ProdutosNãoEnviados { get; set; }
+        public string Selecionado { get; set; }
     }
 }

@@ -128,8 +128,24 @@ namespace StoreEP
                     defaults: new { controller = "Produtos", action = "Listar" });
                 routes.MapRoute(
                     name: null,
+                    template: "ListarTodosProdutos{opcaoSelecionada}",
+                    defaults: new { controller = "Admin", action = "ListarTodosProdutos" });
+                routes.MapRoute(
+                    name: null,
+                    template: "ValidarComentarios{opcaoSelecionada}",
+                    defaults: new { controller = "Admin", action = "ValidarComentarios" });
+                routes.MapRoute(
+                    name: null,
+                    template: "CriarProduto{opcaoSelecionada}",
+                    defaults: new { controller = "Admin", action = "CriarProduto" });
+                routes.MapRoute(
+                    name: null,
+                    template: "Criar{opcaoSelecionada}",
+                    defaults: new { controller = "Identidade", action = "Criar" });
+                routes.MapRoute(
+                    name: null,
                     template: "{category}",
-                    defaults: new { controller = "Produtos", action = "Listar" });
+                    defaults: new { controller = "Admin", action = "ListarTodosProdutos" });
                 routes.MapRoute(
                     name: null,
                     template: "",

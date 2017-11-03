@@ -17,19 +17,19 @@ namespace StoreEP.Controllers
     public class AdminController : Controller
     {
         private readonly IProdutoRepositorio _produtoRepositorio;
-        private readonly IImagensRepositorio _imagensRepositorio;
         private readonly IComentariosRepositorio _comentariosRepositorio;
         private readonly IPedidoRepositorio _pedidoRepositorio;
+        private readonly IImagensRepositorio _imagensRepositorio;
 
         public AdminController(
             IProdutoRepositorio produtoRepositorio,
-            IImagensRepositorio imagensRepositorio,
             IComentariosRepositorio comentariosRepositorio,
-            IPedidoRepositorio pedidoRepositorio)
+            IPedidoRepositorio pedidoRepositorio,
+            IImagensRepositorio imagensRepositorio)
         {
+            _imagensRepositorio = imagensRepositorio;
             _pedidoRepositorio = pedidoRepositorio;
             _produtoRepositorio = produtoRepositorio;
-            _imagensRepositorio = imagensRepositorio;
             _comentariosRepositorio = comentariosRepositorio;
         }
 
@@ -44,7 +44,7 @@ namespace StoreEP.Controllers
             return RedirectToAction(nameof(ListarTodosProdutos));
         }
 
-        public ViewResult Index() => View(new AdminIndexViewModel
+        public ViewResult Index() => View(/*new AdminIndexViewModel
         {
             ProdutosNãoEnviados = _pedidoRepositorio.Pedidos
                                                         .Where(p => p.Enviado == false)
@@ -53,10 +53,10 @@ namespace StoreEP.Controllers
             ComentariosNaoAprovados = _comentariosRepositorio.Comentarios
                                                              .Where(c => c.Aprovado == false)
                                                              .Count()
-        });
+        }*/);
 
         [HttpGet]
-        public ViewResult ListarTodosProdutos(int page = 1)
+        public ViewResult ListarTodosProdutos(int opcaoSelecionada, int page = 1)
         {
             int itensPorPagina = 5;
             IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
@@ -161,7 +161,7 @@ namespace StoreEP.Controllers
             }
             return RedirectToAction(nameof(ListarTodosProdutos));
         }
-        public IActionResult ValidarComentarios(bool aprovado = false)
+        public IActionResult ValidarComentarios(int opcaoSelecionada, bool aprovado = false)
         {
             IEnumerable<Comentario> comentarios = _comentariosRepositorio.Comentarios
                                                                          .Where(c => c.Aprovado == aprovado);

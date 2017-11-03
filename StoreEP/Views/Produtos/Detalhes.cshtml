@@ -1,7 +1,7 @@
 @model DetalheProdutoViewModels
 <div class="row">
     <div class="col-xs-8 col-sm-12 col-md-12">
-        @Html.Partial("_SliderImagensPartial", Model.Produto.Imagens)
+        @Html.Partial("_SliderImagensPartial", Model.Produto)
     </div>
     <div class="col-xs-4 col-sm-12 col-md-12">
         <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.Produto.ProdutoID" class="btn btn-lg btn-success btn-comprar">Comprar</a>
