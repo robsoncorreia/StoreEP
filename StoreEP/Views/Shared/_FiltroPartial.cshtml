@@ -1,5 +1,5 @@
 @model FiltroViewModel
-<form asp-action="Ordenar" asp-controller="Produtos" method="post" class="navbar-form navbar-left">
+<form asp-action="Ordenar" asp-controller="Produtos" method="post" >
     <div>
         <div class="input-group">
             <select asp-for="@Model.Filtro" asp-items="@Model.ComboboxFiltros" class="form-control form-control-sm"></select>
@@ -8,4 +8,5 @@
             </span>
         </div>
     </div>
+    <hr />
 </form>

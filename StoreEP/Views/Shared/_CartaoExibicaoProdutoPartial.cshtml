@@ -1,12 +1,11 @@
 @model Produto
-<div class="card col-md-3 col-sm-6 col-xs-12 col-lg-3">
+<div class="card col-md-3 col-sm-6 col-xs-12 col-lg-3" style="margin: 0 0 20px 0;">
     <div class="col-12 cartao-produto border border-primary">
-        <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@Model.ProdutoID" class="btn-toolbar">
-            <img class="card-img-top" src="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Link).FirstOrDefault()" alt="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Nome).FirstOrDefault()" />
-        </a>
         <div class="card-block">
-            <h4 class="card-title">@Model.Nome</h4>
-            <p class="card-text">@Model.Descricao</p>
+            <h5 class="card-title" style="height:10px; word-break: break-all;">@Model.Nome</h5>
+            <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@Model.ProdutoID" class="btn-toolbar">
+                <img class="card-img-top" src="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Link).FirstOrDefault()" alt="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Nome).FirstOrDefault()" />
+            </a>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
@@ -19,11 +18,11 @@
                     @Model.Fabricante
                 </a>
             </li>
-            <li class="list-group-item">
-                @Model.Preco.ToString("c")
-            </li>
-            <li class="list-group-item">
-                <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.ProdutoID" class="btn-success btn btn-group-justified">
+            <li class="list-group-item text-right">
+                <span class="text-left" style="left: 12px; position: absolute;">
+                    @Model.Preco.ToString("c")
+                </span>
+                <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.ProdutoID" class="btn-success btn btn-sm">
                     Comprar
                     @*<span class="glyphicon glyphicon-shopping-cart" style="float:right;"></span>*@
                 </a>

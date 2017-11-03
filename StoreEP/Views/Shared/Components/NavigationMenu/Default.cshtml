@@ -1,11 +1,24 @@
 @model IEnumerable<string>
-@foreach (string category in Model)
-{
-    <a class="btn @(category == ViewBag.SelectedCategory ? "btn-primary" : "btn-default")"
-       asp-action="Listar"
-       asp-controller="Produtos"
-       asp-route-category="@category"
-       asp-route-page="1">
-        @category
-    </a>
-}
+<ul class="nav nav-pills nav-stacked">
+    @foreach (string category in Model)
+    {
+        @*<a class="btn @(category == ViewBag.SelectedCategory ? "btn-primary" : "btn-default")"
+           asp-action="Listar"
+           asp-controller="Produtos"
+           asp-route-category="@category"
+           asp-route-page="1">
+            @category
+        </a>*@
+
+        <li role="presentation" class="@(category == ViewBag.SelectedCategory ? "active" : "")">
+            <a asp-action="Listar"
+               asp-controller="Produtos"
+               asp-route-category="@category"
+               asp-route-page="1">
+                @category
+            </a>
+        </li>
+
+
+    }
+</ul>

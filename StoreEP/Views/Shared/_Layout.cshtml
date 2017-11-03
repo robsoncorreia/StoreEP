@@ -49,7 +49,6 @@
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@await Html.PartialAsync("_FiltroPartial", new FiltroViewModel())</li>
                     <li>@await Html.PartialAsync("_BuscaPartial", new BuscaViewModel())</li>
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
                     <li>@await Component.InvokeAsync("CartSummary")</li>
@@ -58,19 +57,26 @@
         </div>
     </nav>
     <div class="panel">
-        <div id="categories" class="d-inline">
-            @await Component.InvokeAsync("NavigationMenu")
+        <div class="row">
+            <div class="col-sm-2">
+                <hr />
+                @await Component.InvokeAsync("NavigationMenu")
+                <hr />
+                @await Html.PartialAsync("_FiltroPartial", new FiltroViewModel())
+                
+            </div>
+            <div class="col-sm-10">
+                @if (TempData["busca_nula"] != null)
+                {
+                    <div class="alert alert-success">
+                        <strong>@TempData["busca_nula"]</strong>
+                    </div>
+                }
+                @RenderBody()
+                @RenderSection("scripts", required: false)
+            </div>
         </div>
-        <div class="">
-            @if (TempData["busca_nula"] != null)
-            {
-                <div class="alert alert-success">
-                    <strong>@TempData["busca_nula"]</strong>
-                </div>
-            }
-            @RenderBody()
-            @RenderSection("scripts", required: false)
-        </div>
+        
     </div>
     <footer class="footer">
         <div class="container">
