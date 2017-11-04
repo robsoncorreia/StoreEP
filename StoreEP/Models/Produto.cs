@@ -21,7 +21,7 @@ namespace StoreEP.Models
         public virtual ICollection<Imagem> Imagens { get; set; }
         //[Required(ErrorMessage = "Quem é o fabricante.")]
         public string Fabricante { get; set; }
-        public virtual ICollection<Comentario> Comentarios { get; set; }
+        public virtual ICollection<Avaliacao> Avaliacoes { get; set; }
         public int Quantidade { get; set; } 
         public bool Publicado { get; set; } = false;
         public DateTime DataCadastro { get; set; } = DateTime.Now;

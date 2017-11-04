@@ -1,4 +1,9 @@
 @model DetalheProdutoViewModels
+<style>
+    .row {
+        margin: 0;
+    }
+</style>
 <div class="row">
     <div class="col-xs-8 col-sm-12 col-md-12">
         @Html.Partial("_SliderImagensPartial", Model.Produto)
@@ -9,59 +14,76 @@
 </div>
 @if (Model.HistoricosPreco.Count() > 0)
 {
-    <div class="row">
-        <div class="col">
-            <canvas id="canvas" width="400" height="400" class="col-sm-10" style="min-height:400px;"></canvas>
-        </div>
+<div class="row">
+    <div class="col">
+        <canvas id="canvas" width="400" height="400" class="col-sm-10" style="min-height:400px;"></canvas>
     </div>
+</div>
 }
 <div class="row">
-    @foreach (var comentario in Model.Produto.Comentarios)
+    <hr />
+    @foreach (var avaliacao in Model.Produto.Avaliacoes)
     {
-        <div>@comentario.NomeUsuario</div>
-        <div>@comentario.Texto</div>
-        <form class="form-group" asp-action="Responder" asp-controller="Comentarios" asp-route-comentarioID="@comentario.ComentarioID">
-            <label asp-for="@Model.Comentario.Assunto"></label>
-            <input asp-for="@Model.Resposta.Assunto" />
-            <label>Texto</label>
-            <input asp-for="@Model.Resposta.Texto" />
-            <button type="submit" class="btn btn-success btn-sm">Responder</button>
-            <input type="hidden" asp-for="@Model.Resposta.ProdutoID" value="@Model.Produto.ProdutoID" />
-        </form>
-        if (comentario.Respostas != null)
+    <div class="row justify-content-md-center">
+        <div class="col col-sm-11">
+            <div class="avaliacao">Avaliação Cod.@avaliacao.AvaliacaoID</div>
+            <div>@avaliacao.NomeUsuario</div>
+            <div>@avaliacao.Texto</div>
+            <form class="form-group" asp-action="Responder" asp-controller="Avaliacao" asp-route-AvaliacaoID="@avaliacao.AvaliacaoID">
+                <label asp-for="@Model.Avaliacao.Titulo"></label>
+                <input asp-for="@Model.Resposta.Titulo" />
+                <label>Texto</label>
+                <input asp-for="@Model.Resposta.Texto" />
+                <button type="submit" class="btn btn-success btn-sm">Responder</button>
+                <input type="hidden" asp-for="Resposta.ProdutoID" value="@Model.Produto.ProdutoID" />
+                <input type="hidden" asp-for="Avaliacao.AvaliacaoID" value="@avaliacao.AvaliacaoID" />
+            </form>
+        </div>
+        <div class="col col-sm-1"></div>
+    </div>
+    @if (avaliacao.Respostas != null)
+    {
+    <div class="row justify-content-md-center">
+
+        @foreach (var resposta in avaliacao.Respostas)
         {
-            @foreach (var resposta in comentario.Respostas)
-                    {
-                <div>@resposta.NomeUsuario</div>
-                <div>@resposta.Texto</div>
-            }
+        <div class="col col-sm-1"></div>
+        <div class="col col-sm-11">
+            <div>Resposta Cod.@avaliacao.AvaliacaoID</div>
+            <div>@resposta.NomeUsuario</div>
+            <div>@resposta.Texto</div>
+            <hr />
+        </div>
         }
+    </div>
+    }
+    <hr />
     }
 </div>
 <div class="row">
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@@mdo">Comentar</button>
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@@mdo">Avaliar</button>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
-            <form asp-action="Comentar" asp-controller="Comentarios">
+            <form asp-action="Avaliar" asp-controller="Avaliacao">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel">Novo comentário</h4>
+                        <h4 class="modal-title" id="exampleModalLabel">Nova avaliação</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label asp-for="Comentario.Assunto" class="control-label">Assunto:</label>
-                            <input asp-for="Comentario.Assunto" type="text" class="form-control" />
+                            <label asp-for="Avaliacao.Titulo" class="control-label">Titulo:</label>
+                            <input asp-for="Avaliacao.Titulo" type="text" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label asp-for="Comentario.Texto" class="control-label">Mensagem:</label>
-                            <textarea class="form-control" asp-for="Comentario.Texto"></textarea>
+                            <label asp-for="Avaliacao.Texto" class="control-label">Mensagem:</label>
+                            <textarea class="form-control" asp-for="Avaliacao.Texto"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-default btn-sm">Enviar comentário</button>
-                        <input type="hidden" value="@Model.Produto.ProdutoID" asp-for="@Model.Produto.ProdutoID" />
+                        <input type="hidden" asp-for="Avaliacao.ProdutoID" value="@Model.Produto.ProdutoID" />
                     </div>
                 </div>
             </form>
@@ -70,10 +92,15 @@
 </div>
 
 @section scripts {
-    <script>
-    var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
-    var datasAltarecao = [], preco = [];
-    for (var i = 0; i < x.length ; i++) {
+<script>
+        $("form").slideUp();
+        $(".avaliacao").click(function () {
+            $(this).children().slideToggle();
+            console.log($(this).children("form"));
+        });
+        var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
+        var datasAltarecao = [], preco = [];
+        for (var i = 0; i < x.length ; i++) {
         datasAltarecao.push(new Date(x[i].dataAltarecao).toLocaleDateString());
         preco.push(parseFloat(x[i].precoNovo));
     }
@@ -131,6 +158,6 @@
     window.onload = function () {
         var ctx = document.getElementById("canvas").getContext("2d");
         window.myLine = new Chart(ctx, config);
-    };
-    </script>
+    };''
+</script>
 }

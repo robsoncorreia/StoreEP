@@ -20,6 +20,40 @@ namespace StoreEP.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("StoreEP.Models.Avaliacao", b =>
+                {
+                    b.Property<int>("AvaliacaoID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Aprovado");
+
+                    b.Property<int?>("AvaliacaoID1");
+
+                    b.Property<DateTime>("Data");
+
+                    b.Property<byte>("Estrela");
+
+                    b.Property<string>("NomeUsuario");
+
+                    b.Property<int>("ProdutoID");
+
+                    b.Property<string>("Texto")
+                        .IsRequired();
+
+                    b.Property<string>("Titulo")
+                        .IsRequired();
+
+                    b.Property<string>("UsuarioID");
+
+                    b.HasKey("AvaliacaoID");
+
+                    b.HasIndex("AvaliacaoID1");
+
+                    b.HasIndex("ProdutoID");
+
+                    b.ToTable("Avaliacao");
+                });
+
             modelBuilder.Entity("StoreEP.Models.CartLine", b =>
                 {
                     b.Property<int>("CartLineID")
@@ -38,38 +72,6 @@ namespace StoreEP.Migrations
                     b.HasIndex("ProdutoID");
 
                     b.ToTable("CartLine");
-                });
-
-            modelBuilder.Entity("StoreEP.Models.Comentario", b =>
-                {
-                    b.Property<int>("ComentarioID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Aprovado");
-
-                    b.Property<string>("Assunto");
-
-                    b.Property<int?>("ComentarioID1");
-
-                    b.Property<DateTime>("Data");
-
-                    b.Property<byte>("Estrela");
-
-                    b.Property<string>("NomeUsuario");
-
-                    b.Property<int>("ProdutoID");
-
-                    b.Property<string>("Texto");
-
-                    b.Property<string>("UsuarioID");
-
-                    b.HasKey("ComentarioID");
-
-                    b.HasIndex("ComentarioID1");
-
-                    b.HasIndex("ProdutoID");
-
-                    b.ToTable("Comentario");
                 });
 
             modelBuilder.Entity("StoreEP.Models.Endereco", b =>
@@ -239,6 +241,18 @@ namespace StoreEP.Migrations
                     b.ToTable("ProdutosVisitados");
                 });
 
+            modelBuilder.Entity("StoreEP.Models.Avaliacao", b =>
+                {
+                    b.HasOne("StoreEP.Models.Avaliacao")
+                        .WithMany("Respostas")
+                        .HasForeignKey("AvaliacaoID1");
+
+                    b.HasOne("StoreEP.Models.Produto")
+                        .WithMany("Avaliacoes")
+                        .HasForeignKey("ProdutoID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("StoreEP.Models.CartLine", b =>
                 {
                     b.HasOne("StoreEP.Models.Pedido")
@@ -248,18 +262,6 @@ namespace StoreEP.Migrations
                     b.HasOne("StoreEP.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoID");
-                });
-
-            modelBuilder.Entity("StoreEP.Models.Comentario", b =>
-                {
-                    b.HasOne("StoreEP.Models.Comentario")
-                        .WithMany("Respostas")
-                        .HasForeignKey("ComentarioID1");
-
-                    b.HasOne("StoreEP.Models.Produto")
-                        .WithMany("Comentarios")
-                        .HasForeignKey("ProdutoID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("StoreEP.Models.Imagem", b =>

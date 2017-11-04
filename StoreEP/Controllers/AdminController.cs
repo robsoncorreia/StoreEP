@@ -17,20 +17,20 @@ namespace StoreEP.Controllers
     public class AdminController : Controller
     {
         private readonly IProdutoRepositorio _produtoRepositorio;
-        private readonly IComentariosRepositorio _comentariosRepositorio;
+        private readonly IAvaliacaoRepositorio _avaliacoesRepositorio;
         private readonly IPedidoRepositorio _pedidoRepositorio;
         private readonly IImagensRepositorio _imagensRepositorio;
 
         public AdminController(
             IProdutoRepositorio produtoRepositorio,
-            IComentariosRepositorio comentariosRepositorio,
+            IAvaliacaoRepositorio comentariosRepositorio,
             IPedidoRepositorio pedidoRepositorio,
             IImagensRepositorio imagensRepositorio)
         {
             _imagensRepositorio = imagensRepositorio;
             _pedidoRepositorio = pedidoRepositorio;
             _produtoRepositorio = produtoRepositorio;
-            _comentariosRepositorio = comentariosRepositorio;
+            _avaliacoesRepositorio = comentariosRepositorio;
         }
 
         [HttpGet("[controller]/[action]/{produtoID}")]
@@ -44,16 +44,7 @@ namespace StoreEP.Controllers
             return RedirectToAction(nameof(ListarTodosProdutos));
         }
 
-        public ViewResult Index() => View(/*new AdminIndexViewModel
-        {
-            ProdutosNãoEnviados = _pedidoRepositorio.Pedidos
-                                                        .Where(p => p.Enviado == false)
-                                                        .Count(),
-            NumeroProdutosRegistrados = _produtoRepositorio.Produtos.Count(),
-            ComentariosNaoAprovados = _comentariosRepositorio.Comentarios
-                                                             .Where(c => c.Aprovado == false)
-                                                             .Count()
-        }*/);
+        public ViewResult Index() => View();
 
         [HttpGet]
         public ViewResult ListarTodosProdutos(int opcaoSelecionada, int page = 1)
@@ -161,35 +152,44 @@ namespace StoreEP.Controllers
             }
             return RedirectToAction(nameof(ListarTodosProdutos));
         }
-        public IActionResult ValidarComentarios(int opcaoSelecionada, bool aprovado = false)
+        public IActionResult ValidarAvaliacoes(int opcaoSelecionada, bool aprovado = false)
         {
-            IEnumerable<Comentario> comentarios = _comentariosRepositorio.Comentarios
+            IEnumerable<Avaliacao> Avaliacoes = _avaliacoesRepositorio.Avaliacoes
                                                                          .Where(c => c.Aprovado == aprovado);
-            return View(comentarios);
+            return View(Avaliacoes);
         }
 
-        public IActionResult AprovarComentario(int ID)
+        public IActionResult AprovarAvaliacao(int avaliacaoID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ProdutoID == ID);
-            comentario.Aprovado = true;
-            _comentariosRepositorio.RegistrarComentario(comentario);
-            return RedirectToAction(nameof(ValidarComentarios));
+            Avaliacao avaliacao = _avaliacoesRepositorio.Avaliacoes
+                                                        .SingleOrDefault(c => c.AvaliacaoID == avaliacaoID);
+            if (avaliacao != null)
+            {
+                avaliacao.Aprovado = true;
+                _avaliacoesRepositorio.RegistrarComentario(avaliacao);
+            }
+
+            return RedirectToAction(nameof(ValidarAvaliacoes));
         }
 
         [HttpGet("[controller]/[action]/{ID}")]
         public IActionResult DetalhesComentario(int ID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ProdutoID == ID);
-            return View(comentario);
+            Avaliacao avaliacao = _avaliacoesRepositorio.Avaliacoes.SingleOrDefault(c => c.ProdutoID == ID);
+            return View(avaliacao);
         }
 
-        [HttpGet("[controller]/[action]/{ID}")]
-        public IActionResult RemoverComentario(int ID)
+        [HttpGet("[controller]/[action]/{avaliacaoID}")]
+        public IActionResult RemoverComentario(int avaliacaoID)
         {
-            Comentario comentario = _comentariosRepositorio.Comentarios.SingleOrDefault(c => c.ProdutoID == ID);
-            _comentariosRepositorio.ApagarComentario(comentario);
-            TempData["massage"] = $"{comentario.NomeUsuario} apagado com sucesso.";
-            return RedirectToAction(nameof(ValidarComentarios));
+            Avaliacao avaliacao = _avaliacoesRepositorio.Avaliacoes.SingleOrDefault(a => a.ProdutoID == avaliacaoID);
+            if (avaliacao != null)
+            {
+                _avaliacoesRepositorio.ApagarComentario(avaliacao);
+                TempData["massage"] = $"{avaliacao.NomeUsuario} apagado com sucesso.";
+            }
+
+            return RedirectToAction(nameof(ValidarAvaliacoes));
         }
         public IEnumerable<string> GetCategorias()
         {

@@ -1,0 +1,43 @@
+@model IEnumerable<Avaliacao>
+@{ 
+    Layout = "_GerenciamentoLayout";
+}
+@if (TempData["massage"] != null)
+{
+    <div class="alert alert-success">@TempData["massage"]</div>
+    TempData["massage"] = null;
+}
+<a asp-action="ValidarAvaliacoes" asp-route-aprovado="true">Exibir aprovados</a>
+<br>
+<a asp-action="ValidarAvaliacoes">Exibir ainda não aprovados</a>
+@if (Model.Count() == 0)
+{
+    <div>Todos os comentários foram validados</div>
+}
+else
+{
+    @foreach (Avaliacao c in Model)
+    {
+        <div>
+            <i class="material-icons data-avaliacao">today</i>@String.Format("{0:MM/dd/yyyy}", c.Data)
+        </div>
+        <div>
+            @c.AvaliacaoID
+        </div>
+        <div>
+            <i class="material-icons data-avaliacao">account_box</i>@c.NomeUsuario
+        </div>
+        <div>
+            @c.AvaliacaoID
+        </div>
+        <div>
+            <i class="material-icons data-avaliacao">message</i>@c.Texto
+        </div>
+        <div>
+            @c.UsuarioID
+        </div>
+        <a class="btn btn-primary" asp-action="DetalhesComentario" asp-route-avaliacaoID="@c.AvaliacaoID">Detalhes</a>
+        <a class="btn btn-danger" asp-action="RemoverComentario" asp-route-avaliacaoID="@c.AvaliacaoID">Remover comentário</a>
+        <a class="btn btn-success" asp-action="AprovarAvaliacao" asp-route-avaliacaoID="@c.AvaliacaoID">Aprovar comentário</a>
+    }
+}

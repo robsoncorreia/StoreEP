@@ -17,10 +17,9 @@ namespace StoreEP.Models
 
         public IEnumerable<Produto> Produtos => _bancoContexto.Produtos
                                                                 .Include(i => i.Imagens)
-                                                                .Include(c => c.Comentarios)
+                                                                .Include(c => c.Avaliacoes)
+                                                                    .ThenInclude(r => r.Respostas)
                                                                 .ToList();
-
-
         public int RegistrarProduto(Produto produto)
         {
             if (produto.ProdutoID == 0)

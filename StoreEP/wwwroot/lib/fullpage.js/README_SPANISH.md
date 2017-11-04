@@ -954,7 +954,7 @@ Agradeceré cualquier donación!
 
 ## Licencia
 
-**Los creditos en los comentarios en los archivo sde Javascript y CSS han de mantenerse intactos.** (incluso despues de minificar y combinar archivos)
+**Los creditos en los Avaliacoes en los archivo sde Javascript y CSS han de mantenerse intactos.** (incluso despues de minificar y combinar archivos)
 
 (The MIT License)
 

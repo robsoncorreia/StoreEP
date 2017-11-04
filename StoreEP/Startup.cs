@@ -46,7 +46,7 @@ namespace StoreEP
             services.AddTransient<IProdutoRepositorio, EFProdutoRepositorio>();
             services.AddTransient<IPedidoRepositorio, EFPedidoRepositorio>();
             services.AddTransient<IEnderecoRepositorio, EFEnderecoRepositorio>();
-            services.AddTransient<IComentariosRepositorio, EFComentariosRepository>();
+            services.AddTransient<IAvaliacaoRepositorio, EFAvaliacaoRepository>();
             services.AddTransient<IImagensRepositorio, EFImagemRepositorio>();
             services.AddTransient<IHistoricoPrecosRepositorio, EFHistoricoPreco>();
             services.AddTransient<IProdutoVisitadoRepositorio, EFProdutoVisitadoRepositorio>();
@@ -132,8 +132,8 @@ namespace StoreEP
                     defaults: new { controller = "Admin", action = "ListarTodosProdutos" });
                 routes.MapRoute(
                     name: null,
-                    template: "ValidarComentarios{opcaoSelecionada}",
-                    defaults: new { controller = "Admin", action = "ValidarComentarios" });
+                    template: "ValidarAvaliacoes{opcaoSelecionada}",
+                    defaults: new { controller = "Admin", action = "ValidarAvaliacoes" });
                 routes.MapRoute(
                     name: null,
                     template: "CriarProduto{opcaoSelecionada}",

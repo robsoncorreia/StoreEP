@@ -15,7 +15,7 @@ namespace StoreEP.Models
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
-        public DbSet<Comentario> Comentarios { get; set; }
+        public DbSet<Avaliacao> Avaliacoes { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<Imagem> Imagens { get; set; }
         public DbSet<HistoricoPreco> HistoricoPrecos { get; set; }
@@ -26,7 +26,7 @@ namespace StoreEP.Models
             modelBuilder.Entity<Produto>().ToTable("Produto");
             modelBuilder.Entity<Pedido>().ToTable("Pedido");
             modelBuilder.Entity<Endereco>().ToTable("Endereco");
-            modelBuilder.Entity<Comentario>().ToTable("Comentario");
+            modelBuilder.Entity<Avaliacao>().ToTable("Avaliacao");
             modelBuilder.Entity<Pagamento>().ToTable("Pagamento");
             modelBuilder.Entity<Imagem>().ToTable("Imagem");
             modelBuilder.Entity<HistoricoPreco>().ToTable("HistoricoPreco");

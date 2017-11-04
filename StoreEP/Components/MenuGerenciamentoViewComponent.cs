@@ -12,17 +12,17 @@ namespace StoreEP.Components
     public class MenuGerenciamentoViewComponent : ViewComponent
     {
         private readonly IProdutoRepositorio _produtoRepositorio;
-        private readonly IComentariosRepositorio _comentariosRepositorio;
+        private readonly IAvaliacaoRepositorio _avaliacoesRepositorio;
         private readonly IPedidoRepositorio _pedidoRepositorio;
 
         public MenuGerenciamentoViewComponent(
             IProdutoRepositorio produtoRepositorio,
-            IComentariosRepositorio comentariosRepositorio,
+            IAvaliacaoRepositorio comentariosRepositorio,
             IPedidoRepositorio pedidoRepositorio)
         {
             _pedidoRepositorio = pedidoRepositorio;
             _produtoRepositorio = produtoRepositorio;
-            _comentariosRepositorio = comentariosRepositorio;
+            _avaliacoesRepositorio = comentariosRepositorio;
         }
 
         public IViewComponentResult Invoke()
@@ -34,7 +34,7 @@ namespace StoreEP.Components
                                                         .Where(p => p.Enviado == false)
                                                         .Count(),
                 NumeroProdutosRegistrados = _produtoRepositorio.Produtos.Count(),
-                ComentariosNaoAprovados = _comentariosRepositorio.Comentarios
+                ComentariosNaoAprovados = _avaliacoesRepositorio.Avaliacoes
                                                              .Where(c => c.Aprovado == false)
                                                              .Count()
 

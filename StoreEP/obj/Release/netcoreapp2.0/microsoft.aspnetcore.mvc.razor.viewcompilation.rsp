@@ -52,14 +52,15 @@ C:\Users\robso\Desktop\StoreEP\StoreEP
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\Components\CartSummary\Default.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\Components\ComboboxCategorias\Default.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\Components\ComboboxFabricantes\Default.cshtml
+--file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\Components\MenuGerenciamento\Default.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\Components\NavigationMenu\Default.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\Error.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\Listar.cshtml
---file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_AdminLayout.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_BuscaPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_CartaoExibicaoProdutoMaisVisitadosPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_CartaoExibicaoProdutoPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_FiltroPartial.cshtml
+--file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_GerenciamentoLayout.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_Layout.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_LoginPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_ProdutosMaisVisitadosPartial.cshtml
