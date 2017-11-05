@@ -3,7 +3,13 @@
     ViewBag.Title = "Pedidos";
     Layout = "_Layout";
 }
-
+@if (Model.Pedidos.Count() == 0)
+{
+    <div class="alert alert-success">
+        <strong>Você não tem pedidos.</strong>
+    </div>
+    return;
+}
 @foreach (Pedido pedido in Model.Pedidos)
 {
     <table class="table table-bordered table-striped">
