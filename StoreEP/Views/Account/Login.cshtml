@@ -5,46 +5,59 @@
 @model LoginViewModel
 @inject SignInManager<ApplicationUser> SignInManager
 @{
+    Layout = "_AccountLayout";
     ViewData["Title"] = "Entrar";
 }
-<h2>@ViewData["Title"]</h2>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                <div class="form-row align-items-center">
-                    <div class="col-auto">
-                        <label asp-for="Email" class="sr-only">Email</label>
-                        <input asp-for="Email" type="text" class="form-control mb-2 mb-sm-0" placeholder="Email" />
-                    </div>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                    <div class="col-auto">
-                        <label asp-for="Password" class="sr-only">Senha</label>
-                        <div class="input-group mb-2 mb-sm-0">
-                            <div class="input-group-addon">@@</div>
-                            <input asp-for="Password" type="password" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+<style>
+    .input-group {
+        margin: 20px 0;
+    }
+</style>
+<div class="col-md-12">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">Entrar</div>
+            <div class="panel-body">
+                <section>
+                    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label asp-for="Email" class="sr-only">Email</label>
+                                <div class="input-group mb-2 mb-sm-0">
+                                    <div class="input-group-addon">Email</div>
+                                    <input asp-for="Email" type="text" class="form-control mb-2 mb-sm-0" placeholder="Email" />
+                                </div>
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <div class="col-auto">
+                                <label asp-for="Password" class="sr-only">Senha</label>
+                                <div class="input-group mb-2 mb-sm-0">
+                                    <div class="input-group-addon">Senha</div>
+                                    <input asp-for="Password" type="password" class="form-control" id="inlineFormInputGroup" placeholder="Senha">
+                                </div>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label asp-for="RememberMe">
+                                        <input asp-for="RememberMe" />
+                                        @Html.DisplayNameFor(m => m.RememberMe)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default">Entrar</button>
+                            </div>
+                            <div class="form-group">
+                                <p>
+                                    <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Registrar novo usuário?</a>
+                                </p>
+                            </div>
                         </div>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label asp-for="RememberMe">
-                                <input asp-for="RememberMe" />
-                                @Html.DisplayNameFor(m => m.RememberMe)
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-default">Entrar</button>
-                    </div>
-                    <div class="form-group">
-                        <p>
-                            <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Registrar novo usuário?</a>
-                        </p>
-                    </div>
-                </div>
-            </form>
-        </section>
+                    </form>
+                </section>
+            </div>
+        </div>
     </div>
 </div>
 @section Scripts {
