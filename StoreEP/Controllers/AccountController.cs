@@ -240,11 +240,11 @@ namespace StoreEP.Controllers
             return View(model);
         }
 
-        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation("Usário saiu.");
+            _logger.LogInformation("Usuário saiu.");
             return RedirectToAction(actionName: "Listar", controllerName: "Produtos");
         }
 

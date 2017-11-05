@@ -8,9 +8,8 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@UserManager.GetUserName(User) <span class="caret"></span></a>
     <ul class="dropdown-menu">
         <li><a asp-controller="Pedido" asp-action="ListarPedidos">Pedidos</a></li>
-        <li><a href="#">Something else here</a></li>
         <li role="separator" class="divider"></li>
-        <li><a asp-action="Account" asp-controller="Logout">Sair</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Sair</a></li>
     </ul>
 }
 else

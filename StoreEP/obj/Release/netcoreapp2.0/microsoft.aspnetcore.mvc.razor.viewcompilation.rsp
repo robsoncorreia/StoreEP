@@ -15,6 +15,7 @@ C:\Users\robso\Desktop\StoreEP\StoreEP
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Account\ResetPassword.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Account\ResetPasswordConfirmation.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Account\SignedOut.cshtml
+--file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Account\_AccountLayout.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Admin\ConfirmaExclusaoProduto.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Admin\CriarProduto.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Admin\DetalhesComentario.cshtml
