@@ -2,14 +2,12 @@
 @{
     Layout = "_GerenciamentoLayout";
 }
-}
 @if (TempData["massage"] != null)
 {
     <div class="alert alert-success">
         <strong>@TempData["massage"]</strong>
     </div>
 }
-
 <form asp-action="EditarProduto" method="post">
     <div class="row">
         <div class="col-md-6">
@@ -76,9 +74,7 @@
         <button class="btn btn-primary" type="submit">Salvar</button>
         <a asp-action="Listar" class="btn btn-default">Cancelar</a>
     </div>
-
 </form>
-
 @if (Model.Produto.Imagens.Count() != 0)
 {
     <div>

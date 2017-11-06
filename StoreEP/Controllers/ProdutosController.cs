@@ -57,7 +57,7 @@ namespace StoreEP.Controllers
             });
         }
 
-        public async Task<IActionResult> Ordenar(FiltroViewModel model, int page = 1)
+        public async Task<IActionResult> Ordenar(int ordena, int page = 1)
         {
             IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
                                                                 .Where(p => p.Quantidade > 0 &&
@@ -67,31 +67,32 @@ namespace StoreEP.Controllers
 
             IEnumerable<Produto> produtosVisitados = await GetProdutosVisitados();
 
-            switch (model.Filtro)
+            switch (ordena)
             {
-                case "menor_preco":
+                case 0:
                     produtos = produtos.Where(p => p.Publicado == true && p.Quantidade > 0)
                                         .OrderBy(p => p.Preco)
                                         .ToList();
                     break;
-                case "maior_preco":
+                case 1:
                     produtos = produtos.Where(p => p.Publicado == true && p.Quantidade > 0)
                                         .OrderByDescending(p => p.Preco)
                                         .ToList();
                     break;
-                case "novos":
+                case 2:
                     produtos = produtos.Where(p => p.Publicado == true && p.Quantidade > 0)
                                         .OrderByDescending(p => p.DataCadastro)
                                         .ToList();
                     break;
-                case "recomendados":
+                case 3:
 
                     break;
             }
             ProductsListViewModel viewModel = new ProductsListViewModel
             {
                 ProdutosMaisVisitados = produtosVisitados,
-                Produtos = produtos,
+                Produtos = produtos.Skip((page - 1) * itensPorPagina)
+                                    .Take(itensPorPagina),
                 PagingInfo = new PagingInfo
                 {
                     TotalItems = numeroProdutos,

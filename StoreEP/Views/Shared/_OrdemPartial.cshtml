@@ -1,0 +1,21 @@
+@model OrdemViewModel
+
+<div class="dropdown">
+    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+        Filtro
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        @foreach (KeyValuePair<int, string> dicionario in Model.SelectItens)
+        {
+            <li>
+                <a asp-action="Ordenar"
+                    asp-controller="Produtos"
+                    asp-route-ordena="@dicionario.Key"
+                    asp-route-page="1">
+                    @dicionario.Value
+                </a>
+            </li>
+        }    
+    </ul>
+</div>

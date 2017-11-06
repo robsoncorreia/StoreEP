@@ -1,14 +1,20 @@
 @model IEnumerable<string>
-<ul class="nav nav-pills nav-stacked">
-    @foreach (string category in Model)
-    {
-        <li role="presentation" class="@(category == ViewBag.SelectedCategory ? "active" : "")">
-            <a asp-action="Listar"
-               asp-controller="Produtos"
-               asp-route-category="@category"
-               asp-route-page="1">
-                @category
-            </a>
-        </li>
-    }
-</ul>
+<div class="dropdown">
+    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+        Categorias
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        @foreach (string c in Model)
+        {
+            <li role="presentation" class="@(c == ViewBag.SelectedCategory ? "active" : "")">
+                <a asp-action="Listar"
+                   asp-controller="Produtos"
+                   asp-route-category="@c"
+                   asp-route-page="1">
+                    @c
+                </a>
+            </li>
+        }
+    </ul>
+</div>

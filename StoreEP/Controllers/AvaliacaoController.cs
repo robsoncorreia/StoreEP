@@ -47,7 +47,7 @@ namespace StoreEP.Controllers
             }
             return RedirectToAction(actionName: "Finalizar", controllerName: "Pedido");
         }
-        public async Task<IActionResult> Responder(DetalheProdutoViewModels model)
+        public async Task<IActionResult> Responder(DetalheProdutoViewModels model, string url = null)
         {
             Avaliacao avaliacao = _avaliacoesRepositorio.Avaliacoes
                                                         .SingleOrDefault(a => a.AvaliacaoID == model.Avaliacao.AvaliacaoID);
@@ -57,8 +57,14 @@ namespace StoreEP.Controllers
                 model.Resposta.UsuarioID = user.Id;
                 model.Resposta.NomeUsuario = user.Nome;
                 _avaliacoesRepositorio.RegistrarResposta(avaliacao, model.Resposta);
+                if (url != null)
+                {
+                    TempData["mensagem"] = $"{user.Nome} sua resposta será submetida a aprovação.";
+                    return LocalRedirect(url);
+                }
+
             }
-            return RedirectToAction(actionName: "Finalizar", controllerName: "Pedido");
+            return RedirectToAction(actionName: "Listar", controllerName: "Produtos");
         }
     }
 }
