@@ -180,9 +180,10 @@ namespace StoreEP.Controllers
         }
 
         [HttpGet("[controller]/[action]/{avaliacaoID}")]
-        public IActionResult RemoverComentario(int avaliacaoID)
+        public IActionResult RemoverAvaliacao(int avaliacaoID)
         {
-            Avaliacao avaliacao = _avaliacoesRepositorio.Avaliacoes.SingleOrDefault(a => a.ProdutoID == avaliacaoID);
+            Avaliacao avaliacao = _avaliacoesRepositorio.Avaliacoes
+                                                        .SingleOrDefault(a => a.AvaliacaoID == avaliacaoID);
             if (avaliacao != null)
             {
                 _avaliacoesRepositorio.ApagarComentario(avaliacao);

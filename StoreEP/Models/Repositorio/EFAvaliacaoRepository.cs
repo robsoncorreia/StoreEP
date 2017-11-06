@@ -16,7 +16,8 @@ namespace StoreEP.Models.Repositorio
             _context = ctx;
         }
         public IEnumerable<Avaliacao> Avaliacoes => _context.Avaliacoes
-                                                            .Include(a => a.Respostas);
+                                                            .Include(a => a.Respostas)
+                                                            .Where(a => a.Aprovado == true);
         public void RegistrarComentario(Avaliacao avaliacao)
         {
             if (avaliacao.AvaliacaoID == 0)

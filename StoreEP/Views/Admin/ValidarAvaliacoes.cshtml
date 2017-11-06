@@ -18,6 +18,7 @@ else
 {
     @foreach (Avaliacao c in Model)
     {
+        <h1>Avaliação cod. @c.AvaliacaoID</h1>
         <div>
             <i class="material-icons data-avaliacao">today</i>@String.Format("{0:MM/dd/yyyy}", c.Data)
         </div>
@@ -37,7 +38,32 @@ else
             @c.UsuarioID
         </div>
         <a class="btn btn-primary" asp-action="DetalhesComentario" asp-route-avaliacaoID="@c.AvaliacaoID">Detalhes</a>
-        <a class="btn btn-danger" asp-action="RemoverComentario" asp-route-avaliacaoID="@c.AvaliacaoID">Remover comentário</a>
+        <a class="btn btn-danger" asp-action="RemoverAvaliacao" asp-route-avaliacaoID="@c.AvaliacaoID">Remover comentário</a>
         <a class="btn btn-success" asp-action="AprovarAvaliacao" asp-route-avaliacaoID="@c.AvaliacaoID">Aprovar comentário</a>
+        @foreach (Avaliacao r in c.Respostas)
+        {
+            <h2>Resposta cod. @r.AvaliacaoID</h2>
+            <div>
+                <i class="material-icons data-avaliacao">today</i>@String.Format("{0:MM/dd/yyyy}", r.Data)
+            </div>
+            <div>
+                @r.AvaliacaoID
+            </div>
+            <div>
+                <i class="material-icons data-avaliacao">account_box</i>@r.NomeUsuario
+            </div>
+            <div>
+                @r.AvaliacaoID
+            </div>
+            <div>
+                <i class="material-icons data-avaliacao">message</i>@r.Texto
+            </div>
+            <div>
+                @r.UsuarioID
+            </div>
+            <a class="btn btn-primary" asp-action="DetalhesComentario" asp-route-avaliacaoID="@r.AvaliacaoID">Detalhes</a>
+            <a class="btn btn-danger" asp-action="RemoverAvaliacao" asp-route-avaliacaoID="@r.AvaliacaoID">Remover comentário</a>
+            <a class="btn btn-success" asp-action="AprovarAvaliacao" asp-route-avaliacaoID="@r.AvaliacaoID">Aprovar comentário</a>
+        }
     }
 }
