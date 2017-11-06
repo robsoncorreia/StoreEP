@@ -27,7 +27,7 @@ namespace StoreEP.Controllers
             _avaliacoesRepositorio = comentariosRepositorio;
             _produtoRepositorio = produtoRepositorio;
         }
-        public async Task<IActionResult> Avaliar(Avaliacao avaliacao)
+        public async Task<IActionResult> Avaliar(Avaliacao avaliacao, string url = null)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -39,6 +39,11 @@ namespace StoreEP.Controllers
                 avaliacao.NomeUsuario = user.Nome;
                 avaliacao.UsuarioID = user.Id;
                 _avaliacoesRepositorio.RegistrarComentario(avaliacao);
+                if (url != null)
+                {
+                    TempData["mensagem"] = $"{user.Nome} sua avaliação será submetida a aprovação.";
+                    return LocalRedirect(url);
+                }
             }
             return RedirectToAction(actionName: "Finalizar", controllerName: "Pedido");
         }

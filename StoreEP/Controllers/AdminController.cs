@@ -154,9 +154,9 @@ namespace StoreEP.Controllers
         }
         public IActionResult ValidarAvaliacoes(int opcaoSelecionada, bool aprovado = false)
         {
-            IEnumerable<Avaliacao> Avaliacoes = _avaliacoesRepositorio.Avaliacoes
+            IEnumerable<Avaliacao> avaliacoes = _avaliacoesRepositorio.Avaliacoes
                                                                          .Where(c => c.Aprovado == aprovado);
-            return View(Avaliacoes);
+            return View(avaliacoes);
         }
 
         public IActionResult AprovarAvaliacao(int avaliacaoID)
