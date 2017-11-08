@@ -151,7 +151,7 @@
 @if (usuarioLogado)
 {
     <div class="row">
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@@mdo">Avaliar</button>
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@@mdo">Avaliar</button>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog" role="document">
                 <form asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()" asp-action="Avaliar" asp-controller="Avaliacao">
