@@ -5,6 +5,18 @@
     bool usuarioLogado = SignInManager.IsSignedIn(User);
 }
 <style>
+    .aval {
+        border: 1px solid #5cb85c;
+        margin: 0 10px 10px 0;
+        border-radius: 4px;
+    }
+
+    .resp {
+        border: 1px solid #5cb895;
+        margin: 0 0 10px 10px;
+        border-radius: 4px;
+    }
+
     .row {
         margin: 0;
     }
@@ -12,13 +24,20 @@
     .panel-group {
         margin: 4px 0 4px 0;
     }
+
     #btn_comprar {
         margin: 4px 0 4px 0;
     }
+
     #btn_add_carrinho {
         margin: 4px 0 4px 0;
         color: #5cb85c;
         background: white;
+    }
+    #btn_avaliacoes {
+        color: #5cb85c;
+        border: 2px solid;
+        font-family: monospace;
     }
 </style>
 @if (TempData["mensagem"] != null)
@@ -28,29 +47,31 @@
     </div>
 }
 <div class="row">
+    
     <div class="col col-sm-8">
         @Html.Partial("_SliderImagensPartial", Model.Produto)
     </div>
+    <hr />
     <div class="col col-sm-4 ">
-        <div class="col col-sm-12 ">
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Pagamento</div>
-                    <div class="panel-body">
-                        <h3>@Model.Produto.Nome</h3>
-                        <div class="col">
-                            <del>
-                                <span>@((Model.Produto.Preco * 1.1M).ToString("c"))</span>
-                            </del>
-                        </div>
-                        <div class="col">
-                            <h2>@Model.Produto.Preco.ToString("c")</h2>
-                        </div>
-                        <div class="col">
-                            <span class="text-success">10x </span>
-                            <span class="text-success">@((Model.Produto.Preco / 10M).ToString("c"))</span>
-                            <span class="text-success"> sem juros</span>
-                        </div>
+        <div class="panel-group">
+            <div class="panel panel-success">
+                <div class="panel-heading">Pagamento</div>
+                <div class="panel-body">
+                    <h3>@Model.Produto.Nome</h3>
+                    <div class="col">
+                        <del>
+                            <span>@((Model.Produto.Preco * 1.1M).ToString("c"))</span>
+                        </del>
+                    </div>
+                    <div class="col">
+                        <h2>@Model.Produto.Preco.ToString("c")</h2>
+                    </div>
+                    <div class="col">
+                        <span class="text-success">10x </span>
+                        <span class="text-success">@((Model.Produto.Preco / 10M).ToString("c"))</span>
+                        <span class="text-success"> sem juros</span>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-sm-8"></div>
                         <div class="form-group col-sm-4">
                             <div class="form-group">
@@ -58,12 +79,12 @@
                                 <input asp-for="Produto.Quantidade" class="form-control">
                             </div>
                         </div>
-                        <div class="btn-card col col-sm-12">
-                            <a id="btn_comprar" asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.Produto.ProdutoID" class="btn btn-sm btn-success btn-group-justified btn-comprar">Comprar</a>
-                        </div>
-                        <div class="btn-card col col-sm-12">
-                            <a id="btn_add_carrinho" asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.Produto.ProdutoID" class="btn btn-sm btn-success btn-group-justified btn-comprar">Adicionar ao carrinho</a>
-                        </div>
+                    </div>
+                    <div class="row">
+                        <a id="btn_comprar" asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.Produto.ProdutoID" class="btn btn-sm btn-success btn-group-justified btn-comprar">Comprar</a>
+                    </div>
+                    <div class="row">
+                        <a id="btn_add_carrinho" asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.Produto.ProdutoID" class="btn btn-sm btn-success btn-group-justified btn-comprar">Adicionar ao carrinho</a>
                     </div>
                 </div>
             </div>
@@ -78,12 +99,16 @@
         </div>
     </div>
 }
-<div class="row">
-    <hr />
+<hr />
+<div>
+    <a id="btn_avaliacoes" class="btn btn-default btn-sm">Exibir avalições</a>
+</div>
+<hr />
+<div class="row avaliacoes">
     @foreach (var avaliacao in Model.Produto.Avaliacoes)
     {
         <div class="row justify-content-md-center">
-            <div class="col col-sm-11">
+            <div class="col col-sm-11 aval">
                 <div class="avaliacao">Avaliação Cod.@avaliacao.AvaliacaoID</div>
                 <div>@avaliacao.NomeUsuario</div>
                 <div>@avaliacao.Texto</div>
@@ -109,11 +134,10 @@
                 @foreach (var resposta in avaliacao.Respostas)
                     {
                     <div class="col col-sm-1"></div>
-                    <div class="col col-sm-11">
+                    <div class="col col-sm-11 resp">
                         <div>Resposta Cod.@avaliacao.AvaliacaoID</div>
                         <div>@resposta.NomeUsuario</div>
                         <div>@resposta.Texto</div>
-                        <hr />
                     </div>
                 }
             </div>
@@ -156,6 +180,10 @@
 }
 @section scripts {
     <script>
+        $(".avaliacoes").slideToggle(1000);
+        $("#btn_avaliacoes").click(function () {
+            $(".avaliacoes").slideToggle(1000);
+        });
     var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
         var datasAltarecao = [], preco = [];
         for (var i = 0; i < x.length; i++) {

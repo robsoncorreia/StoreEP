@@ -10,23 +10,25 @@
     <link rel="stylesheet" asp-href-include="/css/index.css" />
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap-combobox/js/bootstrap-combobox.js"></script>
-    <script type="text/javascript" src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
     <script type="text/javascript" src="~/lib/greensock/src/minified/jquery.gsap.min.js"></script>
     <script type="text/javascript" src="~/lib/greensock/src/minified/TimelineMax.min.js"></script>
     <script type="text/javascript" src="~/lib/greensock/src/minified/TweenMax.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="~/js/site.js"></script>
     <script type="text/javascript" src="~/lib/chart.js/dist/Chart.min.js"></script>
     <script type="text/javascript" src="~/lib/chart.js/dist/Chart.bundle.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
             padding-top: 20px;
             padding-bottom: 20px;
         }
-
         .navbar {
             margin-bottom: 20px;
+        }
+        .row {
+            margin: 0;
         }
     </style>
 </head>
@@ -64,7 +66,6 @@
                 @await Component.InvokeAsync("NavigationMenu")
                 <hr />
                 @await Html.PartialAsync("_OrdemPartial", new OrdemViewModel())
-                
             </div>
             <div class="col-sm-10">
                 @if (TempData["busca_nula"] != null)
@@ -77,8 +78,12 @@
                 @RenderSection("scripts", required: false)
             </div>
         </div>
-        
     </div>
+    <form action="?" method="POST">
+        <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+        <br />
+        <input type="submit" value="Submit">
+    </form>
     <footer class="footer bottom">
         <div class="container">
             <p class="text-muted">StoreEP @DateTime.Now.Year</p>

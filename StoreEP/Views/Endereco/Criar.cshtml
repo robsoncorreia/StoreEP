@@ -3,31 +3,32 @@
     ViewBag.Title = "Criar novo endereço";
     Layout = "_Layout";
 }
+<hr />
 <form asp-action="Criar" method="post">
     <div class="form-row">
         <div class="form-group col-md-6">
             <div class="form-group">
-                <label asp-for="Rua" class="col-form-label">Rua</label>
-                <input asp-for="Rua" type="text" class="form-control" placeholder="Rua, Avenida ...">
+                <label asp-for="Rua" class="col-form-label"></label>
+                <input asp-for="Rua" type="text" class="form-control">
                 <div><span asp-validation-for="Rua" class="text-danger"></span></div>
             </div>
         </div>
         <div class="form-group col-md-6">
             <div class="form-group">
-                <label asp-for="Bairro" class="col-form-label">Bairro</label>
-                <input asp-for="Bairro" type="text" class="form-control" placeholder="Bairro">
+                <label asp-for="Bairro" class="col-form-label"></label>
+                <input asp-for="Bairro" type="text" class="form-control">
                 <div><span asp-validation-for="Bairro" class="text-danger"></span></div>
             </div>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label asp-for="Numero" class="col-form-label">Número</label>
+            <label asp-for="Numero" class="col-form-label"></label>
             <input asp-for="Numero" type="text" class="form-control">
             <div><span asp-validation-for="Numero" class="text-danger"></span></div>
         </div>
         <div class="form-group col-md-4">
-            <label asp-for="Complemento" class="col-form-label">Complemento</label>
+            <label asp-for="Complemento" class="col-form-label"></label>
             <input asp-for="Complemento" class="form-control" type="text">
             <div><span asp-validation-for="Complemento" class="text-danger"></span></div>
         </div>
@@ -39,22 +40,25 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label asp-for="Estado" class="col-form-label" for="txt_estado">Estado</label>
+            <label asp-for="Estado" class="col-form-label" for="txt_estado"></label>
             <input asp-for="Estado" class="form-control" type="text">
             <div><span asp-validation-for="Estado" class="text-danger"></span></div>
         </div>
         <div class="form-group col-md-4">
-            <label asp-for="CEP" class="col-form-label">Cep</label>
+            <label asp-for="CEP" class="col-form-label"></label>
             <input asp-for="CEP" class="form-control" type="text">
             <div><span asp-validation-for="CEP" class="text-danger"></span></div>
         </div>
         <div class="form-group col-md-4">
-            <label asp-for="Pais" class="col-form-label">País</label>
+            <label asp-for="Pais" class="col-form-label"></label>
             <input asp-for="Pais" class="form-control" type="text">
             <div><span asp-validation-for="Pais" class="text-danger"></span></div>
+            <button class="btn btn-sm btn-success" type="submit" style="margin:10px 0 10px 0">Criar Endereço</button>
         </div>
     </div>
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" type="submit">
-        <i class="material-icons">add</i>
-    </button>
 </form>
+@section scripts{
+    <script>
+        $("#CEP").mask("00000-000");
+    </script>
+}
