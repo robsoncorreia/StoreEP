@@ -7,13 +7,13 @@
 <style>
     .aval {
         border: 1px solid #5cb85c;
-        margin: 0 10px 10px 0;
+        margin: 0 30px 10px 0;
         border-radius: 4px;
     }
 
     .resp {
         border: 1px solid #5cb895;
-        margin: 0 0 10px 10px;
+        margin: 0 0 10px 30px;
         border-radius: 4px;
     }
 
@@ -34,7 +34,7 @@
         color: #5cb85c;
         background: white;
     }
-    #btn_avaliacoes {
+    #btn_avaliacoes, #btn_historico_preco {
         color: #5cb85c;
         border: 2px solid;
         font-family: monospace;
@@ -47,7 +47,7 @@
     </div>
 }
 <div class="row">
-    
+    <hr />
     <div class="col col-sm-8">
         @Html.Partial("_SliderImagensPartial", Model.Produto)
     </div>
@@ -92,10 +92,14 @@
     </div>
 </div>
 @if (Model.HistoricosPreco.Count() > 0)
-            {
-    <div class="row">
+{
+    <hr />
+    <div>
+        <a id="btn_historico_preco" class="btn btn-default btn-sm">Histórico de Preço</a>
+    </div>
+    <div class="row historico_preco">
         <div class="col">
-            <canvas id="canvas" width="400" height="400" class="col-sm-10" style="min-height:400px;"></canvas>
+            <canvas id="canvas" width="400" height="500"></canvas>
         </div>
     </div>
 }
@@ -108,7 +112,7 @@
     @foreach (var avaliacao in Model.Produto.Avaliacoes)
     {
         <div class="row justify-content-md-center">
-            <div class="col col-sm-11 aval">
+            <div class="aval">
                 <div class="avaliacao">Avaliação Cod.@avaliacao.AvaliacaoID</div>
                 <div>@avaliacao.NomeUsuario</div>
                 <div>@avaliacao.Texto</div>
@@ -132,9 +136,8 @@
             <div class="row justify-content-md-center">
 
                 @foreach (var resposta in avaliacao.Respostas)
-                    {
-                    <div class="col col-sm-1"></div>
-                    <div class="col col-sm-11 resp">
+                {
+                    <div class="resp">
                         <div>Resposta Cod.@avaliacao.AvaliacaoID</div>
                         <div>@resposta.NomeUsuario</div>
                         <div>@resposta.Texto</div>
@@ -180,9 +183,12 @@
 }
 @section scripts {
     <script>
-        $(".avaliacoes").slideToggle(1000);
+        $(".avaliacoes, .historico_preco").slideToggle(1000);
         $("#btn_avaliacoes").click(function () {
             $(".avaliacoes").slideToggle(1000);
+        });
+        $("#btn_historico_preco").click(function () { 
+            $(".historico_preco").slideToggle(1000);
         });
     var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
         var datasAltarecao = [], preco = [];
@@ -192,7 +198,7 @@
         }
         var ctx = document.getElementById("canvas").getContext('2d');
         ctx.canvas.width = 1000;
-        ctx.canvas.height = 300;
+        ctx.canvas.height = 500;
         var config = {
             type: 'line',
             data: {
@@ -234,7 +240,7 @@
                             labelString: 'Valor(R$)'
                         },
                         ticks: {
-                            max: Math.max.apply(null, preco) + 250
+                            max: Math.max.apply(null, preco) + 500
                         }
                     }]
                 }
