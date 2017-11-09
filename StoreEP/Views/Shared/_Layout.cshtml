@@ -18,15 +18,17 @@
     <script type="text/javascript" src="~/lib/chart.js/dist/Chart.bundle.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
-
+    <script src="~/lib/jssor/jssor.slider-26.3.0.min.js" type="text/javascript"></script>
     <style>
         body {
             padding-top: 20px;
             padding-bottom: 20px;
         }
+
         .navbar {
             margin-bottom: 20px;
         }
+
         .row {
             margin: 0;
         }
@@ -53,6 +55,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@await Html.PartialAsync("_BuscaPartial", new BuscaViewModel())</li>
+                    <li style="margin: 12px;">@await Component.InvokeAsync("NavigationMenu")</li>
+                    <li style="margin: 12px;">@await Html.PartialAsync("_OrdemPartial", new OrdemViewModel())</li>
                     <li>@await Html.PartialAsync("_LoginPartial")</li>
                     <li>@await Component.InvokeAsync("CartSummary")</li>
                 </ul>
@@ -60,24 +64,14 @@
         </div>
     </nav>
     <div class="panel">
-        <div class="row">
-            <div class="col-sm-2">
-                <hr />
-                @await Component.InvokeAsync("NavigationMenu")
-                <hr />
-                @await Html.PartialAsync("_OrdemPartial", new OrdemViewModel())
+        @if (TempData["busca_nula"] != null)
+            {
+            <div class="alert alert-success">
+                <strong>@TempData["busca_nula"]</strong>
             </div>
-            <div class="col-sm-10">
-                @if (TempData["busca_nula"] != null)
-                {
-                    <div class="alert alert-success">
-                        <strong>@TempData["busca_nula"]</strong>
-                    </div>
-                }
-                @RenderBody()
-                @RenderSection("scripts", required: false)
-            </div>
-        </div>
+        }
+        @RenderBody()
+        @RenderSection("scripts", required: false)
     </div>
     <footer class="footer bottom">
         <div class="container">

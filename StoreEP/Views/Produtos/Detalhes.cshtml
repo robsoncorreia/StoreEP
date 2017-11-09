@@ -34,6 +34,7 @@
         color: #5cb85c;
         background: white;
     }
+
     #btn_avaliacoes, #btn_historico_preco {
         color: #5cb85c;
         border: 2px solid;
@@ -48,11 +49,9 @@
 }
 <div class="row">
     <hr />
-    <div class="col col-sm-8">
-        @Html.Partial("_SliderImagensPartial", Model.Produto)
-    </div>
+    @Html.Partial("_SliderImagensPartial", Model.Produto)
     <hr />
-    <div class="col col-sm-4 ">
+    <div class="col col-sm-4 col-lg-offset-1">
         <div class="panel-group">
             <div class="panel panel-success">
                 <div class="panel-heading">Pagamento</div>
@@ -72,11 +71,14 @@
                         <span class="text-success"> sem juros</span>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-8"></div>
+                        <div class="form-group col-sm-8">
+                            <label style="margin: 30px 0;">Quantidade em estoque: </label>
+                            <span>@Model.Produto.Quantidade</span>
+                        </div>
                         <div class="form-group col-sm-4">
                             <div class="form-group">
                                 <label asp-for="Produto.Quantidade" class="col-form-label"></label>
-                                <input asp-for="Produto.Quantidade" class="form-control">
+                                <input asp-for="Produto.Quantidade" class="form-control" value="0">
                             </div>
                         </div>
                     </div>
@@ -94,64 +96,72 @@
 @if (Model.HistoricosPreco.Count() > 0)
 {
     <hr />
-    <div>
-        <a id="btn_historico_preco" class="btn btn-default btn-sm">Histórico de Preço</a>
+    <div class="row">
+        <div class="col col-lg-offset-1">
+            <a id="btn_historico_preco" class="btn btn-default btn-sm">Histórico de Preço</a>
+        </div>
     </div>
     <div class="row historico_preco">
-        <div class="col">
+        <div class="col col-lg-offset-1">
             <canvas id="canvas" width="400" height="500"></canvas>
         </div>
     </div>
 }
 <hr />
-<div>
-    <a id="btn_avaliacoes" class="btn btn-default btn-sm">Exibir avalições</a>
-</div>
-<hr />
-<div class="row avaliacoes">
-    @foreach (var avaliacao in Model.Produto.Avaliacoes)
-    {
-        <div class="row justify-content-md-center">
-            <div class="aval">
-                <div class="avaliacao">Avaliação Cod.@avaliacao.AvaliacaoID</div>
-                <div>@avaliacao.NomeUsuario</div>
-                <div>@avaliacao.Texto</div>
-                @if (usuarioLogado)
-                {
-                    <form class="form-group resposta_avaliacao" asp-action="Responder" asp-controller="Avaliacao" asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()" asp-route-AvaliacaoID="@avaliacao.AvaliacaoID">
-                        <label asp-for="@Model.Avaliacao.Titulo"></label>
-                        <input asp-for="@Model.Resposta.Titulo" />
-                        <label>Texto</label>
-                        <input asp-for="@Model.Resposta.Texto" />
-                        <button type="submit" class="btn btn-success btn-sm">Responder</button>
-                        <input type="hidden" asp-for="Resposta.ProdutoID" value="@Model.Produto.ProdutoID" />
-                        <input type="hidden" asp-for="Avaliacao.AvaliacaoID" value="@avaliacao.AvaliacaoID" />
-                    </form>
-                }
-            </div>
-            <div class="col col-sm-1"></div>
+@if (Model.Produto.Avaliacoes.Count() > 0)
+{
+    <div class="row">
+        <div class="col col-lg-offset-1">
+            <a id="btn_avaliacoes" class="btn btn-default btn-sm">Exibir avalições</a>
         </div>
-        @if (avaliacao.Respostas != null)
+    </div>
+    <hr />
+    <div class="row avaliacoes">
+        @foreach (var avaliacao in Model.Produto.Avaliacoes)
         {
-            <div class="row justify-content-md-center">
-
-                @foreach (var resposta in avaliacao.Respostas)
-                {
-                    <div class="resp">
-                        <div>Resposta Cod.@avaliacao.AvaliacaoID</div>
-                        <div>@resposta.NomeUsuario</div>
-                        <div>@resposta.Texto</div>
-                    </div>
-                }
+            <div class="col col-lg-offset-1">
+                <div class="aval">
+                    <div class="avaliacao">Avaliação Cod.@avaliacao.AvaliacaoID</div>
+                    <div>@avaliacao.NomeUsuario</div>
+                    <div>@avaliacao.Texto</div>
+                    @if (usuarioLogado)
+                    {
+                        <form class="form-group resposta_avaliacao" asp-action="Responder" asp-controller="Avaliacao" asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()" asp-route-AvaliacaoID="@avaliacao.AvaliacaoID">
+                            <label asp-for="@Model.Avaliacao.Titulo"></label>
+                            <input asp-for="@Model.Resposta.Titulo" />
+                            <label>Texto</label>
+                            <input asp-for="@Model.Resposta.Texto" />
+                            <button type="submit" class="btn btn-success btn-sm">Responder</button>
+                            <input type="hidden" asp-for="Resposta.ProdutoID" value="@Model.Produto.ProdutoID" />
+                            <input type="hidden" asp-for="Avaliacao.AvaliacaoID" value="@avaliacao.AvaliacaoID" />
+                        </form>
+                    }
+                </div>
             </div>
+            @if (avaliacao.Respostas != null)
+            {
+                <div class="col col-lg-offset-2">
+
+                    @foreach (var resposta in avaliacao.Respostas)
+                    {
+                        <div class="resp">
+                            <div>Resposta Cod.@avaliacao.AvaliacaoID</div>
+                            <div>@resposta.NomeUsuario</div>
+                            <div>@resposta.Texto</div>
+                        </div>
+                    }
+                </div>
+            }
+            <hr />
         }
-        <hr />
-    }
-</div>
+    </div>
+}
 @if (usuarioLogado)
 {
     <div class="row">
-        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@@mdo">Avaliar</button>
+        <div class="col col-lg-offset-1">
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@@mdo">Avaliar</button>
+        </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog" role="document">
                 <form asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()" asp-action="Avaliar" asp-controller="Avaliacao">
@@ -185,10 +195,12 @@
     <script>
         $(".avaliacoes, .historico_preco").slideToggle(1000);
         $("#btn_avaliacoes").click(function () {
-            $(".avaliacoes").slideToggle(1000);
+            $(".avaliacoes").slideToggle();
         });
-        $("#btn_historico_preco").click(function () { 
-            $(".historico_preco").slideToggle(1000);
+        $("#btn_historico_preco").click(function () {
+            $(".historico_preco").slideToggle(500);
+                var ctx = document.getElementById("canvas").getContext("2d");
+                window.myLine = new Chart(ctx, config);
         });
     var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
         var datasAltarecao = [], preco = [];
@@ -245,10 +257,6 @@
                     }]
                 }
             }
-        };
-        window.onload = function () {
-            var ctx = document.getElementById("canvas").getContext("2d");
-            window.myLine = new Chart(ctx, config);
         };
     </script>
 }
