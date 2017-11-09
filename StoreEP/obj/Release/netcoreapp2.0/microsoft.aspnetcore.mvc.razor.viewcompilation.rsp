@@ -60,10 +60,10 @@ C:\Users\robso\Desktop\StoreEP\StoreEP
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_BuscaPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_CartaoExibicaoProdutoMaisVisitadosPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_CartaoExibicaoProdutoPartial.cshtml
---file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_FiltroPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_GerenciamentoLayout.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_Layout.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_LoginPartial.cshtml
+--file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_OrdemPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_ProdutosMaisVisitadosPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_SliderImagensPartial.cshtml
 --file=C:\Users\robso\Desktop\StoreEP\StoreEP\Views\Shared\_ValidationScriptsPartial.cshtml
