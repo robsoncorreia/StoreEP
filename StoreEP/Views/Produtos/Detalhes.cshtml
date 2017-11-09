@@ -4,43 +4,45 @@
 @{
     bool usuarioLogado = SignInManager.IsSignedIn(User);
 }
-<style>
-    .aval {
-        border: 1px solid #5cb85c;
-        margin: 0 30px 10px 0;
-        border-radius: 4px;
-    }
+@section styles{
+    <style>
+        .aval {
+            border: 1px solid #5cb85c;
+            margin: 0 30px 10px 0;
+            border-radius: 4px;
+        }
 
-    .resp {
-        border: 1px solid #5cb895;
-        margin: 0 0 10px 30px;
-        border-radius: 4px;
-    }
+        .resp {
+            border: 1px solid #5cb895;
+            margin: 0 0 10px 30px;
+            border-radius: 4px;
+        }
 
-    .row {
-        margin: 0;
-    }
+        .row {
+            margin: 0;
+        }
 
-    .panel-group {
-        margin: 4px 0 4px 0;
-    }
+        .panel-group {
+            margin: 4px 0 4px 0;
+        }
 
-    #btn_comprar {
-        margin: 4px 0 4px 0;
-    }
+        #btn_comprar {
+            margin: 4px 0 4px 0;
+        }
 
-    #btn_add_carrinho {
-        margin: 4px 0 4px 0;
-        color: #5cb85c;
-        background: white;
-    }
+        #btn_add_carrinho {
+            margin: 4px 0 4px 0;
+            color: #5cb85c;
+            background: white;
+        }
 
-    #btn_avaliacoes, #btn_historico_preco {
-        color: #5cb85c;
-        border: 2px solid;
-        font-family: monospace;
-    }
-</style>
+        #btn_avaliacoes, #btn_historico_preco {
+            color: #5cb85c;
+            border: 2px solid;
+            font-family: monospace;
+        }
+    </style>
+}
 @if (TempData["mensagem"] != null)
 {
     <div class="alert alert-info">
@@ -54,7 +56,7 @@
     <div class="col col-sm-4 col-lg-offset-1">
         <div class="panel-group">
             <div class="panel panel-success">
-                <div class="panel-heading">Pagamento</div>
+                <div class="panel-heading">Detalhes</div>
                 <div class="panel-body">
                     <h3>@Model.Produto.Nome</h3>
                     <div class="col">
@@ -202,7 +204,7 @@
                 var ctx = document.getElementById("canvas").getContext("2d");
                 window.myLine = new Chart(ctx, config);
         });
-    var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
+        var x = @Html.Raw(Json.Serialize(Model.HistoricosPreco));
         var datasAltarecao = [], preco = [];
         for (var i = 0; i < x.length; i++) {
             datasAltarecao.push(new Date(x[i].dataAltarecao).toLocaleDateString());
