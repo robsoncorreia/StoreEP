@@ -31,10 +31,15 @@ namespace StoreEP.Controllers
             });
         }
 
-        public RedirectToActionResult Adicionara(ModelProdutoID model)
+        public void Adicionara(ModelProdutoID model)
         {
+            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == model.ProdutoID);
+            if (produto != null)
+            {
+                int emEstoque = produto.Quantidade;
+                _carrinho.AddItem(produto, 1);
+            }
 
-            return RedirectToAction("Finalizar", "Pedido");
         }
 
         [HttpGet("[controller]/[action]/{produtoID}")]
