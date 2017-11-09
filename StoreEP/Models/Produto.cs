@@ -22,8 +22,8 @@ namespace StoreEP.Models
         //[Required(ErrorMessage = "Quem é o fabricante.")]
         public string Fabricante { get; set; }
         public virtual ICollection<Avaliacao> Avaliacoes { get; set; }
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
         public int Quantidade { get; set; } 
         public bool Publicado { get; set; } = false;
-        public DateTime DataCadastro { get; set; } = DateTime.Now;
     }
 }

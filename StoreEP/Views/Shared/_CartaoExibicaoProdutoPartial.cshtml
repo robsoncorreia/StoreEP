@@ -5,7 +5,6 @@
             <h5 class="card-title" style="height:10px; word-break: break-all;">@Model.Nome</h5>
             <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@Model.ProdutoID" class="btn-toolbar">
                 <img class="card-img-top" src="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Link).FirstOrDefault()" alt="@Model.Imagens.Where(i => i.ProdutoID == Model.ProdutoID).Select(i => i.Nome).FirstOrDefault()" />
-                @*@Html.Partial("_SliderImagensPartial", Model)*@
             </a>
         </div>
         <ul class="list-group list-group-flush">
@@ -23,10 +22,29 @@
                 <span class="text-left" style="left: 12px; position: absolute;">
                     @Model.Preco.ToString("c")
                 </span>
-                <a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.ProdutoID" class="btn-success btn btn-sm">
+                @*<a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.ProdutoID" class="btn-success btn btn-sm">
+                        Comprar
+                    </a>*@
+                <button id="btn_ajax_@Model.ProdutoID" class="btn-success btn btn-sm" type="submit">
                     Comprar
-                </a>
+                </button>
+                <input id="txt_@Model.ProdutoID" asp-for="ProdutoID" type="hidden" value="@Model.ProdutoID" />
             </li>
         </ul>
     </div>
 </div>
+
+<script>
+    $("#btn_ajax_@Model.ProdutoID").click(function () {
+        var data = $("#txt_@Model.ProdutoID").serialize();
+            $.ajax({
+                url: '/Carrinho/Adicionara/',
+                type: 'POST',
+                data: data,
+                dataType: 'html',
+                success: function (data) {
+                    console(data);
+                }
+            });
+        });
+</script>

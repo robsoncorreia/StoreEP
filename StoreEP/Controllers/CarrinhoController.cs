@@ -30,8 +30,15 @@ namespace StoreEP.Controllers
                 ReturnUrl = returnUrl
             });
         }
+
+        public RedirectToActionResult Adicionara(ModelProdutoID model)
+        {
+
+            return RedirectToAction("Finalizar", "Pedido");
+        }
+
         [HttpGet("[controller]/[action]/{produtoID}")]
-        public RedirectToActionResult Adicionar(int produtoID, string returnUrl)
+        public RedirectToActionResult Adicionar(int produtoID, string returnUrl = null)
         {
             Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
             if (produto != null)
