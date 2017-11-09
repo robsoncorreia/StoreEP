@@ -36,14 +36,14 @@
 
 <script>
     $("#btn_ajax_@Model.ProdutoID").click(function () {
-        var data = $("#txt_@Model.ProdutoID").serialize();
+        var produtoID = $("#txt_@Model.ProdutoID").serialize();
             $.ajax({
                 url: '/Carrinho/Adicionara/',
                 type: 'POST',
-                data: data,
+                data: produtoID,
                 dataType: 'html',
                 success: function (data) {
-                    console(data);
+                    $(".badge").append(data);
                 }
             });
         });

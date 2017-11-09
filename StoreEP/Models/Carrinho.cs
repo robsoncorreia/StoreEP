@@ -8,7 +8,7 @@ namespace StoreEP.Models
     public class Carrinho
     {
         private List<CartLine> lineCollection = new List<CartLine>();
-        public virtual void AddItem(Produto produto, int quantidade)
+        public virtual void AddItem(Produto produto, int quantidade = 1)
         {
             CartLine line = lineCollection.Where(p => p.Produto.ProdutoID == produto.ProdutoID)
                                             .FirstOrDefault();

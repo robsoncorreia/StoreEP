@@ -31,27 +31,17 @@ namespace StoreEP.Controllers
             });
         }
 
-        public void Adicionara(ModelProdutoID model)
+        public JsonResult Adicionara(AddCarrinhoViewModel model)
         {
+            int quantidade = model.QuantidadeProduto;
             Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == model.ProdutoID);
             if (produto != null)
             {
                 int emEstoque = produto.Quantidade;
-                _carrinho.AddItem(produto, 1);
+                _carrinho.AddItem(produto);
             }
+            return Json(_carrinho.Lines.Count());
 
-        }
-
-        [HttpGet("[controller]/[action]/{produtoID}")]
-        public RedirectToActionResult Adicionar(int produtoID, string returnUrl = null)
-        {
-            Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
-            if (produto != null)
-            {
-                int emEstoque = produto.Quantidade;
-                _carrinho.AddItem(produto, 1);
-            }
-            return RedirectToAction("Finalizar", "Pedido", new { returnUrl });
         }
         public RedirectToActionResult RemoverCarrinho(int produtoID, string returnUrl)
         {
