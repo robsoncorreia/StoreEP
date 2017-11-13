@@ -80,7 +80,7 @@
                         <div class="form-group col-sm-4">
                             <div class="form-group">
                                 <label asp-for="Produto.Quantidade" class="col-form-label"></label>
-                                <input asp-for="Produto.Quantidade" class="form-control" value="0">
+                                <input asp-for="Produto.Quantidade" class="form-control" value="0" />
                             </div>
                         </div>
                     </div>
@@ -195,6 +195,18 @@
 }
 @section scripts {
     <script>
+    $("#btn_add_carrinho").click(function () {
+        var produtoID = @Model.Produto.ProdutoID;
+            $.ajax({
+                url: '/Carrinho/Adicionara/',
+                type: 'POST',
+                data: produtoID,
+                dataType: 'html',
+                success: function (produtoID.) {
+                    $(".badge").text(data);
+                }
+            });
+        });
         $(".avaliacoes, .historico_preco").slideToggle(1000);
         $("#btn_avaliacoes").click(function () {
             $(".avaliacoes").slideToggle();

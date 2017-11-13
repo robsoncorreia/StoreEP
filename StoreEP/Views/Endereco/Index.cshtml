@@ -1,10 +1,18 @@
 @model IEnumerable<Endereco>
-@foreach (var endereco in Model)
-{
-    @Html.Partial("CardAddress", endereco)
+@{
+    ViewBag.Title = "Lista de Endereços";
+    Layout = "_Layout";
 }
-<form method="post" asp-action="Criar">
-    <div class="text-center">
-        <button type="submit" class="btn btn-default">Criar novo</button>
+<div class="container">
+    <div class="row">
+        @foreach (var endereco in Model)
+        {
+            @Html.Partial("_CartaoEndereco", endereco)
+        }
     </div>
-</form>
+    <form method="post" asp-action="Criar">
+        <div class="text-center">
+            <button type="submit" class="btn btn-default btn-xs">Criar novo</button>
+        </div>
+    </form>
+</div>
