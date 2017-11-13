@@ -40,20 +40,20 @@ namespace StoreEP.Controllers
             return RedirectToAction(nameof(Criar));
         }
         [HttpPost]
-        public async Task<IActionResult> Criar(Endereco address)
+        public async Task<IActionResult> Criar(Endereco model)
         {
-            ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
-                address.UserId = user.Id;
+                model.UserId = user.Id;
+                ModelState.Remove("UserId");
+                if (ModelState.IsValid)
+                {
+                    _addressRepositoty.SalvarEndereco(model);
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            if (ModelState.IsValid)
-            {
-                _addressRepositoty.SalvarEndereco(address);
-                return RedirectToAction(nameof(Index));
-            }
-            return View();
+            return View(model);
         }
         public IActionResult Criar() => View();
 

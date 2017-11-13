@@ -9,6 +9,7 @@ namespace StoreEP.Models
     public class Endereco
     {
         public int EnderecoID { get; set; }
+        [Required]
         public string UserId { get; set; }
         [Required(ErrorMessage = "Entre com o endereço.")]
         public string Rua { get; set; }

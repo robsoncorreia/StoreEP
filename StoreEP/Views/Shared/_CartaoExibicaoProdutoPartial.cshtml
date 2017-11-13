@@ -22,9 +22,6 @@
                 <span class="text-left" style="left: 12px; position: absolute;">
                     @Model.Preco.ToString("c")
                 </span>
-                @*<a asp-action="Adicionar" asp-controller="Carrinho" asp-route-produtoID="@Model.ProdutoID" class="btn-success btn btn-sm">
-                        Comprar
-                    </a>*@
                 <button id="btn_ajax_@Model.ProdutoID" class="btn-success btn btn-sm" type="submit">
                     Comprar
                 </button>

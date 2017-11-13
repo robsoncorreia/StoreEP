@@ -64,18 +64,17 @@ namespace StoreEP.Controllers
                 if (user != null)
                 {
                     await _signInManager.SignOutAsync();
-                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                    var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
                     {
                         _logger.LogInformation(message: $"Usuário {user.UserName} logado.");
-                        return RedirectToAction(actionName: "Listar", controllerName: "Produtos");
+                        return RedirectToLocal(returnUrl);
                     }
                     else
                     {
                         ModelState.AddModelError(string.Empty, "Falha na tentativa de login.");
                         return View(model);
                     }
-
                 }
             }
             return View(model);
@@ -213,7 +212,8 @@ namespace StoreEP.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = model.NomeUsuario,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
@@ -223,7 +223,7 @@ namespace StoreEP.Controllers
                     SobreNome = model.SobreNome
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded) 
+                if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
@@ -333,7 +333,7 @@ namespace StoreEP.Controllers
         {
             if (UserId == null || code == null)
             {
-                
+
             }
             var user = await _userManager.FindByIdAsync(UserId);
             if (user == null)
@@ -396,7 +396,6 @@ namespace StoreEP.Controllers
             var model = new ResetPasswordViewModel { Code = code };
             return View(model);
         }
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

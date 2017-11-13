@@ -27,7 +27,7 @@ namespace StoreEP.Controllers
             return View(new CartIndexViewModel
             {
                 Carrinho = _carrinho,
-                ReturnUrl = returnUrl
+                ReturnUrl = returnUrl != null ? returnUrl : "/"
             });
         }
 
@@ -43,14 +43,28 @@ namespace StoreEP.Controllers
             return Json(_carrinho.Lines.Count());
 
         }
-        public RedirectToActionResult RemoverCarrinho(int produtoID, string returnUrl)
+        public IActionResult RemoverCarrinho(int produtoID, string returnUrl)
         {
             Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == produtoID);
             if (produto != null)
             {
                 _carrinho.RemoveLine(produto);
             }
-            return RedirectToAction("Index", new { returnUrl });
+            return Redirect(returnUrl);
         }
+
+        #region Utilidades
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(ProdutosController.Listar), "Produtos");
+            }
+        }
+        #endregion
     }
 }

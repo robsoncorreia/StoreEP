@@ -22,7 +22,7 @@ else
             </a>
         </li>
         <li>
-            <a asp-area="" asp-controller="Account" asp-action="Login">
+            <a asp-area="" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()">
                 Entrar
             </a>
         </li>

@@ -31,6 +31,9 @@ namespace StoreEP.Controllers
             _avaliacoesRepositorio = comentariosRepositorio;
         }
 
+        public ViewResult Index() => View();
+
+        #region Produto
         [HttpGet("[controller]/[action]/{produtoID}")]
         public ActionResult ConfirmaExclusaoProduto(int produtoID)
         {
@@ -41,8 +44,6 @@ namespace StoreEP.Controllers
             }
             return RedirectToAction(nameof(ListarTodosProdutos));
         }
-
-        public ViewResult Index() => View();
 
         [HttpGet]
         public ViewResult ListarTodosProdutos(int opcaoSelecionada, int page = 1)
@@ -113,7 +114,6 @@ namespace StoreEP.Controllers
             _imagensRepositorio.ApagarImagem(id);
             return LocalRedirect(url);
         }
-
         public ActionResult CriarProduto()
         {
             return View(new EditarProdutoViewModel
@@ -150,6 +150,9 @@ namespace StoreEP.Controllers
             }
             return RedirectToAction(nameof(ListarTodosProdutos));
         }
+        #endregion
+        #region Avaliacao
+
         public IActionResult ValidarAvaliacoes(int opcaoSelecionada, bool aprovado = false)
         {
             IEnumerable<Avaliacao> avaliacoes = _avaliacoesRepositorio.Avaliacoes
@@ -171,7 +174,7 @@ namespace StoreEP.Controllers
         }
 
         [HttpGet("[controller]/[action]/{ID}")]
-        public IActionResult DetalhesComentario(int ID)
+        public IActionResult DetalhesAvaliacao(int ID)
         {
             Avaliacao avaliacao = _avaliacoesRepositorio.Avaliacoes.SingleOrDefault(c => c.ProdutoID == ID);
             return View(avaliacao);
@@ -190,6 +193,8 @@ namespace StoreEP.Controllers
 
             return RedirectToAction(nameof(ValidarAvaliacoes));
         }
+        #endregion
+        #region Utilidade
         public IEnumerable<string> GetCategorias()
         {
             return _produtoRepositorio.Produtos
@@ -208,50 +213,6 @@ namespace StoreEP.Controllers
                                         .Distinct()
                                         .ToList();
         }
-        public IActionResult ShowGrid()
-        {
-            return View();
-        }
-        public IActionResult LoadData()
-        {
-            var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
-            // Skiping number of Rows count  
-            var start = Request.Form["start"].FirstOrDefault();
-            // Paging Length 10,20  
-            var length = Request.Form["length"].FirstOrDefault();
-            // Sort Column Name  
-            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-            // Sort Column Direction ( asc ,desc)  
-            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-            // Search Value from (Search box)  
-            var searchValue = Request.Form["search[value]"].FirstOrDefault();
-
-            //Paging Size (10,20,50,100)  
-            int pageSize = length != null ? Convert.ToInt32(length) : 0;
-            int skip = start != null ? Convert.ToInt32(start) : 0;
-            int recordsTotal = 0;
-
-            // Getting all Customer data  
-            var customerData = (from produtos in _produtoRepositorio.Produtos
-                                select produtos);
-
-            //Sorting  
-            if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
-            {
-                //customerData = customerData.OrderBy(sortColumn + " " + sortColumnDirection);
-            }
-            //Search  
-            if (!string.IsNullOrEmpty(searchValue))
-            {
-                //customerData = customerData.Where(m => m.Name == searchValue);
-            }
-
-            //total number of rows count   
-            recordsTotal = customerData.Count();
-            //Paging   
-            var data = customerData.Skip(skip).Take(pageSize).ToList();
-            //Returning Json Data  
-            return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
-        }
+        #endregion
     }
 }

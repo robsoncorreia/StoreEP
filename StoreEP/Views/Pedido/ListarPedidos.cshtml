@@ -3,62 +3,63 @@
     ViewBag.Title = "Pedidos";
     Layout = "_Layout";
 }
-@if (Model.Pedidos.Count() == 0)
+@if (Model.Pedidos == null)
 {
     <div class="alert alert-success">
         <strong>Você não tem pedidos.</strong>
-    </div> 
+    </div>
     return;
 }
-@foreach (Pedido pedido in Model.Pedidos)
+else
 {
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Pedido</th>
-            <th>Rua</th>
-            <th>Número</th>
-            <th>Bairro</th>
-            <th>Cidade</th>
-            <th>CEP</th>
-            <th>Status</th>
-            <th>Data da compra</th>
-        </tr>
-        <tr>
-            <td>@pedido.PedidoID</td>
-            <td>@pedido.Endereco.Rua</td>
-            <td>@pedido.Endereco.Numero</td>
-            <td>@pedido.Endereco.Bairro</td>
-            <td>@pedido.Endereco.Cidade</td>
-            <td>@pedido.Endereco.CEP</td>
-
-            @if (pedido.Enviado)
-            {
-                <td>Enviado</td>
-            }
-            else
-            {
-                <td>Não Enviado</td>
-            }
-            <td>@pedido.DataCompra</td>
-        </tr>
-        <tr>
-            <th colspan="1"></th>
-            <th>Nome</th>
-            <th>Preço</th>
-            <th>Categoria</th>
-        </tr>
-        
-        @foreach (var produto in pedido.Lines)
-        {
+    @foreach (Pedido pedido in Model.Pedidos)
+    {
+        <table class="table table-bordered table-striped">
             <tr>
-                <td></td>
-                <td>
-                    <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@produto.Produto.ProdutoID">@produto?.Produto?.Nome</a>
-                </td>
-                <td>@produto?.Produto?.Preco.ToString("c")</td>
-                <td>@produto?.Produto?.Categoria</td>
+                <th>Pedido</th>
+                <th>Rua</th>
+                <th>Número</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>CEP</th>
+                <th>Status</th>
+                <th>Data da compra</th>
             </tr>
-        }
-    </table>
-}
+            <tr>
+                <td>@pedido.PedidoID</td>
+                <td>@pedido.Endereco.Rua</td>
+                <td>@pedido.Endereco.Numero</td>
+                <td>@pedido.Endereco.Bairro</td>
+                <td>@pedido.Endereco.Cidade</td>
+                <td>@pedido.Endereco.CEP</td>
 
+                @if (pedido.Enviado)
+                {
+                    <td>Enviado</td>
+                }
+                else
+                {
+                    <td>Não Enviado</td>
+                }
+                <td>@pedido.DataCompra</td>
+            </tr>
+            <tr>
+                <th colspan="1"></th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Categoria</th>
+            </tr>
+            @foreach (var produto in pedido.Lines)
+            {
+                <tr>
+                    <td></td>
+                    <td>
+                        <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@produto.Produto.ProdutoID">@produto?.Produto?.Nome</a>
+                    </td>
+                    <td>@produto?.Produto?.Preco.ToString("c")</td>
+                    <td>@produto?.Produto?.Categoria</td>
+                </tr>
+            }
+        </table>
+    }
+}

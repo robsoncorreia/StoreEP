@@ -28,16 +28,20 @@ namespace StoreEP.Components
         public IViewComponentResult Invoke()
         {
             ViewBag.OpcaoSelecionada = RouteData?.Values["opcaoSelecionada"];
+            var produtosNaoEnviados = _pedidoRepositorio.Pedidos
+                                                        .Where(p => p.Enviado == false)
+                                                        .Count();
+            var numeroProdutosRegistrados = _produtoRepositorio.Produtos
+                                                                .Count();
+            var comentariosNaoAprovados = _avaliacoesRepositorio.Avaliacoes
+                                                             .Where(c => c.Aprovado == false)
+                                                             .Count();
+
             return View(new AdminIndexViewModel
             {
-                ProdutosNãoEnviados = _pedidoRepositorio.Pedidos
-                                                        .Where(p => p.Enviado == false)
-                                                        .Count(),
-                NumeroProdutosRegistrados = _produtoRepositorio.Produtos.Count(),
-                ComentariosNaoAprovados = _avaliacoesRepositorio.Avaliacoes
-                                                             .Where(c => c.Aprovado == false)
-                                                             .Count()
-
+                PedidosNaoEnviados = produtosNaoEnviados,
+                NumeroProdutosRegistrados = numeroProdutosRegistrados,
+                ComentariosNaoAprovados = comentariosNaoAprovados
             });
         }
     }
