@@ -2,6 +2,12 @@
 @{
     Layout = "_Layout";
 }
+@if (Model.Carrinho.QuantidadeTotal() < 1)
+{
+    <div class="alert alert-danger">
+        <strong>Carrinho Vazio</strong>
+    </div>
+}
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#carrinho">Carrinho</a></li>
     <li><a data-toggle="tab" href="#endereco">Endereço</a></li>
