@@ -22,11 +22,12 @@ namespace StoreEP.Models
             }
             else
             {
-                    line.Quantidade += quantidade;
+                line.Quantidade += quantidade;
             }
         }
         public virtual void RemoveLine(Produto produto) => lineCollection.RemoveAll(l => l.Produto.ProdutoID == produto.ProdutoID);
         public virtual decimal ValorTotal() => lineCollection.Sum(e => e.Produto.Preco * e.Quantidade);
+        public virtual int QuantidadeTotal() => lineCollection.Sum(e => e.Quantidade);
         public virtual void Limpar() => lineCollection.Clear();
         public virtual IEnumerable<CartLine> Lines => lineCollection;
     }

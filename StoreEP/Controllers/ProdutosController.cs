@@ -172,7 +172,7 @@ namespace StoreEP.Controllers
             return View(model);
         }
 
-        [HttpGet("[controller]/[action]/{ID}")]//https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/routing
+        [HttpGet("[controller]/[action]/{ID}")]
         public async Task<IActionResult> Detalhes(int ID)
         {
             if (ID == 0)

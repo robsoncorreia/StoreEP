@@ -35,7 +35,7 @@
     $("#btn_ajax_@Model.ProdutoID").click(function () {
         var produtoID = $("#txt_@Model.ProdutoID").serialize();
             $.ajax({
-                url: '/Carrinho/Adicionara/',
+                url: '/Carrinho/Adicionar/',
                 type: 'POST',
                 data: produtoID,
                 dataType: 'html',

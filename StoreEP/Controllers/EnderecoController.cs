@@ -23,9 +23,8 @@ namespace StoreEP.Controllers
             _addressRepositoty = addressRepositoty;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string returnUrl)
         {
-            ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -37,6 +36,7 @@ namespace StoreEP.Controllers
                 enderecos = _addressRepositoty.Enderecos.Where(a => a.UserId.Equals(user.Id)).ToList();
                 return View(enderecos);
             }
+            TempData["endereco"] = "Você não possui endereços.";
             return RedirectToAction(nameof(Criar));
         }
         [HttpPost]
@@ -55,27 +55,30 @@ namespace StoreEP.Controllers
             }
             return View(model);
         }
-        public IActionResult Criar() => View();
-
-
-        public IActionResult Apagar(string ID)
+        public IActionResult Criar()
         {
-            Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoID == int.Parse(ID));
+            return View();
+        }
+
+        public IActionResult Apagar(int enderecoId)
+        {
+            Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoID == enderecoId);
             if (apagarEndereco != null)
             {
-                _addressRepositoty.ApagarEndereco(int.Parse(ID));
+                _addressRepositoty.ApagarEndereco(enderecoId);
+                TempData["endereco"] = "Endereço apagado.";
             }
-            return RedirectToAction("Finalizar", "Pedido");
+            return RedirectToAction(nameof(Index));
         }
-        public IActionResult Utilizar(int ID)
+        public IActionResult Utilizar(int enderecoId)
         {
-            Endereco endereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoID == ID);
+            Endereco endereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoID == enderecoId);
             if (endereco != null)
             {
                 endereco.DataUtilizacao = DateTime.Now;
                 _addressRepositoty.SalvarEndereco(endereco);
             }
-            return RedirectToAction("Finalizar", "Pedido");
+            return RedirectToAction(nameof(Index));
         }
     }
 }

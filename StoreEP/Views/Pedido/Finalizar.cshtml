@@ -80,7 +80,10 @@
                 <td class="text-center">@Model.Endereco.Estado</td>
                 <td class="text-center">@Model.Endereco.Pais</td>
                 <td class="text-center">
-                    <a asp-controller="Endereco" asp-action="Index" class="btn-default btn btn-sm">
+                    <a asp-controller="Endereco" 
+                       asp-action="Index" 
+                       asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()"
+                       class="btn-default btn btn-sm">
                         Mudar
                     </a>
                 </td>

@@ -21,6 +21,7 @@ namespace StoreEP.Controllers
             _produtoRepositorio = produtoRepositorio;
             _carrinho = carService;
         }
+
         [HttpGet]
         public ViewResult Index(string returnUrl)
         {
@@ -31,16 +32,17 @@ namespace StoreEP.Controllers
             });
         }
 
-        public JsonResult Adicionara(AddCarrinhoViewModel model)
+        [HttpPost]
+        public int Adicionar(AddCarrinhoViewModel model)
         {
             int quantidade = model.QuantidadeProduto;
             Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == model.ProdutoID);
             if (produto != null)
             {
                 int emEstoque = produto.Quantidade;
-                _carrinho.AddItem(produto);
+                _carrinho.AddItem(produto, quantidade > 1 ? quantidade : 1);
             }
-            return Json(_carrinho.Lines.Count());
+            return _carrinho.QuantidadeTotal();
 
         }
         public IActionResult RemoverCarrinho(int produtoID, string returnUrl)
