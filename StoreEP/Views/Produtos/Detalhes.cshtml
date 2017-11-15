@@ -93,7 +93,7 @@
                         </a>
                     </div>
                     <div class="row">
-                        <a id="btn_add_carrinho" class="btn btn-sm btn-success btn-group-justified btn-comprar">Adicionar ao carrinho</a>
+                        <a id="btn_add_carrinho" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-success btn-group-justified btn-comprar">Adicionar ao carrinho</a>
                     </div>
                 </div>
             </div>
@@ -198,7 +198,27 @@
         </div>
     </div>
 }
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Produto adicionado ao carrinho.</h4>
+            </div>
+            <div class="modal-body">
+                <p>@Model.Produto.Nome</p>
+                <p>@Model.Produto.Preco.ToString("c")</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+$(document).ready(function(){
     $("#btn_add_carrinho").click(function () {
         var produtoID = @Model.Produto.ProdutoID;
         var quantidade = $("#Produto_Quantidade").val();
@@ -284,5 +304,6 @@
             }
         }
     };
+});
 </script>
 

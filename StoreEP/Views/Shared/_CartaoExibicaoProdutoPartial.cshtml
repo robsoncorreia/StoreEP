@@ -22,28 +22,31 @@
                 <span class="text-left" style="left: 12px; position: absolute;">
                     @Model.Preco.ToString("c")
                 </span>
-                <button id="btn_ajax_@Model.ProdutoID" class="btn-success btn btn-sm" type="submit">
+                <a id="@Model.ProdutoID" class="btn-success btn btn-sm">
                     Comprar
-                </button>
-                <input id="txt_@Model.ProdutoID" asp-for="ProdutoID" type="hidden" value="@Model.ProdutoID" />
+                </a>
             </li>
         </ul>
     </div>
 </div>
 
 <script>
-    $("#btn_ajax_@Model.ProdutoID").click(function () {
-        var produtoID = $("#txt_@Model.ProdutoID").serialize();
-            $.ajax({
-                url: '/Carrinho/Adicionar/',
-                type: 'POST',
-                data: produtoID,
-                dataType: 'html',
-                success: function (data) {
-                    $(".badge").text(data);
-                }
-            });
+
+    $("#@Model.ProdutoID").click(function () {
+        console.log($.active);
+        if ($.active === 1){
+            return;
+        }
+        $.ajax({
+            url: '/Carrinho/Adicionar/',
+            type: 'POST',
+            data: { produtoID : $(this).attr('id')},
+            dataType: 'html',
+            success: function (data) {
+                $(".badge").text(data);
+            }
         });
+    });
 </script>
 
 
