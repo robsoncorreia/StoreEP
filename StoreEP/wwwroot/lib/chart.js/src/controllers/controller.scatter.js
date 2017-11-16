@@ -10,7 +10,7 @@ defaults._set('scatter', {
 	scales: {
 		xAxes: [{
 			id: 'x-axis-1',    // need an ID so datasets can reference the scale
-			type: 'linear',    // scatter should not use a category axis
+			type: 'linear',    // scatter should not use a categoria axis
 			position: 'bottom'
 		}],
 		yAxes: [{

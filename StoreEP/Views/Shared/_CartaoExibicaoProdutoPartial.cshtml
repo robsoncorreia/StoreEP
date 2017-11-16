@@ -9,7 +9,7 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <a asp-action="Listar" asp-controller="Produtos" asp-route-category="@Model.Categoria">
+                <a asp-action="Listar" asp-controller="Produtos" asp-route-categoria="@Model.Categoria">
                     @Model.Categoria
                 </a>
             </li>
@@ -22,14 +22,33 @@
                 <span class="text-left" style="left: 12px; position: absolute;">
                     @Model.Preco.ToString("c")
                 </span>
-                <a id="@Model.ProdutoID" class="btn-success btn btn-sm">
+                <a id="@Model.ProdutoID" data-toggle="modal" data-target="#myModal_@Model.ProdutoID" class="btn-success btn btn-sm">
                     Comprar
                 </a>
             </li>
         </ul>
     </div>
 </div>
-
+<!-- Modal -->
+<div id="myModal_@Model.ProdutoID" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Produto adicionado ao carrinho.</h4>
+            </div>
+            <div class="modal-body">
+                <p>@Model.Nome</p>
+                <p>@Model.Preco.ToString("c")</p>
+            </div>
+            <div class="modal-footer">
+                <a asp-controller="Pedido" asp-action="Finalizar" class="btn btn-xs btn-success">Finalizar compra</a>
+                <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">Continuar comprando</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 
     $("#@Model.ProdutoID").click(function () {

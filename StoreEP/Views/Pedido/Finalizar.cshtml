@@ -41,7 +41,7 @@
                     <td class="text-center">@linha.Produto.Descricao</td>
                     <td class="text-center">@linha.Produto.Preco.ToString("c")</td>
                     <td class="text-center">
-                        <a asp-action="Listar" asp-controller="Produtos" asp-route-category="@linha.Produto.Categoria">
+                        <a asp-action="Listar" asp-controller="Produtos" asp-route-categoria="@linha.Produto.Categoria">
                             @linha.Produto.Categoria
                         </a>
                     </td>
@@ -57,7 +57,10 @@
                         @linha.Produto.Quantidade
                     </td>
                     <th>
-                        <a asp-action="RemoverCarrinho" asp-controller="Carrinho" asp-route-produtoID="@linha.Produto.ProdutoID" class="btn btn-danger btn-sm">
+                        <a asp-action="RemoverCarrinho" 
+                           asp-controller="Carrinho" 
+                           asp-route-produtoID="@linha.Produto.ProdutoID" 
+                           asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()" class="btn btn-danger btn-sm">
                             Remover
                         </a>
                     </th>
@@ -86,8 +89,8 @@
                 <td class="text-center">@Model.Endereco.Estado</td>
                 <td class="text-center">@Model.Endereco.Pais</td>
                 <td class="text-center">
-                    <a asp-controller="Endereco" 
-                       asp-action="Index" 
+                    <a asp-controller="Endereco"
+                       asp-action="Index"
                        asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()"
                        class="btn-default btn btn-sm">
                         Mudar

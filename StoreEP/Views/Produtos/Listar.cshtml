@@ -1,0 +1,101 @@
+@using StoreEP.Models.ViewModels
+@using StoreEP.Models
+@model ProductsListViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("img").hover(function () {
+                TweenMax.to($(this), .5, { scale: 1.1 })
+            });
+            $("img").mouseleave(function () {
+                TweenMax.to($(this), .5, { scale: 1 })
+            });
+        });
+    </script>
+}
+@section styles{
+    <style>
+        .cartao-produto {
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.48);
+            border-radius: 4px;
+            padding: 14px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .mdl-cell {
+            background-color: #1a1a1a;
+        }
+
+            .mdl-cell:hover {
+                border: 1px solid yellow;
+            }
+
+        .mdl-card__supporting-text {
+            color: white;
+        }
+
+        .material-icons, .mdl-card__title-text {
+            color: #fbb813;
+        }
+
+        .row {
+            margin-right: 0;
+            margin-left: 0;
+        }
+    </style>
+}
+@if (TempData["carrinho"] != null)
+{
+    <div class="alert alert-danger">@TempData["carrinho"]</div>
+}
+@if (ViewData["filtro.Nome"] != null)
+{
+    @if (Model.Produtos.Count() < 1)
+    {
+        <div class="alert alert-danger">
+            <strong>Nenhum resuldo encontrado.</strong>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success">
+            <strong>@ViewData["filtro.Nome"]</strong>
+        </div>
+    }
+}
+<div class="row text-center" page-model="@Model.PagingInfo" page-action="Listar" page-classes-enabled="true" page-class="btn btn-sm" page-class-normal="btn-default" page-class-selected="btn-primary" page-url-cartegory="@Model.CurrentCategory">
+
+</div>
+<hr />
+<div class="row">
+    @foreach (var p in Model.Produtos)
+    {
+        @Html.Partial("_CartaoExibicaoProdutoPartial", p)
+    }
+</div>
+<hr />
+
+@if (Model.ProdutosMaisVisitados != null && Model.ProdutosMaisVisitados.Count() != 0)
+{
+    <div class="row">
+        <h3>Produtos Visitados</h3>
+        @foreach (var p in Model.ProdutosMaisVisitados)
+        {
+            @Html.Partial("_CartaoExibicaoProdutoMaisVisitadosPartial", p)
+        }
+    </div>
+    <hr />
+}
+

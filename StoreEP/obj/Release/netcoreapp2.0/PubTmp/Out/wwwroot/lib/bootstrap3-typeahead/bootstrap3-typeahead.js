@@ -271,10 +271,10 @@
           });
         }
 
-        // inject category header
+        // inject categoria header
         if (value[_category] && (key === 0 || value[_category] !== items[key - 1][_category])){
           data.push({
-            __type: 'category',
+            __type: 'categoria',
             name: value[_category]
           });
         }
@@ -282,7 +282,7 @@
       });
 
       items = $(data).map(function (i, item) {
-        if ((item.__type || false) == 'category'){
+        if ((item.__type || false) == 'categoria'){
           return $(that.options.headerHtml).text(item.name)[0];
         }
 
@@ -556,7 +556,7 @@
     afterSelect: $.noop,
     addItem: false,
     delay: 0,
-    separator: 'category',
+    separator: 'categoria',
     headerHtml: '<li class="dropdown-header"></li>',
     headerDivider: '<li class="divider" role="separator"></li>'
   };

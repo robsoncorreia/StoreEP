@@ -707,7 +707,7 @@ describe('Chart.controllers.bar', function() {
 				scales: {
 					xAxes: [{
 						id: 'firstXScaleID',
-						type: 'category',
+						type: 'categoria',
 						display: false
 					}],
 					yAxes: [{
@@ -778,7 +778,7 @@ describe('Chart.controllers.bar', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'category',
+						type: 'categoria',
 						display: false
 					}],
 					yAxes: [{
@@ -819,7 +819,7 @@ describe('Chart.controllers.bar', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'category',
+						type: 'categoria',
 						display: false
 					}],
 					yAxes: [{
@@ -878,7 +878,7 @@ describe('Chart.controllers.bar', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'category',
+						type: 'categoria',
 						display: false
 					}],
 					yAxes: [{
@@ -923,7 +923,7 @@ describe('Chart.controllers.bar', function() {
 		});
 	});
 
-	it('should update elements when only the category scale is stacked', function() {
+	it('should update elements when only the categoria scale is stacked', function() {
 		var chart = window.acquireChart({
 			type: 'bar',
 			data: {
@@ -941,7 +941,7 @@ describe('Chart.controllers.bar', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'category',
+						type: 'categoria',
 						display: false,
 						stacked: true
 					}],
@@ -1000,7 +1000,7 @@ describe('Chart.controllers.bar', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'category',
+						type: 'categoria',
 						display: false
 					}],
 					yAxes: [{
@@ -1061,7 +1061,7 @@ describe('Chart.controllers.bar', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'category',
+						type: 'categoria',
 						display: false
 					}],
 					yAxes: [{
@@ -1120,7 +1120,7 @@ describe('Chart.controllers.bar', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'category',
+						type: 'categoria',
 						display: false
 					}],
 					yAxes: [{
@@ -1166,7 +1166,7 @@ describe('Chart.controllers.bar', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'category',
+						type: 'categoria',
 						display: false
 					}],
 					yAxes: [{
@@ -1209,7 +1209,7 @@ describe('Chart.controllers.bar', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'category',
+						type: 'categoria',
 						display: false,
 						stacked: true,
 						barPercentage: 1,
@@ -1559,7 +1559,7 @@ describe('Chart.controllers.bar', function() {
 		});
 	});
 
-	describe('Bar thickness with a category scale', function() {
+	describe('Bar thickness with a categoria scale', function() {
 		[undefined, 20].forEach(function(barThickness) {
 			describe('When barThickness is ' + barThickness, function() {
 				beforeEach(function() {
@@ -1579,7 +1579,7 @@ describe('Chart.controllers.bar', function() {
 							scales: {
 								xAxes: [{
 									id: 'x',
-									type: 'category',
+									type: 'categoria',
 									barThickness: barThickness
 								}],
 								yAxes: [{

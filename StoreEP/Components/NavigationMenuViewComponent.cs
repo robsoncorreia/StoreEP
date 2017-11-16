@@ -19,7 +19,7 @@ namespace StoreEP.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedCategory = RouteData?.Values["category"];
+            ViewBag.SelectedCategory = RouteData?.Values["categoria"];
             return View(_lojaContexto.Produtos
                 .Where(p => p.Publicado == true)
                 .Select(x => x.Categoria)

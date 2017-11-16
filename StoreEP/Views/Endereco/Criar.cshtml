@@ -12,6 +12,7 @@
 }
 <form asp-action="Criar" method="post">
     <div class="form-row">
+        <input asp-for="EnderecoID" type="hidden" />
         <div class="form-group col-md-6">
             <div class="form-group">
                 <label asp-for="Rua" class="col-form-label"></label>
@@ -59,7 +60,7 @@
             <label asp-for="Pais" class="col-form-label"></label>
             <input asp-for="Pais" class="form-control" type="text">
             <div><span asp-validation-for="Pais" class="text-danger"></span></div>
-            <button class="btn btn-sm btn-success" type="submit" style="margin:10px 0 10px 0">Criar Endereço</button>
+            <button class="btn btn-sm btn-success" type="submit" style="margin:10px 0 10px 0">@(ViewData["editar_endereco"] != null ? "Editar" : "Criar") Endereço</button>
         </div>
     </div>
 </form>

@@ -16,7 +16,7 @@ describe('Test the layout service', function() {
 				scales: {
 					xAxes: [{
 						id: 'xScale',
-						type: 'category'
+						type: 'categoria'
 					}],
 					yAxes: [{
 						id: 'yScale',
@@ -64,7 +64,7 @@ describe('Test the layout service', function() {
 				scales: {
 					xAxes: [{
 						id: 'xScale',
-						type: 'category',
+						type: 'categoria',
 						position: 'top'
 					}],
 					yAxes: [{
@@ -144,7 +144,7 @@ describe('Test the layout service', function() {
 				scales: {
 					xAxes: [{
 						id: 'xScale',
-						type: 'category'
+						type: 'categoria'
 					}],
 					yAxes: [{
 						id: 'yScale1',
@@ -205,10 +205,10 @@ describe('Test the layout service', function() {
 				scales: {
 					xAxes: [{
 						id: 'xScale1',
-						type: 'category'
+						type: 'categoria'
 					}, {
 						id: 'xScale2',
-						type: 'category',
+						type: 'categoria',
 						position: 'top',
 						fullWidth: true
 					}],
@@ -259,7 +259,7 @@ describe('Test the layout service', function() {
 					scales: {
 						xAxes: [{
 							id: 'xScale',
-							type: 'category',
+							type: 'categoria',
 							display: false
 						}],
 						yAxes: [{
@@ -306,7 +306,7 @@ describe('Test the layout service', function() {
 					scales: {
 						xAxes: [{
 							id: 'xScale',
-							type: 'category',
+							type: 'categoria',
 							display: false
 						}],
 						yAxes: [{
@@ -358,7 +358,7 @@ describe('Test the layout service', function() {
 					scales: {
 						xAxes: [{
 							id: 'xScale',
-							type: 'category',
+							type: 'categoria',
 							display: false
 						}],
 						yAxes: [{
@@ -444,27 +444,27 @@ describe('Test the layout service', function() {
 					scales: {
 						xAxes: [{
 							id: 'xScale0',
-							type: 'category',
+							type: 'categoria',
 							display: true,
 							weight: 1
 						}, {
 							id: 'xScale1',
-							type: 'category',
+							type: 'categoria',
 							display: true,
 							weight: 2
 						}, {
 							id: 'xScale2',
-							type: 'category',
+							type: 'categoria',
 							display: true
 						}, {
 							id: 'xScale3',
-							type: 'category',
+							type: 'categoria',
 							display: true,
 							position: 'top',
 							weight: 1
 						}, {
 							id: 'xScale4',
-							type: 'category',
+							type: 'categoria',
 							display: true,
 							position: 'top',
 							weight: 2

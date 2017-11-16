@@ -81,10 +81,10 @@ namespace StoreEP.Controllers
             pedido.Pagamento = model.Pagamento;
             model.Pagamento.UserId = user.Id;
 
-            if (_carrinho.Lines?.Count() == 0)
+            if (_carrinho.QuantidadeTotal() == 0)
             {
-                ModelState.AddModelError("", "Descupe sua lista está vazia.");
-                return RedirectToAction(actionName: "List", controllerName: "Produtos");
+                TempData["carrinho"] = "Você não escolheu nenhum produto.";
+                return RedirectToAction(actionName: "Listar", controllerName: "Produtos");
             }
             if (ModelState.IsValid)
             {
@@ -107,19 +107,27 @@ namespace StoreEP.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
-            if (_enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id) && !e.UserId.Equals("apagado")).Count() == 0)
+            bool possuiEndereco = _enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id) && 
+                                                                        !e.UserId.Equals("apagado")).Count() == 0;
+            if (possuiEndereco)
             {
+                TempData["endereco"] = "Você não possui endereços cadastrados.";
                 return RedirectToAction(actionName: "Criar", controllerName: "Endereco");
             }
             var enderecos = _enderecoRepositorio.Enderecos
                                                 .Where(e => e.UserId == user.Id)
                                                 .ToList();
+            if (_carrinho.QuantidadeTotal() == 0)
+            {
+                TempData["carrinho"] = "Seu carrinho de compras esta vazio.";
+                return RedirectToAction(actionName: "Listar", controllerName: "Produtos");
+            }
             return View(new FinalizarPedidoViewModel
             {
                 Carrinho = _carrinho,
                 Endereco = enderecos.Where(e => e.DataUtilizacao == 
                                           (enderecos.Select(d => d.DataUtilizacao).Max()))
-                                    .SingleOrDefault()
+                                            .SingleOrDefault()
             });
         }
         public RedirectToActionResult RemoverCarrinho(int produtoID)

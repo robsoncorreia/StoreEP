@@ -50,10 +50,10 @@ namespace StoreEP
             services.AddTransient<IImagensRepositorio, EFImagemRepositorio>();
             services.AddTransient<IHistoricoPrecosRepositorio, EFHistoricoPreco>();
             services.AddTransient<IProdutoVisitadoRepositorio, EFProdutoVisitadoRepositorio>();
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Administrador", policy => policy.RequireRole("Administrator"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Administrador", policy => policy.RequireRole("Administrator"));
+            //});
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
@@ -65,7 +65,7 @@ namespace StoreEP
                 options.Password.RequiredUniqueChars = 6;
 
                 // Lockout settings
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(7);
                 options.Lockout.MaxFailedAccessAttempts = 10;
                 options.Lockout.AllowedForNewUsers = true;
 
@@ -116,11 +116,11 @@ namespace StoreEP
             {
                 routes.MapRoute(
                     name: null,
-                    template: "{category}/Page{page:int}",
+                    template: "{categoria}/Page{page:int}",
                     defaults: new { controller = "Produtos", action = "Listar" });
                 routes.MapRoute(
                   name: null,
-                  template: "{controller}/Produto{batata:int}",
+                  template: "{controller}/Produto{produtoID:int}",
                   defaults: new { controller = "Admin", action = "Edit" });
                 routes.MapRoute(
                     name: null,
@@ -144,7 +144,7 @@ namespace StoreEP
                     defaults: new { controller = "Identidade", action = "Criar" });
                 routes.MapRoute(
                     name: null,
-                    template: "{category}",
+                    template: "{categoria}",
                     defaults: new { controller = "Admin", action = "ListarTodosProdutos" });
                 routes.MapRoute(
                     name: null,
@@ -157,7 +157,6 @@ namespace StoreEP
                     name: null,
                     template: "{controller=Endereco}/Index/{ID}");
             });
-            //IdentityDbContext.Initialize(app.ApplicationServices);
         }
     }
 }

@@ -93,8 +93,8 @@ The bar chart defines the following configuration options. These options are mer
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| `barPercentage` | `Number` | `0.9` | Percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole category width and put the bars right next to each other. [more...](#barpercentage-vs-categorypercentage)
-| `categoryPercentage` | `Number` | `0.8` | Percent (0-1) of the available width each category should be within the sample width. [more...](#barpercentage-vs-categorypercentage)
+| `barPercentage` | `Number` | `0.9` | Percent (0-1) of the available width each bar should be within the categoria width. 1.0 will take the whole categoria width and put the bars right next to each other. [more...](#barpercentage-vs-categorypercentage)
+| `categoryPercentage` | `Number` | `0.8` | Percent (0-1) of the available width each categoria should be within the sample width. [more...](#barpercentage-vs-categorypercentage)
 | `barThickness` | `Number` | | Manually set width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take the full available widths without overlap. Then, the bars are sized using `barPercentage` and `categoryPercentage`.
 | `maxBarThickness` | `Number` | | Set this to ensure that bars are not sized thicker than this.
 | `gridLines.offsetGridLines` | `Boolean` | `true` | If true, the bars for a particular data point fall between the grid lines. The grid line will move to the left by one half of the tick interval. If false, the grid line will go right down the middle of the bars. [more...](#offsetgridlines)
@@ -122,7 +122,7 @@ It is common to want to apply a configuration setting to all created bar charts.
 
 ## barPercentage vs categoryPercentage
 
-The following shows the relationship between the bar percentage option and the category percentage option.
+The following shows the relationship between the bar percentage option and the categoria percentage option.
 
 ```text
 // categoryPercentage: 1.0

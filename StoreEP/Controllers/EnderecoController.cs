@@ -8,8 +8,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using StoreEP.Models.ViewModels;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace StoreEP.Controllers
 {
 
@@ -17,10 +15,10 @@ namespace StoreEP.Controllers
     {
 
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEnderecoRepositorio _addressRepositoty;
+        private readonly IEnderecoRepositorio _EnderecoRepositorio;
         public EnderecoController(IEnderecoRepositorio addressRepositoty, UserManager<ApplicationUser> userManager)
         {
-            _addressRepositoty = addressRepositoty;
+            _EnderecoRepositorio = addressRepositoty;
             _userManager = userManager;
         }
         public async Task<IActionResult> Index(string returnUrl)
@@ -30,10 +28,11 @@ namespace StoreEP.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            if (user != null && _addressRepositoty.Enderecos.Where(a => a.UserId.Equals(user.Id)).Count() != 0)
+            if (user != null && _EnderecoRepositorio.Enderecos.Where(a => a.UserId.Equals(user.Id)).Count() != 0)
             {
-                IEnumerable<Endereco> enderecos;
-                enderecos = _addressRepositoty.Enderecos.Where(a => a.UserId.Equals(user.Id)).ToList();
+                IEnumerable<Endereco> enderecos = _EnderecoRepositorio.Enderecos
+                                                                        .Where(a => a.UserId.Equals(user.Id))
+                                                                        .ToList();
                 return View(enderecos);
             }
             TempData["endereco"] = "Você não possui endereços.";
@@ -49,7 +48,7 @@ namespace StoreEP.Controllers
                 ModelState.Remove("UserId");
                 if (ModelState.IsValid)
                 {
-                    _addressRepositoty.SalvarEndereco(model);
+                    _EnderecoRepositorio.SalvarEndereco(model);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -59,24 +58,35 @@ namespace StoreEP.Controllers
         {
             return View();
         }
+        [HttpGet("[controller]/[action]/{enderecoID}")]
+        public IActionResult Editar(int enderecoID)
+        {
+            Endereco editarEndereco = _EnderecoRepositorio.Enderecos.FirstOrDefault(e => e.EnderecoID == enderecoID);
+            if (editarEndereco != null)
+            {
+                ViewData["editar_endereco"] = true;
+                return View(nameof(Criar), editarEndereco);
+            }
+            return View(nameof(Criar));
+        }
 
         public IActionResult Apagar(int enderecoId)
         {
-            Endereco apagarEndereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoID == enderecoId);
+            Endereco apagarEndereco = _EnderecoRepositorio.Enderecos.FirstOrDefault(e => e.EnderecoID == enderecoId);
             if (apagarEndereco != null)
             {
-                _addressRepositoty.ApagarEndereco(enderecoId);
+                _EnderecoRepositorio.ApagarEndereco(enderecoId);
                 TempData["endereco"] = "Endereço apagado.";
             }
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Utilizar(int enderecoId)
         {
-            Endereco endereco = _addressRepositoty.Enderecos.FirstOrDefault(e => e.EnderecoID == enderecoId);
+            Endereco endereco = _EnderecoRepositorio.Enderecos.FirstOrDefault(e => e.EnderecoID == enderecoId);
             if (endereco != null)
             {
                 endereco.DataUtilizacao = DateTime.Now;
-                _addressRepositoty.SalvarEndereco(endereco);
+                _EnderecoRepositorio.SalvarEndereco(endereco);
             }
             return RedirectToAction(nameof(Index));
         }

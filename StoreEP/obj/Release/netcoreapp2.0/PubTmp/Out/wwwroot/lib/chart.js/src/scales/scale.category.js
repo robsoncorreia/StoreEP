@@ -2,7 +2,7 @@
 
 module.exports = function(Chart) {
 
-	// Default config for a category scale
+	// Default config for a categoria scale
 	var defaultConfig = {
 		position: 'bottom'
 	};
@@ -128,6 +128,6 @@ module.exports = function(Chart) {
 		}
 	});
 
-	Chart.scaleService.registerScaleType('category', DatasetScale, defaultConfig);
+	Chart.scaleService.registerScaleType('categoria', DatasetScale, defaultConfig);
 
 };

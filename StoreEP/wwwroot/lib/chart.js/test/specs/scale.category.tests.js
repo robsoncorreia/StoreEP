@@ -1,14 +1,14 @@
-// Test the category scale
+// Test the categoria scale
 
 describe('Category scale tests', function() {
 	it('Should register the constructor with the scale service', function() {
-		var Constructor = Chart.scaleService.getScaleConstructor('category');
+		var Constructor = Chart.scaleService.getScaleConstructor('categoria');
 		expect(Constructor).not.toBe(undefined);
 		expect(typeof Constructor).toBe('function');
 	});
 
 	it('Should have the correct default config', function() {
-		var defaultConfig = Chart.scaleService.getScaleDefaults('category');
+		var defaultConfig = Chart.scaleService.getScaleDefaults('categoria');
 		expect(defaultConfig).toEqual({
 			display: true,
 
@@ -63,8 +63,8 @@ describe('Category scale tests', function() {
 			labels: ['tick1', 'tick2', 'tick3', 'tick4', 'tick5']
 		};
 
-		var config = Chart.helpers.clone(Chart.scaleService.getScaleDefaults('category'));
-		var Constructor = Chart.scaleService.getScaleConstructor('category');
+		var config = Chart.helpers.clone(Chart.scaleService.getScaleDefaults('categoria'));
+		var Constructor = Chart.scaleService.getScaleConstructor('categoria');
 		var scale = new Constructor({
 			ctx: {},
 			options: config,
@@ -90,8 +90,8 @@ describe('Category scale tests', function() {
 			xLabels: ['tick1', 'tick2', 'tick3', 'tick4', 'tick5']
 		};
 
-		var config = Chart.helpers.clone(Chart.scaleService.getScaleDefaults('category'));
-		var Constructor = Chart.scaleService.getScaleConstructor('category');
+		var config = Chart.helpers.clone(Chart.scaleService.getScaleDefaults('categoria'));
+		var Constructor = Chart.scaleService.getScaleConstructor('categoria');
 		var scale = new Constructor({
 			ctx: {},
 			options: config,
@@ -117,9 +117,9 @@ describe('Category scale tests', function() {
 			yLabels: ['tick1', 'tick2', 'tick3', 'tick4', 'tick5']
 		};
 
-		var config = Chart.helpers.clone(Chart.scaleService.getScaleDefaults('category'));
+		var config = Chart.helpers.clone(Chart.scaleService.getScaleDefaults('categoria'));
 		config.position = 'left'; // y axis
-		var Constructor = Chart.scaleService.getScaleConstructor('category');
+		var Constructor = Chart.scaleService.getScaleConstructor('categoria');
 		var scale = new Constructor({
 			ctx: {},
 			options: config,
@@ -145,7 +145,7 @@ describe('Category scale tests', function() {
 				scales: {
 					xAxes: [{
 						id: 'x',
-						type: 'category',
+						type: 'categoria',
 						labels: labels
 					}]
 				}
@@ -167,8 +167,8 @@ describe('Category scale tests', function() {
 			labels: ['tick1', 'tick2', 'tick3', 'tick4', 'tick5']
 		};
 
-		var config = Chart.helpers.clone(Chart.scaleService.getScaleDefaults('category'));
-		var Constructor = Chart.scaleService.getScaleConstructor('category');
+		var config = Chart.helpers.clone(Chart.scaleService.getScaleDefaults('categoria'));
+		var Constructor = Chart.scaleService.getScaleConstructor('categoria');
 		var scale = new Constructor({
 			ctx: {},
 			options: config,
@@ -199,7 +199,7 @@ describe('Category scale tests', function() {
 				scales: {
 					xAxes: [{
 						id: 'xScale0',
-						type: 'category',
+						type: 'categoria',
 						position: 'bottom'
 					}],
 					yAxes: [{
@@ -242,7 +242,7 @@ describe('Category scale tests', function() {
 				scales: {
 					xAxes: [{
 						id: 'xScale0',
-						type: 'category',
+						type: 'categoria',
 						position: 'bottom'
 					}],
 					yAxes: [{
@@ -273,7 +273,7 @@ describe('Category scale tests', function() {
 				scales: {
 					xAxes: [{
 						id: 'xScale0',
-						type: 'category',
+						type: 'categoria',
 						position: 'bottom',
 						ticks: {
 							min: 'tick2',
@@ -315,12 +315,12 @@ describe('Category scale tests', function() {
 				scales: {
 					xAxes: [{
 						id: 'xScale0',
-						type: 'category',
+						type: 'categoria',
 						position: 'bottom',
 					}],
 					yAxes: [{
 						id: 'yScale0',
-						type: 'category',
+						type: 'categoria',
 						position: 'left'
 					}]
 				}
@@ -360,12 +360,12 @@ describe('Category scale tests', function() {
 				scales: {
 					xAxes: [{
 						id: 'xScale0',
-						type: 'category',
+						type: 'categoria',
 						position: 'bottom',
 					}],
 					yAxes: [{
 						id: 'yScale0',
-						type: 'category',
+						type: 'categoria',
 						position: 'left',
 						ticks: {
 							min: '2',

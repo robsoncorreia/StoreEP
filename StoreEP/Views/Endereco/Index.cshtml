@@ -50,6 +50,13 @@
                        title="Apagar endereço">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
+                    <a asp-action="Editar"
+                       asp-controller="Endereco"
+                       asp-route-enderecoId="@endereco.EnderecoID"
+                       style="right:10px; margin: 4px;"
+                       title="Editar endereço">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
                 </div>
             </div>
         }

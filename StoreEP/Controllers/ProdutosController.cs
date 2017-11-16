@@ -139,12 +139,14 @@ namespace StoreEP.Controllers
             return View(nameof(Listar), model);
         }
 
-        public async Task<IActionResult> Listar(string category, int page = 1)
+        public async Task<IActionResult> Listar(string categoria = null, int page = 1)
         {
             IEnumerable<Produto> produtosMaisVisitados = await GetProdutosVisitados();
 
             IEnumerable<Produto> produtos = _produtoRepositorio.Produtos
-                                                          .Where(p => (category == null || p.Categoria == category) && p.Publicado == true && p.Quantidade > 0)
+                                                          .Where(p => (categoria == null || 
+                                                                        p.Categoria == categoria) && 
+                                                                        p.Publicado == true && p.Quantidade > 0)
                                                           .OrderBy(p => p.ProdutoID);
             int numeroProdutos = produtos.Count();
             produtos = produtos.Skip((page - 1) * itensPorPagina)
@@ -167,20 +169,20 @@ namespace StoreEP.Controllers
                     ItensPerPage = itensPorPagina,
                     TotalItems = numeroProdutos
                 },
-                CurrentCategory = category
+                CurrentCategory = categoria
             };
             return View(model);
         }
 
-        [HttpGet("[controller]/[action]/{ID}")]
-        public async Task<IActionResult> Detalhes(int ID)
+        [HttpGet("[controller]/[action]/{produtoID}")]
+        public async Task<IActionResult> Detalhes(int produtoID)
         {
-            if (ID == 0)
+            if (produtoID == 0)
             {
                 return NotFound();
             }
             Produto produto = _produtoRepositorio.Produtos
-                                        .SingleOrDefault(p => p.ProdutoID == ID);
+                                        .SingleOrDefault(p => p.ProdutoID == produtoID);
             if (produto == null)
             {
                 return NotFound();
@@ -192,10 +194,11 @@ namespace StoreEP.Controllers
             }
             return View(new DetalheProdutoViewModels
             {
-                HistoricosPreco = _historicoPrecosRepositorio.HistoricosPreco.Where(h => h.ProdutoID == ID).ToList(),
+                HistoricosPreco = _historicoPrecosRepositorio.HistoricosPreco.Where(h => h.ProdutoID == produtoID).ToList(),
                 Produto = produto
             });
         }
+        #region Utilidades
         public async Task<IEnumerable<Produto>> GetProdutosVisitados()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -210,5 +213,6 @@ namespace StoreEP.Controllers
             }
             return null;
         }
+        #endregion
     }
 }
