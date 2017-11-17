@@ -13261,7 +13261,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\robso\\.nuget\\packages\\": {},
+    "C:\\Users\\robson.correia\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13270,17 +13270,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
+      "projectUniqueName": "C:\\Users\\robson.correia\\Desktop\\StoreEp\\StoreEP\\StoreEP.csproj",
       "projectName": "StoreEP",
-      "projectPath": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
-      "packagesPath": "C:\\Users\\robso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP\\obj\\",
+      "projectPath": "C:\\Users\\robson.correia\\Desktop\\StoreEp\\StoreEP\\StoreEP.csproj",
+      "packagesPath": "C:\\Users\\robson.correia\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\robson.correia\\Desktop\\StoreEp\\StoreEP\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\robso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\robson.correia\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13318,7 +13318,7 @@
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0",
+            "version": "2.0",
             "autoReferenced": true
           },
           "Microsoft.AspNetCore.All": {

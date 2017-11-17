@@ -1,9 +1,9 @@
-@model PedidoListaViewModel
+@model IEnumerable<Pedido>
 @{
     ViewBag.Title = "Pedidos";
     Layout = "_Layout";
 }
-@if (Model.Pedidos == null)
+@if (Model == null)
 {
     <div class="alert alert-success">
         <strong>Você não tem pedidos.</strong>
@@ -12,54 +12,73 @@
 }
 else
 {
-    @foreach (Pedido pedido in Model.Pedidos)
+    @foreach (Pedido pedido in Model)
     {
-        <table class="table table-bordered table-striped">
-            <tr>
-                <th>Pedido</th>
-                <th>Rua</th>
-                <th>Número</th>
-                <th>Bairro</th>
-                <th>Cidade</th>
-                <th>CEP</th>
-                <th>Status</th>
-                <th>Data da compra</th>
-            </tr>
-            <tr>
-                <td>@pedido.PedidoID</td>
-                <td>@pedido.Endereco.Rua</td>
-                <td>@pedido.Endereco.Numero</td>
-                <td>@pedido.Endereco.Bairro</td>
-                <td>@pedido.Endereco.Cidade</td>
-                <td>@pedido.Endereco.CEP</td>
-
-                @if (pedido.Enviado)
-                {
-                    <td>Enviado</td>
-                }
-                else
-                {
-                    <td>Não Enviado</td>
-                }
-                <td>@pedido.DataCompra</td>
-            </tr>
-            <tr>
-                <th colspan="1"></th>
-                <th>Nome</th>
-                <th>Preço</th>
-                <th>Categoria</th>
-            </tr>
-            @foreach (var produto in pedido.Lines)
-            {
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered table-striped table-condensed">
                 <tr>
-                    <td></td>
-                    <td>
-                        <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@produto.Produto.ProdutoID">@produto?.Produto?.Nome</a>
-                    </td>
-                    <td>@produto?.Produto?.Preco.ToString("c")</td>
-                    <td>@produto?.Produto?.Categoria</td>
+                    <th>Pedido</th>
+                    <th>Rua</th>
+                    <th>Número</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>CEP</th>
+                    <th>Status</th>
+                    <th>Data da compra</th>
                 </tr>
-            }
-        </table>
+                <tr>
+                    <td>@pedido.PedidoID</td>
+                    <td>@pedido.Endereco.Rua</td>
+                    <td>@pedido.Endereco.Numero</td>
+                    <td>@pedido.Endereco.Bairro</td>
+                    <td>@pedido.Endereco.Cidade</td>
+                    <td>@pedido.Endereco.CEP</td>
+
+                    @if (pedido.Enviado)
+                    {
+                        <td>Enviado</td>
+                    }
+                    else
+                    {
+                        <td>Não Enviado</td>
+                    }
+                    <td>@pedido.DataCompra</td>
+                </tr>
+                <tr>
+                    <th colspan="5"></th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Categoria</th>
+                </tr>
+                @foreach (var carrinho in pedido.Lines)
+                {
+                    <tr>
+                        <td colspan="5"></td>
+                        <td>
+                            <a asp-action="Detalhes"
+                               asp-controller="Produtos"
+                               asp-route-ID="@carrinho.Produto.ProdutoID">@carrinho.Produto.Nome</a>
+                        </td>
+                        <td>@carrinho.Produto?.Preco.ToString("c")</td>
+                        <td>
+                            <a asp-action="Listar"
+                               asp-controller="Produtos"
+                               asp-route-categoria="@carrinho.Produto.Categoria">
+                                @carrinho.Produto?.Categoria
+                            </a>
+                        </td>
+                    </tr>
+                }
+                <tfoot>
+                    <tr class="success">
+                        <td colspan="5"></td>
+                        <td>Total</td>
+                        <td>@pedido.Pagamento.Valor.ToString("c")</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <hr />
     }
 }

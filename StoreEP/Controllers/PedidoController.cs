@@ -48,14 +48,8 @@ namespace StoreEP.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             IEnumerable<Pedido> pedidos = _pedidoRepositorio.Pedidos.Where(o => o.UserId.Equals(user.Id)).ToList();
-            IEnumerable<Endereco> enderecos = _enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id)).ToList();
 
-
-            return View(new PedidoListaViewModel
-            {
-                Pedidos = pedidos,
-                Enderecos = enderecos
-            });
+            return View(pedidos);
         }
 
         [HttpPost]
@@ -107,7 +101,7 @@ namespace StoreEP.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
-            bool possuiEndereco = _enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id) && 
+            bool possuiEndereco = _enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id) &&
                                                                         !e.UserId.Equals("apagado")).Count() == 0;
             if (possuiEndereco)
             {
@@ -125,7 +119,7 @@ namespace StoreEP.Controllers
             return View(new FinalizarPedidoViewModel
             {
                 Carrinho = _carrinho,
-                Endereco = enderecos.Where(e => e.DataUtilizacao == 
+                Endereco = enderecos.Where(e => e.DataUtilizacao ==
                                           (enderecos.Select(d => d.DataUtilizacao).Max()))
                                             .SingleOrDefault()
             });

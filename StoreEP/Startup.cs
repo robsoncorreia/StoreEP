@@ -50,10 +50,10 @@ namespace StoreEP
             services.AddTransient<IImagensRepositorio, EFImagemRepositorio>();
             services.AddTransient<IHistoricoPrecosRepositorio, EFHistoricoPreco>();
             services.AddTransient<IProdutoVisitadoRepositorio, EFProdutoVisitadoRepositorio>();
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("Administrador", policy => policy.RequireRole("Administrator"));
-            //});
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Administrador", policy => policy.RequireRole("Administrator"));
+            });
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
