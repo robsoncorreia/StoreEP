@@ -25,9 +25,9 @@ C:\Users\robson.correia\Desktop\StoreEP\StoreEP\bin\Debug\netcoreapp2.0\StoreEP.
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\bin\Debug\netcoreapp2.0\StoreEP.runtimeconfig.dev.json
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\bin\Debug\netcoreapp2.0\StoreEP.dll
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\bin\Debug\netcoreapp2.0\StoreEP.pdb
-C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.csprojResolveAssemblyReference.cache
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.csproj.CoreCompileInputs.cache
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.AssemblyInfoInputs.cache
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.AssemblyInfo.cs
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.dll
 C:\Users\robson.correia\Desktop\StoreEP\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.pdb
+C:\Users\robson.correia\Desktop\StoreEp\StoreEP\obj\Debug\netcoreapp2.0\StoreEP.csprojResolveAssemblyReference.cache

@@ -1,8 +1,8 @@
-@model IEnumerable<Endereco>
+@model EnderecoViewModels
 @{
     ViewBag.Title = "Lista de Endereços";
     Layout = "_Layout";
-    var enderecoUtilizado = Model.Select(e => e.DataUtilizacao).Max();
+    var enderecoUtilizado = Model.Enderecos.Select(e => e.DataUtilizacao).Max();
 }
 <style>
     .card {
@@ -19,7 +19,7 @@
         </div>
     }
     <div class="row">
-        @foreach (var endereco in Model)
+        @foreach (var endereco in Model.Enderecos)
         {
             <div class="card col col-sm-3"
                  style="@(endereco.DataUtilizacao == enderecoUtilizado ? "box-shadow: 1px 1px 4px #006555, 1px 1px 4px #14673a;" : "box-shadow: 0px 0px 2px #8f8f8f;") ">
@@ -50,10 +50,9 @@
                        title="Apagar endereço">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
-                    <a asp-action="Editar"
-                       asp-controller="Endereco"
-                       asp-route-enderecoId="@endereco.EnderecoID"
+                    <a id="@endereco.EnderecoID"
                        style="right:10px; margin: 4px;"
+                       class="editar"
                        title="Editar endereço">
                         <span class="glyphicon glyphicon-edit"></span>
                     </a>
@@ -75,21 +74,21 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Endereço</h4>
             </div>
             <div class="modal-body">
-                <form  method="post">
+                <form method="post">
                     <div class="form-row">
                         <input id="EnderecoID" type="hidden" />
                         <div class="form-group col-md-12">
                             <div class="form-group">
                                 <label class="col-form-label">Rua</label>
-                                <input id="Rua" type="text" class="form-control">                             
+                                <input id="Rua" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <div class="form-group">
-                                <label  class="col-form-label">Bairro</label>
+                                <label class="col-form-label">Bairro</label>
                                 <input id="Bairro" type="text" class="form-control">
                             </div>
                         </div>
@@ -111,7 +110,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Estado</label>
-                            <input id="Estado"  class="form-control" type="text">
+                            <input id="Estado" class="form-control" type="text">
                         </div>
                         <div class="form-group col-md-12">
                             <label class="col-form-label">CEP</label>
@@ -131,3 +130,28 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        $(".editar").click(function () {
+            if ($.active != 0) {
+                return;
+            }
+            var enderecoID = { EnderecoID: parseInt($(this).prop("id")), Enderecos : null };
+            console.log(JSON.stringify(enderecoID));
+            $.ajax({
+                url: "/Endereco/Editar",
+                method: "POST",
+                cache: false,
+                dataType: "json",
+                data: JSON.stringify(enderecoID),
+                success: function (data) {
+                    $("#myModal").modal();
+                    console.log(data);
+                },
+                error: function (xhr) {
+                    tratarExcecao(xhr);
+                }
+            });
+        });
+    </script>
+}
