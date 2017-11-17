@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 namespace StoreEP.Models.ViewModels
 {
     public class EnderecoViewModels
-    {
-        public IEnumerable<Endereco> Enderecos { get; set; }
+    { 
         public int EnderecoID { get; set; }
     }
 }

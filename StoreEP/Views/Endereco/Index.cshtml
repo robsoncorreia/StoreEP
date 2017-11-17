@@ -1,8 +1,8 @@
-@model EnderecoViewModels
+@model IEnumerable<Endereco>
 @{
     ViewBag.Title = "Lista de Endereços";
     Layout = "_Layout";
-    var enderecoUtilizado = Model.Enderecos.Select(e => e.DataUtilizacao).Max();
+    var enderecoUtilizado = Model.Select(e => e.DataUtilizacao).Max();
 }
 <style>
     .card {
@@ -19,7 +19,7 @@
         </div>
     }
     <div class="row">
-        @foreach (var endereco in Model.Enderecos)
+        @foreach (var endereco in Model)
         {
             <div class="card col col-sm-3"
                  style="@(endereco.DataUtilizacao == enderecoUtilizado ? "box-shadow: 1px 1px 4px #006555, 1px 1px 4px #14673a;" : "box-shadow: 0px 0px 2px #8f8f8f;") ">
@@ -65,8 +65,6 @@
         <a asp-controller="Pedido" asp-action="Finalizar" class="btn btn-default btn-xs btn-primary">Finalizar pedido</a>
     </div>
 </div>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -94,14 +92,16 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-4">
                             <label class="col-form-label">Número</label>
                             <input id="Numero" type="text" class="form-control">
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-8">
                             <label class="col-form-label">Complemento</label>
                             <input id="Complemento" class="form-control" type="text">
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="col-form-label">Cidade</label>
                             <input id="Cidade" class="form-control" type="text">
@@ -112,20 +112,22 @@
                             <label>Estado</label>
                             <input id="Estado" class="form-control" type="text">
                         </div>
-                        <div class="form-group col-md-12">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label class="col-form-label">CEP</label>
                             <input id="CEP" class="form-control" type="text">
+                            <button class="btn btn-sm btn-success" type="submit" style="margin:10px 0 10px 0">@(ViewData["editar_endereco"] != null ? "Editar" : "Criar") Endereço</button>
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <label class="col-form-label">Pais</label>
                             <input id="Pais" class="form-control" type="text">
-                            <button class="btn btn-sm btn-success" type="submit" style="margin:10px 0 10px 0">@(ViewData["editar_endereco"] != null ? "Editar" : "Criar") Endereço</button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
@@ -136,22 +138,67 @@
             if ($.active != 0) {
                 return;
             }
-            var enderecoID = { EnderecoID: parseInt($(this).prop("id")), Enderecos : null };
-            console.log(JSON.stringify(enderecoID));
+            var enderecoID = { model: parseInt($(this).prop("id")) };
+            console.log($(this).prop("id"));
             $.ajax({
                 url: "/Endereco/Editar",
                 method: "POST",
                 cache: false,
                 dataType: "json",
-                data: JSON.stringify(enderecoID),
+                data: enderecoID,
                 success: function (data) {
                     $("#myModal").modal();
-                    console.log(data);
+                    $("#Rua").val(data.rua);
+                    $("#Bairro").val(data.bairro);
+                    $("#Cidade").val(data.cidade);
+                    $("#Estado").val(data.estado);
+                    $("#Numero").val(data.numero);
+                    $("#CEP").val(data.cep);
+                    $("#Complemento").val(data.complemento);
                 },
                 error: function (xhr) {
                     tratarExcecao(xhr);
                 }
             });
+        });
+        function limpa_formulário_cep() {
+            $("#Rua").val("");
+            $("#Bairro").val("");
+            $("#Cidade").val("");
+            $("#Estado").val("");
+        }
+        $("#CEP").mask("99999-999");
+        $("#CEP").blur(function () {
+            var cep = $(this).val().replace(/\D/g, '');
+            if (cep != "") {
+                var validacep = /^[0-9]{8}$/;
+                if (validacep.test(cep)) {
+                    $("#Rua").val("...");
+                    $("#Bairro").val("...");
+                    $("#Cidade").val("...");
+                    $("#Estado").val("...");
+                    $.getJSON("//viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+                        if (!("erro" in dados)) {
+                            $("#Rua").val(dados.logradouro);
+                            $("#Bairro").val(dados.bairro);
+                            $("#Cidade").val(dados.localidade);
+                            $("#Estado").val(dados.uf);
+                        }
+                        else {
+                            limpa_formulário_cep();
+                            alert("CEP não encontrado.");
+                        }
+                    });
+                }
+                else {
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            }
+            else {
+                limpa_formulário_cep();
+            }
         });
     </script>
 }

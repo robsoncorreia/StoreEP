@@ -33,7 +33,7 @@ namespace StoreEP.Controllers
                 IEnumerable<Endereco> enderecos = _EnderecoRepositorio.Enderecos
                                                                         .Where(a => a.UserId.Equals(user.Id))
                                                                         .ToList();
-                return View(new EnderecoViewModels { Enderecos = enderecos });
+                return View(enderecos);
             }
             TempData["endereco"] = "Você não possui endereços.";
             return RedirectToAction(nameof(Criar));
@@ -59,10 +59,10 @@ namespace StoreEP.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult Editar(EnderecoViewModels model)
+        public JsonResult Editar(string model )
         {
             Endereco editarEndereco = _EnderecoRepositorio.Enderecos
-                                                            .FirstOrDefault(e => e.EnderecoID == model.EnderecoID);
+                                                            .FirstOrDefault(e => e.EnderecoID == int.Parse(model ?? "0"));
             ViewData["editar_endereco"] = true;
             return Json(editarEndereco);
         }
