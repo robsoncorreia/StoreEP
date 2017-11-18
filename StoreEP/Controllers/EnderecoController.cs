@@ -54,15 +54,31 @@ namespace StoreEP.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        public async Task<JsonResult> Editar(Endereco model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                model.UserId = user.Id;
+                ModelState.Remove("UserId");
+                if (ModelState.IsValid)
+                {
+                    _EnderecoRepositorio.SalvarEndereco(model);
+                    //return RedirectToAction(nameof(Index));
+                }
+            }
+            return Json(model);
+        }
         public IActionResult Criar()
         {
             return View();
         }
         [HttpPost]
-        public JsonResult Editar(string model )
+        public JsonResult GetEndereco(int model)
         {
             Endereco editarEndereco = _EnderecoRepositorio.Enderecos
-                                                            .FirstOrDefault(e => e.EnderecoID == int.Parse(model ?? "0"));
+                                                            .FirstOrDefault(e => e.EnderecoID == model);
             ViewData["editar_endereco"] = true;
             return Json(editarEndereco);
         }

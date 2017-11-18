@@ -27,7 +27,7 @@
                     <div class="card-header">
                         @endereco.Estado<br>
                     </div>
-                    <h5>
+                    <h5 id="h5_@endereco.EnderecoID">
                         @endereco.Rua,
                         @endereco.Numero<br>
                         @endereco.Bairro<br>
@@ -75,56 +75,55 @@
                 <h4 class="modal-title">Endereço</h4>
             </div>
             <div class="modal-body">
-                <form method="post">
-                    <div class="form-row">
-                        <input id="EnderecoID" type="hidden" />
-                        <div class="form-group col-md-12">
-                            <div class="form-group">
-                                <label class="col-form-label">Rua</label>
-                                <input id="Rua" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <div class="form-group">
-                                <label class="col-form-label">Bairro</label>
-                                <input id="Bairro" type="text" class="form-control">
-                            </div>
+                <div class="form-row">
+                    <input id="EnderecoID" type="hidden" />
+                    <input id="UserID" type="hidden" />
+                    <div class="form-group col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label">Rua</label>
+                            <input id="Rua" type="text" class="form-control">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label class="col-form-label">Número</label>
-                            <input id="Numero" type="text" class="form-control">
-                        </div>
-                        <div class="form-group col-md-8">
-                            <label class="col-form-label">Complemento</label>
-                            <input id="Complemento" class="form-control" type="text">
+                    <div class="form-group col-md-12">
+                        <div class="form-group">
+                            <label class="col-form-label">Bairro</label>
+                            <input id="Bairro" type="text" class="form-control">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label class="col-form-label">Cidade</label>
-                            <input id="Cidade" class="form-control" type="text">
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label">Número</label>
+                        <input id="Numero" type="text" class="form-control">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label>Estado</label>
-                            <input id="Estado" class="form-control" type="text">
-                        </div>
+                    <div class="form-group col-md-8">
+                        <label class="col-form-label">Complemento</label>
+                        <input id="Complemento" class="form-control" type="text">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="col-form-label">CEP</label>
-                            <input id="CEP" class="form-control" type="text">
-                            <button id="editar_endereco" class="btn btn-sm btn-success" type="submit" style="margin:10px 0 10px 0">@(ViewData["editar_endereco"] != null ? "Editar" : "Criar") Endereço</button>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-form-label">Pais</label>
-                            <input id="Pais" class="form-control" type="text">
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label">Cidade</label>
+                        <input id="Cidade" class="form-control" type="text">
                     </div>
-                </form>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Estado</label>
+                        <input id="Estado" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">CEP</label>
+                        <input id="CEP" class="form-control" type="text">
+                        <button id="editar_endereco" class="btn btn-sm btn-success" style="margin:10px 0 10px 0">Editar Endereço</button>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Pais</label>
+                        <input id="Pais" class="form-control" type="text">
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -134,43 +133,82 @@
 </div>
 @section scripts{
     <script>
+        function atualizarEndereco(endereco) {
+            $("#h5_" + endereco.EnderecoID).html(
+                endereco.Rua + ', ' +
+                endereco.Numero + '<br>' +
+                endereco.Bairro + '<br>' +
+                endereco.Cidade + '<br>' +
+                endereco.CEP + '<br>'
+            );
+        }
+        function tratarExcecao(xhr) {
+            var excecao = JSON.parse(xhr.responseText);
+            alert("Erro ocorrido: " + excecao.ExceptionMessage);
+        }
+        function post(url, data) {
+            return $.ajax({
+                url: url,
+                method: "POST",
+                cache: false,
+                data: data,
+                success: function (data) {
+                    preencheForm(data);
+                    let action = url.substring(10, 11);
+                    $("#myModal").modal(action == "E" ? 'hide' : null);
+                },
+                error: function (xhr) {
+                    tratarExcecao(xhr);
+                }
+            });
+        }
+        function preencheForm(data) {
+            $("#EnderecoID").val(data.enderecoID);
+            $("#Rua").val(data.rua);
+            $("#Bairro").val(data.bairro);
+            $("#Cidade").val(data.cidade);
+            $("#Estado").val(data.estado);
+            $("#Numero").val(data.numero);
+            $("#CEP").val(data.cep);
+            $("#Complemento").val(data.complemento);
+            $("#Pais").val(data.pais);
+            $("#UserID").val(data.userId);
+            var endereco = {
+                Rua: $("#Rua").val(),
+                Bairro: $("#Bairro").val(),
+                Cidade: $("#Cidade").val(),
+                Estado: $("#Estado").val(),
+                Numero: $("#Numero").val(),
+                Pais: $("#Pais").val(),
+                CEP: $("#CEP").val(),
+                EnderecoID: $("#EnderecoID").val(),
+                UserId: $("#UserID").val()
+            };
+            atualizarEndereco(endereco);
+        }
         $("#editar_endereco").click(function () {
             var endereco = {
-                rua: $("#Rua").val(),
-                bairro: $("#Bairro").val(),
-                cidade: $("#Cidade").val(),
-                estado: $("#Estado").val(),
-                numero: $("#Numero").val(),
-                pais:  $("#Pais").val()
+                Rua: $("#Rua").val(),
+                Bairro: $("#Bairro").val(),
+                Cidade: $("#Cidade").val(),
+                Estado: $("#Estado").val(),
+                Numero: $("#Numero").val(),
+                Pais: $("#Pais").val(),
+                CEP: $("#CEP").val(),
+                EnderecoID: $("#EnderecoID").val(),
+                UserId: $("#UserID").val()
+            };
+            if ($.active != 0) {
+                return;
             }
+            post("/Endereco/Editar", endereco);
         });
         $(".editar").click(function () {
             if ($.active != 0) {
                 return;
             }
             var enderecoID = { model: parseInt($(this).prop("id")) };
-            console.log($(this).prop("id"));
-            $.ajax({
-                url: "/Endereco/Editar",
-                method: "POST",
-                cache: false,
-                dataType: "json",
-                data: enderecoID,
-                success: function (data) {
-                    $("#myModal").modal();
-                    $("#Rua").val(data.rua);
-                    $("#Bairro").val(data.bairro);
-                    $("#Cidade").val(data.cidade);
-                    $("#Estado").val(data.estado);
-                    $("#Numero").val(data.numero);
-                    $("#CEP").val(data.cep);
-                    $("#Complemento").val(data.complemento);
-                    $("#Pais").val(data.pais);
-                },
-                error: function (xhr) {
-                    tratarExcecao(xhr);
-                }
-            });
+            post("/Endereco/GetEndereco", enderecoID)
         });
         function limpa_formulário_cep() {
             $("#Rua").val("");
