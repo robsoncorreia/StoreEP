@@ -24,62 +24,65 @@ namespace StoreEP.Controllers
         public async Task<IActionResult> Index(string returnUrl)
         {
             var user = await _userManager.GetUserAsync(User);
+
             if (user == null)
             {
-                return RedirectToAction("Login", "Account");
+                ViewLogin();
             }
-            if (user != null && _EnderecoRepositorio.Enderecos.Where(a => a.UserId.Equals(user.Id)).Count() != 0)
+            IEnumerable<Endereco> enderecos = _EnderecoRepositorio.Enderecos
+                                                                       .Where(a => a.UserId.Equals(user.Id))
+                                                                       .ToList();
+            if (enderecos.Count() == 0)
             {
-                IEnumerable<Endereco> enderecos = _EnderecoRepositorio.Enderecos
-                                                                        .Where(a => a.UserId.Equals(user.Id))
-                                                                        .ToList();
-                return View(enderecos);
+                Alerta("Você não possui endereços.");
             }
-            TempData["endereco"] = "Você não possui endereços.";
-            return RedirectToAction(nameof(Criar));
+            return View(enderecos);
         }
         [HttpPost]
-        public async Task<IActionResult> Criar(Endereco model)
+        public async Task<JsonResult> Criar(Endereco model)
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user != null)
+            if (user == null)
             {
-                model.UserId = user.Id;
-                ModelState.Remove("UserId");
-                if (ModelState.IsValid)
-                {
-                    _EnderecoRepositorio.SalvarEndereco(model);
-                    return RedirectToAction(nameof(Index));
-                }
+                ViewLogin();
             }
-            return View(model);
+            model.UserId = user.Id;
+            ModelState.Remove("UserId");
+            if (!ModelState.IsValid)
+            {
+                return Json(null);
+            }
+            if (_EnderecoRepositorio.SalvarEndereco(model) == 0)
+            {
+                return Json(null);
+            }
+            Alerta("Endereço criado.");
+            return Json(GetUltimoEnderecoUtilizado(user));
         }
         [HttpPost]
         public async Task<JsonResult> Editar(Endereco model)
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user != null)
+            if (user == null)
             {
-                model.UserId = user.Id;
-                ModelState.Remove("UserId");
-                if (ModelState.IsValid)
-                {
-                    _EnderecoRepositorio.SalvarEndereco(model);
-                    //return RedirectToAction(nameof(Index));
-                }
+                ViewLogin();
             }
-            return Json(model);
-        }
-        public IActionResult Criar()
-        {
-            return View();
+            model.UserId = user.Id;
+            ModelState.Remove("UserId");
+            if (ModelState.IsValid)
+            {
+                _EnderecoRepositorio.SalvarEndereco(model);
+                Alerta("Endereço editado.");
+                return Json(model);
+            }
+            return Json(null);
         }
         [HttpPost]
         public JsonResult GetEndereco(int model)
         {
             Endereco editarEndereco = _EnderecoRepositorio.Enderecos
                                                             .FirstOrDefault(e => e.EnderecoID == model);
-            ViewData["editar_endereco"] = true;
+            Alerta("true");
             return Json(editarEndereco);
         }
 
@@ -89,7 +92,7 @@ namespace StoreEP.Controllers
             if (apagarEndereco != null)
             {
                 _EnderecoRepositorio.ApagarEndereco(enderecoId);
-                TempData["endereco"] = "Endereço apagado.";
+                Alerta("Endereço apagado.");
             }
             return RedirectToAction(nameof(Index));
         }
@@ -102,6 +105,18 @@ namespace StoreEP.Controllers
                 _EnderecoRepositorio.SalvarEndereco(endereco);
             }
             return RedirectToAction(nameof(Index));
+        }
+        private Endereco GetUltimoEnderecoUtilizado(IdentityUser user)
+        {
+            return _EnderecoRepositorio.Enderecos.FirstOrDefault(a => a.UserId.Equals(user.Id) && a.DataUtilizacao == (_EnderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id)).Select(e => e.DataUtilizacao).Max()));
+        }
+        private ActionResult ViewLogin()
+        {
+            return RedirectToAction(actionName: "Login", controllerName: "Account");
+        }
+        private void Alerta(string mensagem)
+        {
+            TempData["endereco"] = mensagem;
         }
     }
 }

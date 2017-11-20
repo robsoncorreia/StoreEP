@@ -14,7 +14,7 @@ namespace StoreEP.Models
         }
         public IEnumerable<Endereco> Enderecos => context.Enderecos;
 
-        public void SalvarEndereco(Endereco endereco)
+        public int SalvarEndereco(Endereco endereco)
         {
             if (endereco.EnderecoID == 0)
             {
@@ -35,7 +35,7 @@ namespace StoreEP.Models
                     dbEntry.CEP = endereco.CEP;
                 }
             }
-            context.SaveChanges();
+            return context.SaveChanges();
         }
         public Endereco ApagarEndereco(int id)
         {

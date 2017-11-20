@@ -2,7 +2,11 @@
 @{
     ViewBag.Title = "Lista de Endereços";
     Layout = "_Layout";
-    var enderecoUtilizado = Model.Select(e => e.DataUtilizacao).Max();
+    DateTime enderecoUtilizado = DateTime.Now;
+    if (Model.Count() > 0)
+    {
+        enderecoUtilizado = Model.Select(e => e.DataUtilizacao).Max();
+    }
 }
 <style>
     .card {
@@ -61,7 +65,7 @@
         }
     </div>
     <div class="text-center">
-        <a asp-controller="Endereco" asp-action="Criar" class="btn btn-default btn-xs btn-success">Criar novo</a>
+        <a id="btn_criar" class="btn btn-default btn-xs btn-success">Criar novo</a>
         <a asp-controller="Pedido" asp-action="Finalizar" class="btn btn-default btn-xs btn-primary">Finalizar pedido</a>
     </div>
 </div>
@@ -75,6 +79,16 @@
                 <h4 class="modal-title">Endereço</h4>
             </div>
             <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">CEP</label>
+                        <input id="CEP" class="form-control" type="text">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Pais</label>
+                        <input id="Pais" class="form-control" type="text">
+                    </div>
+                </div>
                 <div class="form-row">
                     <input id="EnderecoID" type="hidden" />
                     <input id="UserID" type="hidden" />
@@ -102,26 +116,14 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                         <label class="col-form-label">Cidade</label>
                         <input id="Cidade" class="form-control" type="text">
+                        <button id="btn_endereco" class="btn btn-sm btn-success" style="margin:10px 0 10px 0">Editar Endereço</button>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                         <label>Estado</label>
                         <input id="Estado" class="form-control" type="text">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label">CEP</label>
-                        <input id="CEP" class="form-control" type="text">
-                        <button id="editar_endereco" class="btn btn-sm btn-success" style="margin:10px 0 10px 0">Editar Endereço</button>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label">Pais</label>
-                        <input id="Pais" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -133,14 +135,20 @@
 </div>
 @section scripts{
     <script>
+        var opcaoEndereco = 1;
         function atualizarEndereco(endereco) {
-            $("#h5_" + endereco.EnderecoID).html(
-                endereco.Rua + ', ' +
-                endereco.Numero + '<br>' +
-                endereco.Bairro + '<br>' +
-                endereco.Cidade + '<br>' +
-                endereco.CEP + '<br>'
-            );
+            let cartaoEnderecoExiste = $("#h5_" + endereco.EnderecoID).length != 0;
+            if (cartaoEnderecoExiste) {
+                $("#h5_" + endereco.EnderecoID).html(
+                    endereco.Rua + ', ' +
+                    endereco.Numero + '<br>' +
+                    endereco.Bairro + '<br>' +
+                    endereco.Cidade + '<br>' +
+                    endereco.CEP + '<br>'
+                );
+            } else {
+                location.reload();
+            }
         }
         function tratarExcecao(xhr) {
             var excecao = JSON.parse(xhr.responseText);
@@ -186,7 +194,14 @@
             };
             atualizarEndereco(endereco);
         }
-        $("#editar_endereco").click(function () {
+        $("#btn_criar").click(function () {
+            opcaoEndereco = 0;
+            $("#myModal").modal();
+            limparFormulario();
+            $("#btn_endereco").html("Criar endereço");
+        });
+        $("#btn_endereco").click(function () {
+            $("#btn_endereco").html("Editar endereço");
             var endereco = {
                 Rua: $("#Rua").val(),
                 Bairro: $("#Bairro").val(),
@@ -201,7 +216,14 @@
             if ($.active != 0) {
                 return;
             }
-            post("/Endereco/Editar", endereco);
+            if (opcaoEndereco === 0) {
+                opcaoEndereco = 1;
+                endereco.EnderecoID = 0;
+                post("/Endereco/Criar", endereco);
+            } else {
+                post("/Endereco/Editar", endereco);
+            }
+
         });
         $(".editar").click(function () {
             if ($.active != 0) {
@@ -210,11 +232,16 @@
             var enderecoID = { model: parseInt($(this).prop("id")) };
             post("/Endereco/GetEndereco", enderecoID)
         });
-        function limpa_formulário_cep() {
+        function limparFormulario() {
             $("#Rua").val("");
             $("#Bairro").val("");
             $("#Cidade").val("");
             $("#Estado").val("");
+            $("#Numero").val("");
+            $("#Pais").val("");
+            $("#CEP").val("");
+            $("#EnderecoID").val("");
+            $("#UserID").val("");
         }
         $("#CEP").mask("99999-999");
         $("#CEP").blur(function () {
@@ -235,18 +262,18 @@
                             $("#Estado").val(dados.uf);
                         }
                         else {
-                            limpa_formulário_cep();
+                            limparFormulario();
                             alert("CEP não encontrado.");
                         }
                     });
                 }
                 else {
-                    limpa_formulário_cep();
+                    limparFormulario();
                     alert("Formato de CEP inválido.");
                 }
             }
             else {
-                limpa_formulário_cep();
+                limparFormulario();
             }
         });
     </script>

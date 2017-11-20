@@ -179,13 +179,15 @@ namespace StoreEP.Controllers
         {
             if (produtoID == 0)
             {
-                return NotFound();
+                Alerta("Produto não encontrado.");
+                return RedirectToAction(actionName: nameof(Listar));
             }
             Produto produto = _produtoRepositorio.Produtos
                                         .SingleOrDefault(p => p.ProdutoID == produtoID);
             if (produto == null)
             {
-                return NotFound();
+                Alerta("Produto não encontrado.");
+                return RedirectToAction(actionName: nameof(Listar));
             }
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
@@ -212,6 +214,10 @@ namespace StoreEP.Controllers
                                                            .ToList();
             }
             return null;
+        }
+        private void Alerta(string mensagem)
+        {
+            TempData["mensagem"] = mensagem;
         }
         #endregion
     }

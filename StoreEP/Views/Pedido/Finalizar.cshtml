@@ -34,19 +34,25 @@
                         <img src="@linha.Produto.Imagens.Select(i => i.Link).FirstOrDefault()" alt="@linha.Produto.Imagens.Select(i => i.Nome).FirstOrDefault()" height="60" />
                     </td>
                     <td class="text-center">
-                        <a asp-action="Detalhes" asp-controller="Produtos" asp-route-ID="@linha.Produto.ProdutoID">
+                        <a asp-action="Detalhes" 
+                           asp-controller="Produtos" 
+                           asp-route-produtoID="@linha.Produto.ProdutoID">
                             @linha.Produto.Nome
                         </a>
                     </td>
                     <td class="text-center">@linha.Produto.Descricao</td>
                     <td class="text-center">@linha.Produto.Preco.ToString("c")</td>
                     <td class="text-center">
-                        <a asp-action="Listar" asp-controller="Produtos" asp-route-categoria="@linha.Produto.Categoria">
+                        <a asp-action="Listar" 
+                           asp-controller="Produtos" 
+                           asp-route-categoria="@linha.Produto.Categoria">
                             @linha.Produto.Categoria
                         </a>
                     </td>
                     <td class="text-center">
-                        <a asp-action="BuscarFabricante" asp-controller="Produtos" asp-route-fabricante="@linha.Produto.Fabricante">
+                        <a asp-action="BuscarFabricante" 
+                           asp-controller="Produtos" 
+                           asp-route-fabricante="@linha.Produto.Fabricante">
                             @linha.Produto.Fabricante
                         </a>
                     </td>
@@ -103,21 +109,15 @@
                 </td>
             </tr>
         </table>
-        @*<a asp-action="Criar" asp-controller="Endereco" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                <i class="material-icons">add</i>
-            </a>*@
     </div>
     <div id="pagamento" class="tab-pane fade">
         <form asp-action="Finalizar" method="post">
             <div>
-                <span class="mdl-chip mdl-chip--contact">
-                    <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white">T</span>
-                    <span class="mdl-chip__text">@Model.Carrinho.ValorTotal().ToString("c")</span>
-                </span>
+                    <span>@Model.Carrinho.ValorTotal().ToString("c")</span>
             </div>
             <div>
                 <button type="submit" class="btn btn-default btn-sm">
-                    <i class="material-icons" style="color: navy;">payment</i>
+                    Finalizar <span class="glyphicon glyphicon-check"></span>
                 </button>
             </div>
             <input asp-for="EnderecoId" type="hidden" value="@Model.Endereco.EnderecoID" />

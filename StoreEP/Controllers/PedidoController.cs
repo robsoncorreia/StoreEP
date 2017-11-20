@@ -101,21 +101,23 @@ namespace StoreEP.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
-            bool possuiEndereco = _enderecoRepositorio.Enderecos.Where(e => e.UserId.Equals(user.Id) &&
-                                                                        !e.UserId.Equals("apagado")).Count() == 0;
-            if (possuiEndereco)
-            {
-                TempData["endereco"] = "Você não possui endereços cadastrados.";
-                return RedirectToAction(actionName: "Criar", controllerName: "Endereco");
-            }
             var enderecos = _enderecoRepositorio.Enderecos
-                                                .Where(e => e.UserId == user.Id)
+                                                .Where(e => e.UserId.Equals(user.Id))
                                                 .ToList();
             if (_carrinho.QuantidadeTotal() == 0)
             {
                 TempData["carrinho"] = "Seu carrinho de compras esta vazio.";
                 return RedirectToAction(actionName: "Listar", controllerName: "Produtos");
             }
+
+            bool naoEndereco = enderecos.Where(e => !e.UserId.Equals("apagado")).Count() == 0;
+
+            if (naoEndereco)
+            {
+                TempData["endereco"] = "Você não possui endereços cadastrados.";
+                return RedirectToAction(actionName: "Index", controllerName: "Endereco");
+            }
+                      
             return View(new FinalizarPedidoViewModel
             {
                 Carrinho = _carrinho,

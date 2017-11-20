@@ -8,7 +8,7 @@ namespace StoreEP.Models
     public interface IEnderecoRepositorio
     {
         IEnumerable<Endereco> Enderecos { get; }
-        void SalvarEndereco(Endereco endereco);
+        int SalvarEndereco(Endereco endereco);
         Endereco ApagarEndereco(int id);
     }
 }
