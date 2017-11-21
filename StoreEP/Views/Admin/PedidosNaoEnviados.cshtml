@@ -1,8 +1,38 @@
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+@model IEnumerable<Pedido>
 @{
     Layout = "_GerenciamentoLayout";
 }
-
-teste
+<table class="table">
+    <tr>
+        <th>Rua</th>
+        <th>Número</th>
+        <th>Bairro</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+    </tr>
+    @foreach (Pedido pedido in Model)
+    {
+        <tr class="active">
+            <td>@pedido.Endereco.Rua</td>
+            <td>@pedido.Endereco.Numero</td>
+            <td>@pedido.Endereco.Bairro</td>
+            <td>@pedido.Endereco.Cidade</td>
+            <td>@pedido.Endereco.Estado</td>
+        </tr>
+        <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+        </tr>
+        @foreach (var item in pedido.Lines)
+        {
+            <tr>
+                <td>
+                    @item.Produto.Nome
+                </td>
+                <td>
+                    @item.Produto.Preco.ToString("c")
+                </td>
+            </tr>
+        }
+    }
+</table>
