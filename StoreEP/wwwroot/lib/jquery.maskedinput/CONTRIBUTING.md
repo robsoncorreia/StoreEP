@@ -110,7 +110,7 @@ in order to craft an excellent pull request:
    ```
 
 7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
-    with a Clear title and description.
+    with a clear title and description.
 
 8. If you haven't updated your pull request for a while, you should consider
    rebasing on master and resolving any conflicts.

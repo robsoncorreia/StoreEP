@@ -4,7 +4,7 @@ Axes that follow a cartesian grid are known as 'Cartesian Axes'. Cartesian axes 
 
 * [linear](./linear.md#linear-cartesian-axis)
 * [logarithmic](./logarithmic.md#logarithmic-cartesian-axis)
-* [categoria](./categoria.md#categoria-cartesian-axis)
+* [category](./category.md#category-cartesian-axis)
 * [time](./time.md#time-cartesian-axis)
 
 # Common Configuration

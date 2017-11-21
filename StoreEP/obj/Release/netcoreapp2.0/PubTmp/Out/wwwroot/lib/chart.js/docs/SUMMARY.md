@@ -32,7 +32,7 @@
   * [Mixed](charts/mixed.md)
 * [Axes](axes/README.md)
   * [Cartesian](axes/cartesian/README.md)
-    * [Category](axes/cartesian/categoria.md)
+    * [Category](axes/cartesian/category.md)
     * [Linear](axes/cartesian/linear.md)
     * [Logarithmic](axes/cartesian/logarithmic.md)
     * [Time](axes/cartesian/time.md)

@@ -7,9 +7,8 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
 using StoreEP.Models;
-using StoreEP.Data;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace StoreEP
 {
@@ -20,6 +19,7 @@ namespace StoreEP
             var host = BuildWebHost(args);
             using (var scope = host.Services.CreateScope())
             {
+               
                 var services = scope.ServiceProvider;
                 try
                 {

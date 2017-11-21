@@ -55,7 +55,7 @@
   Carousel.prototype.cycle = function (e) {
     e || (this.paused = false)
 
-    this.interval && ClearInterval(this.interval)
+    this.interval && clearInterval(this.interval)
 
     this.options.interval
       && !this.paused
@@ -99,7 +99,7 @@
       this.cycle(true)
     }
 
-    this.interval = ClearInterval(this.interval)
+    this.interval = clearInterval(this.interval)
 
     return this
   }

@@ -14,7 +14,7 @@ defaults._set('line', {
 
 	scales: {
 		xAxes: [{
-			type: 'categoria',
+			type: 'category',
 			id: 'x-axis-0'
 		}],
 		yAxes: [{

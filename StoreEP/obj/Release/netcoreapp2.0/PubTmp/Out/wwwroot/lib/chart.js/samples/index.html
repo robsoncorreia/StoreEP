@@ -28,7 +28,7 @@
 	<script>
 		function createCategory(item) {
 			var el = document.createElement('div');
-			el.className = 'samples-categoria';
+			el.className = 'samples-category';
 			el.innerHTML =
 				'<div class="title">' + item.title + '</div>' +
 				'<div class="items"></div>';
@@ -44,14 +44,14 @@
 
 		var categories = document.getElementById('categories');
 		Samples.items.forEach(function(item) {
-			var categoria = createCategory(item);
-			var children = categoria.getElementsByClassName('items')[0];
+			var category = createCategory(item);
+			var children = category.getElementsByClassName('items')[0];
 
 			(item.items || []).forEach(function(item) {
 				children.appendChild(createEntry(item));
 			});
 
-			categories.appendChild(categoria);
+			categories.appendChild(category);
 		});
 	</script>
 </body>

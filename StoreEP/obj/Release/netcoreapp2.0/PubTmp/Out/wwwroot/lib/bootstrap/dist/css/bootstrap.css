@@ -630,7 +630,7 @@ th {
 .glyphicon-retweet:before {
   content: "\e115";
 }
-.glyphicon-shopping-Carrinho:before {
+.glyphicon-shopping-cart:before {
   content: "\e116";
 }
 .glyphicon-folder-close:before {
@@ -1456,7 +1456,7 @@ dd {
     float: left;
     width: 160px;
     overflow: hidden;
-    Clear: left;
+    clear: left;
     text-align: right;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -3552,7 +3552,7 @@ tbody.collapse.in {
 .dropdown-menu > li > a {
   display: block;
   padding: 3px 20px;
-  Clear: both;
+  clear: both;
   font-weight: normal;
   line-height: 1.42857143;
   color: #333;
@@ -6458,8 +6458,8 @@ button.close {
     bottom: 20px;
   }
 }
-.Clearfix:before,
-.Clearfix:after,
+.clearfix:before,
+.clearfix:after,
 .dl-horizontal dd:before,
 .dl-horizontal dd:after,
 .container:before,
@@ -6493,7 +6493,7 @@ button.close {
   display: table;
   content: " ";
 }
-.Clearfix:after,
+.clearfix:after,
 .dl-horizontal dd:after,
 .container:after,
 .container-fluid:after,
@@ -6509,7 +6509,7 @@ button.close {
 .panel-body:after,
 .modal-header:after,
 .modal-footer:after {
-  Clear: both;
+  clear: both;
 }
 .center-block {
   display: block;

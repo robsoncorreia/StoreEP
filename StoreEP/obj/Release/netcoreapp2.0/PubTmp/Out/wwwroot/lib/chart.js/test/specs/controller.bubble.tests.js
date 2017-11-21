@@ -123,7 +123,7 @@ describe('Chart.controllers.bubble', function() {
 				title: false,
 				scales: {
 					xAxes: [{
-						type: 'categoria',
+						type: 'category',
 						display: false
 					}],
 					yAxes: [{

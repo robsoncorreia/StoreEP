@@ -411,8 +411,8 @@ module.exports = function (grunt) {
     compress: {
       main: {
         options: {
-          archive: 'bootstrap-<%= pkg.version %>-dist.CEP',
-          mode: 'CEP',
+          archive: 'bootstrap-<%= pkg.version %>-dist.zip',
+          mode: 'zip',
           level: 9,
           pretty: true
         },

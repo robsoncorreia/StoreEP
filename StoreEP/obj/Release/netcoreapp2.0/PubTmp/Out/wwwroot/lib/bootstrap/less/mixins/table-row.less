@@ -1,15 +1,15 @@
 // Tables
 
-.table-row-variant(@Estado; @background) {
+.table-row-variant(@state; @background) {
   // Exact selectors below required to override `.table-striped` and prevent
   // inheritance to nested tables.
   .table > thead > tr,
   .table > tbody > tr,
   .table > tfoot > tr {
-    > td.@{Estado},
-    > th.@{Estado},
-    &.@{Estado} > td,
-    &.@{Estado} > th {
+    > td.@{state},
+    > th.@{state},
+    &.@{state} > td,
+    &.@{state} > th {
       background-color: @background;
     }
   }
@@ -17,11 +17,11 @@
   // Hover states for `.table-hover`
   // Note: this is not available for cells or rows within `thead` or `tfoot`.
   .table-hover > tbody > tr {
-    > td.@{Estado}:hover,
-    > th.@{Estado}:hover,
-    &.@{Estado}:hover > td,
-    &:hover > .@{Estado},
-    &.@{Estado}:hover > th {
+    > td.@{state}:hover,
+    > th.@{state}:hover,
+    &.@{state}:hover > td,
+    &:hover > .@{state},
+    &.@{state}:hover > th {
       background-color: darken(@background, 5%);
     }
   }

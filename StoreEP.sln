@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreEP", "StoreEP\StoreEP.csproj", "{45A76FBA-1061-422E-9703-BA931C6BFE07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreEP", "StoreEP\StoreEP.csproj", "{951417FE-836D-4CDE-8EA1-31BE29025C25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{45A76FBA-1061-422E-9703-BA931C6BFE07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45A76FBA-1061-422E-9703-BA931C6BFE07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45A76FBA-1061-422E-9703-BA931C6BFE07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45A76FBA-1061-422E-9703-BA931C6BFE07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{951417FE-836D-4CDE-8EA1-31BE29025C25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{951417FE-836D-4CDE-8EA1-31BE29025C25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{951417FE-836D-4CDE-8EA1-31BE29025C25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{951417FE-836D-4CDE-8EA1-31BE29025C25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C2707E12-DA6D-4333-93B2-E5A4EEB10BCF}
+		SolutionGuid = {985744B3-C7BA-4755-BCED-C116A96DBC77}
 	EndGlobalSection
 EndGlobal

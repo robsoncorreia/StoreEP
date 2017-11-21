@@ -34,7 +34,7 @@
     return $parent && $parent.length ? $parent : $this.parent()
   }
 
-  function ClearMenus(e) {
+  function clearMenus(e) {
     if (e && e.which === 3) return
     $(backdrop).remove()
     $(toggle).each(function () {
@@ -63,7 +63,7 @@
     var $parent  = getParent($this)
     var isActive = $parent.hasClass('open')
 
-    ClearMenus()
+    clearMenus()
 
     if (!isActive) {
       if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
@@ -71,7 +71,7 @@
         $(document.createElement('div'))
           .addClass('dropdown-backdrop')
           .insertAfter($(this))
-          .on('click', ClearMenus)
+          .on('click', clearMenus)
       }
 
       var relatedTarget = { relatedTarget: this }
@@ -156,7 +156,7 @@
   // ===================================
 
   $(document)
-    .on('click.bs.dropdown.data-api', ClearMenus)
+    .on('click.bs.dropdown.data-api', clearMenus)
     .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
     .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
     .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)

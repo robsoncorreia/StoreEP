@@ -11,7 +11,7 @@ defaults._set('bar', {
 
 	scales: {
 		xAxes: [{
-			type: 'categoria',
+			type: 'category',
 
 			// Specific to Bar Controller
 			categoryPercentage: 0.8,
@@ -46,7 +46,7 @@ defaults._set('horizontalBar', {
 
 		yAxes: [{
 			position: 'left',
-			type: 'categoria',
+			type: 'category',
 
 			// Specific to Horizontal Bar Controller
 			categoryPercentage: 0.8,

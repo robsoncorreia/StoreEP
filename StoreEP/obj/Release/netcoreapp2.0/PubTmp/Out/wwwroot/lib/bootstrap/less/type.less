@@ -82,7 +82,7 @@ small,
 
 mark,
 .mark {
-  background-color: @Estado-warning-bg;
+  background-color: @state-warning-bg;
   padding: .2em;
 }
 
@@ -106,16 +106,16 @@ mark,
   .text-emphasis-variant(@brand-primary);
 }
 .text-success {
-  .text-emphasis-variant(@Estado-success-text);
+  .text-emphasis-variant(@state-success-text);
 }
 .text-info {
-  .text-emphasis-variant(@Estado-info-text);
+  .text-emphasis-variant(@state-info-text);
 }
 .text-warning {
-  .text-emphasis-variant(@Estado-warning-text);
+  .text-emphasis-variant(@state-warning-text);
 }
 .text-danger {
-  .text-emphasis-variant(@Estado-danger-text);
+  .text-emphasis-variant(@state-danger-text);
 }
 
 // Contextual backgrounds
@@ -128,16 +128,16 @@ mark,
   .bg-variant(@brand-primary);
 }
 .bg-success {
-  .bg-variant(@Estado-success-bg);
+  .bg-variant(@state-success-bg);
 }
 .bg-info {
-  .bg-variant(@Estado-info-bg);
+  .bg-variant(@state-info-bg);
 }
 .bg-warning {
-  .bg-variant(@Estado-warning-bg);
+  .bg-variant(@state-warning-bg);
 }
 .bg-danger {
-  .bg-variant(@Estado-danger-bg);
+  .bg-variant(@state-danger-bg);
 }
 
 
@@ -208,14 +208,14 @@ dd {
 
 .dl-horizontal {
   dd {
-    &:extend(.Clearfix all); // Clear the floated `dt` if an empty `dd` is present
+    &:extend(.clearfix all); // Clear the floated `dt` if an empty `dd` is present
   }
 
   @media (min-width: @dl-horizontal-breakpoint) {
     dt {
       float: left;
       width: (@dl-horizontal-offset - 20);
-      Clear: left;
+      clear: left;
       text-align: right;
       .text-overflow();
     }

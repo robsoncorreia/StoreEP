@@ -20,18 +20,17 @@ namespace StoreEP
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            Configuration = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
-                .Build();
+            Configuration = configuration;
         }
+
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddNodeServices();
 
             services.AddDbContext<StoreEPDbContext>(options =>
@@ -88,7 +87,6 @@ namespace StoreEP
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<Carrinho>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
         }
@@ -98,15 +96,18 @@ namespace StoreEP
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
-                app.UseDatabaseErrorPage();
                 app.UseDeveloperExceptionPage();
-
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
+                    HotModuleReplacement = true
+                });
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseStaticFiles();
 
             app.UseStatusCodePages();
             app.UseStaticFiles();

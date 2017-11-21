@@ -25,21 +25,21 @@
     loadingText: 'loading...'
   }
 
-  Button.prototype.setState = function (Estado) {
+  Button.prototype.setState = function (state) {
     var d    = 'disabled'
     var $el  = this.$element
     var val  = $el.is('input') ? 'val' : 'html'
     var data = $el.data()
 
-    Estado += 'Text'
+    state += 'Text'
 
     if (data.resetText == null) $el.data('resetText', $el[val]())
 
     // push to event loop to allow forms to submit
     setTimeout($.proxy(function () {
-      $el[val](data[Estado] == null ? this.options[Estado] : data[Estado])
+      $el[val](data[state] == null ? this.options[state] : data[state])
 
-      if (Estado == 'loadingText') {
+      if (state == 'loadingText') {
         this.isLoading = true
         $el.addClass(d).attr(d, d).prop(d, true)
       } else if (this.isLoading) {

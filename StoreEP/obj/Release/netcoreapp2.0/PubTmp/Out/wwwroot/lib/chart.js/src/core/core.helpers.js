@@ -52,7 +52,7 @@ module.exports = function(Chart) {
 
 					for (i = 0; i < slen; ++i) {
 						scale = source[key][i];
-						type = helpers.valueOrDefault(scale.type, key === 'xAxes' ? 'categoria' : 'linear');
+						type = helpers.valueOrDefault(scale.type, key === 'xAxes' ? 'category' : 'linear');
 
 						if (i >= target[key].length) {
 							target[key].push({});

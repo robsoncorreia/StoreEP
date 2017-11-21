@@ -232,7 +232,7 @@ module.exports = function(Chart) {
 			if (options.scales) {
 				items = items.concat(
 					(options.scales.xAxes || []).map(function(xAxisOptions) {
-						return {options: xAxisOptions, dtype: 'categoria', dposition: 'bottom'};
+						return {options: xAxisOptions, dtype: 'category', dposition: 'bottom'};
 					}),
 					(options.scales.yAxes || []).map(function(yAxisOptions) {
 						return {options: yAxisOptions, dtype: 'linear', dposition: 'left'};
