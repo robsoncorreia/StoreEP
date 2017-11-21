@@ -32,6 +32,13 @@ namespace StoreEP.Controllers
         }
 
         public ViewResult Index() => View();
+        #region Pedido
+        public IActionResult PedidosNaoEnviados()
+        {
+            IEnumerable<Pedido> pedidos = _pedidoRepositorio.Pedidos.Where(p => p.Enviado == false).ToList();
+            return View(pedidos);
+        }
+        #endregion
 
         #region Produto
         [HttpGet("[controller]/[action]/{produtoID}")]

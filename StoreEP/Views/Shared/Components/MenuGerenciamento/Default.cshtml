@@ -21,7 +21,7 @@
         <a asp-action="Criar" asp-controller="Identidade" asp-route-opcaoSelecionada="4">Criar novos perfis</a>
     </li>
     <li class="@( selecionado == 5 ? "active" : "")">
-        <a asp-controller="Admin" asp-action="ValidarAvaliacoes" asp-route-opcaoSelecionada="5">
+        <a asp-controller="Admin" asp-action="PedidosNaoEnviados" asp-route-opcaoSelecionada="5">
             Pedidos não enviados <span class="badge">@Model.PedidosNaoEnviados</span>
         </a>
     </li>
