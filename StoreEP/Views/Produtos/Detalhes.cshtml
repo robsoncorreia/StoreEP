@@ -241,8 +241,9 @@ $(document).ready(function(){
             cache: false,
             dataType: "json",
             success: function (data) {
-                console.log(data);
-                $(".badge").text(data);
+                if (parseInt(data) > 0) {
+                    $(".badge").text(data);
+                }
             }
         });
     });
