@@ -36,11 +36,28 @@ namespace StoreEP.Controllers
         public int Adicionar(AddCarrinhoViewModel model)
         {
             int quantidade = model.QuantidadeProduto;
+            int quantidadeEmEstoque = _produtoRepositorio.Produtos
+                                                        .Where(p => p.ProdutoID == model.ProdutoID)
+                                                        .Select(p => p.Quantidade)
+                                                        .Sum();
+            int quantidadeNoCarrinho = _carrinho.Lines
+                                                .Where(p => p.Produto.ProdutoID == model.ProdutoID)
+                                                .Select(p => p.Quantidade)
+                                                .Sum();
             Produto produto = _produtoRepositorio.Produtos.FirstOrDefault(p => p.ProdutoID == model.ProdutoID);
+            bool produtoEmEstoque = quantidadeEmEstoque >= quantidadeNoCarrinho && 
+                                    quantidadeEmEstoque >= model.QuantidadeProduto;
             if (produto != null)
             {
-                int emEstoque = produto.Quantidade;
-                _carrinho.AddItem(produto, quantidade > 1 ? quantidade : 1);
+                if (produtoEmEstoque)
+                {
+                    _carrinho.AddItem(produto, quantidade > 1 ? quantidade : 1);
+                }
+                else
+                {
+                    TempData["fora_estoque"] = $"{produto.Nome} fora de estoque.";
+                    return -1;
+                }
             }
             return _carrinho.QuantidadeTotal();
 

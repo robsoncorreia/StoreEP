@@ -23,8 +23,16 @@
         .navbar {
             margin-bottom: 20px;
         }
-        .row{
+
+        .row {
             margin: 0px;
+        }
+
+        .fixed-bottom {
+            position: fixed;
+            height: 100px;
+            bottom: 0;
+            width: 100%
         }
     </style>
 </head>
@@ -64,9 +72,9 @@
                 @RenderBody()
                 @RenderSection("scripts", required: false)
             </div>
-        </div>       
+        </div>
     </div>
-    <footer class="footer bottom">
+    <footer class="fixed-bottom">
         <div class="container">
             <p class="text-muted">StoreEP @DateTime.Now.Year</p>
         </div>

@@ -75,7 +75,7 @@ namespace StoreEP.Controllers
                 Alerta("Endereço editado.");
                 return Json(model);
             }
-            return Json(null);
+            return Json(model);
         }
         [HttpPost]
         public JsonResult GetEndereco(int model)

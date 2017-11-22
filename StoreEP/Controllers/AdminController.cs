@@ -7,7 +7,6 @@ using StoreEP.Models;
 using Microsoft.AspNetCore.Authorization;
 using StoreEP.Models.ViewModels;
 using StoreEP.Models.Interface;
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace StoreEP.Controllers
 {
@@ -33,10 +32,27 @@ namespace StoreEP.Controllers
 
         public ViewResult Index() => View();
         #region Pedido
-        public IActionResult PedidosNaoEnviados()
+        [HttpGet]
+        public IActionResult PedidosNaoEnviados(int page = 1)
         {
+            int itensPorPagina = 1;
             IEnumerable<Pedido> pedidos = _pedidoRepositorio.Pedidos.Where(p => p.Enviado == false).ToList();
-            return View(pedidos);
+            int total = pedidos.Count();
+            pedidos = pedidos.Skip((page - 1) * itensPorPagina)
+                                .Take(itensPorPagina)
+                                .ToList();
+
+            NaoEnvidoViewModel model = new NaoEnvidoViewModel
+            {
+                Pedidos = pedidos,
+                PagingInfo = new PagingInfo 
+                {
+                    TotalItems = total,
+                    ItensPerPage = itensPorPagina,
+                    CurrentPage = page
+                }
+            };
+            return View(model);
         }
         #endregion
 

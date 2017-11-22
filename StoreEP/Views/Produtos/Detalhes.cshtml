@@ -49,6 +49,12 @@
         <strong>@TempData["mensagem"]</strong>
     </div>
 }
+@if (TempData["fora_estoque"] != null)
+{
+    <div class="alert alert-info">
+        <strong>@TempData["fora_estoque"]</strong>
+    </div>
+}
 <div class="row">
     <hr />
     @Html.Partial("_SliderImagensPartial", Model.Produto)
@@ -235,6 +241,7 @@ $(document).ready(function(){
             cache: false,
             dataType: "json",
             success: function (data) {
+                console.log(data);
                 $(".badge").text(data);
             }
         });

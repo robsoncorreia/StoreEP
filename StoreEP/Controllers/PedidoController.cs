@@ -99,7 +99,6 @@ namespace StoreEP.Controllers
         }
         public async Task<IActionResult> Finalizar()
         {
-            ClaimsPrincipal currentUser = this.User;
             var user = await _userManager.GetUserAsync(User);
             var enderecos = _enderecoRepositorio.Enderecos
                                                 .Where(e => e.UserId.Equals(user.Id))

@@ -34,8 +34,8 @@
                         <img src="@linha.Produto.Imagens.Select(i => i.Link).FirstOrDefault()" alt="@linha.Produto.Imagens.Select(i => i.Nome).FirstOrDefault()" height="60" />
                     </td>
                     <td class="text-center">
-                        <a asp-action="Detalhes" 
-                           asp-controller="Produtos" 
+                        <a asp-action="Detalhes"
+                           asp-controller="Produtos"
                            asp-route-produtoID="@linha.Produto.ProdutoID">
                             @linha.Produto.Nome
                         </a>
@@ -43,15 +43,15 @@
                     <td class="text-center">@linha.Produto.Descricao</td>
                     <td class="text-center">@linha.Produto.Preco.ToString("c")</td>
                     <td class="text-center">
-                        <a asp-action="Listar" 
-                           asp-controller="Produtos" 
+                        <a asp-action="Listar"
+                           asp-controller="Produtos"
                            asp-route-categoria="@linha.Produto.Categoria">
                             @linha.Produto.Categoria
                         </a>
                     </td>
                     <td class="text-center">
-                        <a asp-action="BuscarFabricante" 
-                           asp-controller="Produtos" 
+                        <a asp-action="BuscarFabricante"
+                           asp-controller="Produtos"
                            asp-route-fabricante="@linha.Produto.Fabricante">
                             @linha.Produto.Fabricante
                         </a>
@@ -63,9 +63,9 @@
                         @linha.Produto.Quantidade
                     </td>
                     <th>
-                        <a asp-action="RemoverCarrinho" 
-                           asp-controller="Carrinho" 
-                           asp-route-produtoID="@linha.Produto.ProdutoID" 
+                        <a asp-action="RemoverCarrinho"
+                           asp-controller="Carrinho"
+                           asp-route-produtoID="@linha.Produto.ProdutoID"
                            asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()" class="btn btn-danger btn-sm">
                             Remover
                         </a>
@@ -113,7 +113,7 @@
     <div id="pagamento" class="tab-pane fade">
         <form asp-action="Finalizar" method="post">
             <div>
-                    <span>@Model.Carrinho.ValorTotal().ToString("c")</span>
+                <span>@Model.Carrinho.ValorTotal().ToString("c")</span>
             </div>
             <div>
                 <button type="submit" class="btn btn-default btn-sm">
