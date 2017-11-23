@@ -12543,11 +12543,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\robson.correia\\Source\\Repos\\StoreEP\\StoreEP\\StoreEP.csproj",
+      "projectUniqueName": "C:\\Users\\robson.correia\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
       "projectName": "StoreEP",
-      "projectPath": "C:\\Users\\robson.correia\\Source\\Repos\\StoreEP\\StoreEP\\StoreEP.csproj",
+      "projectPath": "C:\\Users\\robson.correia\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
       "packagesPath": "C:\\Users\\robson.correia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\robson.correia\\Source\\Repos\\StoreEP\\StoreEP\\obj\\",
+      "outputPath": "C:\\Users\\robson.correia\\Desktop\\StoreEP\\StoreEP\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

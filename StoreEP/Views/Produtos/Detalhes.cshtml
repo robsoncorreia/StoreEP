@@ -59,7 +59,7 @@
     <hr />
     @Html.Partial("_SliderImagensPartial", Model.Produto)
     <hr />
-    <div class="col col-sm-4 col-lg-offset-1">
+    <div class="col col-lg-4 col-sm-12 col-lg-offset-1">
         <div class="panel-group">
             <div class="panel panel-success">
                 <div class="panel-heading">Detalhes</div>
@@ -79,14 +79,14 @@
                         <span class="text-success"> sem juros</span>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-8">
+                        <div class="form-group col-lg-8 col-sm-12">
                             <label style="margin: 30px 0;">Quantidade em estoque: </label>
                             <span>@Model.Produto.Quantidade</span>
                         </div>
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-lg-4 col-sm-12">
                             <div class="form-group">
                                 <label asp-for="Produto.Quantidade" class="col-form-label"></label>
-                                <input asp-for="Produto.Quantidade" class="form-control" value="1" />
+                                <input asp-for="Produto.Quantidade" class="form-control" value="1" min="1" max="@Model.Produto.Quantidade" />
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,9 @@
                 <form asp-route-url="@ViewContext.HttpContext.Request.PathAndQuery()" asp-action="Avaliar" asp-controller="Avaliacao">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                             <h4 class="modal-title" id="exampleModalLabel">Nova avaliação</h4>
                         </div>
                         <div class="modal-body">
@@ -204,10 +206,8 @@
         </div>
     </div>
 }
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
+<div id="myModal" class="modal fade" role="dialog"style="max-width: 320px;" >
+    <div class="modal-dialog" style="max-width: 320px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -224,7 +224,15 @@
     </div>
 </div>
 <script>
-$(document).ready(function(){
+    $(document).ready(function () {
+        $('#Produto_Quantidade').keyup( function () {
+            if (parseInt($(this).val()) > parseInt(@Model.Produto.Quantidade)) {
+                $(this).val(parseInt(@Model.Produto.Quantidade));
+            }
+            if (parseInt($(this).val()) <= 0){
+                $(this).val(1);
+            }
+        });
     $("#btn_add_carrinho").click(function () {
         var produtoID = @Model.Produto.ProdutoID;
         var quantidade = $("#Produto_Quantidade").val();
