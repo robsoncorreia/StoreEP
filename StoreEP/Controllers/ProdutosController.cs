@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using StoreEP.Models;
 using StoreEP.Models.ViewModels;
 using StoreEP.Models.Interface;
-using Microsoft.AspNetCore.Identity;
+using StoreEP.Cultura;using Microsoft.AspNetCore.Identity;
 
 namespace StoreEP.Controllers
 {

@@ -20,7 +20,7 @@
             </li>
             <li class="list-group-item text-right">
                 <span class="text-left" style="left: 12px; position: absolute;">
-                    @Model.Preco.ToString("c")
+                    @Model.Preco.ToString("c", Cultura.Brasil)
                 </span>
                 <a id="@Model.ProdutoID" data-toggle="modal" data-target="#myModal_@Model.ProdutoID" class="btn-success btn btn-sm">
                     Comprar
@@ -40,7 +40,7 @@
             </div>
             <div class="modal-body">
                 <p>@Model.Nome</p>
-                <p>@Model.Preco.ToString("c")</p>
+                <p>@Model.Preco.ToString("c", Cultura.Brasil)</p>
             </div>
             <div class="modal-footer">
                 <a asp-controller="Pedido" asp-action="Finalizar" class="btn btn-xs btn-success">Finalizar compra</a>
