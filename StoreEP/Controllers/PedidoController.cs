@@ -52,16 +52,16 @@ namespace StoreEP.Controllers
             return View(pedidos);
         }
 
-        [HttpPost]
-        public IActionResult MarkShipped(int ID)
+        [HttpGet("[controller]/[action]/{produtoID}")]
+        public IActionResult MarcarEnviado(int produtoID)
         {
-            Pedido pedido = _pedidoRepositorio.Pedidos.FirstOrDefault(p => p.PedidoID == ID);
+            Pedido pedido = _pedidoRepositorio.Pedidos.FirstOrDefault(p => p.PedidoID == produtoID);
             if (pedido != null)
             {
                 pedido.Enviado = true;
                 _pedidoRepositorio.Registrar(pedido);
             }
-            return RedirectToAction(nameof(ListarPedidos));
+            return RedirectToAction(controllerName:"Admin", actionName: "PedidosNaoEnviados");
         }
 
         [HttpPost]

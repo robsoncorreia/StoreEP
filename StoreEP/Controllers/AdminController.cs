@@ -31,6 +31,7 @@ namespace StoreEP.Controllers
         }
 
         public ViewResult Index() => View();
+
         #region Pedido
         [HttpGet]
         public IActionResult PedidosNaoEnviados(int page = 1)
@@ -45,7 +46,7 @@ namespace StoreEP.Controllers
             NaoEnvidoViewModel model = new NaoEnvidoViewModel
             {
                 Pedidos = pedidos,
-                PagingInfo = new PagingInfo 
+                PagingInfo = new PagingInfo
                 {
                     TotalItems = total,
                     ItensPerPage = itensPorPagina,
@@ -55,7 +56,6 @@ namespace StoreEP.Controllers
             return View(model);
         }
         #endregion
-
         #region Produto
         [HttpGet("[controller]/[action]/{produtoID}")]
         public ActionResult ConfirmaExclusaoProduto(int produtoID)

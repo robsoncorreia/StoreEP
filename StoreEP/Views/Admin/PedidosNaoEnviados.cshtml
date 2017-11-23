@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-8 col-md-8">
+        <div class="col-8 col-md-8 thumbnail">
             <table class="table">
                 <tr class="active">
                     <th></th>
@@ -67,67 +67,10 @@
             </table>
         </div>
     </div>
+    <div class="row">
+        <a asp-action="MarcarEnviado"
+           asp-controller="Pedido"
+           asp-route-produtoID="@pedido.PedidoID"
+           class="btn btn-info">Enviado</a>
+    </div>
 }
-@*
-        @foreach (Pedido pedido in Model.Pedidos)
-        {
-            <tr class="active">
-                <th>Pedido ID</th>
-                <th>Rua</th>
-                <th>Número</th>
-                <th>Bairro</th>
-                <th>Cidade</th>
-                <th>Estado</th>
-                <th>CEP</th>
-            </tr>
-            <tr>
-                <td>@pedido.PedidoID</td>
-                <td>@pedido.Endereco.Rua</td>
-                <td>@pedido.Endereco.Numero</td>
-                <td>@pedido.Endereco.Bairro</td>
-                <td>@pedido.Endereco.Cidade</td>
-                <td>@pedido.Endereco.Estado</td>
-                <td>@pedido.Endereco.CEP</td>
-            </tr>
-            <tr class="active">
-                <th></th>
-                <th></th>
-                <th>Nome</th>
-                <th>Fabricante</th>
-                <th>Categoria</th>
-                <th>Quantidade</th>
-                <th>Preço</th>
-            </tr>
-            @foreach (var item in pedido.Lines)
-            {
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        @item.Produto.Nome
-                    </td>
-                    <td>
-                        <a asp-action="BuscarFabricante" asp-controller="Produtos" asp-route-fabricante="@item.Produto.Fabricante">
-                            @item.Produto.Fabricante
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-action="Listar" asp-controller="Produtos" asp-route-categoria="@item.Produto.Categoria">
-                            @item.Produto.Categoria
-                        </a>
-                    </td>
-                    <td>
-                        @item.Quantidade
-                    </td>
-                    <td>
-                        @item.Produto.Preco.ToString("c")
-                    </td>
-                </tr>
-            }
-            <tr>
-                <td colspan="5"></td>
-                <td>Total</td>
-                <td>@pedido.Pagamento.Valor.ToString("c")
-            </tr>
-        }
-    </table>*@
