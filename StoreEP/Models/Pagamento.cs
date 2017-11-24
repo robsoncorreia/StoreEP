@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace StoreEP.Models
 {
+    public enum FormaPagamento : byte { CartaoCredito = 1, Boleto = 2, Dinheiro = 3 };
     public class Pagamento
     {
         [Key]
@@ -14,8 +15,8 @@ namespace StoreEP.Models
         public int PedidoId { get; set; }
         [Required]
         public decimal Valor { get; set; }
-        [Required]
         public DateTime DataCompra { get; set; } = DateTime.Now;
         public DateTime DataPagamento { get; set; }
+        public byte TipoPagamento { get; set; }
     }
 }

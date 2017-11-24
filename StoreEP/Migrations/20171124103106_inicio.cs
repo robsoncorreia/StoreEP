@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace StoreEP.Migrations.StoreEPDb
+namespace StoreEP.Migrations
 {
     public partial class inicio : Migration
     {
@@ -13,18 +13,18 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "Endereco",
                 columns: table => new
                 {
-                    EnderecoID = table.Column<int>(type: "int", nullable: false)
+                    EnderecoID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CEP = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Complemento = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DataUtilizacao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Pais = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rua = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Bairro = table.Column<string>(nullable: false),
+                    CEP = table.Column<string>(nullable: false),
+                    Cidade = table.Column<string>(nullable: false),
+                    Complemento = table.Column<string>(nullable: true),
+                    DataUtilizacao = table.Column<DateTime>(nullable: false),
+                    Estado = table.Column<string>(nullable: false),
+                    Numero = table.Column<string>(nullable: false),
+                    Pais = table.Column<string>(nullable: false),
+                    Rua = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,12 +35,12 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "HistoricoPreco",
                 columns: table => new
                 {
-                    HistoricoPrecoID = table.Column<int>(type: "int", nullable: false)
+                    HistoricoPrecoID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DataAltarecao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PrecoAntigo = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    PrecoNovo = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    ProdutoID = table.Column<int>(type: "int", nullable: false)
+                    DataAltarecao = table.Column<DateTime>(nullable: false),
+                    PrecoAntigo = table.Column<decimal>(nullable: false),
+                    PrecoNovo = table.Column<decimal>(nullable: false),
+                    ProdutoID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,16 +51,16 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "Produto",
                 columns: table => new
                 {
-                    ProdutoID = table.Column<int>(type: "int", nullable: false)
+                    ProdutoID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Categoria = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Fabricante = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Preco = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    Publicado = table.Column<bool>(type: "bit", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false)
+                    Categoria = table.Column<string>(nullable: false),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    Descricao = table.Column<string>(nullable: false),
+                    Fabricante = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(nullable: false),
+                    Preco = table.Column<decimal>(nullable: false),
+                    Publicado = table.Column<bool>(nullable: false),
+                    Quantidade = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,12 +71,12 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "Pedido",
                 columns: table => new
                 {
-                    PedidoID = table.Column<int>(type: "int", nullable: false)
+                    PedidoID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DataCompra = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EnderecoID = table.Column<int>(type: "int", nullable: true),
-                    Enviado = table.Column<bool>(type: "bit", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DataCompra = table.Column<DateTime>(nullable: false),
+                    EnderecoID = table.Column<int>(nullable: true),
+                    Enviado = table.Column<bool>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -93,17 +93,17 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "Avaliacao",
                 columns: table => new
                 {
-                    AvaliacaoID = table.Column<int>(type: "int", nullable: false)
+                    AvaliacaoID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Aprovado = table.Column<bool>(type: "bit", nullable: false),
-                    AvaliacaoID1 = table.Column<int>(type: "int", nullable: true),
-                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Estrela = table.Column<byte>(type: "tinyint", nullable: false),
-                    NomeUsuario = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProdutoID = table.Column<int>(type: "int", nullable: false),
-                    Texto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UsuarioID = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Aprovado = table.Column<bool>(nullable: false),
+                    AvaliacaoID1 = table.Column<int>(nullable: true),
+                    Data = table.Column<DateTime>(nullable: false),
+                    Estrela = table.Column<byte>(nullable: false),
+                    NomeUsuario = table.Column<string>(nullable: true),
+                    ProdutoID = table.Column<int>(nullable: false),
+                    Texto = table.Column<string>(nullable: false),
+                    Titulo = table.Column<string>(nullable: false),
+                    UsuarioID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -126,11 +126,11 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "Imagem",
                 columns: table => new
                 {
-                    ImagemID = table.Column<int>(type: "int", nullable: false)
+                    ImagemID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Link = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProdutoID = table.Column<int>(type: "int", nullable: false)
+                    Link = table.Column<string>(nullable: false),
+                    Nome = table.Column<string>(nullable: false),
+                    ProdutoID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -147,12 +147,12 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "ProdutosVisitados",
                 columns: table => new
                 {
-                    ProdutoVisitadoID = table.Column<int>(type: "int", nullable: false)
+                    ProdutoVisitadoID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DataHoraVisita = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProdutoID = table.Column<int>(type: "int", nullable: true),
-                    QuantidadeVisita = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DataHoraVisita = table.Column<DateTime>(nullable: false),
+                    ProdutoID = table.Column<int>(nullable: true),
+                    QuantidadeVisita = table.Column<int>(nullable: false),
+                    UserID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -169,11 +169,11 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "CartLine",
                 columns: table => new
                 {
-                    CartLineID = table.Column<int>(type: "int", nullable: false)
+                    CartLineID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PedidoID = table.Column<int>(type: "int", nullable: true),
-                    ProdutoID = table.Column<int>(type: "int", nullable: true),
-                    Quantidade = table.Column<int>(type: "int", nullable: false)
+                    PedidoID = table.Column<int>(nullable: true),
+                    ProdutoID = table.Column<int>(nullable: true),
+                    Quantidade = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -196,13 +196,14 @@ namespace StoreEP.Migrations.StoreEPDb
                 name: "Pagamento",
                 columns: table => new
                 {
-                    PagamentoID = table.Column<int>(type: "int", nullable: false)
+                    PagamentoID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DataCompra = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataPagamento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PedidoId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Valor = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    DataCompra = table.Column<DateTime>(nullable: false),
+                    DataPagamento = table.Column<DateTime>(nullable: false),
+                    PedidoId = table.Column<int>(nullable: false),
+                    TipoPagamento = table.Column<byte>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    Valor = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

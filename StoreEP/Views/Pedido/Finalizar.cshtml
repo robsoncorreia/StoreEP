@@ -112,16 +112,105 @@
     </div>
     <div id="pagamento" class="tab-pane fade">
         <form asp-action="Finalizar" method="post">
-            <div>
-                <span>@Model.Carrinho.ValorTotal().ToString("c")</span>
+            <div class="radio">
+                <label class="checkbox-inline">
+                    <input asp-for="Pagamento.TipoPagamento" value="@((byte)FormaPagamento.Boleto)" type="radio" class="radio" />Boleto
+                </label>
+                <label class="checkbox-inline">
+                    <input asp-for="Pagamento.TipoPagamento" value="@((byte)FormaPagamento.CartaoCredito)" type="radio" class="radio" />Cartão Credito
+                </label>
+                <label class="checkbox-inline">
+                    <input asp-for="Pagamento.TipoPagamento" value="@((byte)FormaPagamento.Dinheiro)" type="radio" class="radio" />Dinheiro
+                </label>
             </div>
-            <div>
-                <button type="submit" class="btn btn-default btn-sm">
-                    Finalizar <span class="glyphicon glyphicon-check"></span>
-                </button>
+            <div id="cartao_credito" class="row">
+                <div id="cartao_credito" class="col-xs-12 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                Detalhes do Cartão
+                            </h3>
+                            <div class="checkbox pull-right">
+                                <label>
+                                    <input type="checkbox" />
+                                    Salvar
+                                </label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="cardNumber">
+                                    Número do Cartão
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="cardNumber" placeholder="Número válido de cartão" required autofocus />
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-8 col-md-8" style="padding: 0">
+                                    <div class="form-group">
+                                        <label for="expityMonth">
+                                            Data validade
+                                        </label>
+                                        <div class="row">
+                                            <div class="col-xs-6 col-lg-6">
+                                                <input type="text" class="form-control" id="expityMonth" placeholder="MÊS" required />
+                                            </div>
+                                            <div class="col-xs-6 col-lg-6">
+                                                <input type="text" class="form-control" id="expityYear" placeholder="ANO" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-md-4 pull-right">
+                                    <div class="form-group">
+                                        <label for="cvCode">
+                                            CV código
+                                        </label>
+                                        <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active">
+                            <a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span>@Model.Carrinho.ValorTotal().ToString("c", Cultura.Brasil)</span> Pagamento Total</a>
+                        </li>
+                    </ul>
+                    <br />
+                    <button type="submit" class="btn btn-success btn-lg btn-block" role="button">
+                        Finalizar
+                    </button>
+                </div>
+                <input asp-for="EnderecoId" type="hidden" value="@Model.Endereco.EnderecoID" />
+                <input asp-for="Pagamento.Valor" type="hidden" value="@Model.Carrinho.ValorTotal()" />
             </div>
-            <input asp-for="EnderecoId" type="hidden" value="@Model.Endereco.EnderecoID" />
-            <input asp-for="Pagamento.Valor" type="hidden" value="@Model.Carrinho.ValorTotal()" />
         </form>
     </div>
 </div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#cartao_credito").hide();
+            $(".radio").click(function () {
+                if ($(this).val() == "") {
+                    return;
+                }
+                console.log($(this).val());
+                switch (parseInt($(this).val())) {
+                    case 1:
+                        $("#cartao_credito").show();
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                }
+            });
+        });
+    </script>
+}

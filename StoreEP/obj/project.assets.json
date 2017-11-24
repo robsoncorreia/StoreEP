@@ -9595,7 +9595,7 @@
       ]
     },
     "System.Linq.Queryable/4.0.1": {
-      "sha512": "Yn/WfYe9RoRfmSLvUt2JerP0BTGGykCZkQPgojaxgzF2N0oPo+/AhB8TXOpdCcNlrG3VRtsamtK2uzsp3cqRVw==",
+      "sha512": "52AjSCHkhCkjlMu0blm4/x8KJz+r+GHmzGkXDhi6olB0U7rjtGiVZ2ISXep+1jVU/hYhIMThkhIHEd6G2jRqKg==",
       "type": "package",
       "path": "system.linq.queryable/4.0.1",
       "files": [
@@ -12534,23 +12534,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\robso\\.nuget\\packages\\": {},
+    "C:\\Users\\robson.correia\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
+      "projectUniqueName": "C:\\Users\\robson.correia\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
       "projectName": "StoreEP",
-      "projectPath": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
-      "packagesPath": "C:\\Users\\robso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\robso\\Desktop\\StoreEP\\StoreEP\\obj\\",
+      "projectPath": "C:\\Users\\robson.correia\\Desktop\\StoreEP\\StoreEP\\StoreEP.csproj",
+      "packagesPath": "C:\\Users\\robson.correia\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\robson.correia\\Desktop\\StoreEP\\StoreEP\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\robso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\robson.correia\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
