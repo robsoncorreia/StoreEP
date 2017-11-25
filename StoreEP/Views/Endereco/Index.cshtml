@@ -70,7 +70,7 @@
     </div>
 </div>
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="myModal" class="modal fade" role="dialog" ng-app="">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -79,53 +79,57 @@
                 <h4 class="modal-title">Endereço</h4>
             </div>
             <div class="modal-body">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label">CEP</label>
-                        <input id="CEP" class="form-control" type="text">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label">Pais</label>
-                        <input id="Pais" class="form-control" type="text">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <input id="EnderecoID" type="hidden" />
-                    <input id="UserID" type="hidden" />
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <label class="col-form-label">Rua</label>
-                            <input id="Rua" type="text" class="form-control">
+                <form id="endereco_form" name="endereco_form">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label">CEP</label>
+                            <input id="CEP" class="form-control" type="text" name="CEP" ng-model="CEP" required>
+                            <span class="text-danger" ng-show="endereco_form.CEP.$invalid">Digite número do CEP</span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label">Pais</label>
+                            <input id="Pais" class="form-control" type="text" name="Pais" ng-model="Pais" required>
+                            <span class="text-danger" ng-show="endereco_form.Pais.$invalid">Digite o nome Pais</span>
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <label class="col-form-label">Bairro</label>
-                            <input id="Bairro" type="text" class="form-control">
+                    <div class="form-row">
+                        <input id="EnderecoID" type="hidden" />
+                        <input id="UserID" type="hidden" />
+                        <div class="form-group col-md-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Rua</label>
+                                <input id="Rua" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Bairro</label>
+                                <input id="Bairro" type="text" class="form-control" required>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label class="col-form-label">Número</label>
-                        <input id="Numero" type="text" class="form-control">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label class="col-form-label">Número</label>
+                            <input id="Numero" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label class="col-form-label">Complemento</label>
+                            <input id="Complemento" class="form-control" type="text">
+                        </div>
                     </div>
-                    <div class="form-group col-md-8">
-                        <label class="col-form-label">Complemento</label>
-                        <input id="Complemento" class="form-control" type="text">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label">Cidade</label>
+                            <input id="Cidade" class="form-control" type="text" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Estado</label>
+                            <input  class="form-control" type="text" required>
+                            <button  id="btn_endereco" class="btn btn-sm btn-success" style="margin:10px 0 10px 0">Salvar Endereço</button>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label">Cidade</label>
-                        <input id="Cidade" class="form-control" type="text">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Estado</label>
-                        <input id="Estado" class="form-control" type="text">
-                        <button id="btn_endereco" class="btn btn-sm btn-success" style="margin:10px 0 10px 0">Salvar Endereço</button>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -154,6 +158,17 @@
             var excecao = JSON.parse(xhr.responseText);
             alert("Erro ocorrido: " + excecao.ExceptionMessage);
         }
+        function limparFormulario() {
+            $("#Rua").val("");
+            $("#Bairro").val("");
+            $("#Cidade").val("");
+            $("#Estado").val("");
+            $("#Numero").val("");
+            $("#Pais").val("");
+            $("#CEP").val("");
+            $("#EnderecoID").val("");
+            $("#UserID").val("");
+        }
         function post(url, data) {
             return $.ajax({
                 url: url,
@@ -171,6 +186,9 @@
             });
         }
         function preencheForm(data) {
+            if (data == null) {
+                return;
+            }
             $("#EnderecoID").val(data.enderecoID);
             $("#Rua").val(data.rua);
             $("#Bairro").val(data.bairro);
@@ -198,10 +216,9 @@
             opcaoEndereco = 0;
             $("#myModal").modal();
             limparFormulario();
-            $("#btn_endereco").html("Criar endereço");
         });
         $("#btn_endereco").click(function () {
-            $("#btn_endereco").html("Editar endereço");
+            //$("#btn_endereco").html("Editar endereço");
             var endereco = {
                 Rua: $("#Rua").val(),
                 Bairro: $("#Bairro").val(),
@@ -219,8 +236,10 @@
             if (opcaoEndereco === 0) {
                 opcaoEndereco = 1;
                 endereco.EnderecoID = 0;
+                $("#btn_endereco").html("Criar endereço");
                 post("/Endereco/Criar", endereco);
             } else {
+                $("#btn_endereco").html("Editar endereço");
                 post("/Endereco/Editar", endereco);
             }
 
@@ -232,17 +251,6 @@
             var enderecoID = { model: parseInt($(this).prop("id")) };
             post("/Endereco/GetEndereco", enderecoID)
         });
-        function limparFormulario() {
-            $("#Rua").val("");
-            $("#Bairro").val("");
-            $("#Cidade").val("");
-            $("#Estado").val("");
-            $("#Numero").val("");
-            $("#Pais").val("");
-            $("#CEP").val("");
-            $("#EnderecoID").val("");
-            $("#UserID").val("");
-        }
         $("#CEP").mask("99999-999");
         $("#CEP").blur(function () {
             var cep = $(this).val().replace(/\D/g, '');
