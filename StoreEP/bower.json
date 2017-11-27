@@ -12,6 +12,7 @@
     "jssor-slider": "26.5.2",
     "jquery.maskedinput": "1.4.1",
     "gsap": "1.20.3",
-    "angularjs": "1.6.7"
+    "angularjs": "1.6.7",
+    "angular-ui-mask": "1.8.7"
   }
 }

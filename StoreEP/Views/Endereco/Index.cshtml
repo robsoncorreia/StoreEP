@@ -70,7 +70,7 @@
     </div>
 </div>
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog" ng-app="">
+<div id="myModal" class="modal fade" role="dialog" ng-app="" ng-controller="ExampleController">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -84,7 +84,7 @@
                         <div class="form-group col-md-6">
                             <label class="col-form-label">CEP</label>
                             <input id="CEP" class="form-control" type="text" name="CEP" ng-model="CEP" required>
-                            <span class="text-danger" ng-show="endereco_form.CEP.$invalid">Digite número do CEP</span>
+                            <span class="text-danger" ng-show="endereco_form.CEP.$invalid">Digite o número do CEP</span>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="col-form-label">Pais</label>
@@ -98,47 +98,73 @@
                         <div class="form-group col-md-12">
                             <div class="form-group">
                                 <label class="col-form-label">Rua</label>
-                                <input id="Rua" type="text" class="form-control" required>
+                                <input id="Rua" type="text" class="form-control" name="Rua" ng-model="Rua" required>
+                                <span class="text-danger" ng-show="endereco_form.Rua.$invalid">Digite o nome Rua</span>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <div class="form-group">
                                 <label class="col-form-label">Bairro</label>
-                                <input id="Bairro" type="text" class="form-control" required>
+                                <input id="Bairro" type="text" class="form-control" name="Bairro" ng-model="Bairro" required>
+                                <span class="text-danger" ng-show="endereco_form.Bairro.$invalid">Digite o nome Bairro</span>
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label class="col-form-label">Número</label>
-                            <input id="Numero" type="text" class="form-control" required>
+                            <input id="Numero" type="text" class="form-control" name="Numero" ng-model="Numero" required>
+                            <span class="text-danger" ng-show="endereco_form.Numero.$invalid">Digite o  Número</span>
                         </div>
                         <div class="form-group col-md-8">
                             <label class="col-form-label">Complemento</label>
-                            <input id="Complemento" class="form-control" type="text">
+                            <input id="Complemento" name="Complemento" ng-model="Complemento" class="form-control" type="text" diretiva>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="col-form-label">Cidade</label>
-                            <input id="Cidade" class="form-control" type="text" required>
+                            <input id="Cidade" class="form-control" name="Cidade" ng-model="Cidade" type="text" ng-minlength="4" required>
+                            <span class="text-danger" ng-show="endereco_form.Cidade.$error.minlength || endereco_form.Cidade.$invalid">
+                                Nome da cidade muito curto!
+                            </span>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Estado</label>
-                            <input  class="form-control" type="text" required>
-                            <button  id="btn_endereco" class="btn btn-sm btn-success" style="margin:10px 0 10px 0">Salvar Endereço</button>
+                            <input class="form-control" type="text" name="Estado" ng-model="Estado" ng-minlength="4" required>
+                            <span class="text-danger" ng-show="endereco_form.Estado.$error.minlength || endereco_form.Estado.$invalid">Nome do estado muito curto!</span>
+                            <div>
+                                <button ng-disabled="endereco_form.Pais.$invalid ||
+                                                  endereco_form.CEP.$invalid ||
+                                                  endereco_form.Numero.$invalid ||
+                                                  endereco_form.Complemento.$invalid ||
+                                                  endereco_form.Rua.$invalid ||
+                                                  endereco_form.Cidade.$error.minlength ||
+                                                  endereco_form.Estado.$invalid || endereco_form.Estado.$error.minlength"
+                                        id="btn_endereco" class="btn btn-sm btn-success" style="margin:10px 0 10px 0">
+                                    Salvar Endereço
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            <div class="row">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
 @section scripts{
     <script>
+        angular.module('inputExample', [])
+            .controller('EndrecoController', ['$scope', function ($scope) {
+                $scope.user = { name: 'guest', last: 'visitor' };
+            }]);
+
         var opcaoEndereco = 1;
         function atualizarEndereco(endereco) {
             let cartaoEnderecoExiste = $("#h5_" + endereco.EnderecoID).length != 0;
@@ -265,9 +291,9 @@
 
                         if (!("erro" in dados)) {
                             $("#Rua").val(dados.logradouro);
-                            $("#Bairro").val(dados.bairro);
-                            $("#Cidade").val(dados.localidade);
-                            $("#Estado").val(dados.uf);
+                            $("#Bairro").val(dados.bairro).focus();
+                            $("#Cidade").val(dados.localidade).focus();
+                            $("#Estado").val(dados.uf).focus();
                         }
                         else {
                             limparFormulario();
