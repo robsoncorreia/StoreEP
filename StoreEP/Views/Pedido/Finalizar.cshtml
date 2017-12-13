@@ -113,14 +113,14 @@
     <div id="pagamento" class="tab-pane fade">
         <form asp-action="Finalizar" method="post">
             <div class="radio">
-                <label class="checkbox-inline">
-                    <input asp-for="Pagamento.TipoPagamento" value="@((byte)FormaPagamento.Boleto)" type="radio" class="radio" />Boleto
+                <label class="checkbox-inline hidden">
+                    <input asp-for="Pagamento.TipoPagamento" value="@((byte)FormaPagamento.Boleto)" type="radio" class="radio hidden" />Boleto
                 </label>
                 <label class="checkbox-inline">
-                    <input asp-for="Pagamento.TipoPagamento" value="@((byte)FormaPagamento.CartaoCredito)" type="radio" class="radio" />Cartão Credito
+                    <input asp-for="Pagamento.TipoPagamento" value="@((byte)FormaPagamento.CartaoCredito)" type="radio" class="radio"  />Cartão Credito
                 </label>
-                <label class="checkbox-inline">
-                    <input asp-for="Pagamento.TipoPagamento" value="@((byte)FormaPagamento.Dinheiro)" type="radio" class="radio" />Dinheiro
+                <label class="checkbox-inline hidden">
+                    <input asp-for="Pagamento.TipoPagamento" value="@((byte)FormaPagamento.Dinheiro)" type="radio" class="hidden" />Dinheiro
                 </label>
             </div>
             <div id="cartao_credito" class="row">
