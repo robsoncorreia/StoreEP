@@ -96,7 +96,7 @@
 }
 @section scripts {
     <script type="text/javascript">
-    $(document).ready(function (){
+        $(document).ready(function () {
         $("#Produto_Categoria").typeahead({
             source:@Html.Raw(Json.Serialize(Model.Categorias))
         });
