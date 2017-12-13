@@ -14,54 +14,55 @@ else
 {
     @foreach (Pedido pedido in Model)
     {
+        <div class="col-4 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Endereço
+                </div>
+                <div class="panel-footer">
+                    <b>Pedido Id: </b>@pedido.PedidoID<br>
+                    <b>Rua: </b>@pedido.Endereco.Rua<br>
+                    <b>Número: </b>@pedido.Endereco.Numero<br>
+                    <b>Bairro: </b>@pedido.Endereco.Bairro<br>
+                    <b>Cidade: </b>@pedido.Endereco.Cidade<br>
+                    <b>Estado: </b>@pedido.Endereco.Estado<br>
+                    <b>CEP: </b>@pedido.Endereco.CEP<br>
+                </div>
+            </div>
+        </div>
         <div class="row thumbnail" style="margin: 10px;">
             <div class="table-responsive">
                 <table class="table s">
-                    <tr>
-                        <th>Pedido</th>
-                        <th>Rua</th>
-                        <th>Número</th>
-                        <th>Bairro</th>
-                        <th>Cidade</th>
-                        <th>CEP</th>
-                        <th>Status</th>
-                        <th>Data da compra</th>
-                    </tr>
-                    <tr>
-                        <td>@pedido.PedidoID</td>
-                        <td>@pedido.Endereco.Rua</td>
-                        <td>@pedido.Endereco.Numero</td>
-                        <td>@pedido.Endereco.Bairro</td>
-                        <td>@pedido.Endereco.Cidade</td>
-                        <td>@pedido.Endereco.CEP</td>
-
-                        @if (pedido.Enviado)
-                    {
-                            <td>Enviado</td>
-                        }
-                        else
-                        {
-                            <td>Não Enviado</td>
-                        }
-                        <td>@pedido.DataCompra</td>
-                    </tr>
                     <tr class="text-warning">
-                        <th colspan="4"></th>
-                        <th>Nome</th>
+                        <th colspan="2"></th>
+                        <th>Quantidade</th>
                         <th>Preço</th>
-                        <th>Categoria</th>
+                        <th>Nome</th>
                         <th>Fabricante</th>
+                        <th>Categoria</th>
+                        <th>Total por Produto</th>
+                        
                     </tr>
                     @foreach (var carrinho in pedido.Lines)
                     {
                         <tr>
-                            <td colspan="4"></td>
+                            <td colspan="2"></td>
+                            <td>
+                                @(carrinho.Quantidade)
+                            </td>
+                            <td>@carrinho.Produto?.Preco.ToString("c")</td>
                             <td>
                                 <a asp-action="Detalhes"
                                    asp-controller="Produtos"
                                    asp-route-ID="@carrinho.Produto.ProdutoID">@carrinho.Produto.Nome</a>
                             </td>
-                            <td>@carrinho.Produto?.Preco.ToString("c")</td>
+                            <td>
+                                <a asp-action="BuscarFabricante"
+                                   asp-controller="Produtos"
+                                   asp-route-fabricante="@carrinho.Produto.Fabricante">
+                                    @carrinho.Produto?.Fabricante
+                                </a>
+                            </td>
                             <td>
                                 <a asp-action="Listar"
                                    asp-controller="Produtos"
@@ -70,18 +71,16 @@ else
                                 </a>
                             </td>
                             <td>
-                                <a asp-action="BuscarFabricante" 
-                                   asp-controller="Produtos" 
-                                   asp-route-fabricante="@carrinho.Produto.Fabricante">
-                                    @carrinho.Produto?.Fabricante
-                                </a>
+                                @((carrinho.Quantidade * carrinho.Produto.Preco).ToString("c"))
                             </td>
+
+                            
                         </tr>
                     }
                     <tfoot>
-                        <tr class="success">
-                            <td colspan="5"></td>
-                            <td>Total</td>
+                        <tr>
+                            <td colspan="6"></td>
+                            <td class="text-center"><b>Total</b></td>
                             <td>@pedido.Pagamento.Valor.ToString("c")</td>
                             <td></td>
                         </tr>
