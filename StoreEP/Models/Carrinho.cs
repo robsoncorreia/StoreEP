@@ -7,6 +7,19 @@ namespace StoreEP.Models
 {
     public class Carrinho
     {
+        private static Carrinho instancia;
+
+        public static Carrinho Instance
+        {
+            get
+            {
+                if (instancia == null)
+                {
+                    instancia = new Carrinho();
+                }
+                return instancia;
+            }
+        }
         private List<CartLine> lineCollection = new List<CartLine>();
         public virtual void AddItem(Produto produto, int quantidade = 1)
         {

@@ -25,5 +25,6 @@ namespace StoreEP.Models
         public DateTime DataCadastro { get; set; } = DateTime.Now;
         public int Quantidade { get; set; } 
         public bool Publicado { get; set; } = false;
+        public float Peso { get; set; }
     }
 }
